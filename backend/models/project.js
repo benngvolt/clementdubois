@@ -3,12 +3,11 @@ const validator = require('validator');
 
 const projectSchema = mongoose.Schema({
     title: {type: String, required: true},
-    projectState: {type: String, required: true},
     subtitle: {type: String, required: false},
-    duration: {type: String, required: false},
-    creationDate: {type: String, required: false},
-    description: {type: String, required: false},
+    projectInfos: {type: String, required: false},
     moreInfos: {type: String, required: false},
+    aboutShow: {type: String, required: false},
+    aboutSceno: {type: String, required: false},
     mainImageIndex: { type: Number, required: true },
     artistList: [
         {
@@ -18,54 +17,47 @@ const projectSchema = mongoose.Schema({
     ],
     productionList: [
         {
-        prodFunction: {type: String, required: false},
+        prodType: {type: String, required: false},
         prodName: {type: String, required: false},
-        }
-    ],
-    pdfList : [
-        {
-        pdfName: {type: String, required: false},
-        pdfLink: {type: String, required: false},
+        prodInfos: {type: String, required: false},
+        prodLink: {type: String, required: false},
         }
     ],
     press: [
         {
         quote: {type: String, required: false},
         mediaName: {type: String, required: false},
+        mediaLink: {type: String, required: false},
         }
     ],
-    videos: [
-        {   
-        videoName: {type: String, required: false},
-        videoLink: {type: String, required: false},
+    links: [
+        {
+        linkType: {type: String, required: false},   
+        linkName: {type: String, required: false},
+        linkUrl: {type: String, required: false},
         }
     ],
-    images: [
+    projectImages: [
         {
         imageUrl: {type: String, required: false},
         photograph: {type: String, required: false},
         }
     ],
-    agendaList: {
-        residencies: [
-            {
-            residencyType : {type: String, required: false},
-            dates: {type: String, required: false},
-            city: {type: String, required: false},
-            placeName: {type: String, required: false},
-            placeLink: {type: String, required: false},
-            }
-        ],
-        shows: [
-            {
-            dates: {type: String, required: false},
-            city: {type: String, required: false},
-            placeName: {type: String, required: false},
-            placeLink: {type: String, required: false},
-            showsNumber: {type: Number, required: false},
-            }
-        ],
-    }
+    makingOfImages: [
+        {
+        imageUrl: {type: String, required: false},
+        photograph: {type: String, required: false},
+        }
+    ],
+    diffusionList: [
+        {
+        dates: {type: String, required: false},
+        city: {type: String, required: false},
+        placeName: {type: String, required: false},
+        placeLink: {type: String, required: false},
+        }
+    ],
+    
 });
 
 
