@@ -10,6 +10,11 @@ function Edit() {
     const [projectEdit, setProjectEdit] = useState('');
     const [handleDisplayProjectForm, setHandleDisplayProjectForm] = useState(false);
     const [confirmBoxState, setConfirmBoxState] = useState(false);
+    const [artistsList, setArtistsList] = useState([]);
+    const [productionList, setProductionList] = useState([]);
+    const [pressList, setPressList] = useState([]);
+    const [linksList, setLinksList] = useState([]);
+    const [diffusionList, setDiffusionList] = useState([]);
 
     
     useEffect(() => {
@@ -28,7 +33,18 @@ function Edit() {
             <button>+ AJOUTER UN PROJET</button>
             <ProjectForm 
                 projectEdit={projectEdit} 
-                projectFormMode={projectFormMode}/>
+                projectFormMode={projectFormMode}
+                artistsList={artistsList}
+                setArtistsList={setArtistsList}
+                productionList={productionList}
+                setProductionList={setProductionList}
+                pressList={pressList}
+                setPressList={setPressList}
+                linksList={linksList}
+                setLinksList={setLinksList}
+                diffusionList={diffusionList}
+                setDiffusionList={setDiffusionList}
+                />
 
         </aside>
     )

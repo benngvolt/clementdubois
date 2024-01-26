@@ -9,6 +9,7 @@ const projectSchema = mongoose.Schema({
     aboutShow: {type: String, required: false},
     aboutSceno: {type: String, required: false},
     mainImageIndex: { type: Number, required: true },
+    projectType: {type: String, required: false},
     artistList: [
         {
         artistFunction: {type: String, required: false},
@@ -31,10 +32,17 @@ const projectSchema = mongoose.Schema({
         }
     ],
     links: [
-        {
-        linkType: {type: String, required: false},   
+        {  
         linkName: {type: String, required: false},
         linkUrl: {type: String, required: false},
+        }
+    ],
+    diffusionList: [
+        {
+        dates: {type: String, required: false},
+        city: {type: String, required: false},
+        placeName: {type: String, required: false},
+        placeLink: {type: String, required: false},
         }
     ],
     projectImages: [
@@ -49,14 +57,7 @@ const projectSchema = mongoose.Schema({
         photograph: {type: String, required: false},
         }
     ],
-    diffusionList: [
-        {
-        dates: {type: String, required: false},
-        city: {type: String, required: false},
-        placeName: {type: String, required: false},
-        placeLink: {type: String, required: false},
-        }
-    ],
+    
     
 });
 
