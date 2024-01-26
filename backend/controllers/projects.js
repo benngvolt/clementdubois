@@ -21,8 +21,8 @@ exports.getAllProjects = (req, res) => {
 exports.createProject = async (req, res) => {
 
     const projectData = req.body;
-    const images = req.newImagesObjects;
-    const projectDescriptionWithBr = projectData.description.replace(/(\r\n|\n|\r)/g, "<br>");
+    const projectImages = req.newImagesObjects;
+    // const projectDescriptionWithBr = projectData.description.replace(/(\r\n|\n|\r)/g, "<br>");
   
     if (!projectData.title || !images) {
       return res.status(400).json({ error: 'Le champ "title" ou "images" est manquant dans la demande.' });
@@ -33,8 +33,8 @@ exports.createProject = async (req, res) => {
         // Si toutes les images ont été traitées, créez une nouvelle instance du modèle Serie
         const project = new Project({
           ... projectData,
-          description: projectDescriptionWithBr,
-          images: images,
+          // description: projectDescriptionWithBr,
+          projectImages: images,
         });
   
         await project.save();

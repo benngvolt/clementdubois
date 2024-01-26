@@ -1,0 +1,53 @@
+/*---------------
+----- FONTS -----
+---------------*/
+
+@font-face {
+    font-family: 'MainFont_light';
+    src: url('../../public/assets/fonts/ProximaNova-Light.ttf') format('truetype');
+    /* Ajouter ici les autres formats de police (.woff2, .ttf, .eot, etc.) pour la compatibilité des navigateurs */
+}
+
+@font-face {
+    font-family: 'MainFont_lightItalic';
+    src: url('../../public/assets/fonts/ProximaNova-LightIt.ttf') format('truetype');
+    /* Ajouter ici les autres formats de police (.woff2, .ttf, .eot, etc.) pour la compatibilité des navigateurs */
+}
+
+@font-face {
+    font-family: 'MainFont_bold';
+    src: url('../../public/assets/fonts/ProximaNova-Bold.ttf') format('truetype');
+    /* Ajouter ici les autres formats de police (.woff2, .ttf, .eot, etc.) pour la compatibilité des navigateurs */
+}
+
+/*---------------
+----- MIXINS -----
+---------------*/
+
+@mixin Button {
+}
+
+/*-------------------
+----- VARIABLES -----
+-------------------*/
+
+$colorLightGrey: #E9E9E9;
+$colorDarkGrey: #0c0c0c;
+$colorFields: aqua;
+$colorButtons: rgb(96, 54, 151);
+
+/*-------------------
+----- KEYFRAMES -----
+-------------------*/
+
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}

@@ -26,7 +26,7 @@ function uploadImages(req, res, next) {
             .toBuffer();
     
           // Créez un blob dans le stockage Google Cloud Storage
-          const blob = bucket.file('series_images/' + originalname);
+          const blob = bucket.file('project_images/' + originalname);
           const blobStream = blob.createWriteStream({
             resumable: false
           });

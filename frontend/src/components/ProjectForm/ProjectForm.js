@@ -1,5 +1,8 @@
 import './ProjectForm.scss'
 import {useRef, useState, useEffect } from 'react'
+import { API_URL } from '../../utils/constants'
+import { v4 as uuidv4 } from 'uuid'
+import DNDGallery from '../../components/DNDGallery/DNDGallery'
 
 
 
@@ -15,16 +18,34 @@ function ProjectForm({
     linksList,
     setLinksList,
     diffusionList,
-    setDiffusionList
+    setDiffusionList,
+    imageFiles, 
+    setImageFiles, 
+    mainImageIndex, 
+    setMainImageIndex,
+    setHandleDisplayProjectForm
     }) {
 
     const inputProjectTitleRef = useRef(null);
-    const inputProjectSubTitleRef = useRef(null);
+    const inputProjectSubtitleRef = useRef(null);
     const inputProjectInfosRef = useRef(null);
     const inputMoreInfosRef = useRef(null);
     const inputAboutShowRef = useRef(null);
     const inputAboutScenoRef = useRef(null);
     const inputProjectTypeRef = useRef(null);
+    const inputProjectImageFileRef = useRef(null);
+    const projectMainImageSampleRef = useRef(null);
+
+    
+    /* ---------------------------
+    ----- FORM FUNCTIONS -----------
+    ----------------------------*/
+
+
+    function closeForm() {
+        setHandleDisplayProjectForm(false);
+    }
+
 
     /* ---------------------------
     ----- ARTISTS LIST -----------
@@ -87,49 +108,183 @@ function ProjectForm({
         setDiffusionList (diffusionList.filter((_, i) => i !== index));
     }
 
+    /* --------------------
+    ----- IMAGES ----------
+    ---------------------*/
+    const [isImageLoaded, setIsImageLoaded] = useState(false);
+    const [newImage, setNewImage] = useState(null);
+
+    function displaySample() {
+        const image = inputProjectImageFileRef.current.files[0];
+        if (image) {
+            setNewImage (image);
+            const id = uuidv4(); // Générez un identifiant unique
+            image._id = id;
+            image.sampleImageUrl= URL.createObjectURL(image);
+            projectMainImageSampleRef.current.setAttribute("src", image.sampleImageUrl);
+            projectMainImageSampleRef.current.setAttribute("alt", "");
+            setIsImageLoaded(true);
+        } else {
+            setIsImageLoaded(false);
+        }    
+    }
+
+    function cancelAddImageFile() {
+        setNewImage (null);
+        setIsImageLoaded(false);
+        projectMainImageSampleRef.current.setAttribute("src", "");
+        projectMainImageSampleRef.current.setAttribute("alt", "");
+    }
+
+    function handleAddImageFile() {
+        if (newImage) {
+            const updatedImageFiles = [...imageFiles, newImage];
+            setImageFiles(updatedImageFiles);
+        }
+        setIsImageLoaded(false);
+        cancelAddImageFile();
+    }
+
+    /* --------------------------------------
+    ----- SOUMISSION DU FORMULAIRE ----------
+    ---------------------------------------*/
+
+    function projectFormSubmit(event) {
+
+
+        event.preventDefault();
+        // const token = window.sessionStorage.getItem('1');
+        const projectFormData = new FormData();
+        projectFormData.append('title', inputProjectTitleRef.current.value);
+        projectFormData.append('subtitle', inputProjectSubtitleRef.current.value);
+        projectFormData.append('projectInfos', inputProjectInfosRef.current.value);
+        projectFormData.append('moreInfos', inputMoreInfosRef.current.value);
+        projectFormData.append('aboutShow', inputAboutShowRef.current.value);
+        projectFormData.append('aboutSceno', inputAboutScenoRef.current.value);
+        projectFormData.append('projectType', inputProjectTypeRef.current.value);
+        projectFormData.append('mainImageIndex', mainImageIndex);
+        projectFormData.append('artistsList', JSON.stringify(artistsList));
+        projectFormData.append('productionList', JSON.stringify(productionList));
+        projectFormData.append('press', JSON.stringify(pressList));
+        projectFormData.append('links', JSON.stringify(linksList));
+        projectFormData.append('diffusionList', JSON.stringify(diffusionList));
+
+        const newImageFiles = Array.from(imageFiles);
+        
+        const imagesWithIndex = newImageFiles.map((image, index) => ({
+            index,
+            image
+        }));
+        imagesWithIndex.forEach(({ index, image }) => {
+            if (image instanceof File) {
+                projectFormData.append('images', image);
+                projectFormData.append('fileIndexes', index)
+            } else {
+                projectFormData.append(`existingImages[${index}]`, JSON.stringify(image));
+            }
+        });
+        if (projectFormMode==='add') {
+            fetch(`${API_URL}/api/projects`, {
+                method: "POST",
+                headers: {
+                    // 'Content-Type': 'application/json',
+                    // 'Authorization': 'Bearer ' + token,
+                },
+                body: projectFormData,
+                })
+                .then((response) => {
+                    if (response.ok) {
+                        return response;
+                    } else {
+                        throw new Error('La requête a échoué');
+                    }
+                })
+                .then(()=> {
+                    closeForm();
+                })
+                .catch((error) => console.error(error));
+        } else if (projectFormMode==='edit') {
+            fetch(`${API_URL}/api/projects/${projectEdit._id}`, {
+                method: "PUT",
+                headers: {
+                    // 'Content-Type': 'application/json',
+                    // 'Authorization': 'Bearer ' + token,
+                },
+                body: projectFormData,
+                })
+                .then((response) => {
+                    if (response.ok) {
+                        return response;
+                    } else {
+                        throw new Error('La requête a échoué');
+                    }
+                })
+                .then(()=> {
+                    closeForm();
+                })
+                .catch((error) => console.error(error));
+        }
+    }
+
 
 
     return  (      
-        <form className='projectForm'>
+        
+        <form onSubmit={(event) => projectFormSubmit(event)} method="post" className='projectForm'>
+
+            <DNDGallery imageFiles={imageFiles} setImageFiles={setImageFiles} mainImageIndex={mainImageIndex} setMainImageIndex={setMainImageIndex} />
+            
+            <div className='projectForm_imageField'>
+                <p>IMAGES</p>
+                <label htmlFor='inputProjectImageFile'>{isImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
+                <input type='file' id='inputProjectImageFile' name="images" ref={inputProjectImageFileRef} onChange={displaySample}></input>
+                <div  className="projectForm_projectImageFile_sampleContainer">
+                    <img id='imageSample' ref={projectMainImageSampleRef} src='' alt=''/>
+                    <div className={isImageLoaded ? "projectForm_projectImageFile_sampleContainer_buttonsSystem--displayOn" :  "projectForm_projectImageFile_sampleContainer_buttonsSystem--displayOff"}>
+                        <button aria-label="Ajouter l'image" onClick={handleAddImageFile} type="button">AJOUTER</button>
+                        <button aria-label="Annuler" onClick={cancelAddImageFile} type="button">ANNULER</button>
+                    </div>
+                </div>
+            </div>
 
             {/* CHAMPS TITRE */}
-            <div className='projectForm_projectTitle'>
+            <div className='projectForm_textField'>
                 <label htmlFor='inputProjectTitle'>TITRE*</label>
                 <input type='text' id='inputProjectTitle' ref={inputProjectTitleRef} defaultValue={projectFormMode==='edit'? projectEdit.title : null}></input>
             </div>
 
             {/* CHAMPS SOUS-TITRE */}
-            <div className='projectForm_projectSubTitle'>
-                <label htmlFor='inputProjectSubTitle'>SOUS-TITRE</label>
-                <input type='text' id='inputProjectSubTitle' ref={inputProjectSubTitleRef} defaultValue={projectFormMode==='edit'? projectEdit.subtitle : null}></input>
+            <div className='projectForm_textField'>
+                <label htmlFor='inputProjectSubtitle'>SOUS-TITRE</label>
+                <input type='text' id='inputProjectSubtitle' ref={inputProjectSubtitleRef} defaultValue={projectFormMode==='edit'? projectEdit.subtitle : null}></input>
             </div>
 
             {/* CHAMPS INFOS COMPAGNIE*/}
-            <div className='projectForm_projectInfos'>
+            <div className='projectForm_textField'>
                 <label htmlFor='inputProjectInfos'>INFORMATIONS COMPAGNIE</label>
                 <input type='text' id='inputProjectInfos' ref={inputProjectInfosRef} defaultValue={projectFormMode==='edit'? projectEdit.projectInfos : null}></input>
             </div>
 
             {/* CHAMPS PLUS D'INFOS*/}
-            <div className='projectForm_moreInfos'>
+            <div className='projectForm_textField'>
                 <label htmlFor='inputMoreInfos'>PLUS D'INFOS</label>
                 <input type='text' id='inputMoreInfos' ref={inputMoreInfosRef} defaultValue={projectFormMode==='edit'? projectEdit.moreInfos : null}></input>
             </div>
 
             {/* CHAMPS A PROPOS DU SPECTACLE*/}
-            <div className='projectForm_aboutShow'>
+            <div className='projectForm_textField'>
                 <label htmlFor='inputAboutShow'>À PROPOS DU SPECTACLE</label>
                 <input type='textarea' id='inputAboutShow' ref={inputAboutShowRef} defaultValue={projectFormMode==='edit'? projectEdit.aboutShow : null}></input>
             </div>
 
             {/* CHAMPS A PROPOS DE LA SCENO*/}
-            <div className='projectForm_aboutSceno'>
+            <div className='projectForm_textField'>
                 <label htmlFor='inputAboutSceno'>À PROPOS DE LA SCÉNOGRAPHIE</label>
                 <input type='textarea' id='inputAboutSceno' ref={inputAboutScenoRef} defaultValue={projectFormMode==='edit'? projectEdit.aboutSceno : null}></input>
             </div>
 
             {/* CHAMPS TYPE DE PROJET*/}
-            <div className='projectForm_projectType'>
+            <div className='projectForm_arrayField'>
                 <label htmlFor='inputProjectType'>TYPE DE PROJET*</label>
                 <select id='inputProjectType' 
                         ref={inputProjectTypeRef} 
@@ -143,10 +298,10 @@ function ProjectForm({
             </div>
 
             {/* CHAMPS DISTRIBUTION*/}
-            <div className='projectForm_projectArtistsList'>
+            <div className='projectForm_arrayField'>
                 <p> DISTRIBUTION </p>
                 {artistsList.map((artist, index) => (
-                    <div key={index}>
+                    <div key={index} className='projectForm_arrayField_fields'>
                         <div>
                             <label htmlFor={`inputProjectArtistFunction${index}`}>FONCTION</label>
                             <input
@@ -181,10 +336,10 @@ function ProjectForm({
 
 
             {/* CHAMPS PRODUCTION*/}
-            <div className='projectForm_projectProductionList'>
+            <div className='projectForm_arrayField'>
                 <p> PRODUCTION </p>
                 {productionList.map((production, index) => (
-                    <div key={index}>
+                    <div key={index} className='projectForm_arrayField_fields'>
                         <div>
                             <label htmlFor={`inputProjectProductionName${index}`}>NOM</label>
                             <input
@@ -242,10 +397,10 @@ function ProjectForm({
             </div>
             
             {/* CHAMPS PRESSE*/}
-            <div className='projectForm_projectPressList'>
+            <div className='projectForm_arrayField'>
                 <p> PRESSE </p>
                 {pressList.map((press, index) => (
-                    <div key={index}>
+                    <div key={index} className='projectForm_arrayField_fields'>
                         <div>
                             <label htmlFor={`inputProjectPressQuote${index}`}>EXTRAIT</label>
                             <input
@@ -292,10 +447,10 @@ function ProjectForm({
             </div>
 
             {/* CHAMPS LIENS*/}
-            <div className='projectForm_projectLinks'>
+            <div className='projectForm_arrayField'>
                 <p> LIENS VIDÉOS/COMPAGNIE/ETC. </p>
                 {linksList.map((link, index) => (
-                    <div key={index}>
+                    <div key={index} className='projectForm_arrayField_fields'>
                         <div>
                             <label htmlFor={`inputProjectLinkName${index}`}>NOM DU LIEN</label>
                             <input
@@ -329,10 +484,10 @@ function ProjectForm({
             </div>
 
             {/* CHAMPS DIFFUSION*/}
-            <div className='projectForm_projectDiffusion'>
+            <div className='projectForm_arrayField'>
                 <p> DIFFUSION </p>
                 {diffusionList.map((diff, index) => (
-                    <div key={index}>
+                    <div key={index} className='projectForm_arrayField_fields'>
                         <div>
                             <label htmlFor={`inputProjectDiffDates${index}`}>DATES</label>
                             <input
@@ -390,6 +545,12 @@ function ProjectForm({
                 ))}
                 <button type='button' onClick={() =>handleAddDiff()} >+ AJOUTER UN LIEU</button>
             </div>
+            
+            <div className='projectForm_buttons'>
+                <button type='submit'>VALIDER</button>
+                <button type='button' onClick={() => closeForm()}>ANNULER</button>
+            </div>
+
 
         </form>
     )

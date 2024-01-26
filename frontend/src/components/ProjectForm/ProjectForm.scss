@@ -1,0 +1,45 @@
+@import '../../utils/mixins';
+
+
+.projectForm {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    height: 90vh;
+    margin: 5vh auto;
+    background: $colorLightGrey;
+    padding: 50px;
+    box-sizing: border-box;
+    overflow: auto;
+    font-family: 'MainFont_bold';
+
+    &_imageField, &_arrayField, &_textField {
+
+        margin: 10px 0;
+        box-sizing: border-box;
+
+        &_fields {
+            display: flex;
+            flex-direction: row;
+            column-gap: 15px;
+        }
+
+        input {
+            border: none;
+            background-color: aqua;
+            width: 100%;
+        }
+
+        button {
+            border: none;
+            background-color: $colorButtons;
+            color: $colorLightGrey;
+            &:hover {
+                cursor: pointer;
+                background-color: $colorDarkGrey;
+            }
+        }
+
+    }
+
+}

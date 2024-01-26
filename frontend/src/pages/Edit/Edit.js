@@ -16,6 +16,11 @@ function Edit() {
     const [linksList, setLinksList] = useState([]);
     const [diffusionList, setDiffusionList] = useState([]);
 
+    const [imageFiles, setImageFiles] = useState([]);
+    const [mainImageIndex, setMainImageIndex]= useState(0);
+
+    
+
     
     useEffect(() => {
         fetch(`${API_URL}/api/projects`)
@@ -26,26 +31,43 @@ function Edit() {
         .catch((error)=>console.log(error.message))
     },[handleDisplayProjectForm, confirmBoxState]);
 
+    function addProject() {
+        setArtistsList([]);
+        setProductionList([]);
+        setPressList([]);
+        setLinksList([]);
+        setDiffusionList([]);
+        setImageFiles([]);
+        setProjectFormMode('add');
+        setHandleDisplayProjectForm(true);
+    }
+
 
     return  (      
         <aside className='edit'>
             <p>PROJETS</p>
-            <button>+ AJOUTER UN PROJET</button>
-            <ProjectForm 
-                projectEdit={projectEdit} 
-                projectFormMode={projectFormMode}
-                artistsList={artistsList}
-                setArtistsList={setArtistsList}
-                productionList={productionList}
-                setProductionList={setProductionList}
-                pressList={pressList}
-                setPressList={setPressList}
-                linksList={linksList}
-                setLinksList={setLinksList}
-                diffusionList={diffusionList}
-                setDiffusionList={setDiffusionList}
-                />
-
+            <button onClick={() => addProject()} type='button' >+ AJOUTER UN PROJET</button>
+            <div className={handleDisplayProjectForm===false ? "edit_form--displayOff" : "edit_form--displayOn"}>
+                <ProjectForm 
+                    projectEdit={projectEdit} 
+                    projectFormMode={projectFormMode}
+                    artistsList={artistsList}
+                    setArtistsList={setArtistsList}
+                    productionList={productionList}
+                    setProductionList={setProductionList}
+                    pressList={pressList}
+                    setPressList={setPressList}
+                    linksList={linksList}
+                    setLinksList={setLinksList}
+                    diffusionList={diffusionList}
+                    setDiffusionList={setDiffusionList}
+                    imageFiles={imageFiles}
+                    setImageFiles={setImageFiles}
+                    mainImageIndex={mainImageIndex}
+                    setMainImageIndex={setMainImageIndex}
+                    setHandleDisplayProjectForm={setHandleDisplayProjectForm}
+                    />
+            </div>
         </aside>
     )
 }
