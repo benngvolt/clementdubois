@@ -20,31 +20,45 @@ exports.getAllProjects = (req, res) => {
 
 exports.createProject = async (req, res) => {
 
-    const projectData = req.body;
-    const projectImages = req.newImagesObjects;
-    // const projectDescriptionWithBr = projectData.description.replace(/(\r\n|\n|\r)/g, "<br>");
+  const projectData = req.body;
+  const images = req.newImagesObjects;
   
-    if (!projectData.title || !images) {
-      return res.status(400).json({ error: 'Le champ "title" ou "images" est manquant dans la demande.' });
-    }
-  
-    try {
-      // if (serieImages.length === req.newImagesObjects.length) {
-        // Si toutes les images ont été traitées, créez une nouvelle instance du modèle Serie
-        const project = new Project({
-          ... projectData,
-          // description: projectDescriptionWithBr,
-          projectImages: images,
-        });
-  
-        await project.save();
-        res.status(201).json({ message: 'Projet enregistrée !' });
-      // }
-    } catch (error) {
-      console.error(error);
-      res.status(400).json({ error });
-    }
-  };
+  const artistsList = JSON.parse(req.body.artistsList);
+  const productionList = JSON.parse(req.body.productionList);
+  const pressList = JSON.parse(req.body.press);
+  const linksList = JSON.parse(req.body.links);
+  const diffusionList = JSON.parse(req.body.diffusionList);
+
+  // const projectDescriptionWithBr = projectData.description.replace(/(\r\n|\n|\r)/g, "<br>");
+
+  if (!projectData.title || !projectData.projectType) {
+    return res.status(400).json({ error: 'Le champ "title" ou "state" est manquant dans la demande.' });
+  }
+
+  try {
+    // if (serieImages.length === req.newImagesObjects.length) {
+      // Si toutes les images ont été traitées, créez une nouvelle instance du modèle Serie
+      const project = new Project({
+        ... projectData,
+        // description: projectDescriptionWithBr,
+        artistsList: artistsList,
+        productionList: productionList,
+        press: pressList,
+        links: linksList,
+        diffusionList: diffusionList,
+        projectImages: images,
+      });
+
+      await project.save();
+      console.log(project);
+      res.status(201).json({ message: 'Projet enregistrée !' });
+    // }
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ error });
+  }
+};
+
 
 /*----------------------------
 ----- DELETE ONE PROJECT -----

@@ -170,11 +170,12 @@ function ProjectForm({
         projectFormData.append('diffusionList', JSON.stringify(diffusionList));
 
         const newImageFiles = Array.from(imageFiles);
-        
+       
         const imagesWithIndex = newImageFiles.map((image, index) => ({
             index,
             image
         }));
+
         imagesWithIndex.forEach(({ index, image }) => {
             if (image instanceof File) {
                 projectFormData.append('images', image);
@@ -183,7 +184,9 @@ function ProjectForm({
                 projectFormData.append(`existingImages[${index}]`, JSON.stringify(image));
             }
         });
+
         if (projectFormMode==='add') {
+            
             fetch(`${API_URL}/api/projects`, {
                 method: "POST",
                 headers: {
