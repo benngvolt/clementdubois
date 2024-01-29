@@ -41,7 +41,7 @@ async function handleMainImage(index) {
         src={props.item.imageUrl ?? (props.item instanceof File ? props.item.sampleImageUrl : '')}
         alt=''/>
       <div className='dndItem_buttons'>
-          <button aria-label="Supprimer l'image" className='dndItem_buttons_supprButton'
+          <button type='button' aria-label="Supprimer l'image" className='dndItem_buttons_supprButton'
             onMouseDown={() => {
               props.openConfirmBox(props.index);
           }}
@@ -49,7 +49,7 @@ async function handleMainImage(index) {
           >
             <FontAwesomeIcon icon={faTrashCan} />
           </button>
-          <button aria-label="Définir cette image comme image principale de la série" className='dndItem_buttons_isMainButton'
+          <button type='button' aria-label="Définir cette image comme image principale de la série" className='dndItem_buttons_isMainButton'
             onMouseDown={() => { handleMainImage(props.index); }} >
             <FontAwesomeIcon icon={props.index === props.mainImageIndex ? faCertificate : faCircle} className={props.index === props.mainImageIndex ? 'dndItem_buttons_isMainButton--isOrange' : 'dndItem_buttons_isMainButton--isWhite'} />
           </button>

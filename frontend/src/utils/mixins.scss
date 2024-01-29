@@ -1,6 +1,11 @@
 /*---------------
 ----- FONTS -----
 ---------------*/
+@font-face {
+    font-family: 'SpecialFont';
+    src: url('../../public/assets/fonts/Mermaid1001.ttf') format('truetype');
+    /* Ajouter ici les autres formats de police (.woff2, .ttf, .eot, etc.) pour la compatibilité des navigateurs */
+}
 
 @font-face {
     font-family: 'MainFont_light';
@@ -20,9 +25,9 @@
     /* Ajouter ici les autres formats de police (.woff2, .ttf, .eot, etc.) pour la compatibilité des navigateurs */
 }
 
-/*---------------
+/*----------------
 ----- MIXINS -----
----------------*/
+----------------*/
 
 @mixin Button {
 }
@@ -35,6 +40,9 @@ $colorLightGrey: #E9E9E9;
 $colorDarkGrey: #0c0c0c;
 $colorFields: aqua;
 $colorButtons: rgb(96, 54, 151);
+$colorFirst: yellow;
+$colorSecond: blue;
+$colorThird: violet;
 
 /*-------------------
 ----- KEYFRAMES -----
@@ -50,4 +58,30 @@ $colorButtons: rgb(96, 54, 151);
 	100% {
 		transform: translatey(0px);
 	}
+}
+
+@keyframes heightRetract {
+    0% {
+        padding-top: 0%;
+        padding-bottom: 0%;
+       
+    }
+    100% {
+        padding-top: 22px;
+        padding-bottom: 22px;
+       
+    }
+}
+
+@keyframes heightRetractInvert {
+    0% {
+        padding-top: 22px;
+        padding-bottom: 22px;
+       
+    }
+    100% {
+        padding-top: 0;
+        padding-bottom: 0;
+       
+    }
 }

@@ -13,6 +13,16 @@
     overflow: auto;
     font-family: 'MainFont_bold';
 
+    &_imageField {
+
+        &_sampleContainer {
+
+            img {
+                width: 300px;
+            }
+        }
+    }
+
     &_imageField, &_arrayField, &_textField {
 
         margin: 10px 0;

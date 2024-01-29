@@ -143,6 +143,7 @@ function ProjectForm({
         }
         setIsImageLoaded(false);
         cancelAddImageFile();
+        console.log(imageFiles);
     }
 
     /* --------------------------------------
@@ -238,12 +239,11 @@ function ProjectForm({
             <DNDGallery imageFiles={imageFiles} setImageFiles={setImageFiles} mainImageIndex={mainImageIndex} setMainImageIndex={setMainImageIndex} />
             
             <div className='projectForm_imageField'>
-                <p>IMAGES</p>
                 <label htmlFor='inputProjectImageFile'>{isImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
                 <input type='file' id='inputProjectImageFile' name="images" ref={inputProjectImageFileRef} onChange={displaySample}></input>
-                <div  className="projectForm_projectImageFile_sampleContainer">
+                <div  className="projectForm_imageField_sampleContainer">
                     <img id='imageSample' ref={projectMainImageSampleRef} src='' alt=''/>
-                    <div className={isImageLoaded ? "projectForm_projectImageFile_sampleContainer_buttonsSystem--displayOn" :  "projectForm_projectImageFile_sampleContainer_buttonsSystem--displayOff"}>
+                    <div className={isImageLoaded ? "projectForm_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_projectImageFile_sampleContainer_buttonsSystem--displayOff"}>
                         <button aria-label="Ajouter l'image" onClick={handleAddImageFile} type="button">AJOUTER</button>
                         <button aria-label="Annuler" onClick={cancelAddImageFile} type="button">ANNULER</button>
                     </div>

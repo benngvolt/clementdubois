@@ -1,0 +1,67 @@
+@import '../../utils/mixins';
+
+.allProjects {
+
+    
+
+    &_projectCard {
+        width: 100%;
+        text-decoration: none;
+        text-align: justify;
+        color: $colorDarkGrey;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        column-gap: 40px;
+        &:hover {
+            cursor: pointer;
+            background-color: $colorFirst;
+
+            .allProjects_projectCard_infos {
+                animation: heightRetract 0.5s ease forwards;
+            }
+        }
+
+        
+
+        &_infos {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-sizing: border-box;
+            padding-left: 50px;
+            width: 40%;
+            animation: heightRetractInvert 0.5s ease forwards;
+            
+
+            &_title {
+                font-family: 'SpecialFont';
+                font-size: 50px
+            }
+
+            &_projectInfos {    
+                font-family: 'MainFont_bold';
+                font-size: 19px
+            }
+
+            &_aboutShow {   
+                font-family: 'MainFont_light';
+                font-size: 19px
+            }
+
+        }
+
+        &_imageContainer {
+
+            width: 60%;
+
+            img {
+                width: 100%;
+                height: 490px;
+                object-fit: cover;
+            }
+            
+        }
+
+    }
+}

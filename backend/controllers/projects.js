@@ -13,6 +13,11 @@ exports.getAllProjects = (req, res) => {
 /*------------------------
 ----- GET ONE PROJECT ----
 -------------------------*/
+exports.getOneProject = (req, res) => {
+  Project.findOne({_id: req.params.id})
+    .then (project =>res.status(200).json(project))
+    .catch (error => res.status (400).json({error}))
+}
 
 /*------------------------
 ----- CREATE PROJECT -----
@@ -124,12 +129,20 @@ async function deleteImageFiles(req) {
 
 exports.updateOneProject = async (req, res) => {
 
+    
+    const artistsList = JSON.parse(req.body.artistsList);
+    const productionList = JSON.parse(req.body.productionList);
+    const pressList = JSON.parse(req.body.press);
+    const linksList = JSON.parse(req.body.links);
+    const diffusionList = JSON.parse(req.body.diffusionList);
+    const projectData = req.body;
+    const newImagesObjects = req.newImagesObjects;
+
     // MODIFICATION DU PROJET
     try {
       // RÉCUPÉRATION DU PROJET CONCERNÉ VIA SON ID STOCKÉ EN PARAMÈTRES D'URL
       const project = await Project.findOne({ _id: req.params.id });
-      const projectData = req.body;
-      const projectDescriptionWithBr = projectData.description.replace(/(\r\n|\n|\r)/g, "<br>");
+      // const projectDescriptionWithBr = projectData.description.replace(/(\r\n|\n|\r)/g, "<br>");
   
       // SI LA SÉRIE N'EXISTE PAS, ON RETOURNE UNE ERREUR 404
       if (!project) {
@@ -141,6 +154,7 @@ exports.updateOneProject = async (req, res) => {
       const existingImagesObjects = existingImages.map((imageStr) => JSON.parse(imageStr));
   
       // TRI DES IMAGES PAR ORDRE D'INDEX ET MISE À JOUR DE MAINIMAGEINDEX ET CONSTRUCTION DU TABLEAU IMAGES AVEC LES NOUVELLES IMAGES ET LES EXISTANTES
+      
       async function processAndSortImages(existingImagesObjects, newImagesObjects) {
         const allImages = existingImagesObjects.map((image, index) => ({
           imageUrl: image.imageUrl,
@@ -156,9 +170,14 @@ exports.updateOneProject = async (req, res) => {
         const updatedMainImageIndex = req.body.mainImageIndex || 0;
         const projectObject = {
           ...projectData,
-          description: projectDescriptionWithBr,
+          artistsList: artistsList,
+          productionList: productionList,
+          press: pressList,
+          links: linksList,
+          diffusionList: diffusionList,
+          // description: projectDescriptionWithBr,
           mainImageIndex: updatedMainImageIndex,
-          images: updatedImages
+          projectImages: updatedImages
         };
   
         await Project.updateOne({ _id: req.params.id }, projectObject);
@@ -168,7 +187,7 @@ exports.updateOneProject = async (req, res) => {
       }
   
       // Appel de la fonction de tri des images et de mise à jour
-      processAndSortImages(existingImagesObjects, req.newImagesObjects)
+      processAndSortImages(existingImagesObjects, newImagesObjects)
         .then((updatedImages) => updateProject(updatedImages))
         .catch((error) => {
           console.error(error);

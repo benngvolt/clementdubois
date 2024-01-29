@@ -1,0 +1,54 @@
+@import '../../utils/mixins';
+
+.header {
+
+    padding: 30px 54px;
+    margin-bottom: 54px;
+    margin-top: 25px;
+    border-bottom: 1px solid $colorDarkGrey;
+    border-top: 1px solid $colorDarkGrey;
+
+    &_nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &_menu {
+            display: flex;
+            flex-direction: row;
+            column-gap: 54px;
+            
+            &_item {
+                background: none;
+                border: none;
+                color: $colorDarkGrey;
+                font-family: 'SpecialFont';
+                font-size: 35px;
+                text-decoration: none;
+                padding: 0;
+                margin: 0;
+
+                h2, p {
+                
+                color: $colorDarkGrey;
+                font-family: 'SpecialFont';
+                font-size: 35px;
+                padding: 0;
+                margin: 0;
+                text-decoration: none;
+                }
+            }
+        }
+
+        &_socials {
+            display: flex;
+            flex-direction: row;
+            column-gap: 54px;
+
+            a svg {
+                color: $colorDarkGrey;
+                height: 30px;
+            }
+        }
+    }
+}

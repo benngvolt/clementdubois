@@ -14,7 +14,8 @@ const uploadImages = require('../middlewares/uploadImages').uploadImages;
 
 router.post('/', multer.fields([{ name: 'images' }]), uploadImages, projectsCtrl.createProject);
 router.get('/', projectsCtrl.getAllProjects);
-// router.delete ('/:id', auth, projectsCtrl.deleteOneProject);
-// router.put ('/:id', auth, multer.array('images'), uploadImages, projectsCtrl.updateOneProject);
+router.get('/:id', projectsCtrl.getOneProject);
+router.delete ('/:id', projectsCtrl.deleteOneProject);
+router.put ('/:id', multer.fields([{ name: 'images' }]), uploadImages, projectsCtrl.updateOneProject);
 
 module.exports = router;
