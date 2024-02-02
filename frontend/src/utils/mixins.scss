@@ -30,6 +30,18 @@
 ----------------*/
 
 @mixin Button {
+    margin: auto;
+    font-family:'MainFont_bold';
+    color: $colorDarkGrey;
+    font-size: 16px;
+    padding: 10px;
+    border: 2px solid $colorDarkGrey;
+    border-radius: 50rem;
+    &:hover {
+        color: $colorLightGrey;
+        border-color: $colorLightGrey;
+        cursor: pointer;
+    }
 }
 
 /*-------------------

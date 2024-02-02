@@ -20,7 +20,9 @@ function Edit() {
     const [projectToDelete, setProjectToDelete] = useState('');
 
     const [imageFiles, setImageFiles] = useState([]);
+    const [moImageFiles, setMoImageFiles] = useState([]);
     const [mainImageIndex, setMainImageIndex]= useState(0);
+    const [mainMoImageIndex, setMainMoImageIndex]= useState(0);
 
     useEffect(() => {
         fetch(`${API_URL}/api/projects`)
@@ -39,6 +41,7 @@ function Edit() {
         setLinksList([]);
         setDiffusionList([]);
         setImageFiles([]);
+        setMoImageFiles([]);
         setProjectFormMode('add');
         setHandleDisplayProjectForm(true);
         console.log(projectFormMode);
@@ -65,6 +68,7 @@ function Edit() {
     async function editProject(project) {
         console.log(project);
         setImageFiles(project.projectImages);
+        setMoImageFiles(project.makingOfImages);
         setArtistsList(project.artistsList);
         setProductionList(project.productionList);
         setPressList(project.press);
@@ -74,6 +78,7 @@ function Edit() {
         setProjectFormMode('edit');
         setHandleDisplayProjectForm(true);
         setMainImageIndex(project.mainImageIndex);
+        setMainMoImageIndex(project.mainMoImageIndex);
     }
 
     function handleProjectDeleteMode (project) {
@@ -122,8 +127,12 @@ function Edit() {
                     setDiffusionList={setDiffusionList}
                     imageFiles={imageFiles}
                     setImageFiles={setImageFiles}
+                    moImageFiles={moImageFiles}
+                    setMoImageFiles={setMoImageFiles}
                     mainImageIndex={mainImageIndex}
+                    mainMoImageIndex={mainMoImageIndex}
                     setMainImageIndex={setMainImageIndex}
+                    setMainMoImageIndex={setMainMoImageIndex}
                     setHandleDisplayProjectForm={setHandleDisplayProjectForm}
                     />
             </div>

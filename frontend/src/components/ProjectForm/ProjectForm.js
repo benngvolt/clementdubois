@@ -20,9 +20,13 @@ function ProjectForm({
     diffusionList,
     setDiffusionList,
     imageFiles, 
-    setImageFiles, 
-    mainImageIndex, 
+    setImageFiles,
+    moImageFiles, 
+    setMoImageFiles, 
+    mainImageIndex,
+    mainMoImageIndex, 
     setMainImageIndex,
+    setMainMoImageIndex,
     setHandleDisplayProjectForm
     }) {
 
@@ -34,7 +38,9 @@ function ProjectForm({
     const inputAboutScenoRef = useRef(null);
     const inputProjectTypeRef = useRef(null);
     const inputProjectImageFileRef = useRef(null);
+    const inputProjectMoImageFileRef = useRef(null);
     const projectMainImageSampleRef = useRef(null);
+    const projectMainMoImageSampleRef = useRef(null);
 
     
     /* ---------------------------
@@ -112,7 +118,9 @@ function ProjectForm({
     ----- IMAGES ----------
     ---------------------*/
     const [isImageLoaded, setIsImageLoaded] = useState(false);
+    const [isMoImageLoaded, setIsMoImageLoaded] = useState(false);
     const [newImage, setNewImage] = useState(null);
+    const [newMoImage, setNewMoImage] = useState(null);
 
     function displaySample() {
         const image = inputProjectImageFileRef.current.files[0];
@@ -129,14 +137,36 @@ function ProjectForm({
         }    
     }
 
+    function displayMoSample() {
+        const image = inputProjectMoImageFileRef.current.files[0];
+        if (image) {
+            setNewMoImage (image);
+            const id = uuidv4(); // Générez un identifiant unique
+            image._id = id;
+            image.sampleImageUrl= URL.createObjectURL(image);
+            projectMainMoImageSampleRef.current.setAttribute("src", image.sampleImageUrl);
+            projectMainMoImageSampleRef.current.setAttribute("alt", "");
+            setIsMoImageLoaded(true);
+        } else {
+            setIsMoImageLoaded(false);
+        }    
+    }
+
     function cancelAddImageFile() {
         setNewImage (null);
         setIsImageLoaded(false);
         projectMainImageSampleRef.current.setAttribute("src", "");
         projectMainImageSampleRef.current.setAttribute("alt", "");
     }
+    function cancelAddMoImageFile() {
+        setNewMoImage (null);
+        setIsMoImageLoaded(false);
+        projectMainMoImageSampleRef.current.setAttribute("src", "");
+        projectMainMoImageSampleRef.current.setAttribute("alt", "");
+    }
 
     function handleAddImageFile() {
+        
         if (newImage) {
             const updatedImageFiles = [...imageFiles, newImage];
             setImageFiles(updatedImageFiles);
@@ -144,6 +174,18 @@ function ProjectForm({
         setIsImageLoaded(false);
         cancelAddImageFile();
         console.log(imageFiles);
+        
+    }
+
+    function handleAddMoImageFile() {
+        if (newMoImage) {
+            console.log(newMoImage);
+            const updatedMoImageFiles = [...moImageFiles, newMoImage];
+            setMoImageFiles(updatedMoImageFiles);
+        }
+        setIsMoImageLoaded(false);
+        cancelAddMoImageFile();
+        
     }
 
     /* --------------------------------------
@@ -151,7 +193,6 @@ function ProjectForm({
     ---------------------------------------*/
 
     function projectFormSubmit(event) {
-
 
         event.preventDefault();
         // const token = window.sessionStorage.getItem('1');
@@ -164,6 +205,7 @@ function ProjectForm({
         projectFormData.append('aboutSceno', inputAboutScenoRef.current.value);
         projectFormData.append('projectType', inputProjectTypeRef.current.value);
         projectFormData.append('mainImageIndex', mainImageIndex);
+        projectFormData.append('mainMoImageIndex', mainMoImageIndex);
         projectFormData.append('artistsList', JSON.stringify(artistsList));
         projectFormData.append('productionList', JSON.stringify(productionList));
         projectFormData.append('press', JSON.stringify(pressList));
@@ -171,8 +213,14 @@ function ProjectForm({
         projectFormData.append('diffusionList', JSON.stringify(diffusionList));
 
         const newImageFiles = Array.from(imageFiles);
+        const newMoImageFiles = Array.from(moImageFiles);
        
         const imagesWithIndex = newImageFiles.map((image, index) => ({
+            index,
+            image
+        }));
+
+        const moImagesWithIndex = newMoImageFiles.map((image, index) => ({
             index,
             image
         }));
@@ -183,6 +231,15 @@ function ProjectForm({
                 projectFormData.append('fileIndexes', index)
             } else {
                 projectFormData.append(`existingImages[${index}]`, JSON.stringify(image));
+            }
+        });
+
+        moImagesWithIndex.forEach(({ index, image }) => {
+            if (image instanceof File) {
+                projectFormData.append('moImages', image);
+                projectFormData.append('moFileIndexes', index)
+            } else {
+                projectFormData.append(`existingMoImages[${index}]`, JSON.stringify(image));
             }
         });
 
@@ -236,6 +293,8 @@ function ProjectForm({
         
         <form onSubmit={(event) => projectFormSubmit(event)} method="post" className='projectForm'>
 
+            <p>IMAGES DU PROJET</p>
+            
             <DNDGallery imageFiles={imageFiles} setImageFiles={setImageFiles} mainImageIndex={mainImageIndex} setMainImageIndex={setMainImageIndex} />
             
             <div className='projectForm_imageField'>
@@ -246,6 +305,22 @@ function ProjectForm({
                     <div className={isImageLoaded ? "projectForm_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_projectImageFile_sampleContainer_buttonsSystem--displayOff"}>
                         <button aria-label="Ajouter l'image" onClick={handleAddImageFile} type="button">AJOUTER</button>
                         <button aria-label="Annuler" onClick={cancelAddImageFile} type="button">ANNULER</button>
+                    </div>
+                </div>
+            </div>
+
+            <p>IMAGES MAKING OF</p>
+
+            <DNDGallery imageFiles={moImageFiles} setImageFiles={setMoImageFiles} mainImageIndex={mainMoImageIndex} setMainImageIndex={setMainMoImageIndex} />
+            
+            <div className='projectForm_imageField'>
+                <label htmlFor='inputProjectMoImageFile'>{isMoImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
+                <input type='file' id='inputProjectMoImageFile' name="moImages" ref={inputProjectMoImageFileRef} onChange={displayMoSample}></input>
+                <div  className="projectForm_imageField_sampleContainer">
+                    <img id='moImageSample' ref={projectMainMoImageSampleRef} src='' alt=''/>
+                    <div className={isMoImageLoaded ? "projectForm_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_projectImageFile_sampleContainer_buttonsSystem--displayOff"}>
+                        <button aria-label="Ajouter l'image" onClick={handleAddMoImageFile} type="button">AJOUTER</button>
+                        <button aria-label="Annuler" onClick={cancelAddMoImageFile} type="button">ANNULER</button>
                     </div>
                 </div>
             </div>
@@ -388,9 +463,13 @@ function ProjectForm({
                                     defaultValue={projectFormMode==='edit'? production.prodType : ""}
                                     onChange={(e) => handleProdTypeSelectChange(index, e.target.value)}>
                                 <option value=""></option>
+                                <option value="Production">Production</option>
                                 <option value="Co-production">Co-production</option>
                                 <option value="Accueils en résidence de création">Accueils en résidence de création</option>
                                 <option value="Aide à la création">Aide à la création</option>
+                                <option value="Aide à la résidence d'écriture">Aide à la résidence d'écriture</option>
+                                <option value="Soutien">Soutien</option>
+                                <option value="Remerciements">Remerciements</option>
                             </select>
                         </div>
                         <button type='button' onClick={() => handleSupprProduction(index)}>SUPPRIMER</button>

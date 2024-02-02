@@ -1,6 +1,5 @@
 @import '../../utils/mixins';
 
-
 .projectForm {
     display: flex;
     flex-direction: column;
@@ -49,7 +48,5 @@
                 background-color: $colorDarkGrey;
             }
         }
-
     }
-
 }

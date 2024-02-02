@@ -23,16 +23,17 @@ import { DNDSortableSingleItem } from '../DNDSortableSingleItem/DNDSortableSing
 
 function DNDGallery ({ imageFiles, setImageFiles, mainImageIndex, setMainImageIndex}) {
 
-  //GET SERIES
-  useEffect(() => {
-    setItems(imageFiles)
-  },[imageFiles]);
+  
 
   const [items, setItems] = useState(imageFiles);
   const [activeId, setActiveId] = useState(null);
   const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
   const [mainImageId, setMainImageId] = useState(null)
 
+  //GET SERIES
+  useEffect(() => {
+    setItems(imageFiles)
+  },[imageFiles]);
   /*------------------------------
   ----- OUVERTURE CONFIRMBOX -----
   ------------------------------*/
@@ -125,7 +126,6 @@ function DNDGallery ({ imageFiles, setImageFiles, mainImageIndex, setMainImageIn
   function handleDragStart(event) {
     setActiveId(event.active.id);
     setMainImageId(items[mainImageIndex]._id);
-    console.log(imageFiles);
   }
 
   //DÉFINITION DE L'ID DE L'ÉLÉMENT D'ARRIVÉE

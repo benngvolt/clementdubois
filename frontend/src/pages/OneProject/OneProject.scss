@@ -2,6 +2,9 @@
 
 .oneProject {
 
+    display: flex;
+    flex-direction: column;
+
     &_titleContainer {
         margin: 85px 54px;
         display: flex;
@@ -49,8 +52,8 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
-        column-gap: 54px;
-        margin: auto;
+        column-gap: 35px;
+        margin: 54px auto;
 
         &_showAndSceno {
             width: 50%;
@@ -73,43 +76,280 @@
             }
         }
 
-        &_distribution {
-            width: 50%;
+        &_distributionAndLinks {
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: space-between;
 
-            h4 {
-                font-family: 'SpecialFont';
-                font-size: 30px;
-                text-align: start;
-                margin: 22px 0;
-            }
-
-            &_list {
+            &_distribution {
+                width: 80%;
                 display: flex;
                 flex-direction: column;
-                list-style-type: none;
-                padding: 0;
-                margin: 0;
+                justify-content: flex-start;
 
-                &_item {
-                    
-                    p {
+                h4 {
+                    font-family: 'SpecialFont';
+                    font-size: 30px;
+                    text-align: start;
+                    margin: 22px 0;
+                }
+
+                &_list {
+                    display: flex;
+                    flex-direction: column;
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+
+                    &_item {
                         
-                        font-size: 16px;
-                        font-family: 'MainFont_light';
-                        margin: 3px 0;
-                    }
-                    span {
-                        font-size: 16px;
-                        font-family: 'MainFont_bold';
-                    }
+                        p {
+                            
+                            font-size: 16px;
+                            font-family: 'MainFont_light';
+                            margin: 3px 0;
+                        }
+                        span {
+                            font-size: 16px;
+                            font-family: 'MainFont_bold';
+                        }
 
+                    }
+                }
+            }
+
+            &_links {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                row-gap: 10px;
+                margin: 22px 0;      
+
+                a {
+                    @include Button;
+                    text-decoration: none;
                 }
             }
         }
 
     }
+    &_secondImageContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: 1364px;
+        grid-gap: 3px;
+        
 
+        img {
+            width: 100%; 
+            object-fit: cover;
+        }
+
+        &_img_0 {
+            height: 100%;
+            grid-column-start: 1;
+            grid-row-start: 1;
+            grid-column-end: 2;
+            grid-row-end: 2;
+        };
+
+        &_img_1 {
+            height: 100%;
+            grid-column-start: 1;
+            grid-row-start: 2;
+            grid-column-end: 2;
+            grid-row-end: 3;
+        };
+
+        &_img_2 {
+            height: 100%;
+            grid-column-start: 2;
+            grid-column-end: 3;
+            grid-row-start: 1;
+            grid-row-end: 3;
+        };
+    
+    }
+
+    &_productionBlocks {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        padding-top: 54px;
+        padding-bottom: 54px;
+        
+        background-color: $colorFirst;
+
+        h4 {
+            font-family: 'SpecialFont';
+            font-size: 30px;
+            text-align: start;
+            margin: 22px auto;
+        }
+
+        &_container {
+            margin: auto;
+            width: 80%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 35px;
+            justify-content: center;
+           
+            margin: auto;
+    
+            &_block {
+
+                &--leftText {
+                    text-align: end;
+                }
+                &--rightText {
+                    text-align: start;
+                }
+                
+                
+
+                    h5 {
+                        font-family: 'SpecialFont';
+                        font-size: 22px;
+                        margin: 22px 0;
+                    }
+                
+                &_list {
+                    display: flex;
+                    flex-direction: column;
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+
+                    &_item {
+                        a {
+                            font-size: 16px;
+                            font-family: 'MainFont_light';
+                            text-decoration: underline;
+                            color: $colorDarkGrey;
+                        } 
+                        span {
+                                
+                            font-size: 16px;
+                            font-family: 'MainFont_light';
+                            margin: 3px 0;
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+    &_thirdImageContainer {
+        display: flex;
+        flex-direction: row;
+        width: 100vw;
+        height: 682px;
+        column-gap: 3px;
+        
+
+        img {
+            object-fit: cover;
+        }
+
+        &_img_0 {
+            width: 66%; 
+            height: 100%;
+        };
+
+        &_img_1 {
+            height: 100%;
+        };
+    }
+    &_pressBlocks {
+        display: flex;
+        flex-direction: column;
+        margin: 54px auto;
+
+        h4 {
+            font-family: 'SpecialFont';
+            font-size: 30px;
+            text-align: start;
+            margin: 22px auto;
+        }
+
+        &_container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            margin: auto;
+            width: 80%;
+            grid-gap: 54px;
+
+            &_item {
+                list-style-type: none;
+                display: flex;
+                flex-direction: column;
+
+                h5 {
+                    font-family: 'SpecialFont';
+                    font-size: 22px;
+                    text-align:center;
+                    margin: 22px 0;
+                }
+                p {
+                    font-size: 16px;
+                    font-family: 'MainFont_lightItalic';
+                    margin: 3px 0;
+                    text-align:center;
+                }
+
+                a {
+                    font-size: 16px;
+                    font-family: 'MainFont_light';
+                    margin: 16px auto;
+                    color: $colorDarkGrey;
+                    text-align: center;
+                }
+            }
+        }
+    }
+    &_makingOfImageContainer {
+        display: flex;
+        flex-direction: row;
+        margin: auto;
+        overflow: scroll;
+        width: 90%;
+        column-gap: 16px;
+        height: 682px;
+
+        img{
+            object-fit: cover;
+            height: 100%;
+            width: 374px;
+        }
+    }
+
+    &_diffBlock {
+        display: flex;
+        flex-direction: column;
+        margin: 54px auto;
+
+        h4 {
+            font-family: 'SpecialFont';
+            font-size: 30px;
+            text-align: start;
+            margin: 22px auto;
+        }
+
+        &_list {
+            list-style-type: none;
+            margin: 54px auto;
+            overflow: scroll;
+            &_item {
+                a {
+                    color: $colorDarkGrey;
+                    font-family: 'MainFont_bold';
+                    text-decoration: none;
+                    &:hover {
+                        color: $colorSecond;
+                    }
+                }
+            }
+        }
+    }
 }

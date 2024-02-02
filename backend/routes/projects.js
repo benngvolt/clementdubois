@@ -12,10 +12,10 @@ const uploadImages = require('../middlewares/uploadImages').uploadImages;
 // Dans cet exemple, il envoie une réponse JSON contenant le message "Votre requête a bien été reçue !" à chaque requête entrante.
 // l'argument next permet de passer au middleware suivant
 
-router.post('/', multer.fields([{ name: 'images' }]), uploadImages, projectsCtrl.createProject);
+router.post('/', multer.fields([{ name: 'images' }, { name: 'moImages' }]), uploadImages, projectsCtrl.createProject);
 router.get('/', projectsCtrl.getAllProjects);
 router.get('/:id', projectsCtrl.getOneProject);
 router.delete ('/:id', projectsCtrl.deleteOneProject);
-router.put ('/:id', multer.fields([{ name: 'images' }]), uploadImages, projectsCtrl.updateOneProject);
+router.put ('/:id', multer.fields([{ name: 'images' }, { name: 'moImages' }]), uploadImages, projectsCtrl.updateOneProject);
 
 module.exports = router;

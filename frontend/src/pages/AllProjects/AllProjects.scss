@@ -6,6 +6,7 @@
 
     &_projectCard {
         width: 100%;
+        height: 490px;
         text-decoration: none;
         text-align: justify;
         color: $colorDarkGrey;
@@ -13,6 +14,7 @@
         flex-direction: row;
         justify-content: space-between;
         column-gap: 40px;
+        box-sizing: border-box;
         &:hover {
             cursor: pointer;
             background-color: $colorFirst;
