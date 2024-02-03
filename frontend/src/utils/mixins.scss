@@ -73,7 +73,11 @@ $colorThird: violet;
 }
 
 @keyframes heightRetract {
-    0% {
+    0% { 
+        padding-top: 0%;
+        padding-bottom: 0%;
+    }
+    35% {
         padding-top: 0%;
         padding-bottom: 0%;
        
@@ -86,6 +90,7 @@ $colorThird: violet;
 }
 
 @keyframes heightRetractInvert {
+ 
     0% {
         padding-top: 22px;
         padding-bottom: 22px;

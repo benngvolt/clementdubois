@@ -192,7 +192,7 @@
             width: 80%;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-gap: 35px;
+            grid-gap: 54px;
             justify-content: center;
            
             margin: auto;
@@ -211,7 +211,7 @@
                     h5 {
                         font-family: 'SpecialFont';
                         font-size: 22px;
-                        margin: 22px 0;
+                        margin: 16px 0;
                     }
                 
                 &_list {
@@ -264,7 +264,9 @@
     &_pressBlocks {
         display: flex;
         flex-direction: column;
-        margin: 54px auto;
+        margin: 0 auto;
+        background-color: $colorDarkGrey;
+        color: $colorLightGrey;
 
         h4 {
             font-family: 'SpecialFont';
@@ -277,6 +279,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             margin: auto;
+            padding: 54px 0;
             width: 80%;
             grid-gap: 54px;
 
@@ -289,7 +292,7 @@
                     font-family: 'SpecialFont';
                     font-size: 22px;
                     text-align:center;
-                    margin: 22px 0;
+                    margin: 16px 0;
                 }
                 p {
                     font-size: 16px;
@@ -302,8 +305,8 @@
                     font-size: 16px;
                     font-family: 'MainFont_light';
                     margin: 16px auto;
-                    color: $colorDarkGrey;
                     text-align: center;
+                    color: $colorLightGrey;
                 }
             }
         }

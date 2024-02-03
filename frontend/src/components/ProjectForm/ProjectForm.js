@@ -32,6 +32,7 @@ function ProjectForm({
 
     const inputProjectTitleRef = useRef(null);
     const inputProjectSubtitleRef = useRef(null);
+    const inputCreationDateRef = useRef(null);
     const inputProjectInfosRef = useRef(null);
     const inputMoreInfosRef = useRef(null);
     const inputAboutShowRef = useRef(null);
@@ -199,6 +200,7 @@ function ProjectForm({
         const projectFormData = new FormData();
         projectFormData.append('title', inputProjectTitleRef.current.value);
         projectFormData.append('subtitle', inputProjectSubtitleRef.current.value);
+        projectFormData.append('creationDate', inputCreationDateRef.current.value);
         projectFormData.append('projectInfos', inputProjectInfosRef.current.value);
         projectFormData.append('moreInfos', inputMoreInfosRef.current.value);
         projectFormData.append('aboutShow', inputAboutShowRef.current.value);
@@ -335,6 +337,12 @@ function ProjectForm({
             <div className='projectForm_textField'>
                 <label htmlFor='inputProjectSubtitle'>SOUS-TITRE</label>
                 <input type='text' id='inputProjectSubtitle' ref={inputProjectSubtitleRef} defaultValue={projectFormMode==='edit'? projectEdit.subtitle : null}></input>
+            </div>
+
+            {/* CHAMPS DATE DE CRÉATION */}
+            <div className='projectForm_textField'>
+                <label htmlFor='inputCreationDate'>DATE DE CRÉATION*</label>
+                <input type='month' id='inputCreationDate' ref={inputCreationDateRef} defaultValue={projectFormMode==='edit'? projectEdit.creationDate : null}></input>
             </div>
 
             {/* CHAMPS INFOS COMPAGNIE*/}

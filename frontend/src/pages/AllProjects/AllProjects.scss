@@ -2,7 +2,9 @@
 
 .allProjects {
 
-    
+    display: flex;
+    flex-direction: column;
+    row-gap: 54px;
 
     &_projectCard {
         width: 100%;

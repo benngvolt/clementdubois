@@ -10,6 +10,7 @@ const projectSchema = mongoose.Schema({
     aboutSceno: {type: String, required: false},
     mainImageIndex: { type: Number, required: true },
     mainMoImageIndex: { type: Number, required: true },
+    creationDate: { type: String, required: true},
     projectType: {type: String, required: true},
     artistsList: [
         {
