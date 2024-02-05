@@ -3,6 +3,7 @@ import {useRef, useState, useEffect } from 'react'
 import { API_URL } from '../../utils/constants'
 import { v4 as uuidv4 } from 'uuid'
 import DNDGallery from '../../components/DNDGallery/DNDGallery'
+import DOMPurify from 'dompurify';
 
 
 
@@ -27,7 +28,9 @@ function ProjectForm({
     mainMoImageIndex, 
     setMainImageIndex,
     setMainMoImageIndex,
-    setHandleDisplayProjectForm
+    setHandleDisplayProjectForm,
+    handleDisplayProjectForm,
+    handleLoadProjects
     }) {
 
     const inputProjectTitleRef = useRef(null);
@@ -43,20 +46,53 @@ function ProjectForm({
     const projectMainImageSampleRef = useRef(null);
     const projectMainMoImageSampleRef = useRef(null);
 
+    const cleanedAboutSceno = DOMPurify.sanitize(projectEdit.aboutSceno);
+    const cleanedAboutShow = DOMPurify.sanitize(projectEdit.aboutShow);
     
+    const [projectTitle, setProjectTitle] = useState(projectFormMode === 'edit' ? projectEdit.title : '');
+    const [projectSubtitle, setProjectSubtitle] = useState(projectFormMode === 'edit' ? projectEdit.subtitle : '');
+    const [creationDate, setCreationDate] = useState(projectFormMode === 'edit' ? projectEdit.creationDate : '');
+    const [projectInfos, setProjectInfos] = useState(projectFormMode === 'edit' ? projectEdit.projectInfos : '');
+    const [moreInfos, setMoreInfos] = useState(projectFormMode === 'edit' ? projectEdit.moreInfos : '');
+    const [aboutShow, setAboutShow] = useState(projectFormMode === 'edit' ? cleanedAboutShow : '');
+    const [aboutSceno, setAboutSceno] = useState(projectFormMode === 'edit' ? cleanedAboutSceno : '');
+    const [projectType, setProjectType] = useState(projectFormMode === 'edit' ? projectEdit.projectType : '');
+
+    // Réinitialisation des valuers input lorsque le formulaire s'ouvre / se ferme.
+    useEffect(() => {
+      if (projectFormMode === 'edit') {
+        setProjectTitle(projectEdit.title);
+        setProjectSubtitle(projectEdit.subtitle);
+        setCreationDate(projectEdit.creationDate);
+        setProjectInfos(projectEdit.projectInfos);
+        setMoreInfos(projectEdit.projectInfos);
+        setAboutShow(projectEdit.aboutShow);
+        setAboutSceno(projectEdit.aboutSceno);
+        setProjectType(projectEdit.projectType);
+      } else {
+        setProjectTitle('');
+        setProjectSubtitle('');
+        setCreationDate('');
+        setProjectInfos('');
+        setMoreInfos('');
+        setAboutShow('');
+        setAboutSceno('');
+        setProjectType('');
+      }
+    }, [projectFormMode, handleDisplayProjectForm]);
+  
     /* ---------------------------
     ----- FORM FUNCTIONS -----------
     ----------------------------*/
 
-
     function closeForm() {
         setHandleDisplayProjectForm(false);
+        handleLoadProjects();
     }
 
-
-    /* ---------------------------
-    ----- ARTISTS LIST -----------
-    ----------------------------*/
+    /* -------------------------------
+    ----- AJOUTS DE CHAMPS -----------
+    --------------------------------*/
 
     const handleAddArtist = () => {
         setArtistsList([...artistsList, { artistFunction: '', artistName: '' }]);
@@ -64,50 +100,29 @@ function ProjectForm({
     const handleSupprArtist = (index) => {
         setArtistsList (artistsList.filter((_, i) => i !== index));
     }
-
-     /* -----------------------------
-    ----- PRODUCTION LIST -----------
-    -------------------------------*/
-
     const handleAddProduction = () => {
         setProductionList([...productionList, { prodType: '', prodName: '', prodInfos: '', prodLink: '' }]);
     };
     const handleSupprProduction = (index) => {
         setProductionList (productionList.filter((_, i) => i !== index));
     }
-
     const handleProdTypeSelectChange = (index, value) => {
         const updatedProductionList = [...productionList];
         updatedProductionList[index].prodType = value;
         setProductionList(updatedProductionList);
     };
-
-    /* ------------------------
-    ----- PRESS LIST ----------
-    -------------------------*/
-
     const handleAddPress = () => {
         setPressList([...pressList, { quote: '', mediaName: '', mediaLink: ''}]);
     };
     const handleSupprPress = (index) => {
         setPressList (pressList.filter((_, i) => i !== index));
     }
-
-    /* ------------------------
-    ----- LINKS LIST ----------
-    -------------------------*/
-
     const handleAddLink = () => {
         setLinksList([...linksList, { linkName: '', linkUrl: ''}]);
     };
     const handleSupprLink = (index) => {
         setLinksList (linksList.filter((_, i) => i !== index));
     }
-
-    /* ------------------------
-    ----- LINKS LIST ----------
-    -------------------------*/
-
     const handleAddDiff = () => {
         setDiffusionList([...diffusionList, { dates: '', city: '', placeName: '', placeLink:''}]);
     };
@@ -297,7 +312,7 @@ function ProjectForm({
 
             <p>IMAGES DU PROJET</p>
             
-            <DNDGallery imageFiles={imageFiles} setImageFiles={setImageFiles} mainImageIndex={mainImageIndex} setMainImageIndex={setMainImageIndex} />
+            <DNDGallery imageFiles={imageFiles} setImageFiles={setImageFiles} mainImageIndex={mainImageIndex} setMainImageIndex={setMainImageIndex} displayClass={'grid'} />
             
             <div className='projectForm_imageField'>
                 <label htmlFor='inputProjectImageFile'>{isImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
@@ -313,7 +328,7 @@ function ProjectForm({
 
             <p>IMAGES MAKING OF</p>
 
-            <DNDGallery imageFiles={moImageFiles} setImageFiles={setMoImageFiles} mainImageIndex={mainMoImageIndex} setMainImageIndex={setMainMoImageIndex} />
+            <DNDGallery imageFiles={moImageFiles} setImageFiles={setMoImageFiles} mainImageIndex={mainMoImageIndex} setMainImageIndex={setMainMoImageIndex} displayClass={'row'} />
             
             <div className='projectForm_imageField'>
                 <label htmlFor='inputProjectMoImageFile'>{isMoImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
@@ -330,43 +345,43 @@ function ProjectForm({
             {/* CHAMPS TITRE */}
             <div className='projectForm_textField'>
                 <label htmlFor='inputProjectTitle'>TITRE*</label>
-                <input type='text' id='inputProjectTitle' ref={inputProjectTitleRef} defaultValue={projectFormMode==='edit'? projectEdit.title : null}></input>
+                <input type='text' id='inputProjectTitle' ref={inputProjectTitleRef} value={projectTitle} onChange={(e) => setProjectTitle(e.target.value)}></input>
             </div>
 
             {/* CHAMPS SOUS-TITRE */}
             <div className='projectForm_textField'>
                 <label htmlFor='inputProjectSubtitle'>SOUS-TITRE</label>
-                <input type='text' id='inputProjectSubtitle' ref={inputProjectSubtitleRef} defaultValue={projectFormMode==='edit'? projectEdit.subtitle : null}></input>
+                <input type='text' id='inputProjectSubtitle' ref={inputProjectSubtitleRef} value={projectSubtitle} onChange={(e) => setProjectSubtitle(e.target.value)}></input>
             </div>
 
             {/* CHAMPS DATE DE CRÉATION */}
             <div className='projectForm_textField'>
                 <label htmlFor='inputCreationDate'>DATE DE CRÉATION*</label>
-                <input type='month' id='inputCreationDate' ref={inputCreationDateRef} defaultValue={projectFormMode==='edit'? projectEdit.creationDate : null}></input>
+                <input type='month' id='inputCreationDate' ref={inputCreationDateRef} value={creationDate} onChange={(e) => setCreationDate(e.target.value)}></input>
             </div>
 
             {/* CHAMPS INFOS COMPAGNIE*/}
             <div className='projectForm_textField'>
                 <label htmlFor='inputProjectInfos'>INFORMATIONS COMPAGNIE</label>
-                <input type='text' id='inputProjectInfos' ref={inputProjectInfosRef} defaultValue={projectFormMode==='edit'? projectEdit.projectInfos : null}></input>
+                <input type='text' id='inputProjectInfos' ref={inputProjectInfosRef} value={projectInfos} onChange={(e) => setProjectInfos(e.target.value)}></input>
             </div>
 
             {/* CHAMPS PLUS D'INFOS*/}
             <div className='projectForm_textField'>
                 <label htmlFor='inputMoreInfos'>PLUS D'INFOS</label>
-                <input type='text' id='inputMoreInfos' ref={inputMoreInfosRef} defaultValue={projectFormMode==='edit'? projectEdit.moreInfos : null}></input>
+                <input type='text' id='inputMoreInfos' ref={inputMoreInfosRef} value={moreInfos} onChange={(e) => setMoreInfos(e.target.value)}></input>
             </div>
 
             {/* CHAMPS A PROPOS DU SPECTACLE*/}
             <div className='projectForm_textField'>
                 <label htmlFor='inputAboutShow'>À PROPOS DU SPECTACLE</label>
-                <input type='textarea' id='inputAboutShow' ref={inputAboutShowRef} defaultValue={projectFormMode==='edit'? projectEdit.aboutShow : null}></input>
+                <textarea className='projectForm_textField_textarea' type='textarea' id='inputAboutShow' ref={inputAboutShowRef} value={aboutShow.replace(/<br>/g, "\n")} onChange={(e) => setAboutShow(e.target.value)}></textarea>
             </div>
 
             {/* CHAMPS A PROPOS DE LA SCENO*/}
             <div className='projectForm_textField'>
                 <label htmlFor='inputAboutSceno'>À PROPOS DE LA SCÉNOGRAPHIE</label>
-                <input type='textarea' id='inputAboutSceno' ref={inputAboutScenoRef} defaultValue={projectFormMode==='edit'? projectEdit.aboutSceno : null}></input>
+                <textarea className='projectForm_textField_textarea' type='textarea' id='inputAboutSceno' ref={inputAboutScenoRef} value={aboutSceno.replace(/<br>/g, "\n")} onChange={(e) => setAboutSceno(e.target.value)}></textarea>
             </div>
 
             {/* CHAMPS TYPE DE PROJET*/}
@@ -375,7 +390,8 @@ function ProjectForm({
                 <select id='inputProjectType' 
                         ref={inputProjectTypeRef} 
                         name="projectType"
-                        defaultValue={projectFormMode==='edit'? projectEdit.projectType : ""}>
+                        value={projectType} 
+                        onChange={(e) => setProjectType(e.target.value)}>
                     <option value=""></option>
                     <option value="spectacle vivant">Spectacle vivant</option>
                     <option value="évènement">Évènement</option>

@@ -2,12 +2,11 @@ import './Edit.scss'
 import ProjectForm from '../../components/ProjectForm/ProjectForm'
 import ConfirmBox from '../../components/ConfirmBox/ConfirmBox'
 import { API_URL } from '../../utils/constants'
-import React, { useEffect, useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { ProjectsContext } from '../../utils/ProjectsContext'
 
 function Edit() {
 
-
-    const [projects, setProjects] = useState([]);
     const [projectFormMode, setProjectFormMode] = useState('add');
     const [projectEdit, setProjectEdit] = useState('');
     const [handleDisplayProjectForm, setHandleDisplayProjectForm] = useState(false);
@@ -24,17 +23,15 @@ function Edit() {
     const [mainImageIndex, setMainImageIndex]= useState(0);
     const [mainMoImageIndex, setMainMoImageIndex]= useState(0);
 
-    useEffect(() => {
-        fetch(`${API_URL}/api/projects`)
-            .then((res) => res.json())
-            .then((data) => {
-                setProjects(data);
-                console.log('Projets chargés');
-            })
-            .catch((error) => console.log(error.message));
-    }, [confirmBoxState, handleDisplayProjectForm]);
+    const { projects, handleLoadProjects } = useContext(ProjectsContext);
 
     function addProject() {
+        resetFields();
+        setProjectFormMode('add');
+        setHandleDisplayProjectForm(true);
+    }
+
+    function resetFields() {
         setArtistsList([]);
         setProductionList([]);
         setPressList([]);
@@ -42,9 +39,7 @@ function Edit() {
         setDiffusionList([]);
         setImageFiles([]);
         setMoImageFiles([]);
-        setProjectFormMode('add');
-        setHandleDisplayProjectForm(true);
-        console.log(projectFormMode);
+        setProjectEdit([]);
     }
 
     function deleteProject() {
@@ -66,7 +61,6 @@ function Edit() {
     }
 
     async function editProject(project) {
-        console.log(project);
         setImageFiles(project.projectImages);
         setMoImageFiles(project.makingOfImages);
         setArtistsList(project.artistsList);
@@ -134,6 +128,8 @@ function Edit() {
                     setMainImageIndex={setMainImageIndex}
                     setMainMoImageIndex={setMainMoImageIndex}
                     setHandleDisplayProjectForm={setHandleDisplayProjectForm}
+                    handleDisplayProjectForm={handleDisplayProjectForm}
+                    handleLoadProjects={handleLoadProjects}
                     />
             </div>
         </aside>

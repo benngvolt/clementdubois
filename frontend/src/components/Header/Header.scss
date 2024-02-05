@@ -2,13 +2,43 @@
 
 .header {
 
-    padding: 30px 54px;
+   
     margin-bottom: 54px;
     margin-top: 25px;
     border-bottom: 1px solid $colorDarkGrey;
     border-top: 1px solid $colorDarkGrey;
+    background-color: $colorLightGrey;
+    position: -webkit-sticky; /* Pour la prise en charge de WebKit (Safari, Chrome) */
+    position: sticky;
+    top: 0px;
+
+    &_hamburger {
+        // padding: auto;
+        height: 30px;
+        display: flex;
+        animation: showHamburger 0.5s ease forwards;
+        
+        &_icon {
+            width: 100%;
+            margin: auto;
+        }
+
+        &--displayOff {
+            animation: hideHamburger 0.5s ease forwards;
+            display: none;
+        }
+    }
 
     &_nav {
+
+        &--displayOff {
+            animation: navOpenInvert 0.5s ease forwards;
+            display: none;
+        }
+
+        animation: navOpen 0.5s ease forwards;
+        // padding: auto;
+        height: 73px;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -17,8 +47,10 @@
             display: flex;
             flex-direction: row;
             column-gap: 54px;
+            margin-left: 54px;
             
             &_item {
+                display: flex;
                 background: none;
                 border: none;
                 color: $colorDarkGrey;
@@ -26,16 +58,23 @@
                 font-size: 35px;
                 text-decoration: none;
                 padding: 0;
-                margin: 0;
+                margin: auto 0;
+                
+
+                p:hover {
+                    cursor: pointer;
+                    color: $colorFirst;
+                }
 
                 h2, p {
-                
+                display: flex;
                 color: $colorDarkGrey;
                 font-family: 'SpecialFont';
                 font-size: 35px;
                 padding: 0;
                 margin: 0;
                 text-decoration: none;
+                height: 100%;
                 }
             }
         }
@@ -44,10 +83,12 @@
             display: flex;
             flex-direction: row;
             column-gap: 54px;
+            margin: auto 54px auto 0px;
 
             a svg {
                 color: $colorDarkGrey;
                 height: 30px;
+                margin: auto;
             }
         }
     }

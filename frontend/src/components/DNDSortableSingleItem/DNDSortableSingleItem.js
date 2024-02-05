@@ -30,14 +30,15 @@ async function handleMainImage(index) {
     }
 }
 
+console.log (props);
 
   return (
-    <div className={`dndItem dndItem_${props.itemsNumber}_item_${props.index}`} ref={setNodeRef}
+    <div className={props.displayClass==='grid'?`dndItem dndItem_${props.itemsNumber}_item_${props.index}`:'dndRowItem'} ref={setNodeRef}
       style={style}
       {...props}
       {...attributes}
       {...listeners}>
-      <img className='dndItem_image'
+      <img className={props.displayClass==='grid'?'dndItem_image':'dndRowItem_image'}
         src={props.item.imageUrl ?? (props.item instanceof File ? props.item.sampleImageUrl : '')}
         alt=''/>
       <div className='dndItem_buttons'>

@@ -4,12 +4,15 @@ import { API_URL } from '../../utils/constants'
 import React, { useState, useEffect } from 'react'
 // import { Context } from '../../utils/Context'
 import { useParams } from 'react-router-dom'
+import DOMPurify from 'dompurify';
 
  
 function OneProject() {
 
     const { id } = useParams();
     const [project, setProject] = useState([]);
+    const cleanedAboutShow = DOMPurify.sanitize(project.aboutShow);
+    const cleanedAboutSceno = DOMPurify.sanitize(project.aboutSceno);
 
     useEffect(() => {
         fetch(`${API_URL}/api/projects/${id}`)
@@ -41,11 +44,11 @@ function OneProject() {
                 <div className='oneProject_firstInfosBlock_showAndSceno'>
                     <div className='oneProject_firstInfosBlock_showAndSceno_showBlock'>
                         <h4>La pièce</h4>
-                        <p>{project.aboutShow}</p>
+                        <p dangerouslySetInnerHTML={{__html:cleanedAboutShow}}></p>
                     </div>
                     <div className='oneProject_firstInfosBlock_showAndSceno_scenoBlock'>
                         <h4>La scénographie</h4>
-                        <p>{project.aboutSceno}</p>
+                        <p dangerouslySetInnerHTML={{__html:cleanedAboutSceno}}></p>
                     </div>
                 </div>
                 <div className='oneProject_firstInfosBlock_distributionAndLinks'>

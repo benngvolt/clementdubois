@@ -1,23 +1,14 @@
 import './Footer.scss'
 import { Link } from 'react-router-dom'
 import { API_URL } from '../../utils/constants'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { ProjectsContext } from '../../utils/ProjectsContext'
 // import { Context } from '../../utils/Context'
 // import { useNavigate } from 'react-router-dom'
  
 function Footer() {
 
-    const [projects, setProjects] = useState([]);
-
-    useEffect(() => {
-        fetch(`${API_URL}/api/projects`)
-            .then((res) => res.json())
-            .then((data) => {
-                setProjects(data);
-                console.log('Projets chargés');
-            })
-            .catch((error) => console.log(error.message));
-    }, []);
+    const { projects } = useContext(ProjectsContext);
 
     return  (      
         <footer className='footer'>

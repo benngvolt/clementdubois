@@ -175,3 +175,16 @@
         }
     }
 }
+
+.dndRowItem {
+    
+    height: 300px;
+    width: 200px;
+    position: relative;
+    &_image {
+
+        height: 100%;
+        width: 100%;
+        object-fit: cover ;
+    }
+}

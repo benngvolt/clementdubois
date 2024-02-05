@@ -1,25 +1,15 @@
 import './AllProjects.scss'
-import { API_URL } from '../../utils/constants'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
+import { ProjectsContext } from '../../utils/ProjectsContext'
 import {Link} from 'react-router-dom'
+import DOMPurify from 'dompurify';
+
 
 
 function AllProjects() {
 
-    const [projects, setProjects] = useState([]);
+    const { projects } = useContext(ProjectsContext);
     const [sortedProjects, setSortedProjects] = useState([]);
-
-    useEffect(() => {
-        fetch(`${API_URL}/api/projects`)
-            .then((res) => res.json())
-            .then((data) => {
-                setProjects(data);
-                setSortedProjects(data); // Assurez-vous que sortedProjects est initialisé avec les données chargées
-                console.log('Projets chargés');
-            })
-            .catch((error) => console.log(error.message));
-    }, []);
-
 
     return  (      
         <section className='allProjects'>
@@ -28,7 +18,7 @@ function AllProjects() {
                     <div className='allProjects_projectCard_infos'>
                         <h3 className='allProjects_projectCard_infos_title'>{project.title}</h3>
                         <p className='allProjects_projectCard_infos_projectInfos'>{project.projectInfos}</p>
-                        <p className='allProjects_projectCard_infos_aboutShow'>{project.aboutShow}</p>
+                        <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(project.aboutShow) }} className='allProjects_projectCard_infos_aboutShow'></p>
                     </div>
                     <div className='allProjects_projectCard_imageContainer'>
                         <img src={`${project.projectImages[project.mainImageIndex].imageUrl}`}/>

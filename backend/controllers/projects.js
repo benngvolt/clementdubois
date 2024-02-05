@@ -35,6 +35,10 @@ exports.createProject = async (req, res) => {
   const linksList = JSON.parse(req.body.links);
   const diffusionList = JSON.parse(req.body.diffusionList);
 
+  
+  const aboutShowWithBr = req.body.aboutShow.replace(/(\r\n|\n|\r)/g, "<br>");
+  const aboutScenoWithBr = req.body.aboutSceno.replace(/(\r\n|\n|\r)/g, "<br>");
+
   // const projectDescriptionWithBr = projectData.description.replace(/(\r\n|\n|\r)/g, "<br>");
 
   if (!projectData.title || !projectData.projectType) {
@@ -54,6 +58,8 @@ exports.createProject = async (req, res) => {
         diffusionList: diffusionList,
         projectImages: images,
         makingOfImages: moImages,
+        aboutShow: aboutShowWithBr,
+        aboutSceno: aboutScenoWithBr
       });
 
       await project.save();
@@ -178,6 +184,9 @@ exports.updateOneProject = async (req, res) => {
     const newImagesObjects = req.newImagesObjects;
     const newMoImagesObjects = req.newMoImagesObjects;
 
+    const aboutShowWithBr = req.body.aboutShow.replace(/(\r\n|\n|\r)/g, "<br>");
+    const aboutScenoWithBr = req.body.aboutSceno.replace(/(\r\n|\n|\r)/g, "<br>");
+
     // RÉCUPÉRATION DU PROJET CONCERNÉ VIA SON ID STOCKÉ EN PARAMÈTRES D'URL
     const project = await Project.findOne({ _id: req.params.id });
 
@@ -219,6 +228,8 @@ exports.updateOneProject = async (req, res) => {
       const updatedMainMoImageIndex = req.body.mainMoImageIndex || 0;
       const projectObject = {
         ...projectData,
+        aboutShow: aboutShowWithBr,
+        aboutSceno: aboutScenoWithBr,
         artistsList: artistsList,
         productionList: productionList,
         press: pressList,

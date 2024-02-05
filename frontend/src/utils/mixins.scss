@@ -102,3 +102,91 @@ $colorThird: violet;
        
     }
 }
+
+@keyframes navOpen {
+    0% { 
+        // padding: 10px 54px;
+        height: 30px;
+        opacity: 0;
+        
+    }
+    50% {
+        // padding: 30px 54px;
+        height: 63px;
+        opacity: 0;
+    }
+   
+    100% {
+        // padding: 30px 54px;
+        height: 63px;
+        opacity: 1;
+    }
+}
+
+@keyframes navOpenInvert {
+    0% {
+        // padding: 30px 54px;
+        height: 63px;
+        opacity: 1;
+        display: flex;
+        
+    }
+    50% { 
+        // padding: 10px 54px;
+        height: 63px;
+        opacity: 0;
+        display: flex;
+        
+    }
+    100% {
+        // padding: 10px 54px;
+        height: 30px;
+        opacity: 0;
+        display: none;
+    }
+}
+
+@keyframes showHamburger {
+    0% { 
+        // padding: 10px 54px;
+        height: 0px;
+        opacity: 0;
+        display: none;
+        
+    }
+    50% {
+        // padding: 30px 54px;
+        height: 30px;
+        opacity: 0;
+        display: flex;
+    }
+   
+    100% {
+        // padding: 30px 54px;
+        height: 30px;
+        opacity: 1;
+        display: flex;
+    }
+}
+@keyframes hideHamburger {
+    0% { 
+        // padding: 10px 54px;
+        height: 30px;
+        opacity: 1;
+        display: flex;
+        
+    }
+    50% {
+        // padding: 30px 54px;
+        height: 30px;
+        opacity: 0;
+        display: flex;
+    }
+   
+    100% {
+        // padding: 30px 54px;
+        height: 0px;
+        opacity: 0;
+        display: flex;
+    }
+}

@@ -1,9 +1,9 @@
 import  './DNDGrid.scss'
 
-function DNDGrid ({children}) {
+function DNDGrid ({children, displayClass}) {
     
     return (
-        <div className={`dndGrid`}>
+        <div className={displayClass==='grid'?'dndGrid':'dndRow'}>
             {children}
         </div>
     );

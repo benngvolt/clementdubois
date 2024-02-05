@@ -21,7 +21,7 @@ import DNDGrid from '../DNDGrid/DNDGrid';
 import { DNDSortableSingleItem } from '../DNDSortableSingleItem/DNDSortableSingleItem';
 
 
-function DNDGallery ({ imageFiles, setImageFiles, mainImageIndex, setMainImageIndex}) {
+function DNDGallery ({ imageFiles, setImageFiles, mainImageIndex, setMainImageIndex, displayClass}) {
 
   
 
@@ -81,7 +81,7 @@ function DNDGallery ({ imageFiles, setImageFiles, mainImageIndex, setMainImageIn
         setMainImageIndex={setMainImageIndex}
       >
         <SortableContext items={items} strategy={rectSortingStrategy} mainImageIndex={mainImageIndex} setMainImageIndex={setMainImageIndex}>
-          <DNDGrid>
+          <DNDGrid displayClass={displayClass}>
           {items && items.length > 0 ? (
             items.map((item, index) => (
               <DNDSortableSingleItem 
@@ -95,6 +95,7 @@ function DNDGallery ({ imageFiles, setImageFiles, mainImageIndex, setMainImageIn
                 imageFiles={imageFiles}
                 setImageFiles={setImageFiles}
                 openConfirmBox={() => openConfirmBox(index)}
+                displayClass={displayClass}
                 />
               ))
             ) : (

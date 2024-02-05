@@ -6,7 +6,7 @@
     box-sizing: border-box;
     border-top: 1px solid $colorDarkGrey;
     border-bottom: 1px solid $colorDarkGrey;
-
+    margin: 54px 0 16px 0;
 
     &_list {
         display: flex;
@@ -40,9 +40,7 @@
                     color: $colorDarkGrey;
                     font-size: 16px;
                 }
-            }
-
-            
+            }   
         }
     }
 }
