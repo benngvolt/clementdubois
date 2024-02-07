@@ -30,16 +30,34 @@
 ----------------*/
 
 @mixin Button {
-    margin: auto;
-    font-family:'MainFont_bold';
+    // margin: auto;
+    font-family:'SpecialFont';
     color: $colorDarkGrey;
-    font-size: 16px;
+    font-size: 25px;
     padding: 10px;
-    border: 2px solid $colorDarkGrey;
-    border-radius: 50rem;
+    border: none;
+    background-color: $colorFirst;
+    // border-radius: 50rem;
     &:hover {
         color: $colorLightGrey;
-        border-color: $colorLightGrey;
+        background-color: $colorDarkGrey;
+        cursor: pointer;
+    }
+}
+
+
+@mixin ButtonSelected {
+    // margin: auto;
+    font-family:'SpecialFont';
+    color: $colorDarkGrey;
+    font-size: 25px;
+    padding: 10px;
+    border: none;
+    background-color: $colorThird;
+    // border-radius: 50rem;
+    &:hover {
+        color: $colorLightGrey;
+        background-color: $colorDarkGrey;
         cursor: pointer;
     }
 }
@@ -77,14 +95,14 @@ $colorThird: violet;
         padding-top: 0%;
         padding-bottom: 0%;
     }
-    35% {
+    25% {
         padding-top: 0%;
         padding-bottom: 0%;
        
     }
     100% {
-        padding-top: 22px;
-        padding-bottom: 22px;
+        padding-top: 16px;
+        padding-bottom: 16px;
        
     }
 }
@@ -92,8 +110,8 @@ $colorThird: violet;
 @keyframes heightRetractInvert {
  
     0% {
-        padding-top: 22px;
-        padding-bottom: 22px;
+        padding-top: 16px;
+        padding-bottom: 16px;
        
     }
     100% {
@@ -105,88 +123,69 @@ $colorThird: violet;
 
 @keyframes navOpen {
     0% { 
-        // padding: 10px 54px;
-        height: 30px;
-        opacity: 0;
-        
+        opacity: 0;  
     }
-    50% {
-        // padding: 30px 54px;
-        height: 63px;
-        opacity: 0;
-    }
-   
     100% {
-        // padding: 30px 54px;
-        height: 63px;
         opacity: 1;
     }
 }
 
 @keyframes navOpenInvert {
     0% {
-        // padding: 30px 54px;
-        height: 63px;
         opacity: 1;
-        display: flex;
-        
-    }
-    50% { 
-        // padding: 10px 54px;
-        height: 63px;
-        opacity: 0;
-        display: flex;
-        
     }
     100% {
-        // padding: 10px 54px;
-        height: 30px;
         opacity: 0;
-        display: none;
     }
 }
 
 @keyframes showHamburger {
     0% { 
-        // padding: 10px 54px;
-        height: 0px;
         opacity: 0;
-        display: none;
-        
-    }
-    50% {
-        // padding: 30px 54px;
-        height: 30px;
-        opacity: 0;
-        display: flex;
     }
    
     100% {
-        // padding: 30px 54px;
-        height: 30px;
         opacity: 1;
-        display: flex;
     }
 }
 @keyframes hideHamburger {
     0% { 
-        // padding: 10px 54px;
-        height: 30px;
-        opacity: 1;
-        display: flex;
-        
-    }
-    50% {
-        // padding: 30px 54px;
-        height: 30px;
-        opacity: 0;
-        display: flex;
+        opacity: 1;    
     }
    
     100% {
-        // padding: 30px 54px;
-        height: 0px;
+        opacity: 0;  
+    }
+}
+
+@keyframes openHeader {
+    0% {  
+        height: 30px;
+    }
+    
+    100% { 
+        height: 63px;
+    }
+}
+
+@keyframes closeHeader {
+    0% {  
+        height: 63px;
+    }
+    
+    100% { 
+        height: 30px;
+    }
+}
+
+
+@keyframes disappear {
+    0% {  
+        opacity: 1;
+    }
+
+    100% { 
         opacity: 0;
-        display: flex;
+        display: none;
     }
 }

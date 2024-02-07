@@ -1,10 +1,11 @@
 import './OneProject.scss'
 import { API_URL } from '../../utils/constants'
 // import { Link } from 'react-router-dom'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 // import { Context } from '../../utils/Context'
 import { useParams } from 'react-router-dom'
 import DOMPurify from 'dompurify';
+import { ProjectsContext } from '../../utils/ProjectsContext';
 
  
 function OneProject() {
@@ -14,14 +15,17 @@ function OneProject() {
     const cleanedAboutShow = DOMPurify.sanitize(project.aboutShow);
     const cleanedAboutSceno = DOMPurify.sanitize(project.aboutSceno);
 
+    const { projects, setDisplayHomePage } = useContext(ProjectsContext);
+
     useEffect(() => {
         fetch(`${API_URL}/api/projects/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setProject(data);
+                setDisplayHomePage(false);
             })
             .catch((error) => console.log(error.message));
-    }, []);
+    }, [id]);
 
     const prodTypeArray = Array.from(new Set(project.productionList?.map(prod => prod.prodType) || []));
 

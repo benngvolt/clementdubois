@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 
 import reportWebVitals from './reportWebVitals';
-import Home from './pages/Home/Home';
 import Edit from './pages/Edit/Edit';
 import OneProject from './pages/OneProject/OneProject';
 import About from './pages/About/About';
@@ -20,8 +19,7 @@ root.render(
       <ProjectsProvider>
           <Header/>
           <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/projects" element={<AllProjects/>} />
+            <Route path="/" element={<AllProjects/>} />
             <Route path="/projects/:id" element={<OneProject/>} />
             <Route path="/about" element={<About/>} />
             <Route path="/edit" element={<Edit/>} />

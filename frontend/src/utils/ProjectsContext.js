@@ -23,29 +23,34 @@ export const ProjectsProvider = ({ children }) => {
     };
 
     const [projects, setProjects] = useState([]);
+    const [displayHomePage, setDisplayHomePage] = useState(true);
 
     useEffect(() => {
+        displayLoader();
         fetch(`${API_URL}/api/projects`)
             .then((res) => res.json())
             .then((data) => {
                 setProjects(data);
+                hideLoader();
                 console.log('Projets chargés');
             })
-            .catch((error) => console.log(error.message));
+            .catch((error) => {
+                console.log(error.message);
+                hideLoader(); // Appel à hideLoader() pour gérer les erreurs
+            });
     }, [loadProjects]);
 
-    //AFFICHAGE DU LOADER
-    // const [loaderDisplay, setLoaderDisplay] = useState(false);
-    // function displayLoader() {
-    //     setLoaderDisplay(true);
-    // }
+    const [loaderDisplay, setLoaderDisplay] = useState(false);
+    function displayLoader() {
+        setLoaderDisplay(true);
+    }
 
-    // function hideLoader() {
-    //     setLoaderDisplay(false);
-    // }
+    function hideLoader() {
+        setLoaderDisplay(false);
+    }
 
     return (
-        <ProjectsContext.Provider value={{ projects, setProjects, handleLoadProjects, loadProjects}}>
+        <ProjectsContext.Provider value={{ projects, setProjects, handleLoadProjects, loadProjects, displayHomePage, setDisplayHomePage, loaderDisplay}}>
             {children}
         </ProjectsContext.Provider>
     )

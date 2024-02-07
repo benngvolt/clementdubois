@@ -1,0 +1,159 @@
+@charset "UTF-8";
+/*---------------
+----- FONTS -----
+---------------*/
+@font-face {
+  font-family: "TitleFont";
+  src: url("../assets/fonts/gobold/Gobold Bold.otf") format("opentype");
+  /* Ajouter ici les autres formats de police (.woff2, .ttf, .eot, etc.) pour la compatibilité des navigateurs */
+}
+@font-face {
+  font-family: "MainFont";
+  src: url("../assets/fonts/Abel/Abel-Regular.ttf") format("truetype");
+}
+/*-------------------
+----- KEYFRAMES -----
+-------------------*/
+@-webkit-keyframes apparition {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes apparition {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes apparition_disparition {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes apparition_disparition {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.loader {
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  margin: 0 auto;
+}
+.loader:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+.loader--displayOff {
+  display: none;
+}
+.loader--displayOn {
+  display: block;
+}
+
+.circular {
+  -webkit-animation: rotate 2s linear infinite;
+          animation: rotate 2s linear infinite;
+  transform-origin: center center;
+  width: 50px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.path {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+          animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+@-webkit-keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+@-webkit-keyframes color {
+  100%, 0% {
+    stroke: #ff9100;
+  }
+  90% {
+    stroke: #ff9100;
+  }
+}
+@keyframes color {
+  100%, 0% {
+    stroke: #ff9100;
+  }
+  90% {
+    stroke: #ff9100;
+  }
+}/*# sourceMappingURL=Loader.css.map */

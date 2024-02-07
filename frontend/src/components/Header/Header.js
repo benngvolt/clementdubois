@@ -1,6 +1,6 @@
 import './Header.scss'
 import { Link } from 'react-router-dom'
-import {useState} from 'react';
+import { useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faFacebook,
@@ -9,6 +9,7 @@ import {
     faYoutube,
     faLinkedin
 } from '@fortawesome/free-brands-svg-icons'
+
 import {
     faBars
 } from '@fortawesome/free-solid-svg-icons'
@@ -21,25 +22,24 @@ import {
  
 function Header() {
 
-    const [displayHeader, setDisplayHeader] = useState(false)
+    const [ displayHeader, setDisplayHeader ] = useState(false)
 
     function openHeader() {
-            setDisplayHeader(true)
+        setDisplayHeader(true)
     }
 
     function closeHeader() {
         setDisplayHeader(false)
-}
+    }
 
     return  (
-        <header className='header' onMouseOver={()=>openHeader()} onMouseLeave={()=>setTimeout(()=>closeHeader(), 500)}>
-            <div className={displayHeader===true ? 'header_hamburger--displayOff':'header_hamburger'}>
+        <header className={displayHeader===true ? 'header header--open':' header header--close'} onMouseOver={()=>openHeader()} onMouseLeave={()=>setTimeout(()=>closeHeader(), 200)}>
+            <div className={displayHeader===true ? 'header_hamburger header_hamburger--displayOff':'header_hamburger header_hamburger--displayOn'}>
                 <FontAwesomeIcon icon={faBars} className='header_hamburger_icon'/>
             </div>
-            <nav className={displayHeader===false ? 'header_nav--displayOff':'header_nav'}>
+            <nav className={displayHeader===false ? 'header_nav header_nav--displayOff':'header_nav header_nav--displayOn'}>
                 <div className='header_nav_menu'>
-                    <Link to="/" className='header_nav_menu_item'><p>accueil</p></Link>
-                    <Link to="/projects" className='header_nav_menu_item'><p>créations</p></Link>
+                    <Link to="/" className='header_nav_menu_item'><p>créations</p></Link>
                     <Link to="/about" className='header_nav_menu_item'><p>à propos</p></Link>
                     <button className='header_nav_menu_item'><p>contact</p></button>
                     <Link to="/edit" className='header_nav_menu_item'><p>dashboard</p></Link>

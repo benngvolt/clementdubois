@@ -190,7 +190,6 @@ function ProjectForm({
         setIsImageLoaded(false);
         cancelAddImageFile();
         console.log(imageFiles);
-        
     }
 
     function handleAddMoImageFile() {

@@ -12,12 +12,55 @@
     position: sticky;
     top: 0px;
 
-    &_hamburger {
-        // padding: auto;
-        height: 30px;
-        display: flex;
-        animation: showHamburger 0.5s ease forwards;
+    &_homePage {
         
+        &--displayOn {
+            height: 100vh;
+            animation: appear 2s ease forwards;
+        }
+        &--displayOff {
+            animation: disappear 2s ease forwards;
+        }
+        
+        &_image {
+
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            object-fit: cover;
+            top: 0;
+            left: 0;    
+        }
+
+        &_button {
+            background: none;
+            border: none;
+            font-family: 'SpecialFont';
+            font-size: 35px;
+            color: $colorLightGrey;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: fixed;
+            margin: auto;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    &--open {
+        animation: openHeader 0.5s ease forwards;
+    }
+    &--close {
+        animation: closeHeader 0.5s ease forwards;
+    }
+
+    &_hamburger {
+
+        height: 100%;
+
         &_icon {
             width: 100%;
             margin: auto;
@@ -27,19 +70,25 @@
             animation: hideHamburger 0.5s ease forwards;
             display: none;
         }
+
+        &--displayOn {
+            animation: showHamburger 0.5s ease forwards;
+            display: flex;
+        }
     }
 
     &_nav {
-
         &--displayOff {
             animation: navOpenInvert 0.5s ease forwards;
             display: none;
         }
 
-        animation: navOpen 0.5s ease forwards;
-        // padding: auto;
-        height: 73px;
-        display: flex;
+        &--displayOn {
+            animation: navOpen 0.5s ease forwards;
+            display: flex;
+        }
+
+        height: 100%;
         flex-direction: row;
         justify-content: space-between;
 

@@ -10,12 +10,19 @@ function Footer() {
 
     const { projects } = useContext(ProjectsContext);
 
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'auto'
+        });
+    };
+
     return  (      
         <footer className='footer'>
             <ul className='footer_list'>
                 {projects?.map((project)=>(
                     <li className='footer_list_item'> 
-                        <Link to={`/projects/${project._id}`}>
+                        <Link to={`/projects/${project._id}`} onClick={()=>scrollToTop()}>
                             <img src={`${project.projectImages[project.mainImageIndex].imageUrl}`}/>
                             <p>{project.title}</p>
                         </Link>

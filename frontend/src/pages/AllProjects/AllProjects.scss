@@ -4,7 +4,76 @@
 
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     row-gap: 54px;
+
+    &_homePage {
+        
+        &--displayOn {
+            height: 100vh;
+            display: flex;
+        
+        }
+        &--displayOff {
+            animation: disappear 2s ease forwards;
+        }
+
+        &_loader {
+
+            &--displayOn {
+                display: flex;
+                z-index: 2;
+            }
+            &--displayOff {
+                display: none;
+            }
+        }
+        
+        &_image {
+
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            object-fit: cover;
+            top: 0;
+            left: 0;    
+        }
+
+        &_button {
+            background: none;
+            border: none;
+            font-family: 'SpecialFont';
+            font-size: 35px;
+            color: $colorLightGrey;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: fixed;
+            margin: auto;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+    
+
+    &_buttonsContainer {
+        display: flex;
+        flex-direction: row;
+        column-gap: 30px;
+        margin-left: 54px;
+        
+        &_button {
+
+            &--notSelected {
+                @include Button;
+            };
+            &--selected {
+                @include ButtonSelected;
+            }
+        }
+    }
 
     &_projectCard {
         width: 100%;
@@ -17,6 +86,7 @@
         justify-content: space-between;
         column-gap: 40px;
         box-sizing: border-box;
+
         &:hover {
             cursor: pointer;
             background-color: $colorFirst;
@@ -26,31 +96,47 @@
             }
         }
 
+        &_creationDate {
+            padding-left: 54px;
+            padding-top: 54px;
+        }
+
         
 
         &_infos {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            margin: auto;
             box-sizing: border-box;
-            padding-left: 50px;
+            border-left: solid 1px $colorDarkGrey;
+            padding-left: 30px;
             width: 40%;
+            height: 80%;
             animation: heightRetractInvert 0.5s ease forwards;
             
 
             &_title {
                 font-family: 'SpecialFont';
-                font-size: 50px
+                font-size: 50px;
             }
 
             &_projectInfos {    
                 font-family: 'MainFont_bold';
-                font-size: 19px
+                font-size: 19px;
+            }
+
+            &_creationDate {
+                font-family: 'MainFont_light';
+                font-size: 19px;
+                color: $colorDarkGrey;
             }
 
             &_aboutShow {   
                 font-family: 'MainFont_light';
-                font-size: 19px
+                font-size: 19px;
+                height: 161px;
+                overflow: scroll;
             }
 
         }
