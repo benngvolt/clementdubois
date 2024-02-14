@@ -1,12 +1,13 @@
 .dndGrid {
-    width: 500px;
-    height:  auto;
+    width: 100%;
+    height: auto;
     display: grid;
     justify-content: center;
     align-items: center;
     margin: auto;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 5px;
+    gap: 2px;
+    row-gap: 10px;
 
     &_item {
         width: auto;
@@ -21,24 +22,14 @@
 }
 
 .dndRow {
-    width: auto;
+    width: 100%;
     height:  300px;
     display: flex;
     flex-direction: row;
-    
+    // box-sizing: border-box;
+    overflow: scroll;
     justify-content: center;
     align-items: center;
     margin: auto;
-    gap: 5px;
-
-    &_item {
-        width: auto;
-        list-style-type: none;
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    }
+    gap: 2px;
 }

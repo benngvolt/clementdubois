@@ -1,7 +1,9 @@
 import './Header.scss'
 import { Link } from 'react-router-dom'
-import { useState} from 'react';
+import { useState, useContext} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { ProjectsContext } from '../../utils/ProjectsContext';
+import HomePage from '../HomePage/HomePage';
 import {
     faFacebook,
     faSquareInstagram,
@@ -22,6 +24,7 @@ import {
  
 function Header() {
 
+    const { displayHomePage, loaderDisplay, setDisplayHomePage } = useContext(ProjectsContext);
     const [ displayHeader, setDisplayHeader ] = useState(false)
 
     function openHeader() {
@@ -33,7 +36,8 @@ function Header() {
     }
 
     return  (
-        <header className={displayHeader===true ? 'header header--open':' header header--close'} onMouseOver={()=>openHeader()} onMouseLeave={()=>setTimeout(()=>closeHeader(), 200)}>
+        <header className={displayHeader===true ? 'header header--open':' header header--close'} onMouseOver={()=>openHeader()} onMouseLeave={()=>closeHeader()}>
+            <HomePage displayHomePage={displayHomePage} loaderDisplay={loaderDisplay} setDisplayHomePage={setDisplayHomePage}/>
             <div className={displayHeader===true ? 'header_hamburger header_hamburger--displayOff':'header_hamburger header_hamburger--displayOn'}>
                 <FontAwesomeIcon icon={faBars} className='header_hamburger_icon'/>
             </div>

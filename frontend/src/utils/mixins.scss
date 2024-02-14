@@ -72,7 +72,7 @@ $colorFields: aqua;
 $colorButtons: rgb(96, 54, 151);
 $colorFirst: yellow;
 $colorSecond: blue;
-$colorThird: violet;
+$colorThird: rgb(255, 144, 177);
 
 /*-------------------
 ----- KEYFRAMES -----
@@ -181,11 +181,63 @@ $colorThird: violet;
 
 @keyframes disappear {
     0% {  
-        opacity: 1;
+        height: 100vh;
     }
 
     100% { 
-        opacity: 0;
+        height: 0vh;
         display: none;
+    }
+}
+
+@keyframes closeCollapse {
+    0% {  
+        transform: rotate(180deg);
+    }
+
+    100% { 
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes openCollapse {
+    0% {  
+        transform: rotate(0deg);
+    }
+
+    100% { 
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes openCarrousel {
+    0% {  
+        height: 0px;
+        opacity: 0;
+    }
+    70% { 
+        height: 300px;
+        opacity: 0;
+    }
+
+    100% { 
+        height: 300px;
+        opacity: 1;
+    }
+}
+
+@keyframes closeCarrousel {
+    0% {  
+        height: 300px;
+        opacity: 1;
+    }
+    30% {  
+        height: 300px;
+        opacity: 0;
+    }
+
+    100% { 
+        height: 0px;
+        opacity: 0;
     }
 }

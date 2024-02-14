@@ -6,12 +6,17 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import DOMPurify from 'dompurify';
 import { ProjectsContext } from '../../utils/ProjectsContext';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+    faChevronUp,
+    faChevronDown
+} from '@fortawesome/free-solid-svg-icons'
  
 function OneProject() {
 
     const { id } = useParams();
     const [project, setProject] = useState([]);
+    const [isCollapseOpened, setIsCollapseOpened] = useState(false);
     const cleanedAboutShow = DOMPurify.sanitize(project.aboutShow);
     const cleanedAboutSceno = DOMPurify.sanitize(project.aboutSceno);
 
@@ -26,6 +31,14 @@ function OneProject() {
             })
             .catch((error) => console.log(error.message));
     }, [id]);
+
+    function handleCollapseState() {
+        if (isCollapseOpened === true) {
+            setIsCollapseOpened(false)
+        } else {
+            setIsCollapseOpened(true)
+        }
+    }
 
     const prodTypeArray = Array.from(new Set(project.productionList?.map(prod => prod.prodType) || []));
 
@@ -119,9 +132,12 @@ function OneProject() {
                 </ul>
             </div>
             <div className='oneProject_makingOfImageContainer'>
-                {project.makingOfImages?.map((image, index) => (
-                    <img key={index} src={image.imageUrl} alt="Project" />
-                ))}
+                <button type='button' className='oneProject_makingOfImageContainer_collapseButton' onClick={() => handleCollapseState()} ><p>Making of</p><FontAwesomeIcon icon={faChevronDown} className={isCollapseOpened===false?'oneProject_makingOfImageContainer_collapseButton_icon--closed':'oneProject_makingOfImageContainer_collapseButton_icon--opened'}/></button>
+                <div className={isCollapseOpened===false?'oneProject_makingOfImageContainer_carrousel oneProject_makingOfImageContainer_carrousel--closed':'oneProject_makingOfImageContainer_carrousel oneProject_makingOfImageContainer_carrousel--opened'}>
+                    {project.makingOfImages?.map((image, index) => (
+                        <img key={index} src={image.imageUrl} alt="Project" />
+                    ))}
+                </div>
             </div>
             <div className='oneProject_diffBlock'>
                 <h4>Lieux de diffusion</h4>

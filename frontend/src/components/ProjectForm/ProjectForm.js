@@ -4,6 +4,8 @@ import { API_URL } from '../../utils/constants'
 import { v4 as uuidv4 } from 'uuid'
 import DNDGallery from '../../components/DNDGallery/DNDGallery'
 import DOMPurify from 'dompurify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faXmark} from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -309,354 +311,370 @@ function ProjectForm({
         
         <form onSubmit={(event) => projectFormSubmit(event)} method="post" className='projectForm'>
 
-            <p>IMAGES DU PROJET</p>
-            
-            <DNDGallery imageFiles={imageFiles} setImageFiles={setImageFiles} mainImageIndex={mainImageIndex} setMainImageIndex={setMainImageIndex} displayClass={'grid'} />
-            
-            <div className='projectForm_imageField'>
-                <label htmlFor='inputProjectImageFile'>{isImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
-                <input type='file' id='inputProjectImageFile' name="images" ref={inputProjectImageFileRef} onChange={displaySample}></input>
-                <div  className="projectForm_imageField_sampleContainer">
-                    <img id='imageSample' ref={projectMainImageSampleRef} src='' alt=''/>
-                    <div className={isImageLoaded ? "projectForm_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_projectImageFile_sampleContainer_buttonsSystem--displayOff"}>
-                        <button aria-label="Ajouter l'image" onClick={handleAddImageFile} type="button">AJOUTER</button>
-                        <button aria-label="Annuler" onClick={cancelAddImageFile} type="button">ANNULER</button>
+            <button type='button' className='projectForm_stickyCancelButton' onClick={() => closeForm()}>
+                <FontAwesomeIcon icon={faXmark} className='projectForm_stickyCancelButton_icon'/>
+            </button>
+
+            {/* WELCOME */}
+            <div className='projectForm_welcomeContainer'>
+                <p className='projectForm_welcomeContainer_mainWelcome'>Bienvenu dans ta demeure, talentueux scénographe.</p>
+                <img className='projectForm_welcomeContainer_imageWelcome'src='./assets/welcome01.png' alt='image de bienvenue'/>
+                <p className='projectForm_welcomeContainer_secondWelcome'> Prends-toi tranquille un café avant de te mettre au boulot...</p>
+            </div>
+
+            {/* INFOS PRINCIPALES */}
+            <div className='projectForm_mainInfosContainer'>
+                {/* CHAMPS TITRE */}
+                <div className='projectForm_mainInfosContainer_textField'>
+                    <label htmlFor='inputProjectTitle'>TITRE*</label>
+                    <input type='text' id='inputProjectTitle' ref={inputProjectTitleRef} value={projectTitle} onChange={(e) => setProjectTitle(e.target.value)}></input>
+                </div>
+
+                {/* CHAMPS SOUS-TITRE */}
+                <div className='projectForm_mainInfosContainer_textField'>
+                    <label htmlFor='inputProjectSubtitle'>SOUS-TITRE</label>
+                    <input type='text' id='inputProjectSubtitle' ref={inputProjectSubtitleRef} value={projectSubtitle} onChange={(e) => setProjectSubtitle(e.target.value)}></input>
+                </div>
+
+                {/* CHAMPS DATE DE CRÉATION */}
+                <div className='projectForm_mainInfosContainer_textField'>
+                    <label htmlFor='inputCreationDate'>DATE DE CRÉATION*</label>
+                    <input type='month' id='inputCreationDate' ref={inputCreationDateRef} value={creationDate} onChange={(e) => setCreationDate(e.target.value)}></input>
+                </div>
+
+                {/* CHAMPS INFOS COMPAGNIE*/}
+                <div className='projectForm_mainInfosContainer_textField'>
+                    <label htmlFor='inputProjectInfos'>INFORMATIONS COMPAGNIE</label>
+                    <input type='text' id='inputProjectInfos' ref={inputProjectInfosRef} value={projectInfos} onChange={(e) => setProjectInfos(e.target.value)}></input>
+                </div>
+
+                {/* CHAMPS PLUS D'INFOS*/}
+                <div className='projectForm_mainInfosContainer_textField'>
+                    <label htmlFor='inputMoreInfos'>PLUS D'INFOS</label>
+                    <input type='text' id='inputMoreInfos' ref={inputMoreInfosRef} value={moreInfos} onChange={(e) => setMoreInfos(e.target.value)}></input>
+                </div>
+                {/* CHAMPS TYPE DE PROJET*/}
+                <div className='projectForm_mainInfosContainer_arrayField'>
+                    <label htmlFor='inputProjectType'>TYPE DE PROJET*</label>
+                    <select id='inputProjectType' 
+                            ref={inputProjectTypeRef} 
+                            name="projectType"
+                            value={projectType} 
+                            onChange={(e) => setProjectType(e.target.value)}>
+                        <option value=""></option>
+                        <option value="spectacle vivant">Spectacle vivant</option>
+                        <option value="évènement">Évènement</option>
+                        <option value="médiation">Médiation</option>
+                    </select>
+                </div>
+            </div>
+
+            {/* IMAGES */}
+            <div className='projectForm_imagesFieldsContainer'>
+                <div className='projectForm_imagesFieldsContainer_projectImagesContainer'>
+                    <p>IMAGES DU PROJET</p>
+                    <DNDGallery imageFiles={imageFiles} setImageFiles={setImageFiles} mainImageIndex={mainImageIndex} setMainImageIndex={setMainImageIndex} displayClass={'grid'} />
+                    <div className='projectForm_imagesFieldsContainer_projectImagesContainer_imageField'>
+                        <label htmlFor='inputProjectImageFile'>{isImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
+                        <input type='file' id='inputProjectImageFile' name="images" ref={inputProjectImageFileRef} onChange={displaySample} style={{ display: 'none' }}></input>
+                        <div  className="projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer">
+                            <img id='imageSample' ref={projectMainImageSampleRef} src='' alt=''/>
+                            <div className={isImageLoaded ? "projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOff"}>
+                                <button aria-label="Ajouter l'image" onClick={handleAddImageFile} type="button">AJOUTER</button>
+                                <button aria-label="Annuler" onClick={cancelAddImageFile} type="button">ANNULER</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='projectForm_imagesFieldsContainer_makingOfImagesContainer'>
+                    <p>IMAGES DU WORK-IN-PROCESS</p>
+                    <DNDGallery imageFiles={moImageFiles} setImageFiles={setMoImageFiles} mainImageIndex={mainMoImageIndex} setMainImageIndex={setMainMoImageIndex} displayClass={'row'} /> 
+                    <div className='projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField'>
+                        <label htmlFor='inputProjectMoImageFile'>{isMoImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
+                        <input type='file' id='inputProjectMoImageFile' name="moImages" ref={inputProjectMoImageFileRef} onChange={displayMoSample} style={{ display: 'none' }}></input>
+                        <div  className="projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer">
+                            <img id='moImageSample' ref={projectMainMoImageSampleRef} src='' alt=''/>
+                            <div className={isMoImageLoaded ? "projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer_buttonsSystem--displayOff"}>
+                                <button aria-label="Ajouter l'image" onClick={handleAddMoImageFile} type="button">AJOUTER</button>
+                                <button aria-label="Annuler" onClick={cancelAddMoImageFile} type="button">ANNULER</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <p>IMAGES MAKING OF</p>
+            {/* DESCRIPTIFS */}
+            <div className='projectForm_descriptionsContainer'>
+                {/* CHAMPS A PROPOS DU SPECTACLE*/}
+                <div className='projectForm_descriptionsContainer_textField'>
+                    <label htmlFor='inputAboutShow'>À PROPOS DU SPECTACLE</label>
+                    <textarea className='projectForm_descriptionsContainer_textField_textarea' type='textarea' id='inputAboutShow' ref={inputAboutShowRef} value={aboutShow.replace(/<br>/g, "\n")} onChange={(e) => setAboutShow(e.target.value)}></textarea>
+                </div>
 
-            <DNDGallery imageFiles={moImageFiles} setImageFiles={setMoImageFiles} mainImageIndex={mainMoImageIndex} setMainImageIndex={setMainMoImageIndex} displayClass={'row'} />
-            
-            <div className='projectForm_imageField'>
-                <label htmlFor='inputProjectMoImageFile'>{isMoImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
-                <input type='file' id='inputProjectMoImageFile' name="moImages" ref={inputProjectMoImageFileRef} onChange={displayMoSample}></input>
-                <div  className="projectForm_imageField_sampleContainer">
-                    <img id='moImageSample' ref={projectMainMoImageSampleRef} src='' alt=''/>
-                    <div className={isMoImageLoaded ? "projectForm_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_projectImageFile_sampleContainer_buttonsSystem--displayOff"}>
-                        <button aria-label="Ajouter l'image" onClick={handleAddMoImageFile} type="button">AJOUTER</button>
-                        <button aria-label="Annuler" onClick={cancelAddMoImageFile} type="button">ANNULER</button>
-                    </div>
+                {/* CHAMPS A PROPOS DE LA SCENO*/}
+                <div className='projectForm_descriptionsContainer_textField'>
+                    <label htmlFor='inputAboutSceno'>À PROPOS DE LA SCÉNOGRAPHIE</label>
+                    <textarea className='projectForm_descriptionsContainer_textField_textarea' type='textarea' id='inputAboutSceno' ref={inputAboutScenoRef} value={aboutSceno.replace(/<br>/g, "\n")} onChange={(e) => setAboutSceno(e.target.value)}></textarea>
                 </div>
             </div>
 
-            {/* CHAMPS TITRE */}
-            <div className='projectForm_textField'>
-                <label htmlFor='inputProjectTitle'>TITRE*</label>
-                <input type='text' id='inputProjectTitle' ref={inputProjectTitleRef} value={projectTitle} onChange={(e) => setProjectTitle(e.target.value)}></input>
-            </div>
+            {/* TABLEAUX */}
+            <div className='projectForm_arraysContainer'>
+                {/* CHAMPS DISTRIBUTION*/}
+                <div className='projectForm_arraysContainer_arrayField'>
+                    <p> DISTRIBUTION </p>
+                    {artistsList.map((artist, index) => (
+                        <div key={index} className='projectForm_arraysContainer_arrayField_fields'>
+                            <div className='projectForm_arraysContainer_arrayField_fields_line'>
+                                <label htmlFor={`inputProjectArtistFunction${index}`}>FONCTION</label>
+                                <input
+                                    type='text'
+                                    id={`inputProjectArtistFunction${index}`}
+                                    value={artist.artistFunction}
+                                    onChange={(e) => {
+                                        const updatedArtistsList = [...artistsList];
+                                        updatedArtistsList[index].artistFunction = e.target.value;
+                                        setArtistsList(updatedArtistsList);
+                                    }}
+                                ></input>
+                            </div>
+                            <div className='projectForm_arraysContainer_arrayField_fields_line'>
+                                <label htmlFor={`inputProjectArtistName${index}`}>NOMS</label>
+                                <input
+                                    type='text'
+                                    id={`inputProjectArtistName${index}`}
+                                    value={artist.artistName}
+                                    onChange={(e) => {
+                                        const updatedArtistsList = [...artistsList];
+                                        updatedArtistsList[index].artistName = e.target.value;
+                                        setArtistsList(updatedArtistsList);
+                                    }}
+                                ></input>
+                            </div>
+                            <button type='button' onClick={() => handleSupprArtist(index)}>SUPPRIMER</button>
+                        </div>              
+                    ))}
+                    <button type='button' onClick={() =>handleAddArtist()} >+ AJOUTER UN ARTISTE</button>
+                </div>
+                {/* CHAMPS PRODUCTION*/}
+                <div className='projectForm_arraysContainer_arrayField'>
+                    <p> PRODUCTION </p>
+                    {productionList.map((production, index) => (
+                        <div key={index} className='projectForm_arraysContainer_arrayField_fields'>
+                            <div className='projectForm_arraysContainer_arrayField_fields_line'>
+                                <label htmlFor={`inputProjectProductionName${index}`}>NOM</label>
+                                <input
+                                    type='text'
+                                    id={`inputProjectProductionName${index}`}
+                                    value={production.prodName}
+                                    onChange={(e) => {
+                                        const updatedProductionList = [...productionList];
+                                        updatedProductionList[index].prodName = e.target.value;
+                                        setProductionList(updatedProductionList);
+                                    }}
+                                ></input>
+                            </div>
+                            <div className='projectForm_arraysContainer_arrayField_fields_line'>
+                                <label htmlFor={`inputProjectProductionLink${index}`}>LIEN</label>
+                                <input
+                                    type='text'
+                                    id={`inputProjectProductionLink${index}`}
+                                    value={production.prodLink}
+                                    onChange={(e) => {
+                                        const updatedProductionList = [...productionList];
+                                        updatedProductionList[index].prodLink = e.target.value;
+                                        setProductionList(updatedProductionList);
+                                    }}
+                                ></input>
+                            </div>
+                            <div className='projectForm_arraysContainer_arrayField_fields_line'>
+                                <label htmlFor={`inputProjectProductionLink${index}`}>INFOS</label>
+                                <input
+                                    type='text'
+                                    id={`inputProjectProductionInfos${index}`}
+                                    value={production.prodInfos}
+                                    onChange={(e) => {
+                                        const updatedProductionList = [...productionList];
+                                        updatedProductionList[index].prodInfos = e.target.value;
+                                        setProductionList(updatedProductionList);
+                                    }}
+                                ></input>
+                            </div>
+                            <div className='projectForm_arraysContainer_arrayField_fields_line'>
+                                <label htmlFor={`inputProjectProductionType${index}`}>TYPE</label>
+                                <select id={`inputProjectProductionType${index}`} 
+                                        defaultValue={projectFormMode==='edit'? production.prodType : ""}
+                                        onChange={(e) => handleProdTypeSelectChange(index, e.target.value)}>
+                                    <option value=""></option>
+                                    <option value="Production">Production</option>
+                                    <option value="Co-production">Co-production</option>
+                                    <option value="Accueils en résidence de création">Accueils en résidence de création</option>
+                                    <option value="Aide à la création">Aide à la création</option>
+                                    <option value="Aide à la résidence d'écriture">Aide à la résidence d'écriture</option>
+                                    <option value="Soutien">Soutien</option>
+                                    <option value="Remerciements">Remerciements</option>
+                                </select>
+                            </div>
+                            <button type='button' onClick={() => handleSupprProduction(index)}>SUPPRIMER</button>
+                        </div>              
+                    ))}
+                    <button type='button' onClick={() =>handleAddProduction()} >+ AJOUTER UN MEMBRE DE L'EQUIPE DE PROD</button>
+                </div>
+                
+                {/* CHAMPS PRESSE*/}
+                <div className='projectForm_arraysContainer_arrayField'>
+                    <p> PRESSE </p>
+                    {pressList.map((press, index) => (
+                        <div key={index} className='projectForm_arraysContainer_arrayField_fields'>
+                            <div className='projectForm_arraysContainer_arrayField_fields_line'>
+                                <label htmlFor={`inputProjectPressQuote${index}`}>EXTRAIT</label>
+                                <input
+                                    type='textarea'
+                                    id={`inputProjectPressQuote${index}`}
+                                    value={press.quote}
+                                    onChange={(e) => {
+                                        const updatedPressList = [...pressList];
+                                        updatedPressList[index].quote = e.target.value;
+                                        setPressList(updatedPressList);
+                                    }}
+                                ></input>
+                            </div>
+                            <div className='projectForm_arraysContainer_arrayField_fields_line'>
+                                <label htmlFor={`inputProjectPressMediaName${index}`}>MEDIA</label>
+                                <input
+                                    type='text'
+                                    id={`inputProjectPressMediaName${index}`}
+                                    value={press.mediaName}
+                                    onChange={(e) => {
+                                        const updatedPressList = [...pressList];
+                                        updatedPressList[index].mediaName = e.target.value;
+                                        setPressList(updatedPressList);
+                                    }}
+                                ></input>
+                            </div>
+                            <div className='projectForm_arraysContainer_arrayField_fields_line'>
+                                <label htmlFor={`inputProjectPressMediaLink${index}`}>LIEN</label>
+                                <input
+                                    type='text'
+                                    id={`inputProjectPressMediaLink${index}`}
+                                    value={press.mediaLink}
+                                    onChange={(e) => {
+                                        const updatedPressList = [...pressList];
+                                        updatedPressList[index].mediaLink = e.target.value;
+                                        setPressList(updatedPressList);
+                                    }}
+                                ></input>
+                            </div>
+                            <button type='button' onClick={() => handleSupprPress(index)}>SUPPRIMER</button>
+                        </div>              
+                    ))}
+                    <button type='button' onClick={() =>handleAddPress()} >+ AJOUTER UN ARTICLE DE PRESSE</button>
+                </div>
 
-            {/* CHAMPS SOUS-TITRE */}
-            <div className='projectForm_textField'>
-                <label htmlFor='inputProjectSubtitle'>SOUS-TITRE</label>
-                <input type='text' id='inputProjectSubtitle' ref={inputProjectSubtitleRef} value={projectSubtitle} onChange={(e) => setProjectSubtitle(e.target.value)}></input>
-            </div>
+                {/* CHAMPS LIENS*/}
+                <div className='projectForm_arraysContainer_arrayField'>
+                    <p> LIENS VIDÉOS/COMPAGNIE/ETC. </p>
+                    {linksList.map((link, index) => (
+                        <div key={index} className='projectForm_arraysContainer_arrayField_fields'>
+                            <div className='projectForm_arraysContainer_arrayField_fields_line'>
+                                <label htmlFor={`inputProjectLinkName${index}`}>NOM DU LIEN</label>
+                                <input
+                                    type='text'
+                                    id={`inputProjectLinkName${index}`}
+                                    value={link.linkName}
+                                    onChange={(e) => {
+                                        const updatedLinksList = [...linksList];
+                                        updatedLinksList[index].linkName = e.target.value;
+                                        setLinksList(updatedLinksList);
+                                    }}
+                                ></input>
+                            </div>
+                            <div className='projectForm_arraysContainer_arrayField_fields_line'>
+                                <label htmlFor={`inputProjectLinkUrl${index}`}>URL</label>
+                                <input
+                                    type='text'
+                                    id={`inputProjectLinkUrl${index}`}
+                                    value={link.linkUrl}
+                                    onChange={(e) => {
+                                        const updatedLinksList = [...linksList];
+                                        updatedLinksList[index].linkUrl = e.target.value;
+                                        setLinksList(updatedLinksList);
+                                    }}
+                                ></input>
+                            </div>
+                            <button type='button' onClick={() => handleSupprLink(index)}>SUPPRIMER</button>
+                        </div>              
+                    ))}
+                    <button type='button' onClick={() =>handleAddLink()} >+ AJOUTER UN LIEN</button>
+                </div>
 
-            {/* CHAMPS DATE DE CRÉATION */}
-            <div className='projectForm_textField'>
-                <label htmlFor='inputCreationDate'>DATE DE CRÉATION*</label>
-                <input type='month' id='inputCreationDate' ref={inputCreationDateRef} value={creationDate} onChange={(e) => setCreationDate(e.target.value)}></input>
+                {/* CHAMPS DIFFUSION*/}
+                <div className='projectForm_arraysContainer_arrayField'>
+                    <p> DIFFUSION </p>
+                    {diffusionList.map((diff, index) => (
+                        <div key={index} className='projectForm_arraysContainer_arrayField_fields'>
+                            <div className='projectForm_arraysContainer_arrayField_fields_line'>
+                                <label htmlFor={`inputProjectDiffDates${index}`}>DATES</label>
+                                <input
+                                    type='text'
+                                    id={`inputProjectDiffDates${index}`}
+                                    value={diff.dates}
+                                    onChange={(e) => {
+                                        const updatedDiffusionList = [...diffusionList];
+                                        updatedDiffusionList[index].dates = e.target.value;
+                                        setDiffusionList(updatedDiffusionList);
+                                    }}
+                                ></input>
+                            </div>
+                            <div className='projectForm_arraysContainer_arrayField_fields_line'>
+                                <label htmlFor={`inputProjectDiffCity${index}`}>VILLE</label>
+                                <input
+                                    type='text'
+                                    id={`inputProjectDiffCity${index}`}
+                                    value={diff.city}
+                                    onChange={(e) => {
+                                        const updatedDiffusionList = [...diffusionList];
+                                        updatedDiffusionList[index].city = e.target.value;
+                                        setDiffusionList(updatedDiffusionList);
+                                    }}
+                                ></input>
+                            </div>
+                            <div className='projectForm_arraysContainer_arrayField_fields_line'>
+                                <label htmlFor={`inputProjectPlaceName${index}`}>LIEU</label>
+                                <input
+                                    type='text'
+                                    id={`inputProjectPlaceName${index}`}
+                                    value={diff.placeName}
+                                    onChange={(e) => {
+                                        const updatedDiffusionList = [...diffusionList];
+                                        updatedDiffusionList[index].placeName = e.target.value;
+                                        setDiffusionList(updatedDiffusionList);
+                                    }}
+                                ></input>
+                            </div>
+                            <div className='projectForm_arraysContainer_arrayField_fields_line'>
+                                <label htmlFor={`inputProjectPlaceLink${index}`}>URL</label>
+                                <input
+                                    type='text'
+                                    id={`inputProjectPlaceLink${index}`}
+                                    value={diff.placeLink}
+                                    onChange={(e) => {
+                                        const updatedDiffusionList = [...diffusionList];
+                                        updatedDiffusionList[index].placeLink = e.target.value;
+                                        setDiffusionList(updatedDiffusionList);
+                                    }}
+                                ></input>
+                            </div>
+                            <button type='button' onClick={() => handleSupprDiff(index)}>SUPPRIMER</button>
+                        </div>              
+                    ))}
+                    <button type='button' onClick={() =>handleAddDiff()} >+ AJOUTER UN LIEU</button>
+                </div>
+                <div className='projectForm_buttons'>
+                    <button type='submit'>VALIDER</button>
+                    <button type='button' onClick={() => closeForm()}>ANNULER</button>
+                </div>
             </div>
-
-            {/* CHAMPS INFOS COMPAGNIE*/}
-            <div className='projectForm_textField'>
-                <label htmlFor='inputProjectInfos'>INFORMATIONS COMPAGNIE</label>
-                <input type='text' id='inputProjectInfos' ref={inputProjectInfosRef} value={projectInfos} onChange={(e) => setProjectInfos(e.target.value)}></input>
-            </div>
-
-            {/* CHAMPS PLUS D'INFOS*/}
-            <div className='projectForm_textField'>
-                <label htmlFor='inputMoreInfos'>PLUS D'INFOS</label>
-                <input type='text' id='inputMoreInfos' ref={inputMoreInfosRef} value={moreInfos} onChange={(e) => setMoreInfos(e.target.value)}></input>
-            </div>
-
-            {/* CHAMPS A PROPOS DU SPECTACLE*/}
-            <div className='projectForm_textField'>
-                <label htmlFor='inputAboutShow'>À PROPOS DU SPECTACLE</label>
-                <textarea className='projectForm_textField_textarea' type='textarea' id='inputAboutShow' ref={inputAboutShowRef} value={aboutShow.replace(/<br>/g, "\n")} onChange={(e) => setAboutShow(e.target.value)}></textarea>
-            </div>
-
-            {/* CHAMPS A PROPOS DE LA SCENO*/}
-            <div className='projectForm_textField'>
-                <label htmlFor='inputAboutSceno'>À PROPOS DE LA SCÉNOGRAPHIE</label>
-                <textarea className='projectForm_textField_textarea' type='textarea' id='inputAboutSceno' ref={inputAboutScenoRef} value={aboutSceno.replace(/<br>/g, "\n")} onChange={(e) => setAboutSceno(e.target.value)}></textarea>
-            </div>
-
-            {/* CHAMPS TYPE DE PROJET*/}
-            <div className='projectForm_arrayField'>
-                <label htmlFor='inputProjectType'>TYPE DE PROJET*</label>
-                <select id='inputProjectType' 
-                        ref={inputProjectTypeRef} 
-                        name="projectType"
-                        value={projectType} 
-                        onChange={(e) => setProjectType(e.target.value)}>
-                    <option value=""></option>
-                    <option value="spectacle vivant">Spectacle vivant</option>
-                    <option value="évènement">Évènement</option>
-                    <option value="médiation">Médiation</option>
-                </select>
-            </div>
-
-            {/* CHAMPS DISTRIBUTION*/}
-            <div className='projectForm_arrayField'>
-                <p> DISTRIBUTION </p>
-                {artistsList.map((artist, index) => (
-                    <div key={index} className='projectForm_arrayField_fields'>
-                        <div>
-                            <label htmlFor={`inputProjectArtistFunction${index}`}>FONCTION</label>
-                            <input
-                                type='text'
-                                id={`inputProjectArtistFunction${index}`}
-                                value={artist.artistFunction}
-                                onChange={(e) => {
-                                    const updatedArtistsList = [...artistsList];
-                                    updatedArtistsList[index].artistFunction = e.target.value;
-                                    setArtistsList(updatedArtistsList);
-                                }}
-                            ></input>
-                        </div>
-                        <div>
-                            <label htmlFor={`inputProjectArtistName${index}`}>NOMS</label>
-                            <input
-                                type='text'
-                                id={`inputProjectArtistName${index}`}
-                                value={artist.artistName}
-                                onChange={(e) => {
-                                    const updatedArtistsList = [...artistsList];
-                                    updatedArtistsList[index].artistName = e.target.value;
-                                    setArtistsList(updatedArtistsList);
-                                }}
-                            ></input>
-                        </div>
-                        <button type='button' onClick={() => handleSupprArtist(index)}>SUPPRIMER</button>
-                    </div>              
-                ))}
-                <button type='button' onClick={() =>handleAddArtist()} >+ AJOUTER UN ARTISTE</button>
-            </div>
-
-
-            {/* CHAMPS PRODUCTION*/}
-            <div className='projectForm_arrayField'>
-                <p> PRODUCTION </p>
-                {productionList.map((production, index) => (
-                    <div key={index} className='projectForm_arrayField_fields'>
-                        <div>
-                            <label htmlFor={`inputProjectProductionName${index}`}>NOM</label>
-                            <input
-                                type='text'
-                                id={`inputProjectProductionName${index}`}
-                                value={production.prodName}
-                                onChange={(e) => {
-                                    const updatedProductionList = [...productionList];
-                                    updatedProductionList[index].prodName = e.target.value;
-                                    setProductionList(updatedProductionList);
-                                }}
-                            ></input>
-                        </div>
-                        <div>
-                            <label htmlFor={`inputProjectProductionLink${index}`}>LIEN</label>
-                            <input
-                                type='text'
-                                id={`inputProjectProductionLink${index}`}
-                                value={production.prodLink}
-                                onChange={(e) => {
-                                    const updatedProductionList = [...productionList];
-                                    updatedProductionList[index].prodLink = e.target.value;
-                                    setProductionList(updatedProductionList);
-                                }}
-                            ></input>
-                        </div>
-                        <div>
-                            <label htmlFor={`inputProjectProductionLink${index}`}>INFOS</label>
-                            <input
-                                type='text'
-                                id={`inputProjectProductionInfos${index}`}
-                                value={production.prodInfos}
-                                onChange={(e) => {
-                                    const updatedProductionList = [...productionList];
-                                    updatedProductionList[index].prodInfos = e.target.value;
-                                    setProductionList(updatedProductionList);
-                                }}
-                            ></input>
-                        </div>
-                        <div>
-                            <label htmlFor={`inputProjectProductionType${index}`}>TYPE</label>
-                            <select id={`inputProjectProductionType${index}`} 
-                                    defaultValue={projectFormMode==='edit'? production.prodType : ""}
-                                    onChange={(e) => handleProdTypeSelectChange(index, e.target.value)}>
-                                <option value=""></option>
-                                <option value="Production">Production</option>
-                                <option value="Co-production">Co-production</option>
-                                <option value="Accueils en résidence de création">Accueils en résidence de création</option>
-                                <option value="Aide à la création">Aide à la création</option>
-                                <option value="Aide à la résidence d'écriture">Aide à la résidence d'écriture</option>
-                                <option value="Soutien">Soutien</option>
-                                <option value="Remerciements">Remerciements</option>
-                            </select>
-                        </div>
-                        <button type='button' onClick={() => handleSupprProduction(index)}>SUPPRIMER</button>
-                    </div>              
-                ))}
-                <button type='button' onClick={() =>handleAddProduction()} >+ AJOUTER UN MEMBRE DE L'EQUIPE DE PROD</button>
-            </div>
-            
-            {/* CHAMPS PRESSE*/}
-            <div className='projectForm_arrayField'>
-                <p> PRESSE </p>
-                {pressList.map((press, index) => (
-                    <div key={index} className='projectForm_arrayField_fields'>
-                        <div>
-                            <label htmlFor={`inputProjectPressQuote${index}`}>EXTRAIT</label>
-                            <input
-                                type='textarea'
-                                id={`inputProjectPressQuote${index}`}
-                                value={press.quote}
-                                onChange={(e) => {
-                                    const updatedPressList = [...pressList];
-                                    updatedPressList[index].quote = e.target.value;
-                                    setPressList(updatedPressList);
-                                }}
-                            ></input>
-                        </div>
-                        <div>
-                            <label htmlFor={`inputProjectPressMediaName${index}`}>NOM DU MEDIA</label>
-                            <input
-                                type='text'
-                                id={`inputProjectPressMediaName${index}`}
-                                value={press.mediaName}
-                                onChange={(e) => {
-                                    const updatedPressList = [...pressList];
-                                    updatedPressList[index].mediaName = e.target.value;
-                                    setPressList(updatedPressList);
-                                }}
-                            ></input>
-                        </div>
-                        <div>
-                            <label htmlFor={`inputProjectPressMediaLink${index}`}>LIEN VERS L'ARTICLE</label>
-                            <input
-                                type='text'
-                                id={`inputProjectPressMediaLink${index}`}
-                                value={press.mediaLink}
-                                onChange={(e) => {
-                                    const updatedPressList = [...pressList];
-                                    updatedPressList[index].mediaLink = e.target.value;
-                                    setPressList(updatedPressList);
-                                }}
-                            ></input>
-                        </div>
-                        <button type='button' onClick={() => handleSupprPress(index)}>SUPPRIMER</button>
-                    </div>              
-                ))}
-                <button type='button' onClick={() =>handleAddPress()} >+ AJOUTER UN ARTICLE DE PRESSE</button>
-            </div>
-
-            {/* CHAMPS LIENS*/}
-            <div className='projectForm_arrayField'>
-                <p> LIENS VIDÉOS/COMPAGNIE/ETC. </p>
-                {linksList.map((link, index) => (
-                    <div key={index} className='projectForm_arrayField_fields'>
-                        <div>
-                            <label htmlFor={`inputProjectLinkName${index}`}>NOM DU LIEN</label>
-                            <input
-                                type='text'
-                                id={`inputProjectLinkName${index}`}
-                                value={link.linkName}
-                                onChange={(e) => {
-                                    const updatedLinksList = [...linksList];
-                                    updatedLinksList[index].linkName = e.target.value;
-                                    setLinksList(updatedLinksList);
-                                }}
-                            ></input>
-                        </div>
-                        <div>
-                            <label htmlFor={`inputProjectLinkUrl${index}`}>URL DU LIEN</label>
-                            <input
-                                type='text'
-                                id={`inputProjectLinkUrl${index}`}
-                                value={link.linkUrl}
-                                onChange={(e) => {
-                                    const updatedLinksList = [...linksList];
-                                    updatedLinksList[index].linkUrl = e.target.value;
-                                    setLinksList(updatedLinksList);
-                                }}
-                            ></input>
-                        </div>
-                        <button type='button' onClick={() => handleSupprLink(index)}>SUPPRIMER</button>
-                    </div>              
-                ))}
-                <button type='button' onClick={() =>handleAddLink()} >+ AJOUTER UN LIEN</button>
-            </div>
-
-            {/* CHAMPS DIFFUSION*/}
-            <div className='projectForm_arrayField'>
-                <p> DIFFUSION </p>
-                {diffusionList.map((diff, index) => (
-                    <div key={index} className='projectForm_arrayField_fields'>
-                        <div>
-                            <label htmlFor={`inputProjectDiffDates${index}`}>DATES</label>
-                            <input
-                                type='text'
-                                id={`inputProjectDiffDates${index}`}
-                                value={diff.dates}
-                                onChange={(e) => {
-                                    const updatedDiffusionList = [...diffusionList];
-                                    updatedDiffusionList[index].dates = e.target.value;
-                                    setDiffusionList(updatedDiffusionList);
-                                }}
-                            ></input>
-                        </div>
-                        <div>
-                            <label htmlFor={`inputProjectDiffCity${index}`}>VILLE</label>
-                            <input
-                                type='text'
-                                id={`inputProjectDiffCity${index}`}
-                                value={diff.city}
-                                onChange={(e) => {
-                                    const updatedDiffusionList = [...diffusionList];
-                                    updatedDiffusionList[index].city = e.target.value;
-                                    setDiffusionList(updatedDiffusionList);
-                                }}
-                            ></input>
-                        </div>
-                        <div>
-                            <label htmlFor={`inputProjectPlaceName${index}`}>NOM DU LIEU</label>
-                            <input
-                                type='text'
-                                id={`inputProjectPlaceName${index}`}
-                                value={diff.placeName}
-                                onChange={(e) => {
-                                    const updatedDiffusionList = [...diffusionList];
-                                    updatedDiffusionList[index].placeName = e.target.value;
-                                    setDiffusionList(updatedDiffusionList);
-                                }}
-                            ></input>
-                        </div>
-                        <div>
-                            <label htmlFor={`inputProjectPlaceLink${index}`}>LIEN DU LIEU</label>
-                            <input
-                                type='text'
-                                id={`inputProjectPlaceLink${index}`}
-                                value={diff.placeLink}
-                                onChange={(e) => {
-                                    const updatedDiffusionList = [...diffusionList];
-                                    updatedDiffusionList[index].placeLink = e.target.value;
-                                    setDiffusionList(updatedDiffusionList);
-                                }}
-                            ></input>
-                        </div>
-                        <button type='button' onClick={() => handleSupprDiff(index)}>SUPPRIMER</button>
-                    </div>              
-                ))}
-                <button type='button' onClick={() =>handleAddDiff()} >+ AJOUTER UN LIEU</button>
-            </div>
-            
-            <div className='projectForm_buttons'>
-                <button type='submit'>VALIDER</button>
-                <button type='button' onClick={() => closeForm()}>ANNULER</button>
-            </div>
-
-
         </form>
     )
 }

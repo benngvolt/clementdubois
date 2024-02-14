@@ -3,13 +3,13 @@ import React, { useState, useContext, useEffect } from 'react'
 import { ProjectsContext } from '../../utils/ProjectsContext'
 import {Link} from 'react-router-dom'
 import DOMPurify from 'dompurify';
-import Loader from '../../components/Loader/Loader'
+import HomePage from '../../components/HomePage/HomePage';
 
 
 
 function AllProjects() {
 
-    const { projects, displayHomePage, setDisplayHomePage, loaderDisplay } = useContext(ProjectsContext);
+    const { projects, displayHomePage } = useContext(ProjectsContext);
     const [filteredProjects, setFilteredProjects] = useState(projects);
     const [categoryProjects, setCategoryProjects] = useState('tous');
 
@@ -62,13 +62,6 @@ function AllProjects() {
                     </div>
                 </Link>
             ))}
-            <div className={displayHomePage===true?'allProjects_homePage--displayOn':'allProjects_homePage--displayOff'}>
-                <div className={loaderDisplay===true?'allProjects_homePage_loader--displayOn':'allProjects_homePage_loader--displayOff'}>
-                    <Loader/>
-                </div>
-                <img className='allProjects_homePage_image'src='./assets/homeImage2.jpg' alt="Project" />
-                <button className='allProjects_homePage_button' type='button' onClick={()=>setDisplayHomePage(false)}><h1> Clément Dubois Scénographe </h1> </button>
-            </div>
         </section>
     )
 }

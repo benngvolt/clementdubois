@@ -1,6 +1,60 @@
 @import '../../utils/mixins';
 
 .edit {
+    margin: auto 54px;
+    display: flex;
+    flex-direction: column;
+
+
+    &_list {
+
+        margin: auto;
+        width: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 25px;
+        
+        &_item {
+            display: flex;
+            flex-direction: column;
+            row-gap: 12px;
+
+            &_image {
+                width: 300px;
+                height: 200px;
+                object-fit: cover;
+            }
+
+            &_title {
+                font-family: 'SpecialFont';
+                font-size: 25px;
+                color: $colorDarkGrey;
+
+            }
+
+            &_buttonsBox {
+                display: flex;
+                flex-direction: row;
+                column-gap: 16px;
+                button {
+                    font-family: 'MainFont_light';
+                    font-size: 16px;
+                    background-color: $colorFirst;
+                    border: none;
+                    &:hover {
+                        cursor: pointer;
+                        background-color: $colorDarkGrey;
+                        color: $colorLightGrey;
+                    }
+                }
+            }
+        }
+    }
+
+    &_addButton {
+        margin: 85px auto;
+        @include Button;
+    }
 
     &_form {
 

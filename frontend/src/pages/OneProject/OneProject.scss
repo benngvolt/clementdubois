@@ -314,18 +314,65 @@
         }
     }
     &_makingOfImageContainer {
-        display: flex;
-        flex-direction: row;
-        margin: auto;
-        overflow: scroll;
-        width: 90%;
-        column-gap: 16px;
-        height: 682px;
+        background: $colorThird;
+        padding-bottom: 22px;
 
-        img{
-            object-fit: cover;
-            height: 100%;
-            width: 374px;
+        &_collapseButton {
+            width: 100%;
+            background: $colorThird;
+            border: none;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin: 22px auto;
+            column-gap: 19px;
+            &:hover {
+                cursor: pointer;
+            }
+
+            p {
+                color: $colorLightGrey;
+                font-family: 'SpecialFont';
+                font-size: 22px;
+            }
+            &_icon--closed {
+                font-size: 19px;
+                color: $colorLightGrey;
+                margin: auto 0px;
+                animation: closeCollapse 0.5s ease forwards;
+            }
+            &_icon--opened {
+                font-size: 19px;
+                color: $colorLightGrey;
+                margin: auto 0px;
+                animation: openCollapse 0.5s ease forwards;
+            }
+            
+        }
+
+        &_carrousel {
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin: auto;
+            overflow: scroll;
+            width: 90%;
+            column-gap: 3px;
+
+            img {
+                object-fit: cover;
+                height: 100%;
+                width: 374px;
+            }
+        
+            &--opened {
+                animation: openCarrousel 1s ease forwards;
+            }
+            
+            &--closed {
+                animation: closeCarrousel 1s ease forwards;
+            }
         }
     }
 

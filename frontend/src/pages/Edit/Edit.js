@@ -87,17 +87,19 @@ function Edit() {
 
     return  (      
         <aside className='edit'>
-            <p>PROJETS</p>
-            <ul>
+            <ul className='edit_list'>
                 {projects.map((project)=>(
-                    <li>
-                        <p>{project.title}</p>
-                        <button type='button' onClick={()=> handleProjectDeleteMode(project)}>SUPPRIMER</button>
-                        <button type='button' onClick={()=> editProject(project)}>MODIFIER</button>
+                    <li className='edit_list_item'>
+                        <img className='edit_list_item_image' src={`${project.projectImages[project.mainImageIndex].imageUrl}`}/>
+                        <p className='edit_list_item_title'>{project.title}</p>
+                        <div className='edit_list_item_buttonsBox'>
+                            <button type='button' onClick={()=> handleProjectDeleteMode(project)}>SUPPRIMER</button>
+                            <button type='button' onClick={()=> editProject(project)}>MODIFIER</button>
+                        </div>
                     </li>
                 ))}
             </ul>
-            <button onClick={() => addProject()} type='button' >+ AJOUTER UN PROJET</button>
+            <button onClick={() => addProject()} type='button' className='edit_addButton'>+ ajouter</button>
             <div>
                 <ConfirmBox
                     deleteProject = {deleteProject}
