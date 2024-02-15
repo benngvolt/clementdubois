@@ -90,7 +90,9 @@ function Edit() {
             <ul className='edit_list'>
                 {projects.map((project)=>(
                     <li className='edit_list_item'>
-                        <img className='edit_list_item_image' src={`${project.projectImages[project.mainImageIndex].imageUrl}`}/>
+                        {project.projectImages && project.projectImages.length > 0 &&
+                            <img className='edit_list_item_image' src={project.projectImages[project.mainImageIndex].imageUrl} />
+                        }
                         <p className='edit_list_item_title'>{project.title}</p>
                         <div className='edit_list_item_buttonsBox'>
                             <button type='button' onClick={()=> handleProjectDeleteMode(project)}>SUPPRIMER</button>

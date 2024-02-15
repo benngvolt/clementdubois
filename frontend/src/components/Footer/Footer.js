@@ -23,7 +23,9 @@ function Footer() {
                 {projects?.map((project)=>(
                     <li className='footer_list_item'> 
                         <Link to={`/projects/${project._id}`} onClick={()=>scrollToTop()}>
-                            <img src={`${project.projectImages[project.mainImageIndex].imageUrl}`}/>
+                            {project.projectImages && project.projectImages.length > 0 &&
+                                <img src={`${project.projectImages[project.mainImageIndex].imageUrl}`}/>
+                            }
                             <p>{project.title}</p>
                         </Link>
                     </li>

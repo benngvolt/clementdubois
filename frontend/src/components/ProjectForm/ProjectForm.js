@@ -577,7 +577,7 @@ function ProjectForm({
                     {linksList.map((link, index) => (
                         <div key={index} className='projectForm_arraysContainer_arrayField_fields'>
                             <div className='projectForm_arraysContainer_arrayField_fields_line'>
-                                <label htmlFor={`inputProjectLinkName${index}`}>NOM DU LIEN</label>
+                                <label htmlFor={`inputProjectLinkName${index}`}>LABEL</label>
                                 <input
                                     type='text'
                                     id={`inputProjectLinkName${index}`}

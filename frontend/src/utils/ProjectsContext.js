@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { API_URL } from './constants'
-export const ProjectsContext = createContext()
+import { API_URL } from './constants';
+import { useLocation } from 'react-router-dom';
+export const ProjectsContext = createContext();
 export const ProjectsProvider = ({ children }) => {
 
     /*---------------------------------
@@ -23,7 +24,23 @@ export const ProjectsProvider = ({ children }) => {
     };
 
     const [projects, setProjects] = useState([]);
-    const [displayHomePage, setDisplayHomePage] = useState(true);
+    const [ displayHeader, setDisplayHeader ] = useState(true)
+
+    const location = useLocation();
+
+    function openHeader() {
+        if (location.pathname==='/') {
+            return;
+        }
+        setDisplayHeader(true)
+    }
+
+    function closeHeader() {
+        if (location.pathname==='/') {
+            return;
+        }
+        setDisplayHeader(false)
+    }
 
     useEffect(() => {
         displayLoader();
@@ -41,6 +58,7 @@ export const ProjectsProvider = ({ children }) => {
     }, [loadProjects]);
 
     const [loaderDisplay, setLoaderDisplay] = useState(false);
+
     function displayLoader() {
         setLoaderDisplay(true);
     }
@@ -50,7 +68,7 @@ export const ProjectsProvider = ({ children }) => {
     }
 
     return (
-        <ProjectsContext.Provider value={{ projects, setProjects, handleLoadProjects, loadProjects, displayHomePage, setDisplayHomePage, loaderDisplay}}>
+        <ProjectsContext.Provider value={{ projects, setProjects, handleLoadProjects, loadProjects, loaderDisplay, displayHeader, closeHeader, openHeader}}>
             {children}
         </ProjectsContext.Provider>
     )

@@ -8,6 +8,7 @@ import OneProject from './pages/OneProject/OneProject';
 import About from './pages/About/About';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import Home from './pages/Home/Home';
 import AllProjects from './pages/AllProjects/AllProjects';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { ProjectsProvider } from './utils/ProjectsContext';
@@ -19,7 +20,8 @@ root.render(
       <ProjectsProvider>
           <Header/>
           <Routes>
-            <Route path="/" element={<AllProjects/>} />
+            <Route path="/" element={<Home/>} />
+            <Route path="/projects" element={<AllProjects/>} />
             <Route path="/projects/:id" element={<OneProject/>} />
             <Route path="/about" element={<About/>} />
             <Route path="/edit" element={<Edit/>} />

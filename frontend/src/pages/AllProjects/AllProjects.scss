@@ -8,10 +8,12 @@
     row-gap: 54px;
 
     &_buttonsContainer {
+
         display: flex;
         flex-direction: row;
         column-gap: 30px;
-        margin-left: 54px;
+        margin: 54px;
+
         
         &_button {
 
@@ -25,6 +27,7 @@
     }
 
     &_projectCard {
+
         width: 100%;
         height: 490px;
         text-decoration: none;

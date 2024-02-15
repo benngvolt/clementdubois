@@ -5,9 +5,9 @@
     justify-content: center;
     align-items: center;
     margin: auto;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 2px;
-    row-gap: 10px;
+    // row-gap: 10px;
 
     &_item {
         width: auto;
