@@ -315,57 +315,46 @@
     padding-bottom: 0px;
   }
 }
-.editWorkModal_confirmBox {
-  z-index: 1;
-  position: fixed;
-  align-items: center;
-  justify-content: center;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-}
-.editWorkModal_confirmBox_container {
+.contactModal {
   display: flex;
   flex-direction: column;
-  row-gap: 16px;
-  padding-top: 22px;
-  padding-bottom: 22px;
-  width: 500px;
-  height: auto;
+  width: 50%;
+  height: 50vh;
   background-color: #E9E9E9;
-}
-.editWorkModal_confirmBox_container_question {
-  text-align: center;
-  font-size: 22px;
-  font-family: "SpecialFont";
-}
-.editWorkModal_confirmBox_container_buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   margin: auto;
-  -moz-column-gap: 16px;
-       column-gap: 16px;
+  position: relative;
 }
-.editWorkModal_confirmBox_container_buttons button {
+.contactModal_title {
+  display: flex;
+  justify-content: center;
+  width: 100%;
   font-family: "SpecialFont";
-  color: #0c0c0c;
-  font-size: 25px;
-  padding: 10px;
-  border: none;
-  background-color: rgb(242, 255, 0);
-  font-size: 19px;
+  font-size: 54px;
+  margin: 54px auto;
 }
-.editWorkModal_confirmBox_container_buttons button:hover {
-  color: #E9E9E9;
-  background-color: #0c0c0c;
+.contactModal_closeButton {
+  width: auto;
+  display: flex;
+  color: #0c0c0c;
+  background: none;
+  border: none;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+.contactModal_closeButton_icon {
+  height: 2em;
+}
+.contactModal_closeButton_icon:hover {
   cursor: pointer;
 }
-.editWorkModal_confirmBox--displayOn {
-  display: flex;
+.contactModal_tel {
+  font-family: "MainFont_bold";
+  font-size: 19px;
+  margin: 25px 98px;
 }
-.editWorkModal_confirmBox--displayOff {
-  display: none;
-}/*# sourceMappingURL=ConfirmBox.css.map */
+.contactModal_address, .contactModal_mail {
+  font-family: "MainFont_light";
+  font-size: 19px;
+  margin: 25px 98px;
+}/*# sourceMappingURL=ContactModal.css.map */
