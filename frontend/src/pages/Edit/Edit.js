@@ -104,9 +104,10 @@ function Edit() {
             <button onClick={() => addProject()} type='button' className='edit_addButton'>+ ajouter</button>
             <div>
                 <ConfirmBox
-                    deleteProject = {deleteProject}
+                    affirmativeChoice = {deleteProject}
                     confirmBoxState={confirmBoxState}
-                    closeConfirmBox={closeConfirmBox}
+                    negativeChoice={closeConfirmBox}
+                    attribut={null}
                     />
             </div>
             <div className={handleDisplayProjectForm===false ? "edit_form--displayOff" : "edit_form--displayOn"}>

@@ -1,11 +1,13 @@
 import './ProjectForm.scss'
-import {useRef, useState, useEffect } from 'react'
+import {useRef, useState, useEffect, useContext } from 'react'
+import { ProjectsContext } from '../../utils/ProjectsContext'
 import { API_URL } from '../../utils/constants'
 import { v4 as uuidv4 } from 'uuid'
 import DNDGallery from '../../components/DNDGallery/DNDGallery'
 import DOMPurify from 'dompurify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faXmark} from '@fortawesome/free-solid-svg-icons'
+import Loader from '../Loader/Loader'
 
 
 
@@ -60,6 +62,8 @@ function ProjectForm({
     const [aboutSceno, setAboutSceno] = useState(projectFormMode === 'edit' ? cleanedAboutSceno : '');
     const [projectType, setProjectType] = useState(projectFormMode === 'edit' ? projectEdit.projectType : '');
 
+    const { loaderDisplay, setLoaderDisplay } = useContext(ProjectsContext);
+
     // Réinitialisation des valuers input lorsque le formulaire s'ouvre / se ferme.
     useEffect(() => {
       if (projectFormMode === 'edit') {
@@ -88,6 +92,7 @@ function ProjectForm({
     ----------------------------*/
 
     function closeForm() {
+        setLoaderDisplay(false);
         setHandleDisplayProjectForm(false);
         handleLoadProjects();
     }
@@ -212,6 +217,7 @@ function ProjectForm({
     function projectFormSubmit(event) {
 
         event.preventDefault();
+        setLoaderDisplay(true);
         // const token = window.sessionStorage.getItem('1');
         const projectFormData = new FormData();
         projectFormData.append('title', inputProjectTitleRef.current.value);
@@ -273,12 +279,15 @@ function ProjectForm({
                 })
                 .then((response) => {
                     if (response.ok) {
+                        
                         return response;
                     } else {
+                        
                         throw new Error('La requête a échoué');
                     }
                 })
                 .then(()=> {
+                    
                     closeForm();
                 })
                 .catch((error) => console.error(error));
@@ -293,12 +302,15 @@ function ProjectForm({
                 })
                 .then((response) => {
                     if (response.ok) {
+                        
                         return response;
                     } else {
+                        
                         throw new Error('La requête a échoué');
                     }
                 })
                 .then(()=> {
+                    
                     closeForm();
                 })
                 .catch((error) => console.error(error));
@@ -317,7 +329,7 @@ function ProjectForm({
 
             {/* WELCOME */}
             <div className='projectForm_welcomeContainer'>
-                <p className='projectForm_welcomeContainer_mainWelcome'>Bienvenu dans ta demeure, talentueux scénographe.</p>
+                <p className='projectForm_welcomeContainer_mainWelcome'>Bienvenu chez toi.</p>
                 <img className='projectForm_welcomeContainer_imageWelcome'src='./assets/welcome01.png' alt='image de bienvenue'/>
                 <p className='projectForm_welcomeContainer_secondWelcome'> Prends-toi tranquille un café avant de te mettre au boulot...</p>
             </div>
@@ -674,6 +686,9 @@ function ProjectForm({
                     <button type='submit'>VALIDER</button>
                     <button type='button' onClick={() => closeForm()}>ANNULER</button>
                 </div>
+            </div>
+            <div className={loaderDisplay===true?'projectForm_loaderContainer--displayOn':'projectForm_loaderContainer--displayOff'} >
+                <Loader/>
             </div>
         </form>
     )

@@ -4,6 +4,7 @@ const projectsCtrl = require ('../controllers/projects');
 const multer = require('../middlewares/multer-config');
 const auth = require('../middlewares/auth');
 const uploadImages = require('../middlewares/uploadImages').uploadImages;
+const deleteImages = require('../middlewares/deleteImages').deleteImages;
 
 // Cette partie du code définit un  **** MIDDLEWARE **** pour notre application Express. 
 // Un middleware est une fonction qui peut être utilisée pour effectuer des actions sur une requête avant qu'elle n'atteigne sa route finale.
@@ -12,10 +13,25 @@ const uploadImages = require('../middlewares/uploadImages').uploadImages;
 // Dans cet exemple, il envoie une réponse JSON contenant le message "Votre requête a bien été reçue !" à chaque requête entrante.
 // l'argument next permet de passer au middleware suivant
 
-router.post('/', multer.fields([{ name: 'images' }, { name: 'moImages' }]), uploadImages, projectsCtrl.createProject);
-router.get('/', projectsCtrl.getAllProjects);
-router.get('/:id', projectsCtrl.getOneProject);
-router.delete ('/:id', projectsCtrl.deleteOneProject);
-router.put ('/:id', multer.fields([{ name: 'images' }, { name: 'moImages' }]), uploadImages, projectsCtrl.updateOneProject);
+router.post('/', 
+            multer.fields([{ name: 'images' }, { name: 'moImages' }]), 
+            uploadImages, 
+            projectsCtrl.createProject);
+            
+router.get('/', 
+            projectsCtrl.getAllProjects);
+
+router.get('/:id', 
+            projectsCtrl.getOneProject);
+
+router.delete ('/:id', 
+            projectsCtrl.deleteOneProject, 
+            deleteImages);
+
+router.put ('/:id', 
+            multer.fields([{ name: 'images' }, { name: 'moImages' }]), 
+            uploadImages, 
+            projectsCtrl.updateOneProject, 
+            deleteImages);
 
 module.exports = router;

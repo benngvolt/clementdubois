@@ -1,4 +1,5 @@
 const Project = require('../models/project')
+const { storage, bucket } = require('../config/storage');
 
 /*------------------------
 ----- GET ALL PROJECTS ---
@@ -77,7 +78,7 @@ exports.createProject = async (req, res) => {
 ----- DELETE ONE PROJECT -----
 ----------------------------*/
 
-exports.deleteOneProject = async (req, res) => {
+exports.deleteOneProject = async (req, res, next) => {
     try {
       const deletedProject = await Project.findOneAndDelete({ _id: req.params.id });
       if (!deletedProject) {
@@ -85,95 +86,98 @@ exports.deleteOneProject = async (req, res) => {
       }
   
       // Appeler la fonction de suppression d'images après avoir supprimé la série
-      await deleteImageFiles(req);
-      await deleteMoImageFiles(req);
+      // await deleteImageFiles(req);
+      // await deleteMoImageFiles(req);
       
       res.status(200).json({ message: 'Projet supprimé !' });
+      next();
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Erreur lors de la suppression du projet' });
     }
   }
     
-async function deleteImageFiles(req) {
-    // Obtenez la liste des URLs des images depuis Google Cloud Storage
-    async function getCloudImageUrls() {
-      const [files] = await bucket.getFiles({ prefix: 'projects_images/' });
-      return files.map((file) => `https://storage.googleapis.com/${bucket.name}/${file.name}`);
-    }
+// async function deleteImageFiles(req) {
+//     // Obtenez la liste des URLs des images depuis Google Cloud Storage
+//     async function getCloudImageUrls() {
+//       const [files] = await bucket.getFiles({ prefix: 'project_images/' });
+//       return files.map((file) => `https://storage.googleapis.com/${bucket.name}/${file.name}`);
+//     }
       
-    // Obtenez la liste des URLs des images depuis MongoDB
-    async function getDbImageUrls() {
+//     // Obtenez la liste des URLs des images depuis MongoDB
+//     async function getDbImageUrls() {
   
-      // Récupérez toutes les séries depuis MongoDB
-      const projects = await Project.find();
-      const imageUrls = projects.flatMap((project) => project.projectImages.map((image) => image.imageUrl));
-      return imageUrls;
-    }
+//       // Récupérez toutes les séries depuis MongoDB
+//       const projects = await Project.find();
+//       const imageUrls = projects.flatMap((project) => project.projectImages.map((image) => image.imageUrl));
+//       return imageUrls;
+//     }
       
-        try {
-          const cloudImageUrls = await getCloudImageUrls(); // Utilisez "await" pour attendre la résolution de la promesse
-          const dbImageUrls = await getDbImageUrls(); // Utilisez "await" pour attendre la résolution de la promesse
-          const imagesToDelete = cloudImageUrls.filter((url) => !dbImageUrls.includes(url));
+//         try {
+//           const cloudImageUrls = await getCloudImageUrls(); // Utilisez "await" pour attendre la résolution de la promesse
+//           const dbImageUrls = await getDbImageUrls(); // Utilisez "await" pour attendre la résolution de la promesse
+//           const imagesToDelete = cloudImageUrls.filter((url) => !dbImageUrls.includes(url));
     
-          // Suppression des images non référencées dans le cloud
-          for (const imageUrl of imagesToDelete) {
-            // Divisez l'URL en parties en utilisant "/" comme séparateur
-            const parts = imageUrl.split('/');
-            // Récupérez la dernière partie qui contient le nom du fichier
-            const fileToDeleteName = parts.pop();
-            if (fileToDeleteName) {
-              await bucket.file('projects_images/' + fileToDeleteName).delete();
-            }
-          }
+//           // Suppression des images non référencées dans le cloud
+//           for (const imageUrl of imagesToDelete) {
+//             // Divisez l'URL en parties en utilisant "/" comme séparateur
+//             const parts = imageUrl.split('/');
+//             // Récupérez la dernière partie qui contient le nom du fichier
+//             const fileToDeleteName = parts.pop();
+//             if (fileToDeleteName) {
+//               await bucket.file('project_images/' + fileToDeleteName).delete();
+//             }
+//           }
   
-        } catch (error) {
-          console.error(error.message);
-        }
-    }
+//         } catch (error) {
+//           console.error(error.message);
+//         }
+//     }
   
-    async function deleteMoImageFiles(req) {
-      // Obtenez la liste des URLs des images depuis Google Cloud Storage
-      async function getCloudImageUrls() {
-        const [files] = await bucket.getFiles({ prefix: 'makingOf_images/' });
-        return files.map((file) => `https://storage.googleapis.com/${bucket.name}/${file.name}`);
-      }
-        
-      // Obtenez la liste des URLs des images depuis MongoDB
-      async function getDbImageUrls() {
+// async function deleteMoImageFiles(req) {
+//   // Obtenez la liste des URLs des images depuis Google Cloud Storage
+//   async function getCloudImageUrls() {
+//     console.log('delete')
+//     const [files] = await bucket.getFiles({ prefix: 'makingOf_images/' });
+//     return files.map((file) => `https://storage.googleapis.com/${bucket.name}/${file.name}`);
+//   }
     
-        // Récupérez toutes les séries depuis MongoDB
-        const projects = await Project.find();
-        const imageUrls = projects.flatMap((project) => project.makingOfImages.map((image) => image.imageUrl));
-        return imageUrls;
-      }
-        
-          try {
-            const cloudImageUrls = await getCloudImageUrls(); // Utilisez "await" pour attendre la résolution de la promesse
-            const dbImageUrls = await getDbImageUrls(); // Utilisez "await" pour attendre la résolution de la promesse
-            const imagesToDelete = cloudImageUrls.filter((url) => !dbImageUrls.includes(url));
-      
-            // Suppression des images non référencées dans le cloud
-            for (const imageUrl of imagesToDelete) {
-              // Divisez l'URL en parties en utilisant "/" comme séparateur
-              const parts = imageUrl.split('/');
-              // Récupérez la dernière partie qui contient le nom du fichier
-              const fileToDeleteName = parts.pop();
-              if (fileToDeleteName) {
-                await bucket.file('makingOf_images/' + fileToDeleteName).delete();
-              }
-            }
+//   // Obtenez la liste des URLs des images depuis MongoDB
+//   async function getDbImageUrls() {
+
+//     // Récupérez toutes les séries depuis MongoDB
+//     const projects = await Project.find();
+//     const imageUrls = projects.flatMap((project) => project.makingOfImages.map((image) => image.imageUrl));
+//     return imageUrls;
+//   }
     
-          } catch (error) {
-            console.error(error.message);
-          }
-      }
+//   try {
+//     const cloudImageUrls = await getCloudImageUrls(); // Utilisez "await" pour attendre la résolution de la promesse
+//     const dbImageUrls = await getDbImageUrls(); // Utilisez "await" pour attendre la résolution de la promesse
+//     const imagesToDelete = cloudImageUrls.filter((url) => !dbImageUrls.includes(url));
+
+//     // Suppression des images non référencées dans le cloud
+//     for (const imageUrl of imagesToDelete) {
+//       // Divisez l'URL en parties en utilisant "/" comme séparateur
+//       const parts = imageUrl.split('/');
+//       // Récupérez la dernière partie qui contient le nom du fichier
+//       const fileToDeleteName = parts.pop();
+//       if (fileToDeleteName) {
+//         await bucket.file('makingOf_images/' + fileToDeleteName).delete();
+//         console.log('done')
+//       }
+//     }
+
+//   } catch (error) {
+//     console.error(error.message);
+//   }
+// }
 
 /*--------------------------
 ----- UPDATE ONE SERIE -----
 --------------------------*/
 
-exports.updateOneProject = async (req, res) => {
+exports.updateOneProject = async (req, res, next) => {
   try {
     const artistsList = JSON.parse(req.body.artistsList);
     const productionList = JSON.parse(req.body.productionList);
@@ -250,9 +254,12 @@ exports.updateOneProject = async (req, res) => {
 
     // Appel de la fonction de mise à jour du projet
     await updateProject(updatedImages, updatedMoImages);
+    // await deleteImageFiles(req);
+    // await deleteMoImageFiles(req);
 
     console.log('Project updated successfully');
     res.status(200).json({ message: 'Projet modifié' });
+    next();
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Erreur lors de la mise à jour de la série.' });

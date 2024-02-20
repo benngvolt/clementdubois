@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import './DNDGallery.scss'
+import ConfirmBox from '../ConfirmBox/ConfirmBox';
 
 import {
   DndContext,
@@ -112,12 +113,13 @@ function DNDGallery ({ imageFiles, setImageFiles, mainImageIndex, setMainImageIn
                   src={items.find(item => item._id === activeId).imageUrl}/>
           ) : null}
         </DragOverlay>
-        <div className={confirmBoxState===false ? 'projectForm_DNDGallery_confirmBox projectForm_DNDGallery_confirmBox--displayOff' : 'projectForm_DNDGallery_confirmBox projectForm_DNDGallery_confirmBox--displayOn'}>
-          <p className='projectForm_DNDGallery_confirmBox_label'>Êtes-vous sûr ?</p>
-          <div className='projectForm_DNDGallery_confirmBox_buttons'>
-            <button aria-label="Valider la suppression de l'image" type='button' onClick={() => deleteImage(indexImageToDelete)}>OUI</button>
-            <button aria-label="Annuler la suppression de l'image" type='button' onClick={() => closeConfirmBox () }>NON</button>
-          </div>
+        <div>
+          <ConfirmBox
+            affirmativeChoice ={deleteImage}
+            attribut = {indexImageToDelete}
+            confirmBoxState={confirmBoxState}
+            negativeChoice={closeConfirmBox}
+          />
         </div>
       </DndContext>
   );

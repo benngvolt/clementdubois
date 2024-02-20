@@ -1,9 +1,9 @@
 import './Header.scss'
 import { Link } from 'react-router-dom'
-import { useState, useContext} from 'react';
-import { useLocation } from 'react-router-dom';
+import { useContext, useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ProjectsContext } from '../../utils/ProjectsContext';
+import ContactModal from '../ContactModal/ContactModal';
 import {
     faFacebook,
     faSquareInstagram,
@@ -23,7 +23,7 @@ import {
 
  
 function Header() {
-
+    const [displayContactModal, setdisplayContactModal]= useState(false);
     const { displayHeader, openHeader, closeHeader } = useContext(ProjectsContext);
 
     return  (
@@ -35,7 +35,7 @@ function Header() {
                 <div className='header_nav_menu'>
                     <Link to="/projects" className='header_nav_menu_item'><p>créations</p></Link>
                     <Link to="/about" className='header_nav_menu_item'><p>à propos</p></Link>
-                    <button className='header_nav_menu_item'><p>contact</p></button>
+                    <button type='button' className='header_nav_menu_item' onClick={()=>setdisplayContactModal(true)}><p>contact</p></button>
                     <Link to="/edit" className='header_nav_menu_item'><p>dashboard</p></Link>
                 </div>
                 <div className='header_nav_socials'>
@@ -46,6 +46,9 @@ function Header() {
                     <a href=''><FontAwesomeIcon icon={faLinkedin} /></a>
                 </div>
             </nav>
+            <div className={displayContactModal===true ? 'header_contactModal header_contactModal--open':' header_contactModal header_contactModal--close'}s>
+                < ContactModal setdisplayContactModal={setdisplayContactModal}/>
+            </div>
         </header>
     )
 }

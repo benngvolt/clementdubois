@@ -69,10 +69,10 @@
 $colorLightGrey: #E9E9E9;
 $colorDarkGrey: #0c0c0c;
 $colorFields: aqua;
-$colorButtons: rgb(96, 54, 151);
-$colorFirst: yellow;
-$colorSecond: blue;
-$colorThird: rgb(255, 144, 177);
+// $colorButtons: rgb(96, 54, 151);
+$colorFirst: rgb(242, 255, 0);
+$colorSecond: rgb(65, 65, 65);
+$colorThird: rgb(131, 109, 255);
 
 /*-------------------
 ----- KEYFRAMES -----
@@ -216,7 +216,7 @@ $colorThird: rgb(255, 144, 177);
         opacity: 0;
         padding-bottom: 0px;
     }
-    70% { 
+    50% { 
         height: auto;
         opacity: 0;
         padding-bottom: 54px;
@@ -235,7 +235,7 @@ $colorThird: rgb(255, 144, 177);
         opacity: 1;
         padding-bottom: 54px;
     }
-    30% {  
+    50% {  
         height: auto;
         opacity: 0;
         padding-bottom: 54px;

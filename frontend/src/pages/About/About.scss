@@ -1,0 +1,64 @@
+@import '../../utils/mixins';
+
+    .about {
+
+        &_title {
+            margin: 85px 54px;
+            font-size: 98px;
+            font-family: 'SpecialFont';
+        }
+        &_img { 
+            width: 100%; 
+            aspect-ratio: 2/1;
+            object-fit: cover;
+        }
+
+        &_introductionContainer {
+            background-color: $colorFirst;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            
+            p {
+
+            width: 50%;
+            text-align: justify;
+            font-family: 'MainFont_light';
+            font-size: 19px;
+            margin: 0 54px;
+            padding-top: 98px;
+            padding-bottom: 98px;
+            
+            }
+        }
+        &_manifestoTitle {
+            
+                display: flex;
+                // flex-direction: row;
+                justify-content: center;
+                width: 100%;
+                font-family: 'SpecialFont';
+                font-size: 54px;
+                margin: 98px auto;
+           
+        }
+        &_list {
+            margin: 98px 54px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            row-gap: 35px;
+            
+
+            &_item {
+                
+                margin: auto;
+                p {
+                    font-family: 'SpecialFont';
+                    font-size: 25px;
+                    margin: auto;
+                }
+            }
+        }
+
+    }

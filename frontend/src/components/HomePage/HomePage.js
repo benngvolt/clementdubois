@@ -13,8 +13,10 @@ function HomePage({ setDisplayHomePage}) {
             <div className={loaderDisplay===true?'homePage_loader--displayOn':'homePage_loader--displayOff'}>
                 <Loader/>
             </div>
-            <img className='homePage_image'src='./assets/homeImage.jpg' alt="Project" />
-            <Link className='homePage_button' to="/projects"><h1> Clément Dubois Scénographe </h1></Link>
+            <img className='homePage_image'src='./assets/homeImage3.jpg' alt="Project" />
+            <div className='homePage_button'>
+                <Link to="/projects"><h1> Clément<br/> Dubois<br/> Scénographe </h1></Link>
+            </div>
          </div>
     )
 }
