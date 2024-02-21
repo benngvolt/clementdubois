@@ -2,7 +2,7 @@ import { useEffect, useContext } from 'react';
 import { ProjectsContext } from '../../utils/ProjectsContext'
 import './About.scss'
 import lignes from '../../datas/lignes.json';
-
+import profileImage from '../../assets/clément-dubois-portrait.jpg'
 
 function About() {
 
@@ -15,7 +15,7 @@ function About() {
     return  (      
         <section className='about'>
             <h2 className='about_title'>Clément Dubois</h2>
-            <img className='about_img' src='./assets/clément-dubois-portrait.jpg' alt='Clément Dubois'/>
+            <img className='about_img' src={profileImage} alt='Clément Dubois'/>
             <div className='about_introductionContainer'>
                 <p> Clément Dubois, scénographe, allie sa riche expérience de comédien et de technicien à sa formation en design. Chaque création, fruit d'une analyse approfondie, fusionne l'esthétique et la fonctionnalité pour susciter l’imaginaire des spectateurs et faciliter le travail des acteurs. Ses décors deviennent des acteurs à part entière, invitant à explorer des univers visuels singuliers, méticuleusement adaptés à chaque récit avec une dramaturgie spécifique.
                     Sa méthodologie de travail encourage la collaboration et l'expression pour tous les contributeurs impliqués dans la conception. Il crée des espaces où la scénographie se transforme en un véritable terrain de jeu artistique, un espace où l'art et la technique se rencontrent, tout en demeurant accessible à tous.
