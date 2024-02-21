@@ -2,7 +2,7 @@ import './DNDSortableSingleItem.scss'
 import {useSortable} from '@dnd-kit/sortable'
 import {CSS} from '@dnd-kit/utilities'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faTrashCan, faCertificate, faCircle} from '@fortawesome/free-solid-svg-icons'
+import {faTrashCan, faCertificate, faCircle, faBolt} from '@fortawesome/free-solid-svg-icons'
 
 export const DNDSortableSingleItem = (props) => {
   const sortable = useSortable({id: props.itemId});
@@ -53,6 +53,12 @@ console.log (props);
           <button type='button' aria-label="Définir cette image comme image principale de la série" className='dndItem_buttons_isMainButton'
             onMouseDown={() => { handleMainImage(props.index); }} >
             <FontAwesomeIcon icon={props.index === props.mainImageIndex ? faCertificate : faCircle} className={props.index === props.mainImageIndex ? 'dndItem_buttons_isMainButton--isOrange' : 'dndItem_buttons_isMainButton--isWhite'} />
+          </button>
+          <button type='button' aria-label="Définir cette image comme image random de la landing-page" className='dndItem_buttons_isRandomButton'
+            onMouseDown={() => console.log("coucou")} >
+            <FontAwesomeIcon icon={faBolt} 
+            // className={props.index === props.mainImageIndex ? 'dndItem_buttons_isMainButton--isOrange' : 'dndItem_buttons_isMainButton--isWhite'} 
+            />
           </button>
       </div>
     </div>
