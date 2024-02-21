@@ -6,12 +6,6 @@ import profileImage from '../../assets/clément-dubois-portrait.jpg'
 
 function About() {
 
-    const { projects, closeHeader } = useContext(ProjectsContext);
-    
-    console.log(lignes);
-  
-
-
     return  (      
         <section className='about'>
             <h2 className='about_title'>Clément Dubois</h2>
