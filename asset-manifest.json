@@ -1,21 +1,20 @@
 {
   "files": {
-    "main.css": "/clementdubois/static/css/main.701c34b3.css",
-    "main.js": "/clementdubois/static/js/main.ea2de2f2.js",
+    "main.css": "/clementdubois/static/css/main.967b35bc.css",
+    "main.js": "/clementdubois/static/js/main.ebbb27cd.js",
     "static/js/787.9e9f4ffd.chunk.js": "/clementdubois/static/js/787.9e9f4ffd.chunk.js",
-    "static/media/homeImage3.jpg": "/clementdubois/static/media/homeImage3.d3abcc1007054cf799e4.jpg",
     "static/media/ProximaNova-LightIt.ttf": "/clementdubois/static/media/ProximaNova-LightIt.5a76d7bf8d6b966c72a6.ttf",
     "static/media/ProximaNova-Light.ttf": "/clementdubois/static/media/ProximaNova-Light.4e6430d1b1cdd53aab1d.ttf",
     "static/media/ProximaNova-Bold.ttf": "/clementdubois/static/media/ProximaNova-Bold.f3c7fec78a9f7f598801.ttf",
     "static/media/Mermaid1001.ttf": "/clementdubois/static/media/Mermaid1001.fb304cfb22003d6c591e.ttf",
     "static/media/clément-dubois-portrait.jpg": "/clementdubois/static/media/clément-dubois-portrait.aa823948b8f444a245d4.jpg",
     "index.html": "/clementdubois/index.html",
-    "main.701c34b3.css.map": "/clementdubois/static/css/main.701c34b3.css.map",
-    "main.ea2de2f2.js.map": "/clementdubois/static/js/main.ea2de2f2.js.map",
+    "main.967b35bc.css.map": "/clementdubois/static/css/main.967b35bc.css.map",
+    "main.ebbb27cd.js.map": "/clementdubois/static/js/main.ebbb27cd.js.map",
     "787.9e9f4ffd.chunk.js.map": "/clementdubois/static/js/787.9e9f4ffd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.701c34b3.css",
-    "static/js/main.ea2de2f2.js"
+    "static/css/main.967b35bc.css",
+    "static/js/main.ebbb27cd.js"
   ]
 }
