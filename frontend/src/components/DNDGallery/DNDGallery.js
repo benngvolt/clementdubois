@@ -24,8 +24,6 @@ import { DNDSortableSingleItem } from '../DNDSortableSingleItem/DNDSortableSing
 
 function DNDGallery ({ imageFiles, setImageFiles, mainImageIndex, setMainImageIndex, displayClass}) {
 
-  
-
   const [items, setItems] = useState(imageFiles);
   const [activeId, setActiveId] = useState(null);
   const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));

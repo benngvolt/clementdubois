@@ -4,6 +4,8 @@ import ConfirmBox from '../../components/ConfirmBox/ConfirmBox'
 import { API_URL } from '../../utils/constants'
 import React, { useState, useContext } from 'react'
 import { ProjectsContext } from '../../utils/ProjectsContext'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faBolt} from '@fortawesome/free-solid-svg-icons'
 
 function Edit() {
 
@@ -23,7 +25,7 @@ function Edit() {
     const [mainImageIndex, setMainImageIndex]= useState(0);
     const [mainMoImageIndex, setMainMoImageIndex]= useState(0);
 
-    const { projects, handleLoadProjects } = useContext(ProjectsContext);
+    const { projects, handleLoadProjects, randomImagesSelection } = useContext(ProjectsContext);
 
     function addProject() {
         resetFields();
@@ -136,6 +138,23 @@ function Edit() {
                     handleDisplayProjectForm={handleDisplayProjectForm}
                     handleLoadProjects={handleLoadProjects}
                     />
+            </div>
+            <div className='edit_randomImages'>
+                <p className='edit_randomImages_title'>IMAGES LANDING PAGE</p>
+                <div className='edit_randomImages_list'>
+                    {randomImagesSelection.map((imageUrl) => (
+                    <div className='edit_randomImages_list_item'>
+                        <img className='edit_randomImages_list_item_img' src={imageUrl} alt='Clément Dubois'/>
+                        {/* <button type='button' aria-label="Définir cette image comme image random de la landing-page" className='edit_randomImages_list_item_inRandomSelectionButton'
+                            onMouseDown={() => console.log('hola')} >
+                            <FontAwesomeIcon icon={faBolt} 
+                            className = 'edit_randomImages_list_item'
+                            // className={props.item.inRandomSelection === true ? 'dndItem_buttons_inRandomSelectionButton--isOrange' : 'dndItem_buttons_inRandomSelectionButton--isWhite'} 
+                            />
+                        </button> */}
+                    </div>
+                    ))}
+                </div>
             </div>
         </aside>
     )

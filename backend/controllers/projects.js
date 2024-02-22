@@ -209,6 +209,7 @@ exports.updateOneProject = async (req, res, next) => {
     async function processAndSortImages(existingImagesObjects, newImagesObjects) {
       const allImages = existingImagesObjects.map((image, index) => ({
         imageUrl: image.imageUrl,
+        inRandomSelection: image.inRandomSelection,
         index,
       })).concat(newImagesObjects);
       allImages.sort((a, b) => a.index - b.index);

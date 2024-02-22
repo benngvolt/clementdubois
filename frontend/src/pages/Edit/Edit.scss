@@ -74,4 +74,30 @@
         } 
     }
 
+    &_randomImages {
+        display: flex;
+        flex-direction: column;
+
+        &_title {
+            margin: 54px auto;
+        }
+
+        &_list {
+
+            width: 50%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-gap: 25px;
+
+            &_item {
+                img {
+                    width: 200px;
+                }
+            }
+        }
+
+        
+    }
+
 }

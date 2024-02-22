@@ -148,6 +148,9 @@ function ProjectForm({
     function displaySample() {
         const image = inputProjectImageFileRef.current.files[0];
         if (image) {
+            if (!image.inRandomSelection) {
+                image.inRandomSelection = true
+            }
             setNewImage (image);
             const id = uuidv4(); // Générez un identifiant unique
             image._id = id;
@@ -162,6 +165,7 @@ function ProjectForm({
 
     function displayMoSample() {
         const image = inputProjectMoImageFileRef.current.files[0];
+
         if (image) {
             setNewMoImage (image);
             const id = uuidv4(); // Générez un identifiant unique

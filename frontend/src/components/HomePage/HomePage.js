@@ -3,12 +3,15 @@ import Loader from '../Loader/Loader'
 import { ProjectsContext } from '../../utils/ProjectsContext';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import homeImage from '../../assets/homeImage3.jpg'
     
-function HomePage({ setDisplayHomePage}) {
+function HomePage() {
 
-    const { loaderDisplay } = useContext(ProjectsContext);
-    
+    const { loaderDisplay, randomImagesSelection } = useContext(ProjectsContext);
+    const randomIndex = Math.floor(Math.random() * randomImagesSelection.length)
+    const homeImage = randomImagesSelection[randomIndex];
+    console.log (homeImage);
+
+
     return (
         <div className='homePage'>
             <div className={loaderDisplay===true?'homePage_loader--displayOn':'homePage_loader--displayOff'}>

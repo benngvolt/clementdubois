@@ -30,6 +30,14 @@ async function handleMainImage(index) {
     }
 }
 
+async function handleRandomImageSelection() {
+  if (props.item.inRandomSelection === false) {
+      props.item.inRandomSelection = true
+  } else {
+      props.item.inRandomSelection = false
+  }
+}
+
 console.log (props);
 
   return (
@@ -45,19 +53,19 @@ console.log (props);
           <button type='button' aria-label="Supprimer l'image" className='dndItem_buttons_supprButton'
             onMouseDown={() => {
               props.openConfirmBox(props.index);
-          }}
-          draggable="false"
-          >
+            }}
+            draggable="false"
+            >
             <FontAwesomeIcon icon={faTrashCan} />
           </button>
           <button type='button' aria-label="Définir cette image comme image principale de la série" className='dndItem_buttons_isMainButton'
-            onMouseDown={() => { handleMainImage(props.index); }} >
+            onMouseDown={() => { handleMainImage(props.index)}} >
             <FontAwesomeIcon icon={props.index === props.mainImageIndex ? faCertificate : faCircle} className={props.index === props.mainImageIndex ? 'dndItem_buttons_isMainButton--isOrange' : 'dndItem_buttons_isMainButton--isWhite'} />
           </button>
-          <button type='button' aria-label="Définir cette image comme image random de la landing-page" className='dndItem_buttons_isRandomButton'
-            onMouseDown={() => console.log("coucou")} >
+          <button type='button' aria-label="Définir cette image comme image random de la landing-page" className='dndItem_buttons_inRandomSelectionButton'
+            onMouseDown={() => handleRandomImageSelection()} >
             <FontAwesomeIcon icon={faBolt} 
-            // className={props.index === props.mainImageIndex ? 'dndItem_buttons_isMainButton--isOrange' : 'dndItem_buttons_isMainButton--isWhite'} 
+            className={props.item.inRandomSelection === true ? 'dndItem_buttons_inRandomSelectionButton--isOrange' : 'dndItem_buttons_inRandomSelectionButton--isWhite'} 
             />
           </button>
       </div>

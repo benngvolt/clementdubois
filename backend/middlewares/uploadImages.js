@@ -59,11 +59,13 @@ function uploadImages(req, res, next) {
           if (fileIndexes) {
             newImagesObjects.push({
               imageUrl: publicUrl,
+              inRandomSelection: file.inRandomSelection,
               index: JSON.parse(fileIndexes[index])
             });
           } else {
             newImagesObjects.push({
               imageUrl: publicUrl,
+              inRandomSelection: file.inRandomSelection,
             });
           }
 
