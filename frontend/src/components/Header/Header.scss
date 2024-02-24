@@ -5,13 +5,17 @@
    
     margin-bottom: 54px 0 25px 0;
     // margin-top: 25px;
-    border-bottom: 1px solid $colorDarkGrey;
-    border-top: 1px solid $colorDarkGrey;
-    background-color: $colorLightGrey;
+    // border-bottom: 1px solid $colorDarkGrey;
+    // border-top: 1px solid $colorDarkGrey;
+    background-color: $colorFirst;
     position: -webkit-sticky; /* Pour la prise en charge de WebKit (Safari, Chrome) */
     position: sticky;
     top: 0px;
     z-index: 3;
+
+    &--displayOff {
+        display: none;
+    }
 
     &--open {
         animation: openHeader 0.5s ease forwards;
@@ -75,7 +79,8 @@
 
                 p:hover {
                     cursor: pointer;
-                    color: $colorFirst;
+                    // color: $colorLightGrey;
+                    text-decoration: underline;
                 }
 
                 h2, p {
@@ -94,13 +99,26 @@
         &_socials {
             display: flex;
             flex-direction: row;
-            column-gap: 54px;
+            column-gap: 46px;
             margin: auto 54px auto 0px;
+            box-sizing: border-box;
 
             a svg {
                 color: $colorDarkGrey;
                 height: 30px;
+                width: 30px;
                 margin: auto;
+                padding: 6px;
+                box-sizing: border-box;
+                border-radius: 30px;
+
+                &:hover {
+                    color: $colorFirst;
+                    background-color: $colorDarkGrey;
+                    
+                    
+                    
+                }
             }
         }
     }

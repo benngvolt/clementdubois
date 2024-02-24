@@ -29,14 +29,11 @@ exports.createProject = async (req, res) => {
   const projectData = req.body;
   const images = req.newImagesObjects;
   const moImages = req.newMoImagesObjects;
-  
   const artistsList = JSON.parse(req.body.artistsList);
   const productionList = JSON.parse(req.body.productionList);
   const pressList = JSON.parse(req.body.press);
   const linksList = JSON.parse(req.body.links);
   const diffusionList = JSON.parse(req.body.diffusionList);
-
-  
   const aboutShowWithBr = req.body.aboutShow.replace(/(\r\n|\n|\r)/g, "<br>");
   const aboutScenoWithBr = req.body.aboutSceno.replace(/(\r\n|\n|\r)/g, "<br>");
 
@@ -64,7 +61,6 @@ exports.createProject = async (req, res) => {
       });
 
       await project.save();
-      console.log(project);
       res.status(201).json({ message: 'Projet enregistrée !' });
     // }
   } catch (error) {

@@ -30,7 +30,7 @@
 ----------------*/
 
 @mixin Button {
-    // margin: auto;
+    margin: auto;
     font-family:'SpecialFont';
     color: $colorDarkGrey;
     font-size: 25px;
@@ -45,15 +45,31 @@
     }
 }
 
+@mixin AddFieldButton {
+    margin: auto;
+    font-family:'SpecialFont';
+    color: $colorLightGrey;
+    font-size: 25px;
+    padding: 10px;
+    border: none;
+    background-color: $colorDarkGrey;
+    // border-radius: 50rem;
+    &:hover {
+        color: $colorLightGrey;
+        background-color: $colorDarkGrey;
+        cursor: pointer;
+    }
+}
+
 
 @mixin ButtonSelected {
     // margin: auto;
     font-family:'SpecialFont';
-    color: $colorDarkGrey;
+    color: $colorLightGrey;
     font-size: 25px;
     padding: 10px;
     border: none;
-    background-color: $colorThird;
+    background-color: $colorDarkGrey;
     // border-radius: 50rem;
     &:hover {
         color: $colorLightGrey;

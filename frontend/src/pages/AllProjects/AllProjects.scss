@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    row-gap: 54px;
+    row-gap: 4px;
 
     &_buttonsContainer {
 
@@ -16,9 +16,11 @@
 
         
         &_button {
+            
 
             &--notSelected {
                 @include Button;
+                margin: 0;
             };
             &--selected {
                 @include ButtonSelected;
@@ -40,6 +42,7 @@
         box-sizing: border-box;
 
         &:hover {
+
             cursor: pointer;
             background-color: $colorFirst;
 
@@ -51,6 +54,7 @@
         &_creationDate {
             padding-left: 54px;
             padding-top: 54px;
+            width: 2%;
         }
 
         
@@ -84,9 +88,9 @@
                 color: $colorDarkGrey;
             }
 
-            &_aboutShow {   
+            &_summary {   
                 font-family: 'MainFont_light';
-                font-size: 19px;
+                font-size: 16px;
                 height: 161px;
                 overflow: scroll;
             }

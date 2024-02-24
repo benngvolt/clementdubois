@@ -79,7 +79,7 @@
 
             input, #inputProjectType {
                 border: none;
-                background-color: $colorThird;
+                background-color: $colorFirst;
                 font-family: 'MainFont_light';
                 font-size: 16px;
                 width: 70%;
@@ -113,7 +113,7 @@
                 
                 input {
                     border: none;
-                    background-color: $colorThird;
+                    background-color: $colorFirst;
                     font-family: 'MainFont_light';
                     font-size: 16px;
                     margin-right: 12px;
@@ -193,7 +193,7 @@
     
             &_textarea {
                 border: none;
-                background-color: $colorThird;
+                background-color: $colorFirst;
                 font-family: 'MainFont_light';
                 font-size: 16px;
                 margin-right: 12px;
@@ -202,7 +202,7 @@
                 width: auto;
                 max-width: 100%;
                 min-width: 100%;
-                height: auto;
+                height: 200px;
                 resize: vertical;
                 line-height: 100%;
             }
@@ -257,7 +257,7 @@
 
             input, &_textarea, select {
                 border: none;
-                background-color: $colorThird;
+                background-color: $colorFirst;
                 font-family: 'MainFont_light';
                 font-size: 16px;
                 margin-right: 6px;
@@ -271,11 +271,12 @@
 
             button {
                 
-                @include Button;
+                @include AddFieldButton;
                 font-family: 'MainFont_light';
                 font-size: 16px;
                 line-height: 50%;
                 height: auto;
+                margin-top: 16px;
             }
 
             &_textarea {

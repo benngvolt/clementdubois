@@ -24,6 +24,7 @@ export const ProjectsProvider = ({ children }) => {
 
     const [projects, setProjects] = useState([]);
     const [displayHeader, setDisplayHeader] = useState(true)
+    const [hideHeader, setHideHeader] = useState(true)
 
     const [randomImagesSelection, setRandomImageSelection] = useState ([]);
     
@@ -70,6 +71,14 @@ export const ProjectsProvider = ({ children }) => {
         setRandomImageSelection(randomImagesUrlArray);
     }, [projects]);
 
+    useEffect(() => {
+        if (location.pathname==='/') {
+            setHideHeader(true);
+        } else {
+            setHideHeader(false);
+        }
+    }, [location.pathname]);
+
     const [loaderDisplay, setLoaderDisplay] = useState(false);
 
     function displayLoader() {
@@ -81,7 +90,7 @@ export const ProjectsProvider = ({ children }) => {
     }
 
     return (
-        <ProjectsContext.Provider value={{ projects, setProjects, handleLoadProjects, loadProjects, loaderDisplay, setLoaderDisplay, displayHeader, closeHeader, openHeader, randomImagesSelection}}>
+        <ProjectsContext.Provider value={{ projects, setProjects, handleLoadProjects, loadProjects, loaderDisplay, setLoaderDisplay, displayHeader, closeHeader, openHeader, randomImagesSelection, hideHeader}}>
             {children}
         </ProjectsContext.Provider>
     )

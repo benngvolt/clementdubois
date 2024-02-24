@@ -44,6 +44,7 @@ function ProjectForm({
     const inputMoreInfosRef = useRef(null);
     const inputAboutShowRef = useRef(null);
     const inputAboutScenoRef = useRef(null);
+    const inputSummaryRef = useRef(null);
     const inputProjectTypeRef = useRef(null);
     const inputProjectImageFileRef = useRef(null);
     const inputProjectMoImageFileRef = useRef(null);
@@ -52,6 +53,7 @@ function ProjectForm({
 
     const cleanedAboutSceno = DOMPurify.sanitize(projectEdit.aboutSceno);
     const cleanedAboutShow = DOMPurify.sanitize(projectEdit.aboutShow);
+    const cleanedSummary = DOMPurify.sanitize(projectEdit.summary);
     
     const [projectTitle, setProjectTitle] = useState(projectFormMode === 'edit' ? projectEdit.title : '');
     const [projectSubtitle, setProjectSubtitle] = useState(projectFormMode === 'edit' ? projectEdit.subtitle : '');
@@ -60,6 +62,7 @@ function ProjectForm({
     const [moreInfos, setMoreInfos] = useState(projectFormMode === 'edit' ? projectEdit.moreInfos : '');
     const [aboutShow, setAboutShow] = useState(projectFormMode === 'edit' ? cleanedAboutShow : '');
     const [aboutSceno, setAboutSceno] = useState(projectFormMode === 'edit' ? cleanedAboutSceno : '');
+    const [summary, setSummary] = useState(projectFormMode === 'edit' ? cleanedSummary : '');
     const [projectType, setProjectType] = useState(projectFormMode === 'edit' ? projectEdit.projectType : '');
 
     const { loaderDisplay, setLoaderDisplay } = useContext(ProjectsContext);
@@ -74,6 +77,7 @@ function ProjectForm({
         setMoreInfos(projectEdit.projectInfos);
         setAboutShow(projectEdit.aboutShow);
         setAboutSceno(projectEdit.aboutSceno);
+        setSummary(projectEdit.summary);
         setProjectType(projectEdit.projectType);
       } else {
         setProjectTitle('');
@@ -83,6 +87,7 @@ function ProjectForm({
         setMoreInfos('');
         setAboutShow('');
         setAboutSceno('');
+        setSummary('');
         setProjectType('');
       }
     }, [projectFormMode, handleDisplayProjectForm]);
@@ -149,7 +154,7 @@ function ProjectForm({
         const image = inputProjectImageFileRef.current.files[0];
         if (image) {
             if (!image.inRandomSelection) {
-                image.inRandomSelection = true
+                image.inRandomSelection = false
             }
             setNewImage (image);
             const id = uuidv4(); // Générez un identifiant unique
@@ -231,6 +236,7 @@ function ProjectForm({
         projectFormData.append('moreInfos', inputMoreInfosRef.current.value);
         projectFormData.append('aboutShow', inputAboutShowRef.current.value);
         projectFormData.append('aboutSceno', inputAboutScenoRef.current.value);
+        projectFormData.append('summary', inputSummaryRef.current.value);
         projectFormData.append('projectType', inputProjectTypeRef.current.value);
         projectFormData.append('mainImageIndex', mainImageIndex);
         projectFormData.append('mainMoImageIndex', mainMoImageIndex);
@@ -424,13 +430,19 @@ function ProjectForm({
                 {/* CHAMPS A PROPOS DU SPECTACLE*/}
                 <div className='projectForm_descriptionsContainer_textField'>
                     <label htmlFor='inputAboutShow'>À PROPOS DU SPECTACLE</label>
-                    <textarea className='projectForm_descriptionsContainer_textField_textarea' type='textarea' id='inputAboutShow' ref={inputAboutShowRef} value={aboutShow.replace(/<br>/g, "\n")} onChange={(e) => setAboutShow(e.target.value)}></textarea>
+                    <textarea className='projectForm_descriptionsContainer_textField_textarea' type='textarea' id='inputAboutShow' ref={inputAboutShowRef} value={aboutShow?.replace(/<br>/g, "\n")} onChange={(e) => setAboutShow(e.target.value)}></textarea>
                 </div>
 
                 {/* CHAMPS A PROPOS DE LA SCENO*/}
                 <div className='projectForm_descriptionsContainer_textField'>
                     <label htmlFor='inputAboutSceno'>À PROPOS DE LA SCÉNOGRAPHIE</label>
-                    <textarea className='projectForm_descriptionsContainer_textField_textarea' type='textarea' id='inputAboutSceno' ref={inputAboutScenoRef} value={aboutSceno.replace(/<br>/g, "\n")} onChange={(e) => setAboutSceno(e.target.value)}></textarea>
+                    <textarea className='projectForm_descriptionsContainer_textField_textarea' type='textarea' id='inputAboutSceno' ref={inputAboutScenoRef} value={aboutSceno?.replace(/<br>/g, "\n")} onChange={(e) => setAboutSceno(e.target.value)}></textarea>
+                </div>
+
+                {/* CHAMPS RESUME*/}
+                <div className='projectForm_descriptionsContainer_textField'>
+                    <label htmlFor='inputSummary'>RÉSUMÉ</label>
+                    <textarea className='projectForm_descriptionsContainer_textField_textarea' type='textarea' id='inputSummary' ref={inputSummaryRef} value={summary?.replace(/<br>/g, "\n")} onChange={(e) => setSummary(e.target.value)}></textarea>
                 </div>
             </div>
 

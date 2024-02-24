@@ -23,23 +23,27 @@
 
         width: 100%;
         height: 100%;
-        filter: brightness(0.5);
+        // filter: brightness(0.5);
         
         // position: fixed;
         object-fit: cover;
         // top: 0;
         // left: 0;    
+
+        &--blackBg {
+            background-color: $colorDarkGrey;
+        }
     }
 
     &_button {
         
         a {
-            padding: 25px;
+            padding: 0 25px;
             width: 500px;
             background-color: $colorFirst;
             border: none;
             font-family: 'SpecialFont';
-            font-size: 35px;
+            text-decoration: none;
             color: $colorDarkGrey;
             top: 80%;
             left: 20%;
@@ -47,10 +51,14 @@
             position: fixed;
             margin: auto;
 
+            h1 {
+                font-size: 35px;
+            }
+
         &:hover {
             cursor: pointer;
             color: $colorLightGrey;
-            background-color: $colorSecond;
+            background-color: $colorDarkGrey;
         }
     }
     }

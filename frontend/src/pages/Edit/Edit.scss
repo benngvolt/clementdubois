@@ -8,11 +8,12 @@
 
     &_list {
 
-        margin: auto;
-        width: auto;
+        margin: 54px auto;
+        padding: 0;
+        width: 80%;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-gap: 25px;
+        // grid-gap: 25px;
         
         &_item {
             display: flex;
@@ -29,6 +30,7 @@
                 font-family: 'SpecialFont';
                 font-size: 25px;
                 color: $colorDarkGrey;
+                margin: 0;
 
             }
 
@@ -36,6 +38,7 @@
                 display: flex;
                 flex-direction: row;
                 column-gap: 16px;
+                margin-bottom: 16px;
                 button {
                     font-family: 'MainFont_light';
                     font-size: 16px;
@@ -52,7 +55,7 @@
     }
 
     &_addButton {
-        margin: 85px auto;
+        margin: 54px auto;
         @include Button;
     }
 
@@ -75,29 +78,32 @@
     }
 
     &_randomImages {
+        
         display: flex;
         flex-direction: column;
+        
 
         &_title {
-            margin: 54px auto;
+            width: 80%;
+            margin: 25px auto;
         }
 
         &_list {
-
-            width: 50%;
-            margin: auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            grid-gap: 25px;
+            width: 80%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 0 auto 54px auto;
+            // grid-template-columns: 1fr 1fr 1fr 1fr;
+            // grid-gap: 25px;
 
             &_item {
                 img {
                     width: 200px;
+                    margin-bottom: 8px;
                 }
             }
-        }
-
-        
+        }  
     }
-
 }

@@ -58,7 +58,9 @@ function AllProjects() {
                     <div className='allProjects_projectCard_infos'>
                         <h3 className='allProjects_projectCard_infos_title'>{project.title}</h3>
                         <p className='allProjects_projectCard_infos_projectInfos'>{project.projectInfos}</p>
-                        <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(project.aboutShow) }} className='allProjects_projectCard_infos_aboutShow'></p>
+                        {project.summary &&
+                            <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(project.summary) }} className='allProjects_projectCard_infos_summary'></p>
+                        }
                     </div>
                     <div className='allProjects_projectCard_imageContainer'>
                         {project.projectImages && project.projectImages.length > 0 &&

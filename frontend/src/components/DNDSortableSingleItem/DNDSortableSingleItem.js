@@ -1,4 +1,5 @@
 import './DNDSortableSingleItem.scss'
+import { useEffect } from 'react'
 import {useSortable} from '@dnd-kit/sortable'
 import {CSS} from '@dnd-kit/utilities'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -38,7 +39,6 @@ async function handleRandomImageSelection() {
   }
 }
 
-console.log (props);
 
   return (
     <div className={props.displayClass==='grid'?`dndItem dndItem_${props.itemsNumber}_item_${props.index}`:'dndRowItem'} ref={setNodeRef}

@@ -13,6 +13,7 @@ function uploadImages(req, res, next) {
   const moFileIndexes = req.body.moFileIndexes;
 
   const files = req.files.images;
+  console.log(files);
   const moFiles = req.files.moImages;
   
   if (!files && !moFiles) {
@@ -23,7 +24,7 @@ function uploadImages(req, res, next) {
 
   // Créez un tableau de promesses pour gérer chaque fichier individuellement
   const uploadPromises = files?.map( (file, index) => {
-
+    
     return new Promise(async(resolve, reject) => {
       try {
         const { originalname, buffer } = file;
@@ -31,7 +32,7 @@ function uploadImages(req, res, next) {
         // Redimensionnez et convertissez l'image avec Sharp
         const resizedImageBuffer = await sharp(buffer)
           .resize({
-            width: 1500,
+            width: 1920,
             fit: 'cover',
             kernel: 'lanczos3',
           })
@@ -59,13 +60,14 @@ function uploadImages(req, res, next) {
           if (fileIndexes) {
             newImagesObjects.push({
               imageUrl: publicUrl,
-              inRandomSelection: file.inRandomSelection,
-              index: JSON.parse(fileIndexes[index])
+              index: JSON.parse(fileIndexes[index]),
+              inRandomSelection: false,
             });
+            console.log()
           } else {
             newImagesObjects.push({
               imageUrl: publicUrl,
-              inRandomSelection: file.inRandomSelection,
+              inRandomSelection: false,
             });
           }
 
@@ -92,7 +94,7 @@ function uploadImages(req, res, next) {
         // Redimensionnez et convertissez l'image avec Sharp
         const resizedImageBuffer = await sharp(buffer)
           .resize({
-            width: 1500,
+            width: 1920,
             fit: 'cover',
             kernel: 'lanczos3',
           })

@@ -24,10 +24,10 @@ import {
  
 function Header() {
     const [displayContactModal, setdisplayContactModal]= useState(false);
-    const { displayHeader, openHeader, closeHeader } = useContext(ProjectsContext);
+    const { displayHeader, openHeader, closeHeader, hideHeader } = useContext(ProjectsContext);
 
     return  (
-        <header className={displayHeader===true ? 'header header--open':' header header--close'}>
+        <header className={hideHeader===true?'header header--displayOff' : (displayHeader===true ? 'header header--open':' header header--close')}>
             <div className={displayHeader===true ? 'header_hamburger header_hamburger--displayOff':'header_hamburger header_hamburger--displayOn'} onMouseOver={()=>openHeader()} >
                 <FontAwesomeIcon icon={faBars} className='header_hamburger_icon'/>
             </div>

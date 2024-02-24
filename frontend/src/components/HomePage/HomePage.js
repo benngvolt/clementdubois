@@ -17,7 +17,12 @@ function HomePage() {
             <div className={loaderDisplay===true?'homePage_loader--displayOn':'homePage_loader--displayOff'}>
                 <Loader/>
             </div>
-            <img className='homePage_image'src={homeImage} alt="Project" />
+            {homeImage && 
+                <img className='homePage_image'src={homeImage} alt="Project" />
+            }
+            {!homeImage && 
+                <div className='homePage_image homePage_image--blackBg'></div>
+            }
             <div className='homePage_button'>
                 <Link to="/projects"><h1> Clément<br/> Dubois<br/> Scénographe </h1></Link>
             </div>
