@@ -78,6 +78,10 @@
     }
 }
 
+@mixin mainGalleryRatio1 {
+    width: 100%;
+    aspect-ratio: 2.5/1;
+}
 /*-------------------
 ----- VARIABLES -----
 -------------------*/
@@ -89,6 +93,7 @@ $colorFields: aqua;
 $colorFirst: rgb(238, 255, 0);
 $colorSecond: rgb(65, 65, 65);
 $colorThird: rgb(131, 109, 255);
+
 
 /*-------------------
 ----- KEYFRAMES -----

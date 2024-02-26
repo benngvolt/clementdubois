@@ -2,6 +2,7 @@
 
 .dndItem {
     position: relative;
+    
     &_15 {
         &_item_0 {
             height: 400px;
@@ -973,11 +974,10 @@
 }
 
 .dndRowItem { 
-    height: 300px;
-    aspect-ratio: 1/1.5;
+    height: 200px;
+    aspect-ratio: 1/1;
     position: relative;
     &_image {
-
         height: 100%;
         width: 100%;
         object-fit: cover ;

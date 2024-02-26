@@ -23,7 +23,7 @@ export const DNDSortableSingleItem = (props) => {
 ----- CHOISIR LA PHOTO PRINCIPALE DE LA SÉRIE -----
 -------------------------------------------------*/
 
-async function handleMainImage(index) {
+function handleMainImage(index) {
     if (index >= 0 && index <= props.imageFiles.length -1) {
       props.setMainImageIndex(index)
     } else {
@@ -31,7 +31,7 @@ async function handleMainImage(index) {
     }
 }
 
-async function handleRandomImageSelection() {
+function handleRandomImageSelection() {
   if (props.item.inRandomSelection === false) {
       props.item.inRandomSelection = true
   } else {
@@ -58,16 +58,20 @@ async function handleRandomImageSelection() {
             >
             <FontAwesomeIcon icon={faTrashCan} />
           </button>
+          { props.displayClass==='grid' &&
           <button type='button' aria-label="Définir cette image comme image principale de la série" className='dndItem_buttons_isMainButton'
             onMouseDown={() => { handleMainImage(props.index)}} >
             <FontAwesomeIcon icon={props.index === props.mainImageIndex ? faCertificate : faCircle} className={props.index === props.mainImageIndex ? 'dndItem_buttons_isMainButton--isOrange' : 'dndItem_buttons_isMainButton--isWhite'} />
           </button>
+          }
+          { props.displayClass==='grid' &&
           <button type='button' aria-label="Définir cette image comme image random de la landing-page" className='dndItem_buttons_inRandomSelectionButton'
             onMouseDown={() => handleRandomImageSelection()} >
             <FontAwesomeIcon icon={faBolt} 
             className={props.item.inRandomSelection === true ? 'dndItem_buttons_inRandomSelectionButton--isOrange' : 'dndItem_buttons_inRandomSelectionButton--isWhite'} 
             />
           </button>
+          }
       </div>
     </div>
   );

@@ -413,17 +413,19 @@ function ProjectForm({
                 <div className='projectForm_imagesFieldsContainer_makingOfImagesContainer'>
                     <p>IMAGES DU WORK-IN-PROCESS</p>
                     <DNDGallery imageFiles={moImageFiles} setImageFiles={setMoImageFiles} mainImageIndex={mainMoImageIndex} setMainImageIndex={setMainMoImageIndex} displayClass={'row'} /> 
-                    <div className='projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField'>
-                        <label htmlFor='inputProjectMoImageFile'>{isMoImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
-                        <input type='file' id='inputProjectMoImageFile' name="moImages" ref={inputProjectMoImageFileRef} onChange={displayMoSample} style={{ display: 'none' }}></input>
-                        <div  className="projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer">
-                            <img id='moImageSample' ref={projectMainMoImageSampleRef} src='' alt=''/>
-                            <div className={isMoImageLoaded ? "projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer_buttonsSystem--displayOff"}>
-                                <button aria-label="Ajouter l'image" onClick={handleAddMoImageFile} type="button">AJOUTER</button>
-                                <button aria-label="Annuler" onClick={cancelAddMoImageFile} type="button">ANNULER</button>
+                    {moImageFiles.length < 10 &&
+                        <div className='projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField'>
+                            <label htmlFor='inputProjectMoImageFile'>{isMoImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
+                            <input type='file' id='inputProjectMoImageFile' name="moImages" ref={inputProjectMoImageFileRef} onChange={displayMoSample} style={{ display: 'none' }}></input>
+                            <div  className="projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer">
+                                <img id='moImageSample' ref={projectMainMoImageSampleRef} src='' alt=''/>
+                                <div className={isMoImageLoaded ? "projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer_buttonsSystem--displayOff"}>
+                                    <button aria-label="Ajouter l'image" onClick={handleAddMoImageFile} type="button">AJOUTER</button>
+                                    <button aria-label="Annuler" onClick={cancelAddMoImageFile} type="button">ANNULER</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 </div>
             </div>
 

@@ -108,7 +108,46 @@ function OneProject() {
                     {project.projectImages.slice(1, 4).map((image, index) => (
                         <img className={`oneProject_secondImageContainer_${project.projectImages.length}_img_${index}`} key={index} src={image.imageUrl} alt="Project" />
                 ))}
-                </div>}
+                </div>
+            }
+            
+            {project.press && project.press.length > 0 && 
+            <div className='oneProject_pressBlocks'>
+                <ul className='oneProject_pressBlocks_container'>
+                {project.press.map((press)=>(
+                    <li className='oneProject_pressBlocks_container_item'>
+                        <h5>{press.mediaName}</h5>
+                        <p>{press.quote}</p>
+                        <a href={press.mediaLink} target='_blank' rel='noreferrer'>lien vers l'article</a>
+                    </li>
+                ))}
+                </ul>
+            </div>
+            }
+
+            {project.projectImages?.length > 4 && project.projectImages?.length <= 15 &&
+            <div className={`oneProject_thirdImageContainer oneProject_thirdImageContainer_${project.projectImages.length}`}> 
+                {project.projectImages.slice(4, 15).map((image, index) => (
+                    <img className={`oneProject_thirdImageContainer_${project.projectImages.length}_img_${index}`} key={index} src={image.imageUrl} alt="Project" />
+                ))}
+            </div>}
+
+            {project.makingOfImages && project.makingOfImages.length > 0 &&
+            <div className='oneProject_makingOfImageContainer'> 
+                <button type='button' className='oneProject_makingOfImageContainer_collapseButton' onClick={() => handleCollapseState()} ><p>Making of</p><FontAwesomeIcon icon={faChevronDown} className={isCollapseOpened===false?'oneProject_makingOfImageContainer_collapseButton_icon--closed':'oneProject_makingOfImageContainer_collapseButton_icon--opened'}/></button>
+                <div className={isCollapseOpened===false?'oneProject_makingOfImageContainer_carrousel oneProject_makingOfImageContainer_carrousel--closed':'oneProject_makingOfImageContainer_carrousel oneProject_makingOfImageContainer_carrousel--opened'}>
+                    {project.makingOfImages.map((image, index) => (
+                        <img key={index} src={image.imageUrl} alt="Project" onClick={()=>{ 
+                            setImageFocusUrl(image.imageUrl);
+                            setDisplayImageFocus(true);
+                        }}/>
+                    ))}
+                </div>
+                <div className={displayImageFocus===true?'oneProject_makingOfImageContainer_imageFocusContainer--displayOn':'oneProject_makingOfImageContainer_imageFocusContainer--displayOff'}>
+                    <ImageFocus imageFocusUrl={imageFocusUrl} setImageFocusUrl={setImageFocusUrl} imagesArray={project.makingOfImages} setDisplayImageFocus={setDisplayImageFocus}/>
+                </div>
+            </div>
+            }
 
             {project.productionList && project.productionList.length > 0 &&    
             <div className='oneProject_productionBlocks'>
@@ -127,44 +166,6 @@ function OneProject() {
                             </ul>
                         </div>
                     ))}
-                </div>
-            </div>
-            }
-
-            {project.projectImages?.length > 4 && project.projectImages?.length <= 15 &&
-            <div className={`oneProject_thirdImageContainer oneProject_thirdImageContainer_${project.projectImages.length}`}> 
-                {project.projectImages.slice(4, 15).map((image, index) => (
-                    <img className={`oneProject_thirdImageContainer_${project.projectImages.length}_img_${index}`} key={index} src={image.imageUrl} alt="Project" />
-                ))}
-            </div>}
-
-            {project.press && project.press.length > 0 && 
-            <div className='oneProject_pressBlocks'>
-                <ul className='oneProject_pressBlocks_container'>
-                {project.press.map((press)=>(
-                    <li className='oneProject_pressBlocks_container_item'>
-                        <h5>{press.mediaName}</h5>
-                        <p>{press.quote}</p>
-                        <a href={press.mediaLink} target='_blank' rel='noreferrer'>lien vers l'article</a>
-                    </li>
-                ))}
-                </ul>
-            </div>
-            }
-
-            {project.makingOfImages && project.makingOfImages.length > 0 &&
-            <div className='oneProject_makingOfImageContainer'> 
-                <button type='button' className='oneProject_makingOfImageContainer_collapseButton' onClick={() => handleCollapseState()} ><p>Making of</p><FontAwesomeIcon icon={faChevronDown} className={isCollapseOpened===false?'oneProject_makingOfImageContainer_collapseButton_icon--closed':'oneProject_makingOfImageContainer_collapseButton_icon--opened'}/></button>
-                <div className={isCollapseOpened===false?'oneProject_makingOfImageContainer_carrousel oneProject_makingOfImageContainer_carrousel--closed':'oneProject_makingOfImageContainer_carrousel oneProject_makingOfImageContainer_carrousel--opened'}>
-                    {project.makingOfImages.map((image, index) => (
-                        <img key={index} src={image.imageUrl} alt="Project" onClick={()=>{ 
-                            setImageFocusUrl(image.imageUrl);
-                            setDisplayImageFocus(true);
-                        }}/>
-                    ))}
-                </div>
-                <div className={displayImageFocus===true?'oneProject_makingOfImageContainer_imageFocusContainer--displayOn':'oneProject_makingOfImageContainer_imageFocusContainer--displayOff'}>
-                    <ImageFocus imageFocusUrl={imageFocusUrl} setImageFocusUrl={setImageFocusUrl} imagesArray={project.makingOfImages} setDisplayImageFocus={setDisplayImageFocus}/>
                 </div>
             </div>
             }
