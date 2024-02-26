@@ -131,10 +131,10 @@ function OneProject() {
             </div>
             }
 
-            {project.projectImages?.length > 4 && 
-            <div className='oneProject_thirdImageContainer'> 
-                {project.projectImages.slice(4, 6).map((image, index) => (
-                    <img className={`oneProject_thirdImageContainer_img_${index}`} key={index} src={image.imageUrl} alt="Project" />
+            {project.projectImages?.length > 4 && project.projectImages?.length <= 15 &&
+            <div className={`oneProject_thirdImageContainer oneProject_thirdImageContainer_${project.projectImages.length}`}> 
+                {project.projectImages.slice(4, 15).map((image, index) => (
+                    <img className={`oneProject_thirdImageContainer_${project.projectImages.length}_img_${index}`} key={index} src={image.imageUrl} alt="Project" />
                 ))}
             </div>}
 

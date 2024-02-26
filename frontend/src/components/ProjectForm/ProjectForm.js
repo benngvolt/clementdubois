@@ -396,17 +396,19 @@ function ProjectForm({
                 <div className='projectForm_imagesFieldsContainer_projectImagesContainer'>
                     <p>IMAGES DU PROJET</p>
                     <DNDGallery imageFiles={imageFiles} setImageFiles={setImageFiles} mainImageIndex={mainImageIndex} setMainImageIndex={setMainImageIndex} displayClass={'grid'} />
-                    <div className='projectForm_imagesFieldsContainer_projectImagesContainer_imageField'>
-                        <label htmlFor='inputProjectImageFile'>{isImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
-                        <input type='file' id='inputProjectImageFile' name="images" ref={inputProjectImageFileRef} onChange={displaySample} style={{ display: 'none' }}></input>
-                        <div  className="projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer">
-                            <img id='imageSample' ref={projectMainImageSampleRef} src='' alt=''/>
-                            <div className={isImageLoaded ? "projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOff"}>
-                                <button aria-label="Ajouter l'image" onClick={handleAddImageFile} type="button">AJOUTER</button>
-                                <button aria-label="Annuler" onClick={cancelAddImageFile} type="button">ANNULER</button>
+                    {imageFiles.length < 15 &&
+                        <div className='projectForm_imagesFieldsContainer_projectImagesContainer_imageField'>
+                            <label htmlFor='inputProjectImageFile'>{isImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
+                            <input type='file' id='inputProjectImageFile' name="images" ref={inputProjectImageFileRef} onChange={displaySample} style={{ display: 'none' }}></input>
+                            <div  className="projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer">
+                                <img id='imageSample' ref={projectMainImageSampleRef} src='' alt=''/>
+                                <div className={isImageLoaded ? "projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOff"}>
+                                    <button aria-label="Ajouter l'image" onClick={handleAddImageFile} type="button">AJOUTER</button>
+                                    <button aria-label="Annuler" onClick={cancelAddImageFile} type="button">ANNULER</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 </div>
                 <div className='projectForm_imagesFieldsContainer_makingOfImagesContainer'>
                     <p>IMAGES DU WORK-IN-PROCESS</p>
