@@ -6,17 +6,15 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import DOMPurify from 'dompurify';
 import { ProjectsContext } from '../../utils/ProjectsContext';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    faChevronDown
-} from '@fortawesome/free-solid-svg-icons'
+import Collapse from '../../components/Collapse/Collapse';
+
 import ImageFocus from '../../components/ImageFocus/ImageFocus';
  
 function OneProject() {
 
     const { id } = useParams();
     const [project, setProject] = useState([]);
-    const [isCollapseOpened, setIsCollapseOpened] = useState(false);
+    
     const [imageFocusUrl, setImageFocusUrl]=useState('');
     const [displayImageFocus, setDisplayImageFocus]= useState(false);
     const cleanedAboutShow = DOMPurify.sanitize(project.aboutShow);
@@ -33,13 +31,7 @@ function OneProject() {
             .catch((error) => console.log(error.message));
     }, [id]);
 
-    function handleCollapseState() {
-        if (isCollapseOpened === true) {
-            setIsCollapseOpened(false)
-        } else {
-            setIsCollapseOpened(true)
-        }
-    }
+    
 
     const prodTypeArray = Array.from(new Set(project.productionList?.map(prod => prod.prodType) || []));
 
@@ -133,54 +125,56 @@ function OneProject() {
             </div>}
 
             {project.makingOfImages && project.makingOfImages.length > 0 &&
-            <div className='oneProject_makingOfImageContainer'> 
-                <button type='button' className='oneProject_makingOfImageContainer_collapseButton' onClick={() => handleCollapseState()} ><p>Making of</p><FontAwesomeIcon icon={faChevronDown} className={isCollapseOpened===false?'oneProject_makingOfImageContainer_collapseButton_icon--closed':'oneProject_makingOfImageContainer_collapseButton_icon--opened'}/></button>
-                <div className={isCollapseOpened===false?'oneProject_makingOfImageContainer_carrousel oneProject_makingOfImageContainer_carrousel--closed':'oneProject_makingOfImageContainer_carrousel oneProject_makingOfImageContainer_carrousel--opened'}>
-                    {project.makingOfImages.map((image, index) => (
-                        <img key={index} src={image.imageUrl} alt="Project" onClick={()=>{ 
-                            setImageFocusUrl(image.imageUrl);
-                            setDisplayImageFocus(true);
-                        }}/>
-                    ))}
+            
+            <Collapse title="Making Of">
+                <div className="oneProject_makingOfImageContainer_imagesGrid">
+                {project.makingOfImages.map((image, index) => (
+                    <img key={index} src={image.imageUrl} alt="Project" onClick={()=>{ 
+                        setImageFocusUrl(image.imageUrl);
+                        setDisplayImageFocus(true);
+                    }}/>
+                ))}
                 </div>
                 <div className={displayImageFocus===true?'oneProject_makingOfImageContainer_imageFocusContainer--displayOn':'oneProject_makingOfImageContainer_imageFocusContainer--displayOff'}>
                     <ImageFocus imageFocusUrl={imageFocusUrl} setImageFocusUrl={setImageFocusUrl} imagesArray={project.makingOfImages} setDisplayImageFocus={setDisplayImageFocus}/>
                 </div>
-            </div>
+            </Collapse>
             }
 
             {project.productionList && project.productionList.length > 0 &&    
-            <div className='oneProject_productionBlocks'>
-                <h4>Production</h4>
-                <div className='oneProject_productionBlocks_container'>
-                    {prodTypeArray.map((prodType, index) => (
-                        <div key={prodType} className={index % 2 === 0 ? 'oneProject_productionBlocks_container_block oneProject_productionBlocks_container_block--leftText' :'oneProject_productionBlocks_container_block oneProject_productionBlocks_container_block--rightText'} >
-                            <h5>{prodType}</h5>
-                            <ul className='oneProject_productionBlocks_container_block_list'>
-                                {project.productionList?.filter(prodFiltered => prodFiltered.prodType === prodType).map((prod) => (
-                                    <li key={prod.prodName} className='oneProject_productionBlocks_container_block_list_item'>
-                                        <a href={prod.prodLink}>{prod.prodName}</a>
-                                        <span> {prod.prodInfos}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
+            <Collapse title="Production" style='color'>
+                <div className='oneProject_productionBlocks'>
+                    <div className='oneProject_productionBlocks_container'>
+                        {prodTypeArray.map((prodType, index) => (
+                            <div key={prodType} className={index % 2 === 0 ? 'oneProject_productionBlocks_container_block oneProject_productionBlocks_container_block--leftText' :'oneProject_productionBlocks_container_block oneProject_productionBlocks_container_block--rightText'} >
+                                <h5>{prodType}</h5>
+                                <ul className='oneProject_productionBlocks_container_block_list'>
+                                    {project.productionList?.filter(prodFiltered => prodFiltered.prodType === prodType).map((prod) => (
+                                        <li key={prod.prodName} className='oneProject_productionBlocks_container_block_list_item'>
+                                            <a href={prod.prodLink}>{prod.prodName}</a>
+                                            <span> {prod.prodInfos}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
+            </Collapse>
             }
 
             {project.diffusionList && project.diffusionList.length > 0 &&
-            <div className='oneProject_diffBlock'>
-                <h4>Lieux de diffusion</h4>
-                <ul className='oneProject_diffBlock_list'>
-                    {project.diffusionList.map((diff)=>(
-                        <li className='oneProject_diffBlock_list_item'>
-                            <a href={diff.placeLink} target='_blank' rel='noreferrer'>{diff.placeName}</a><span> {diff.city} {diff.dates}</span>
-                        </li>  
-                    ))}
-                </ul>
-            </div>
+            <Collapse title="Lieux de diffusion" style='light'>
+                <div className='oneProject_diffBlock'>
+                    <ul className='oneProject_diffBlock_list'>
+                        {project.diffusionList.map((diff)=>(
+                            <li className='oneProject_diffBlock_list_item'>
+                                <a href={diff.placeLink} target='_blank' rel='noreferrer'>{diff.placeName}</a><span> {diff.city} {diff.dates}</span>
+                            </li>  
+                        ))}
+                    </ul>
+                </div>
+            </Collapse>
             }
 
         </section>

@@ -321,11 +321,11 @@
   flex-direction: column;
 }
 .edit_list {
-  margin: auto;
-  width: auto;
+  margin: 54px auto;
+  padding: 0;
+  width: 80%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 25px;
 }
 .edit_list_item {
   display: flex;
@@ -342,17 +342,19 @@
   font-family: "SpecialFont";
   font-size: 25px;
   color: #0c0c0c;
+  margin: 0;
 }
 .edit_list_item_buttonsBox {
   display: flex;
   flex-direction: row;
   -moz-column-gap: 16px;
        column-gap: 16px;
+  margin-bottom: 16px;
 }
 .edit_list_item_buttonsBox button {
   font-family: "MainFont_light";
   font-size: 16px;
-  background-color: rgb(242, 255, 0);
+  background-color: rgb(238, 255, 0);
   border: none;
 }
 .edit_list_item_buttonsBox button:hover {
@@ -361,13 +363,14 @@
   color: #E9E9E9;
 }
 .edit_addButton {
-  margin: 85px auto;
+  margin: 54px auto;
+  margin: auto;
   font-family: "SpecialFont";
   color: #0c0c0c;
   font-size: 25px;
   padding: 10px;
   border: none;
-  background-color: rgb(242, 255, 0);
+  background-color: rgb(238, 255, 0);
 }
 .edit_addButton:hover {
   color: #E9E9E9;
@@ -387,4 +390,24 @@
 }
 .edit_form--displayOff {
   display: none;
+}
+.edit_randomImages {
+  display: flex;
+  flex-direction: column;
+}
+.edit_randomImages_title {
+  width: 80%;
+  margin: 25px auto;
+}
+.edit_randomImages_list {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0 auto 54px auto;
+}
+.edit_randomImages_list_item img {
+  width: 200px;
+  margin-bottom: 8px;
 }/*# sourceMappingURL=Edit.css.map */

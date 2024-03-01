@@ -318,45 +318,738 @@
 .dndItem {
   position: relative;
 }
+.dndItem_15_item_0 {
+  height: 400px;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 7;
+}
+.dndItem_15_item_1 {
+  height: 300px;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_15_item_2 {
+  height: 300px;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_15_item_3 {
+  height: 100%;
+  grid-column-start: 4;
+  grid-column-end: 7;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+.dndItem_15_item_4 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 7;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+.dndItem_15_item_5 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.dndItem_15_item_6 {
+  height: 400px;
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.dndItem_15_item_7 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_15_item_8 {
+  height: 400px;
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_15_item_9 {
+  height: 400px;
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_15_item_10 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 7;
+  grid-row-end: 8;
+}
+.dndItem_15_item_11 {
+  height: 400px;
+  grid-column-start: 3;
+  grid-column-end: 7;
+  grid-row-start: 7;
+  grid-row-end: 8;
+}
+.dndItem_15_item_12 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 8;
+  grid-row-end: 9;
+}
+.dndItem_15_item_13 {
+  height: 400px;
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 8;
+  grid-row-end: 9;
+}
+.dndItem_15_item_14 {
+  height: 400px;
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 8;
+  grid-row-end: 9;
+}
+.dndItem_14_item_0 {
+  height: 400px;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 7;
+}
+.dndItem_14_item_1 {
+  height: 300px;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_14_item_2 {
+  height: 300px;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_14_item_3 {
+  height: 100%;
+  grid-column-start: 4;
+  grid-column-end: 7;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+.dndItem_14_item_4 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 7;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+.dndItem_14_item_5 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.dndItem_14_item_6 {
+  height: 400px;
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.dndItem_14_item_7 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_14_item_8 {
+  height: 400px;
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_14_item_9 {
+  height: 400px;
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_14_item_10 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 7;
+  grid-row-end: 8;
+}
+.dndItem_14_item_11 {
+  height: 400px;
+  grid-column-start: 3;
+  grid-column-end: 7;
+  grid-row-start: 7;
+  grid-row-end: 8;
+}
+.dndItem_14_item_12 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 8;
+  grid-row-end: 9;
+}
+.dndItem_14_item_13 {
+  height: 400px;
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 8;
+  grid-row-end: 9;
+}
+.dndItem_13_item_0 {
+  height: 400px;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 7;
+}
+.dndItem_13_item_1 {
+  height: 300px;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_13_item_2 {
+  height: 300px;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_13_item_3 {
+  height: 100%;
+  grid-column-start: 4;
+  grid-column-end: 7;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+.dndItem_13_item_4 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 7;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+.dndItem_13_item_5 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.dndItem_13_item_6 {
+  height: 400px;
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.dndItem_13_item_7 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_13_item_8 {
+  height: 400px;
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_13_item_9 {
+  height: 400px;
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_13_item_10 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 7;
+  grid-row-end: 8;
+}
+.dndItem_13_item_11 {
+  height: 400px;
+  grid-column-start: 3;
+  grid-column-end: 7;
+  grid-row-start: 7;
+  grid-row-end: 8;
+}
+.dndItem_13_item_12 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 7;
+  grid-row-start: 8;
+  grid-row-end: 9;
+}
+.dndItem_12_item_0 {
+  height: 400px;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 7;
+}
+.dndItem_12_item_1 {
+  height: 300px;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_12_item_2 {
+  height: 300px;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_12_item_3 {
+  height: 100%;
+  grid-column-start: 4;
+  grid-column-end: 7;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+.dndItem_12_item_4 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 7;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+.dndItem_12_item_5 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.dndItem_12_item_6 {
+  height: 400px;
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.dndItem_12_item_7 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_12_item_8 {
+  height: 400px;
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_12_item_9 {
+  height: 400px;
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_12_item_10 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 7;
+  grid-row-end: 8;
+}
+.dndItem_12_item_11 {
+  height: 400px;
+  grid-column-start: 3;
+  grid-column-end: 7;
+  grid-row-start: 7;
+  grid-row-end: 8;
+}
+.dndItem_11_item_0 {
+  height: 400px;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 7;
+}
+.dndItem_11_item_1 {
+  height: 300px;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_11_item_2 {
+  height: 300px;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_11_item_3 {
+  height: 100%;
+  grid-column-start: 4;
+  grid-column-end: 7;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+.dndItem_11_item_4 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 7;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+.dndItem_11_item_5 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.dndItem_11_item_6 {
+  height: 400px;
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.dndItem_11_item_7 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_11_item_8 {
+  height: 400px;
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_11_item_9 {
+  height: 400px;
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_11_item_10 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 7;
+  grid-row-start: 7;
+  grid-row-end: 8;
+}
+.dndItem_10_item_0 {
+  height: 400px;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 7;
+}
+.dndItem_10_item_1 {
+  height: 300px;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_10_item_2 {
+  height: 300px;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_10_item_3 {
+  height: 100%;
+  grid-column-start: 4;
+  grid-column-end: 7;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+.dndItem_10_item_4 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 7;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+.dndItem_10_item_5 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.dndItem_10_item_6 {
+  height: 400px;
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.dndItem_10_item_7 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_10_item_8 {
+  height: 400px;
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_10_item_9 {
+  height: 400px;
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_9_item_0 {
+  height: 400px;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 7;
+}
+.dndItem_9_item_1 {
+  height: 300px;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_9_item_2 {
+  height: 300px;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_9_item_3 {
+  height: 100%;
+  grid-column-start: 4;
+  grid-column-end: 7;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+.dndItem_9_item_4 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 7;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+.dndItem_9_item_5 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.dndItem_9_item_6 {
+  height: 400px;
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.dndItem_9_item_7 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_9_item_8 {
+  height: 400px;
+  grid-column-start: 3;
+  grid-column-end: 7;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_8_item_0 {
+  height: 400px;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 7;
+}
+.dndItem_8_item_1 {
+  height: 300px;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_8_item_2 {
+  height: 300px;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_8_item_3 {
+  height: 100%;
+  grid-column-start: 4;
+  grid-column-end: 7;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+.dndItem_8_item_4 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 7;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+.dndItem_8_item_5 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.dndItem_8_item_6 {
+  height: 400px;
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.dndItem_8_item_7 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 7;
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+.dndItem_7_item_0 {
+  height: 400px;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 7;
+}
+.dndItem_7_item_1 {
+  height: 300px;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_7_item_2 {
+  height: 300px;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.dndItem_7_item_3 {
+  height: 100%;
+  grid-column-start: 4;
+  grid-column-end: 7;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+.dndItem_7_item_4 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 7;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+.dndItem_7_item_5 {
+  height: 400px;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+.dndItem_7_item_6 {
+  height: 400px;
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
 .dndItem_6_item_0 {
   height: 400px;
   grid-row-start: 1;
   grid-row-end: 2;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 7;
 }
 .dndItem_6_item_1 {
   height: 300px;
   grid-row-start: 2;
   grid-row-end: 3;
   grid-column-start: 1;
-  grid-column-end: 2;
+  grid-column-end: 4;
 }
 .dndItem_6_item_2 {
   height: 300px;
   grid-row-start: 3;
   grid-row-end: 4;
   grid-column-start: 1;
-  grid-column-end: 2;
+  grid-column-end: 4;
 }
 .dndItem_6_item_3 {
   height: 100%;
-  grid-column-start: 2;
-  grid-column-end: 3;
+  grid-column-start: 4;
+  grid-column-end: 7;
   grid-row-start: 2;
   grid-row-end: 4;
 }
 .dndItem_6_item_4 {
   height: 400px;
   grid-column-start: 1;
-  grid-column-end: 2;
+  grid-column-end: 5;
   grid-row-start: 4;
   grid-row-end: 5;
 }
 .dndItem_6_item_5 {
   height: 400px;
-  grid-column-start: 2;
-  grid-column-end: 3;
+  grid-column-start: 5;
+  grid-column-end: 7;
   grid-row-start: 4;
   grid-row-end: 5;
 }
@@ -365,33 +1058,33 @@
   grid-row-start: 1;
   grid-row-end: 2;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 7;
 }
 .dndItem_5_item_1 {
   height: 300px;
   grid-row-start: 2;
   grid-row-end: 3;
   grid-column-start: 1;
-  grid-column-end: 2;
+  grid-column-end: 4;
 }
 .dndItem_5_item_2 {
   height: 300px;
   grid-row-start: 3;
   grid-row-end: 4;
   grid-column-start: 1;
-  grid-column-end: 2;
+  grid-column-end: 4;
 }
 .dndItem_5_item_3 {
   height: 100%;
-  grid-column-start: 2;
-  grid-column-end: 3;
+  grid-column-start: 4;
+  grid-column-end: 7;
   grid-row-start: 2;
   grid-row-end: 4;
 }
 .dndItem_5_item_4 {
   height: 400px;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 7;
   grid-row-start: 4;
   grid-row-end: 5;
 }
@@ -400,58 +1093,58 @@
   grid-row-start: 1;
   grid-row-end: 2;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 7;
 }
 .dndItem_4_item_1 {
   height: 300px;
   grid-row-start: 2;
   grid-row-end: 3;
   grid-column-start: 1;
-  grid-column-end: 2;
+  grid-column-end: 4;
 }
 .dndItem_4_item_2 {
   height: 300px;
   grid-row-start: 3;
   grid-row-end: 4;
   grid-column-start: 1;
-  grid-column-end: 2;
+  grid-column-end: 4;
 }
 .dndItem_4_item_3 {
   height: 100%;
-  grid-column-start: 2;
-  grid-column-end: 3;
+  grid-column-start: 4;
+  grid-column-end: 7;
   grid-row-start: 2;
   grid-row-end: 4;
 }
 .dndItem_3_item_0 {
   height: 400px;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 7;
 }
 .dndItem_3_item_1 {
   height: 300px;
   grid-column-start: 1;
-  grid-column-end: 2;
+  grid-column-end: 4;
 }
 .dndItem_3_item_2 {
   height: 300px;
-  grid-column-start: 2;
-  grid-column-end: 3;
+  grid-column-start: 4;
+  grid-column-end: 7;
 }
 .dndItem_2_item_0 {
   height: 400px;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 7;
 }
 .dndItem_2_item_1 {
   height: 400px;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 7;
 }
 .dndItem_1_item_0 {
   height: 400px;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 7;
 }
 .dndItem_0 {
   display: none;
@@ -474,25 +1167,25 @@
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 10%;
 }
-.dndItem_buttons_supprButton, .dndItem_buttons_isMainButton {
+.dndItem_buttons_supprButton, .dndItem_buttons_isMainButton, .dndItem_buttons_inRandomSelectionButton {
   color: white;
   z-index: 3;
   background: none;
   border: none;
 }
-.dndItem_buttons_supprButton:hover, .dndItem_buttons_isMainButton:hover {
+.dndItem_buttons_supprButton:hover, .dndItem_buttons_isMainButton:hover, .dndItem_buttons_inRandomSelectionButton:hover {
   cursor: pointer;
 }
-.dndItem_buttons_isMainButton--isWhite {
+.dndItem_buttons_isMainButton--isWhite, .dndItem_buttons_inRandomSelectionButton--isWhite {
   color: white;
 }
-.dndItem_buttons_isMainButton--isOrange {
+.dndItem_buttons_isMainButton--isOrange, .dndItem_buttons_inRandomSelectionButton--isOrange {
   color: rgb(131, 109, 255);
 }
 
 .dndRowItem {
-  height: 300px;
-  aspect-ratio: 1/1.5;
+  height: 150px;
+  aspect-ratio: 1/1;
   position: relative;
 }
 .dndRowItem_image {

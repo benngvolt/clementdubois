@@ -400,17 +400,17 @@
 }
 @-webkit-keyframes color {
   100%, 0% {
-    stroke: rgb(242, 255, 0);
+    stroke: rgb(238, 255, 0);
   }
   90% {
-    stroke: rgb(242, 255, 0);
+    stroke: rgb(238, 255, 0);
   }
 }
 @keyframes color {
   100%, 0% {
-    stroke: rgb(242, 255, 0);
+    stroke: rgb(238, 255, 0);
   }
   90% {
-    stroke: rgb(242, 255, 0);
+    stroke: rgb(238, 255, 0);
   }
 }/*# sourceMappingURL=Loader.css.map */

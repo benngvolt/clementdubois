@@ -319,7 +319,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  row-gap: 54px;
+  row-gap: 4px;
 }
 .allProjects_buttonsContainer {
   display: flex;
@@ -329,12 +329,14 @@
   margin: 54px;
 }
 .allProjects_buttonsContainer_button--notSelected {
+  margin: auto;
   font-family: "SpecialFont";
   color: #0c0c0c;
   font-size: 25px;
   padding: 10px;
   border: none;
-  background-color: rgb(242, 255, 0);
+  background-color: rgb(238, 255, 0);
+  margin: 0;
 }
 .allProjects_buttonsContainer_button--notSelected:hover {
   color: #E9E9E9;
@@ -343,11 +345,11 @@
 }
 .allProjects_buttonsContainer_button--selected {
   font-family: "SpecialFont";
-  color: #0c0c0c;
+  color: #E9E9E9;
   font-size: 25px;
   padding: 10px;
   border: none;
-  background-color: rgb(131, 109, 255);
+  background-color: #0c0c0c;
 }
 .allProjects_buttonsContainer_button--selected:hover {
   color: #E9E9E9;
@@ -369,7 +371,7 @@
 }
 .allProjects_projectCard:hover {
   cursor: pointer;
-  background-color: rgb(242, 255, 0);
+  background-color: rgb(238, 255, 0);
 }
 .allProjects_projectCard:hover .allProjects_projectCard_infos {
   -webkit-animation: heightRetract 0.5s ease forwards;
@@ -378,6 +380,7 @@
 .allProjects_projectCard_creationDate {
   padding-left: 54px;
   padding-top: 54px;
+  width: 1%;
 }
 .allProjects_projectCard_infos {
   display: flex;
@@ -405,14 +408,15 @@
   font-size: 19px;
   color: #0c0c0c;
 }
-.allProjects_projectCard_infos_aboutShow {
+.allProjects_projectCard_infos_summary {
   font-family: "MainFont_light";
-  font-size: 19px;
+  font-size: 16px;
   height: 161px;
   overflow: scroll;
 }
 .allProjects_projectCard_imageContainer {
   width: 60%;
+  box-sizing: border-box;
 }
 .allProjects_projectCard_imageContainer img {
   width: 100%;

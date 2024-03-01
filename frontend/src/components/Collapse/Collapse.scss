@@ -1,0 +1,84 @@
+@import '../../utils/mixins';
+
+.collapse {
+
+        &--white {
+            background-color: white;
+        } 
+
+        &--dark {
+            background-color: $colorDarkGrey;
+        } 
+
+        &--light {
+            background-color: $colorLightGrey;
+        } 
+
+        &--color {
+            background-color: $colorFirst;
+        } 
+
+        &_collapseButton {
+            &--white {
+                background-color: white;
+                color: $colorDarkGrey;
+            } 
+    
+            &--dark {
+                background-color: $colorDarkGrey;
+                color: $colorLightGrey;
+            } 
+    
+            &--light {
+                background-color: $colorLightGrey;
+                color: $colorDarkGrey;
+            } 
+    
+            &--color {
+                background-color: $colorFirst;
+                color: $colorDarkGrey;
+            } 
+            
+            width: 100%;
+            border: none;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin: 0 auto;
+            column-gap: 19px;
+            background: $colorDarkGrey;
+            &:hover {
+                cursor: pointer;
+            }
+
+            p {  
+                font-family: 'SpecialFont';
+                font-size: 30px;
+                padding-top: 22px;
+                padding-bottom: 22px;
+            }
+            &_icon--closed {
+                font-size: 19px;
+                margin: auto 0px;
+                animation: closeCollapse 0.5s ease forwards;
+            }
+            &_icon--opened {
+                font-size: 19px;
+                margin: auto 0px;
+                animation: openCollapse 0.5s ease forwards;
+            }
+            
+        }
+
+        &_children {
+        
+            &--opened {
+                animation: openCarrousel 1s ease forwards;
+            }
+            
+            &--closed {
+                animation: closeCarrousel 1s ease forwards;
+            }
+        }
+    
+}

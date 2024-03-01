@@ -333,17 +333,19 @@
 .homePage_image {
   width: 100%;
   height: 100%;
-  filter: brightness(0.5);
   -o-object-fit: cover;
      object-fit: cover;
 }
+.homePage_image--blackBg {
+  background-color: #0c0c0c;
+}
 .homePage_button a {
-  padding: 25px;
+  padding: 0 25px;
   width: 500px;
-  background-color: rgb(242, 255, 0);
+  background-color: rgb(238, 255, 0);
   border: none;
   font-family: "SpecialFont";
-  font-size: 35px;
+  text-decoration: none;
   color: #0c0c0c;
   top: 80%;
   left: 20%;
@@ -351,8 +353,11 @@
   position: fixed;
   margin: auto;
 }
+.homePage_button a h1 {
+  font-size: 35px;
+}
 .homePage_button a:hover {
   cursor: pointer;
   color: #E9E9E9;
-  background-color: rgb(65, 65, 65);
+  background-color: #0c0c0c;
 }/*# sourceMappingURL=HomePage.css.map */

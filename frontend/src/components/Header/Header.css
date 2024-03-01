@@ -317,13 +317,14 @@
 }
 .header {
   margin-bottom: 54px 0 25px 0;
-  border-bottom: 1px solid #0c0c0c;
-  border-top: 1px solid #0c0c0c;
-  background-color: #E9E9E9;
+  background-color: rgb(238, 255, 0);
   position: -webkit-sticky; /* Pour la prise en charge de WebKit (Safari, Chrome) */
   position: sticky;
   top: 0px;
   z-index: 3;
+}
+.header--displayOff {
+  display: none;
 }
 .header--open {
   -webkit-animation: openHeader 0.5s ease forwards;
@@ -385,7 +386,7 @@
 }
 .header_nav_menu_item p:hover {
   cursor: pointer;
-  color: rgb(242, 255, 0);
+  text-decoration: underline;
 }
 .header_nav_menu_item h2, .header_nav_menu_item p {
   display: flex;
@@ -400,14 +401,23 @@
 .header_nav_socials {
   display: flex;
   flex-direction: row;
-  -moz-column-gap: 54px;
-       column-gap: 54px;
+  -moz-column-gap: 46px;
+       column-gap: 46px;
   margin: auto 54px auto 0px;
+  box-sizing: border-box;
 }
 .header_nav_socials a svg {
   color: #0c0c0c;
   height: 30px;
+  width: 30px;
   margin: auto;
+  padding: 6px;
+  box-sizing: border-box;
+  border-radius: 30px;
+}
+.header_nav_socials a svg:hover {
+  color: rgb(238, 255, 0);
+  background-color: #0c0c0c;
 }
 .header_contactModal--open {
   z-index: 1;

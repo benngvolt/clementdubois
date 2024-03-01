@@ -1039,45 +1039,7 @@
     }
 
     &_makingOfImageContainer {
-        background: $colorDarkGrey;
-        
-        &_collapseButton {
-            width: 100%;
-            border: none;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            margin: 0 auto;
-            column-gap: 19px;
-            background: $colorDarkGrey;
-            &:hover {
-                cursor: pointer;
-            }
-
-            p {
-                color: $colorLightGrey;
-                font-family: 'SpecialFont';
-                font-size: 30px;
-                padding-top: 22px;
-                padding-bottom: 22px;
-            }
-            &_icon--closed {
-                font-size: 19px;
-                color: $colorLightGrey;
-                margin: auto 0px;
-                animation: closeCollapse 0.5s ease forwards;
-            }
-            &_icon--opened {
-                font-size: 19px;
-                color: $colorLightGrey;
-                margin: auto 0px;
-                animation: openCollapse 0.5s ease forwards;
-            }
-            
-        }
-
-        &_carrousel {
-
+        &_imagesGrid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
             margin: auto;
@@ -1096,16 +1058,7 @@
                     cursor: pointer;
                 }
             }
-        
-            &--opened {
-                animation: openCarrousel 1s ease forwards;
-            }
-            
-            &--closed {
-                animation: closeCarrousel 1s ease forwards;
-            }
         }
-
         &_imageFocusContainer {
 
             &--displayOn {

@@ -315,58 +315,71 @@
     padding-bottom: 0px;
   }
 }
-.editWorkModal_confirmBox {
-  z-index: 1;
-  position: fixed;
-  align-items: center;
-  justify-content: center;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+.collapse--white {
+  background-color: white;
 }
-.editWorkModal_confirmBox_container {
-  display: flex;
-  flex-direction: column;
-  row-gap: 16px;
-  padding-top: 22px;
-  padding-bottom: 22px;
-  width: 500px;
-  height: auto;
+.collapse--dark {
+  background-color: #0c0c0c;
+}
+.collapse--light {
   background-color: #E9E9E9;
 }
-.editWorkModal_confirmBox_container_question {
-  text-align: center;
-  font-size: 22px;
-  font-family: "SpecialFont";
+.collapse--color {
+  background-color: rgb(238, 255, 0);
 }
-.editWorkModal_confirmBox_container_buttons {
+.collapse_collapseButton {
+  width: 100%;
+  border: none;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: auto;
-  -moz-column-gap: 16px;
-       column-gap: 16px;
+  margin: 0 auto;
+  -moz-column-gap: 19px;
+       column-gap: 19px;
+  background: #0c0c0c;
 }
-.editWorkModal_confirmBox_container_buttons button {
-  margin: auto;
-  font-family: "SpecialFont";
+.collapse_collapseButton--white {
+  background-color: white;
   color: #0c0c0c;
-  font-size: 25px;
-  padding: 10px;
-  border: none;
-  background-color: rgb(238, 255, 0);
-  font-size: 19px;
 }
-.editWorkModal_confirmBox_container_buttons button:hover {
-  color: #E9E9E9;
+.collapse_collapseButton--dark {
   background-color: #0c0c0c;
+  color: #E9E9E9;
+}
+.collapse_collapseButton--light {
+  background-color: #E9E9E9;
+  color: #0c0c0c;
+}
+.collapse_collapseButton--color {
+  background-color: rgb(238, 255, 0);
+  color: #0c0c0c;
+}
+.collapse_collapseButton:hover {
   cursor: pointer;
 }
-.editWorkModal_confirmBox--displayOn {
-  display: flex;
+.collapse_collapseButton p {
+  font-family: "SpecialFont";
+  font-size: 30px;
+  padding-top: 22px;
+  padding-bottom: 22px;
 }
-.editWorkModal_confirmBox--displayOff {
-  display: none;
-}/*# sourceMappingURL=ConfirmBox.css.map */
+.collapse_collapseButton_icon--closed {
+  font-size: 19px;
+  margin: auto 0px;
+  -webkit-animation: closeCollapse 0.5s ease forwards;
+          animation: closeCollapse 0.5s ease forwards;
+}
+.collapse_collapseButton_icon--opened {
+  font-size: 19px;
+  margin: auto 0px;
+  -webkit-animation: openCollapse 0.5s ease forwards;
+          animation: openCollapse 0.5s ease forwards;
+}
+.collapse_children--opened {
+  -webkit-animation: openCarrousel 1s ease forwards;
+          animation: openCarrousel 1s ease forwards;
+}
+.collapse_children--closed {
+  -webkit-animation: closeCarrousel 1s ease forwards;
+          animation: closeCarrousel 1s ease forwards;
+}/*# sourceMappingURL=Collapse.css.map */

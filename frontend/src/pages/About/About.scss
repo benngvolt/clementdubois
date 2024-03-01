@@ -11,17 +11,19 @@
             width: 100%; 
             aspect-ratio: 2/1;
             object-fit: cover;
+            filter: grayscale(1);
         }
 
         &_introductionContainer {
-            background-color: $colorFirst;
+            // background-color: $colorFirst;
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
             
+            
             p {
 
-            width: 50%;
+            width: 40%;
             text-align: justify;
             font-family: 'MainFont_light';
             font-size: 19px;
@@ -31,32 +33,88 @@
             
             }
         }
-        &_manifestoTitle {
-            
+
+        &_manifestoContainer {
+            padding-left: 54px;
+            padding-right: 54px;
+            background-color: $colorFirst;
+            margin: 0;
+            &_title {
                 display: flex;
                 // flex-direction: row;
                 justify-content: center;
                 width: 100%;
                 font-family: 'SpecialFont';
                 font-size: 54px;
-                margin: 98px auto;
-           
+                padding-top: 98px;
+                margin: auto;
+            }
+            &_secondTitle {
+                display: flex;
+                justify-content: flex-start;
+                width: 50%;
+                font-family: 'SpecialFont';
+                font-size: 35px;
+                padding-top: 98px;
+
+            }
+
+            &_description {
+                display: flex;
+                text-align: justify;
+                width: 50%;
+                font-family: 'MainFont_light';
+                font-size: 19px;
+            }
+
+            &_list {
+                margin: 0;
+                padding: 98px 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                row-gap: 35px;
+                list-style-type: none;
+    
+                &_item {
+                    
+                    p {
+                        font-family: 'SpecialFont';
+                        font-size: 25px;
+                        margin: auto;
+                    }
+                }
+            }
         }
-        &_list {
-            margin: 98px 54px;
+
+        &_mentionsText {
+
+            color: $colorLightGrey;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            row-gap: 35px;
-            
+            text-align: justify;
+            width: 50%;
+            margin: auto;
+            padding: 98px;
+            font-family: 'MainFont_light';
+            font-size: 19px;
+        }
+        
+        &_collabsGrid {
+            padding-top: 54px;
+            padding-bottom: 54px;
+            width: 30%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            row-gap: 22px;
+            list-style-type: none;
 
             &_item {
-                
-                margin: auto;
-                p {
-                    font-family: 'SpecialFont';
-                    font-size: 25px;
-                    margin: auto;
+
+                width: 100px;
+
+                img {
+                    width: 100px;
                 }
             }
         }
