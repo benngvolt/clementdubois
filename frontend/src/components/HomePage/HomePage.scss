@@ -38,8 +38,12 @@
     &_button {
         
         a {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             padding: 0 25px;
             width: 500px;
+            height: 153px;
             background-color: $colorFirst;
             border: none;
             font-family: 'SpecialFont';
@@ -50,7 +54,7 @@
             transform: translate(-50%, -50%);
             position: fixed;
             margin: auto;
-
+            
             h1 {
                 font-size: 35px;
             }
