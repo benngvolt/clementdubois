@@ -90,9 +90,9 @@ $colorLightGrey: #E9E9E9;
 $colorDarkGrey: #0c0c0c;
 $colorFields: aqua;
 // $colorButtons: rgb(96, 54, 151);
-$colorFirst: rgb(238, 255, 0);
-$colorSecond: rgb(65, 65, 65);
-$colorThird: rgb(131, 109, 255);
+$colorFirst: rgb(255, 242, 0);
+$colorThird: rgb(65, 65, 65);
+$colorSecond: rgb(255, 206, 213);
 
 
 /*-------------------
@@ -231,11 +231,12 @@ $colorThird: rgb(131, 109, 255);
     }
 }
 
-@keyframes openCarrousel {
+@keyframes openCollapseChildren {
     0% {  
         height: 0%;
         opacity: 0;
         padding-bottom: 0px;
+        display: none;
     }
     50% { 
         height: auto;
@@ -250,7 +251,7 @@ $colorThird: rgb(131, 109, 255);
     }
 }
 
-@keyframes closeCarrousel {
+@keyframes closeCollapseChildren {
     0% {  
         height: auto;
         opacity: 1;
@@ -266,5 +267,6 @@ $colorThird: rgb(131, 109, 255);
         height: 0px;
         opacity: 0;
         padding-bottom: 0px;
+        display: none;
     }
 }

@@ -69,7 +69,7 @@ function DNDGallery ({ imageFiles, setImageFiles, mainImageIndex, setMainImageIn
 
 
   return (
-
+    
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
@@ -80,9 +80,9 @@ function DNDGallery ({ imageFiles, setImageFiles, mainImageIndex, setMainImageIn
         setMainImageIndex={setMainImageIndex}
       >
         <SortableContext items={items} strategy={rectSortingStrategy} mainImageIndex={mainImageIndex} setMainImageIndex={setMainImageIndex}>
+        {items && items.length > 0 ? (
           <DNDGrid displayClass={displayClass}>
-          {items && items.length > 0 ? (
-            items.map((item, index) => (
+            {items.map((item, index) => (
               <DNDSortableSingleItem 
                 itemsNumber={items.length}
                 item={item} 
@@ -96,11 +96,11 @@ function DNDGallery ({ imageFiles, setImageFiles, mainImageIndex, setMainImageIn
                 openConfirmBox={() => openConfirmBox(index)}
                 displayClass={displayClass}
                 />
-              ))
-            ) : (
-                <p className="">Aucune image à afficher</p>
-            )}
+            ))}
           </DNDGrid>
+          ) : (
+          <p className="">Aucune image à afficher</p>
+        )}
         </SortableContext>
         <DragOverlay adjustScale={true}>
           {activeId ? (

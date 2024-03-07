@@ -15,13 +15,7 @@ import {
 import {
     faBars
 } from '@fortawesome/free-solid-svg-icons'
-// import React, { useContext, useEffect } from 'react'
-// import { Context } from '../../utils/Context'
-// import { useNavigate } from 'react-router-dom'
 
-
-
- 
 function Header() {
     const [displayContactModal, setdisplayContactModal]= useState(false);
     const { displayHeader, openHeader, closeHeader, hideHeader } = useContext(ProjectsContext);

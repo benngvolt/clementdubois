@@ -1,11 +1,8 @@
 import './OneProject.scss'
 import { API_URL } from '../../utils/constants'
-// import { Link } from 'react-router-dom'
-import React, { useState, useEffect, useContext } from 'react'
-// import { Context } from '../../utils/Context'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import DOMPurify from 'dompurify';
-import { ProjectsContext } from '../../utils/ProjectsContext';
 import Collapse from '../../components/Collapse/Collapse';
 
 import ImageFocus from '../../components/ImageFocus/ImageFocus';
@@ -20,8 +17,6 @@ function OneProject() {
     const cleanedAboutShow = DOMPurify.sanitize(project.aboutShow);
     const cleanedAboutSceno = DOMPurify.sanitize(project.aboutSceno);
 
-    const { projects } = useContext(ProjectsContext);
-
     useEffect(() => {
         fetch(`${API_URL}/api/projects/${id}`)
             .then((res) => res.json())
@@ -31,12 +26,12 @@ function OneProject() {
             .catch((error) => console.log(error.message));
     }, [id]);
 
-    
-
     const prodTypeArray = Array.from(new Set(project.productionList?.map(prod => prod.prodType) || []));
 
     return  (      
         <section className='oneProject'>
+            
+            {/* TITRE/SOUS-TITRE/INFOS*/}
             <div className='oneProject_titleContainer'>
                 <div className='oneProject_titleContainer_title'>
                     <h3>{project.title}</h3>
@@ -45,13 +40,14 @@ function OneProject() {
                 <p className='oneProject_titleContainer_projectInfos'>{project.projectInfos}</p>
             </div>
 
+            {/* IMAGE 1*/}
             {project.projectImages && project.projectImages.length > 0 && 
             <div className='oneProject_firstImageContainer'>
                 <img src={project.projectImages[0].imageUrl} alt="Project" />                
             </div>
             }
             
-            
+            {/* A PROPOS SCENO/A PROPOS PROJET/DISTRIBUTION */}
             <div className='oneProject_firstInfosBlock'>
                 {cleanedAboutShow && cleanedAboutSceno &&
                 <div className='oneProject_firstInfosBlock_showAndSceno'>
@@ -69,7 +65,6 @@ function OneProject() {
                     }
                 </div>
                 }
-                
                 <div className='oneProject_firstInfosBlock_distributionAndLinks'>
                     {project.artistsList && project.artistsList.length > 0 &&
                     <div className='oneProject_firstInfosBlock_distributionAndLinks_distribution'>
@@ -92,9 +87,9 @@ function OneProject() {
                     </div>
                     }
                 </div>
-                
             </div>
-
+            
+            {/* IMAGES 2 à 4 */}
             {project.projectImages?.length > 1 && 
                 <div className={`oneProject_secondImageContainer_${project.projectImages.length}`}>
                     {project.projectImages.slice(1, 4).map((image, index) => (
@@ -103,6 +98,7 @@ function OneProject() {
                 </div>
             }
             
+            {/* PRESSE */}
             {project.press && project.press.length > 0 && 
             <div className='oneProject_pressBlocks'>
                 <ul className='oneProject_pressBlocks_container'>
@@ -117,6 +113,7 @@ function OneProject() {
             </div>
             }
 
+            {/* IMAGES 5 à 15 */}
             {project.projectImages?.length > 4 && project.projectImages?.length <= 15 &&
             <div className={`oneProject_thirdImageContainer oneProject_thirdImageContainer_${project.projectImages.length}`}> 
                 {project.projectImages.slice(4, 15).map((image, index) => (
@@ -124,9 +121,9 @@ function OneProject() {
                 ))}
             </div>}
 
+            {/* IMAGES MAKING OF */}
             {project.makingOfImages && project.makingOfImages.length > 0 &&
-            
-            <Collapse title="Making Of">
+            <Collapse title="Making Of" style='dark'>
                 <div className="oneProject_makingOfImageContainer_imagesGrid">
                 {project.makingOfImages.map((image, index) => (
                     <img key={index} src={image.imageUrl} alt="Project" onClick={()=>{ 
@@ -141,6 +138,7 @@ function OneProject() {
             </Collapse>
             }
 
+            {/* PRODUCTION */}
             {project.productionList && project.productionList.length > 0 &&    
             <Collapse title="Production" style='color'>
                 <div className='oneProject_productionBlocks'>
@@ -163,6 +161,7 @@ function OneProject() {
             </Collapse>
             }
 
+            {/* DIFFUSION */}
             {project.diffusionList && project.diffusionList.length > 0 &&
             <Collapse title="Lieux de diffusion" style='light'>
                 <div className='oneProject_diffBlock'>

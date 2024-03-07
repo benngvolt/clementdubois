@@ -8,6 +8,7 @@ import DOMPurify from 'dompurify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faXmark} from '@fortawesome/free-solid-svg-icons'
 import Loader from '../Loader/Loader'
+import welcomeImage from '../../assets/welcome01.png'
 
 
 
@@ -65,7 +66,7 @@ function ProjectForm({
     const [summary, setSummary] = useState(projectFormMode === 'edit' ? cleanedSummary : '');
     const [projectType, setProjectType] = useState(projectFormMode === 'edit' ? projectEdit.projectType : '');
 
-    const { loaderDisplay, setLoaderDisplay } = useContext(ProjectsContext);
+    const { loaderDisplay, setLoaderDisplay, projectCategories, productionCategories } = useContext(ProjectsContext);
 
     // Réinitialisation des valuers input lorsque le formulaire s'ouvre / se ferme.
     useEffect(() => {
@@ -339,9 +340,9 @@ function ProjectForm({
 
             {/* WELCOME */}
             <div className='projectForm_welcomeContainer'>
-                <p className='projectForm_welcomeContainer_mainWelcome'>Bienvenu chez toi.</p>
-                <img className='projectForm_welcomeContainer_imageWelcome'src='./assets/welcome01.png' alt='image de bienvenue'/>
-                <p className='projectForm_welcomeContainer_secondWelcome'> Prends-toi tranquille un café avant de te mettre au boulot...</p>
+                <p className='projectForm_welcomeContainer_mainWelcome'>Bienvenu chez toi :) </p>
+                <img className='projectForm_welcomeContainer_imageWelcome'src={welcomeImage} alt='image de bienvenue'/>
+                {/* <p className='projectForm_welcomeContainer_secondWelcome'> Prends-toi tranquille un café avant de te mettre au boulot...</p> */}
             </div>
 
             {/* INFOS PRINCIPALES */}
@@ -384,9 +385,9 @@ function ProjectForm({
                             value={projectType} 
                             onChange={(e) => setProjectType(e.target.value)}>
                         <option value=""></option>
-                        <option value="spectacle vivant">Spectacle vivant</option>
-                        <option value="évènement">Évènement</option>
-                        <option value="médiation">Médiation</option>
+                        {projectCategories.map((projectCategory)=>(
+                            <option value={projectCategory}>{projectCategory}</option>
+                        ))}
                     </select>
                 </div>
             </div>
@@ -396,35 +397,36 @@ function ProjectForm({
                 <div className='projectForm_imagesFieldsContainer_projectImagesContainer'>
                     <p>IMAGES DU PROJET</p>
                     <DNDGallery imageFiles={imageFiles} setImageFiles={setImageFiles} mainImageIndex={mainImageIndex} setMainImageIndex={setMainImageIndex} displayClass={'grid'} />
-                    {imageFiles.length < 15 &&
-                        <div className='projectForm_imagesFieldsContainer_projectImagesContainer_imageField'>
-                            <label htmlFor='inputProjectImageFile'>{isImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
-                            <input type='file' id='inputProjectImageFile' name="images" ref={inputProjectImageFileRef} onChange={displaySample} style={{ display: 'none' }}></input>
-                            <div  className="projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer">
-                                <img id='imageSample' ref={projectMainImageSampleRef} src='' alt=''/>
-                                <div className={isImageLoaded ? "projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOff"}>
-                                    <button aria-label="Ajouter l'image" onClick={handleAddImageFile} type="button">AJOUTER</button>
-                                    <button aria-label="Annuler" onClick={cancelAddImageFile} type="button">ANNULER</button>
-                                </div>
+                    {imageFiles.length < 15 && 
+                    <div className='projectForm_imagesFieldsContainer_projectImagesContainer_imageField'>
+                        <label htmlFor='inputProjectImageFile'>{isImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
+                        <input type='file' id='inputProjectImageFile' name="images" ref={inputProjectImageFileRef} onChange={displaySample} style={{ display: 'none' }}></input>
+                        <div  className="projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer">
+                            <img id='imageSample' ref={projectMainImageSampleRef} src='' alt=''/>
+                            <div className={isImageLoaded ? "projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOff"}>
+                                <button aria-label="Ajouter l'image" onClick={handleAddImageFile} type="button">AJOUTER</button>
+                                <button aria-label="Annuler" onClick={cancelAddImageFile} type="button">ANNULER</button>
                             </div>
                         </div>
+                    </div>
                     }
+                    
                 </div>
                 <div className='projectForm_imagesFieldsContainer_makingOfImagesContainer'>
                     <p>IMAGES DU WORK-IN-PROCESS</p>
                     <DNDGallery imageFiles={moImageFiles} setImageFiles={setMoImageFiles} mainImageIndex={mainMoImageIndex} setMainImageIndex={setMainMoImageIndex} displayClass={'row'} /> 
                     {moImageFiles.length < 10 &&
-                        <div className='projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField'>
-                            <label htmlFor='inputProjectMoImageFile'>{isMoImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
-                            <input type='file' id='inputProjectMoImageFile' name="moImages" ref={inputProjectMoImageFileRef} onChange={displayMoSample} style={{ display: 'none' }}></input>
-                            <div  className="projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer">
-                                <img id='moImageSample' ref={projectMainMoImageSampleRef} src='' alt=''/>
-                                <div className={isMoImageLoaded ? "projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer_buttonsSystem--displayOff"}>
-                                    <button aria-label="Ajouter l'image" onClick={handleAddMoImageFile} type="button">AJOUTER</button>
-                                    <button aria-label="Annuler" onClick={cancelAddMoImageFile} type="button">ANNULER</button>
-                                </div>
+                    <div className='projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField'>
+                        <label htmlFor='inputProjectMoImageFile'>{isMoImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
+                        <input type='file' id='inputProjectMoImageFile' name="moImages" ref={inputProjectMoImageFileRef} onChange={displayMoSample} style={{ display: 'none' }}></input>
+                        <div  className="projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer">
+                            <img id='moImageSample' ref={projectMainMoImageSampleRef} src='' alt=''/>
+                            <div className={isMoImageLoaded ? "projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer_buttonsSystem--displayOff"}>
+                                <button aria-label="Ajouter l'image" onClick={handleAddMoImageFile} type="button">AJOUTER</button>
+                                <button aria-label="Annuler" onClick={cancelAddMoImageFile} type="button">ANNULER</button>
                             </div>
                         </div>
+                    </div>
                     }
                 </div>
             </div>
@@ -538,13 +540,9 @@ function ProjectForm({
                                         defaultValue={projectFormMode==='edit'? production.prodType : ""}
                                         onChange={(e) => handleProdTypeSelectChange(index, e.target.value)}>
                                     <option value=""></option>
-                                    <option value="Production">Production</option>
-                                    <option value="Co-production">Co-production</option>
-                                    <option value="Accueils en résidence de création">Accueils en résidence de création</option>
-                                    <option value="Aide à la création">Aide à la création</option>
-                                    <option value="Aide à la résidence d'écriture">Aide à la résidence d'écriture</option>
-                                    <option value="Soutien">Soutien</option>
-                                    <option value="Remerciements">Remerciements</option>
+                                    {productionCategories.map((productionCategory)=>(
+                                    <option value={productionCategory}>{productionCategory}</option>
+                                    ))}
                                 </select>
                             </div>
                             <button type='button' onClick={() => handleSupprProduction(index)}>SUPPRIMER</button>

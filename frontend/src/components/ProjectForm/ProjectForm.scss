@@ -33,13 +33,22 @@
 
     &_welcomeContainer {
         width: 70%;
-        margin: auto;
+        margin: 54px auto;
+        background-color: $colorSecond;
+        
+        
         &_mainWelcome {
+            
             font-family: 'SpecialFont';
-            font-size: 25px;
-            margin: 35px auto;
+            font-size: 35px;
+            padding: 10px;
+            margin: 62px auto 35px auto;
             text-align: center;
-            color: $colorThird;
+            color: $colorLightGrey;
+            background-color: $colorDarkGrey;
+            width: 40%;
+            rotate: -5deg;
+            filter: drop-shadow(10px 10px 0px $colorFirst);
         }
 
         &_imageWelcome {
@@ -52,6 +61,7 @@
             font-family: 'MainFont_light';
             text-align: center;
             margin-bottom: 54px;
+            color: $colorLightGrey;
         }
     }
 
@@ -71,7 +81,7 @@
             justify-content: space-between;
             margin: 10px 0;
             box-sizing: border-box;
-            border-bottom: solid 1px $colorDarkGrey;
+            // border-bottom: solid 1px $colorDarkGrey;
 
             label {
                 width: 50%;
@@ -90,11 +100,14 @@
     &_imagesFieldsContainer {
         width: 70%;
         margin: auto;
+        
 
         &_projectImagesContainer, &_makingOfImagesContainer {
             display: flex;
             flex-direction: column;
             width: 100%;
+            height: auto;
+            
             margin: 30px auto 0 auto;
             box-sizing: border-box;
 
@@ -102,7 +115,8 @@
                 display: flex;
                 flex-direction: column;
                 vertical-align: middle;
-                width: 50%;
+                // width: 50%;
+                height: auto;
 
                 label {
                     margin: auto;
@@ -151,7 +165,7 @@
 
             p {
                 font-family:'MainFont_bold';
-                margin-bottom: 25px;
+                margin: 16px auto;
             } 
         }
 
@@ -160,8 +174,10 @@
             padding-bottom: 54px;
             p {
                 padding: 30px;
+                margin: auto;
                 box-sizing: border-box;
             }
+
             &_imageField {
                 margin: 54px auto 0 auto;
                 label {
@@ -185,6 +201,7 @@
         margin: 30px auto 0 auto;
         display: flex;
         flex-direction: column;
+        row-gap: 35px;
 
         &_textField {
     
@@ -217,9 +234,11 @@
         flex-direction: column;
 
         &_arrayField {
+
             p {
                 margin-bottom: 25px;
             }
+
             margin: 30px auto 0 auto;
             box-sizing: border-box;
             width: 100%;
@@ -228,21 +247,19 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
-                height: 25px;
-                column-gap: 16px;
+                column-gap: 5px;
                 width: 100%;
                 margin-top: 8px;
-                border-bottom: solid 1px $colorDarkGrey;
+                // border-bottom: solid 1px $colorDarkGrey;
 
                 &_line {
                     display: flex;
-                    flex-direction: row;
+                    flex-direction: column;
                     justify-content: flex-start;
                     margin: 0;
-                    column-gap: 15px;
+                    column-gap: 5px;
                     width: 100%;
                     
-
                     label {
                         font-size: 16px;
                         line-height: 200%;
@@ -250,7 +267,7 @@
                         width: auto;
                     }
                     input {
-                        width: 60%;
+                        width: 100%;
                         box-sizing: border-box;
                     }
                 }
@@ -263,11 +280,13 @@
                 font-size: 16px;
                 margin-right: 6px;
             }
+
             input, &_textarea {
-                width: 90%;
+                width: 95%;
             }
+
             select {
-                width: 100px;
+                width: 95%;
             }
 
             button {
@@ -278,6 +297,7 @@
                 line-height: 50%;
                 height: auto;
                 margin-top: 16px;
+                margin-bottom: 0;
             }
 
             &_textarea {

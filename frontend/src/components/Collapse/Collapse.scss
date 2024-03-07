@@ -47,6 +47,7 @@
             margin: 0 auto;
             column-gap: 19px;
             background: $colorDarkGrey;
+           
             &:hover {
                 cursor: pointer;
             }
@@ -73,11 +74,11 @@
         &_children {
         
             &--opened {
-                animation: openCarrousel 1s ease forwards;
+                animation: openCollapseChildren 1s ease forwards;
             }
             
             &--closed {
-                animation: closeCarrousel 1s ease forwards;
+                animation: closeCollapseChildren 1s ease forwards;
             }
         }
     

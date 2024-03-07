@@ -58,6 +58,7 @@ function Edit() {
             }
             setHandleDisplayProjectForm(false);
             setConfirmBoxState (false);
+            handleLoadProjects();
         })
         .catch((error) => console.log(error.message))
     }
@@ -79,7 +80,7 @@ function Edit() {
 
     function handleProjectDeleteMode (project) {
         setConfirmBoxState(true);
-        setProjectToDelete (project)
+        setProjectToDelete (project);
     }
 
     function closeConfirmBox () {

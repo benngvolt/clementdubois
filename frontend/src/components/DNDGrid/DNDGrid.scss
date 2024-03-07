@@ -1,6 +1,6 @@
 .dndGrid {
     width: 100%;
-    height: auto;
+    aspect-ratio: 1/2;
     display: grid;
     justify-content: center;
     align-items: center;
@@ -22,12 +22,14 @@
 }
 
 .dndRow {
-    width: auto;
+    aspect-ratio: 3/1;
+    width: 90%;
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    overflow: scroll;
-    justify-content: center;
+    box-sizing: content-box;
+    // justify-content: center;
     align-items: center;
     margin: auto;
-    grid-gap: 20px;
+    grid-gap: 19px;
 }

@@ -1,14 +1,11 @@
 import './Footer.scss'
 import { Link } from 'react-router-dom'
-import { API_URL } from '../../utils/constants'
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import { ProjectsContext } from '../../utils/ProjectsContext'
-// import { Context } from '../../utils/Context'
-// import { useNavigate } from 'react-router-dom'
  
 function Footer() {
 
-    const { projects } = useContext(ProjectsContext);
+    const { projects, hideFooter } = useContext(ProjectsContext);
 
     const scrollToTop = () => {
         window.scrollTo({
@@ -18,7 +15,7 @@ function Footer() {
     };
 
     return  (      
-        <footer className='footer'>
+        <footer className={hideFooter===false?'footer':'footer footer--displayOff'}>
             <ul className='footer_list'>
                 {projects?.map((project)=>(
                     <li className='footer_list_item'> 
