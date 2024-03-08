@@ -17,6 +17,8 @@ function OneProject() {
     const cleanedAboutShow = DOMPurify.sanitize(project.aboutShow);
     const cleanedAboutSceno = DOMPurify.sanitize(project.aboutSceno);
 
+
+
     useEffect(() => {
         fetch(`${API_URL}/api/projects/${id}`)
             .then((res) => res.json())
@@ -132,9 +134,6 @@ function OneProject() {
                     }}/>
                 ))}
                 </div>
-                <div className={displayImageFocus===true?'oneProject_makingOfImageContainer_imageFocusContainer--displayOn':'oneProject_makingOfImageContainer_imageFocusContainer--displayOff'}>
-                    <ImageFocus imageFocusUrl={imageFocusUrl} setImageFocusUrl={setImageFocusUrl} imagesArray={project.makingOfImages} setDisplayImageFocus={setDisplayImageFocus}/>
-                </div>
             </Collapse>
             }
 
@@ -175,6 +174,10 @@ function OneProject() {
                 </div>
             </Collapse>
             }
+            {/* On sort la modale de focus hors d'un block pour qu'elle reste au premier plan. */}
+            <div className={displayImageFocus===true?'oneProject_makingOfImageContainer_imageFocusContainer--displayOn':'oneProject_makingOfImageContainer_imageFocusContainer--displayOff'}>
+                <ImageFocus imageFocusUrl={imageFocusUrl} setImageFocusUrl={setImageFocusUrl} imagesArray={project.makingOfImages} setDisplayImageFocus={setDisplayImageFocus}/>
+            </div>
 
         </section>
     )
