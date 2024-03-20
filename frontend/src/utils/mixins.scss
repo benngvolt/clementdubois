@@ -270,3 +270,13 @@ $colorSecond: rgb(255, 206, 213);
         display: none;
     }
 }
+
+@keyframes appearOpacity {
+    0% {  
+        opacity: 0;
+    }
+    100% {  
+        opacity: 1;
+    }
+
+}

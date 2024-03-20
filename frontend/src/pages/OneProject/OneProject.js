@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import DOMPurify from 'dompurify';
 import Collapse from '../../components/Collapse/Collapse';
-
 import ImageFocus from '../../components/ImageFocus/ImageFocus';
  
 function OneProject() {
@@ -175,9 +174,11 @@ function OneProject() {
             </Collapse>
             }
             {/* On sort la modale de focus hors d'un block pour qu'elle reste au premier plan. */}
-            <div className={displayImageFocus===true?'oneProject_makingOfImageContainer_imageFocusContainer--displayOn':'oneProject_makingOfImageContainer_imageFocusContainer--displayOff'}>
-                <ImageFocus imageFocusUrl={imageFocusUrl} setImageFocusUrl={setImageFocusUrl} imagesArray={project.makingOfImages} setDisplayImageFocus={setDisplayImageFocus}/>
-            </div>
+            {project.makingOfImages &&
+                <div className={displayImageFocus===true?'oneProject_makingOfImageContainer_imageFocusContainer--displayOn':'oneProject_makingOfImageContainer_imageFocusContainer--displayOff'}>
+                    <ImageFocus imageFocusUrl={imageFocusUrl} setImageFocusUrl={setImageFocusUrl} imagesArray={project.makingOfImages} setDisplayImageFocus={setDisplayImageFocus}/>
+                </div>
+            }
 
         </section>
     )

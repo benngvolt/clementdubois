@@ -15,7 +15,7 @@ function HomePage() {
     return (
         <div className='homePage'>
             <div className={loaderDisplay===true?'homePage_loader--displayOn':'homePage_loader--displayOff'}>
-                <Loader/>
+                <Loader className='loader--opaque' loaderDisplay={loaderDisplay}/>
             </div>
             {homeImage && 
                 <img className='homePage_image'src={homeImage} alt="Project" />
@@ -24,7 +24,7 @@ function HomePage() {
                 <div className='homePage_image homePage_image--blackBg'></div>
             }
             <div className='homePage_button'>
-                <Link to="/projects"><h1> Clément<br/> Dubois<br/> Scénographe </h1></Link>
+                <Link to="/projects"><h1> Clément Dubois<br/>scénographe </h1></Link>
             </div>
          </div>
     )

@@ -4,6 +4,7 @@
     margin: auto 54px;
     display: flex;
     flex-direction: column;
+    animation: appearOpacity 2s ease forwards;
 
 
     &_list {

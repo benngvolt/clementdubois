@@ -706,7 +706,7 @@ function ProjectForm({
                 </div>
             </div>
             <div className={loaderDisplay===true?'projectForm_loaderContainer--displayOn':'projectForm_loaderContainer--displayOff'} >
-                <Loader/>
+                <Loader className='loader--translucent' loaderDisplay={loaderDisplay}/>
             </div>
         </form>
     )

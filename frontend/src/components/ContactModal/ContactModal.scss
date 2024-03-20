@@ -8,6 +8,7 @@
     background-color: $colorLightGrey;
     margin: auto;
     position: relative;
+    animation: appearOpacity 2s ease forwards;
 
 
     &_title {
