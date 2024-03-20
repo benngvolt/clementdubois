@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/clementdubois/static/css/main.d3d613ab.css",
+    "main.css": "/clementdubois/static/css/main.644901ef.css",
     "main.js": "/clementdubois/static/js/main.f6524260.js",
     "static/js/787.9e9f4ffd.chunk.js": "/clementdubois/static/js/787.9e9f4ffd.chunk.js",
     "static/media/welcome01.png": "/clementdubois/static/media/welcome01.bf1faa40242248c76d0c.png",
@@ -15,12 +15,12 @@
     "static/media/porte mine.png": "/clementdubois/static/media/porte mine.4d7232c329e3a91c34b8.png",
     "static/media/artex.webp": "/clementdubois/static/media/artex.a2ba70a0aee6926739a7.webp",
     "index.html": "/clementdubois/index.html",
-    "main.d3d613ab.css.map": "/clementdubois/static/css/main.d3d613ab.css.map",
+    "main.644901ef.css.map": "/clementdubois/static/css/main.644901ef.css.map",
     "main.f6524260.js.map": "/clementdubois/static/js/main.f6524260.js.map",
     "787.9e9f4ffd.chunk.js.map": "/clementdubois/static/js/787.9e9f4ffd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d3d613ab.css",
+    "static/css/main.644901ef.css",
     "static/js/main.f6524260.js"
   ]
 }
