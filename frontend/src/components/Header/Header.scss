@@ -3,11 +3,11 @@
 .header {
 
    
-    margin-bottom: 54px 0 25px 0;
+    margin: 54px 0 25px 0;
     // margin-top: 25px;
-    // border-bottom: 1px solid $colorDarkGrey;
+    border-bottom: 1px solid $colorDarkGrey;
     // border-top: 1px solid $colorDarkGrey;
-    background-color: $colorFirst;
+    background-color: $colorLightGrey;
     position: -webkit-sticky; /* Pour la prise en charge de WebKit (Safari, Chrome) */
     position: sticky;
     top: 0px;
@@ -19,9 +19,12 @@
 
     &--open {
         animation: openHeader 0.5s ease forwards;
+        margin:0;
     }
+
     &--close {
         animation: closeHeader 0.5s ease forwards;
+        margin:0;
     }
 
     &_hamburger {
@@ -67,6 +70,7 @@
             
             &_item {
                 display: flex;
+                
                 background: none;
                 border: none;
                 color: $colorDarkGrey;
@@ -75,20 +79,28 @@
                 text-decoration: none;
                 padding: 0;
                 margin: auto 0;
+                height: 100%;
                 
+                &--selected {
+                    background-color: $colorFirst;
+                }
 
                 p:hover {
                     cursor: pointer;
                     // color: $colorLightGrey;
-                    text-decoration: underline;
+                    // text-decoration: underline;
+                    background-color: $colorFirst;
+                    
                 }
 
                 h2, p {
                 display: flex;
+                flex-direction: column;
+                justify-content: center;
                 color: $colorDarkGrey;
                 font-family: 'SpecialFont';
                 font-size: 35px;
-                padding: 0;
+                padding: 0 9px;
                 margin: 0;
                 text-decoration: none;
                 height: 100%;

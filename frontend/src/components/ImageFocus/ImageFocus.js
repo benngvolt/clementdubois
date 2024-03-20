@@ -1,11 +1,12 @@
 import './ImageFocus.scss'
+import { useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faChevronLeft,
     faChevronRight,
 } from '@fortawesome/free-solid-svg-icons'
 function ImageFocus ({imageFocusUrl, setDisplayImageFocus, setImageFocusUrl, imagesArray}) {
-
+    const modalRef = useRef(null);
     const imagesArrayLength = imagesArray.length;
     const currentIndex = imagesArray.findIndex (image => image.imageUrl === imageFocusUrl);
 
@@ -23,12 +24,24 @@ function ImageFocus ({imageFocusUrl, setDisplayImageFocus, setImageFocusUrl, ima
         setImageFocusUrl (nextImage.imageUrl);
     }
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (modalRef.current && !modalRef.current.contains(event.target)) {
+                setDisplayImageFocus(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [setDisplayImageFocus]);
+
     return (
-        <div className='imageFocus'>
+        <div className='imageFocus' ref={modalRef}>
             {imagesArrayLength > 1 &&
             <FontAwesomeIcon icon={faChevronLeft} className='imageFocus_icon' onClick={()=>displayPrevImage()}/>
             }
-            <img src={imageFocusUrl} onClick={()=>setDisplayImageFocus(false)}/>
+            <img src={imageFocusUrl}/>
             {imagesArrayLength > 1 &&
             <FontAwesomeIcon icon={faChevronRight} className='imageFocus_icon' onClick={()=>displayNextImage()}/>
             }

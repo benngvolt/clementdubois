@@ -24,7 +24,7 @@ function HomePage() {
                 <div className='homePage_image homePage_image--blackBg'></div>
             }
             <div className='homePage_button'>
-                <Link to="/projects"><h1> Clément Dubois<br/>scénographe </h1></Link>
+                <Link to="/projects"><h1> Clément Dubois<br/>Scénographe </h1></Link>
             </div>
          </div>
     )

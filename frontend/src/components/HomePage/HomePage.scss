@@ -45,11 +45,11 @@
             box-sizing: border-box;
             width: 400px;
             height: 114px;
-            background-color: $colorFirst;
+            background-color: $colorDarkGrey;
             border: none;
             font-family: 'SpecialFont';
             text-decoration: none;
-            color: $colorDarkGrey;
+            color: $colorLightGrey;
             top: 80%;
             left: 20%;
             transform: translate(-50%, -50%);
@@ -62,8 +62,8 @@
 
         &:hover {
             cursor: pointer;
-            color: $colorLightGrey;
-            background-color: $colorDarkGrey;
+            color: $colorDarkGrey;
+            background-color: $colorFirst;
         }
     }
     }

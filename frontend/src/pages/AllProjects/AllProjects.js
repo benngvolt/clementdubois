@@ -13,7 +13,7 @@ function AllProjects() {
 
     useEffect(() => {
         setFilteredProjects(projects);
-    },[]);
+    },[projects]);
     
     // Trier les projets en fonction de leurs dates numériques (AAAAMM) dans l'ordre décroissant
     const projectsWithNumericDate = filteredProjects.map(project => {

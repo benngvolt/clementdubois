@@ -32,15 +32,16 @@
 @mixin Button {
     margin: auto;
     font-family:'SpecialFont';
-    color: $colorDarkGrey;
+    color: $colorLightGrey;
+    background-color: $colorDarkGrey;
     font-size: 25px;
     padding: 10px;
     border: none;
-    background-color: $colorFirst;
+   
     // border-radius: 50rem;
     &:hover {
-        color: $colorLightGrey;
-        background-color: $colorDarkGrey;
+        color: $colorDarkGrey;
+        background-color: $colorFirst;
         cursor: pointer;
     }
 }
@@ -65,15 +66,14 @@
 @mixin ButtonSelected {
     // margin: auto;
     font-family:'SpecialFont';
-    color: $colorLightGrey;
     font-size: 25px;
     padding: 10px;
     border: none;
-    background-color: $colorDarkGrey;
+    color: $colorDarkGrey;
+    background-color: $colorFirst;
     // border-radius: 50rem;
     &:hover {
-        color: $colorLightGrey;
-        background-color: $colorDarkGrey;
+        
         cursor: pointer;
     }
 }

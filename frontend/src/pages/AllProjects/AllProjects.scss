@@ -56,6 +56,7 @@
             padding-left: 54px;
             padding-top: 54px;
             width: 1%;
+            margin: auto;
         }
 
         
@@ -64,7 +65,6 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            margin: auto;
             box-sizing: border-box;
             // border-left: solid 1px $colorDarkGrey;
             // padding-left: 30px;
@@ -82,19 +82,21 @@
             &_projectInfos {    
                 font-family: 'MainFont_bold';
                 font-size: 19px;
+                margin: auto 0;
             }
 
             &_creationDate {
                 font-family: 'MainFont_light';
                 font-size: 19px;
                 color: $colorDarkGrey;
+                margin: auto 0;
             }
 
             &_summary {   
                 font-family: 'MainFont_light';
                 font-size: 16px;
                 height: 161px;
-                overflow: scroll;
+                // overflow: scroll;
             }
 
         }

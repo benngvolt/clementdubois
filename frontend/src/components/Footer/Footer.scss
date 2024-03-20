@@ -2,9 +2,10 @@
 
 .footer {
     height: auto;
-    padding: 21px 54px 12px 54px;
+    padding: 0 54px 0 54px;
     box-sizing: border-box;
-    background-color: $colorFirst;
+    background-color: $colorLightGrey;
+    border-top: 1px solid $colorDarkGrey;
     margin-top: 98px;
 
     &--displayOff {
@@ -18,23 +19,32 @@
         column-gap: 25px;
         padding: 0;
         margin: 0;
-        overflow: scroll;
+        // overflow: scroll;
 
        
         &_item {
-            height: 70%;
+            // height: 70%;
+            padding: 21px 0 12px 0;
             margin: auto 0;
             list-style-type: none;
+            height: 100%;
+
+            &--selected {
+                background-color: $colorFirst;
+            }
+
+            &:hover {
+                background-color: $colorFirst;
+                cursor: pointer;
+            }
             a {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 row-gap: 3px;
                 text-decoration: none;
-                &:hover {
-                    background-color: $colorFirst;
-                    cursor: pointer;
-                }
+                height: 100%;
+                
 
                 img {
                     

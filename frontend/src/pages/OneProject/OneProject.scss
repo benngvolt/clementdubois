@@ -4,6 +4,7 @@
 
     display: flex;
     flex-direction: column;
+    animation: appearOpacity 2s ease forwards;
     
 
     &_titleContainer {
@@ -81,7 +82,7 @@
         &_distributionAndLinks {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
             height: auto;
 
             &_distribution {
@@ -124,13 +125,28 @@
             &_links {
                 display: flex;
                 flex-direction: column;
-                justify-content: flex-end;
+                justify-content: flex-start;
                 row-gap: 10px;
-                margin: 22px 0;      
+                margin: 73px 0;      
 
                 a {
-                    @include Button;
+                    display: flex;
+                    justify-content: center;
+                    width: 50%;
                     text-decoration: none;
+                    font-family:'SpecialFont';
+                    color: $colorLightGrey;
+                    background-color: $colorDarkGrey;
+                    font-size: 25px;
+                    padding: 10px;
+                    border: none;
+   
+    // border-radius: 50rem;
+    &:hover {
+        color: $colorDarkGrey;
+        background-color: $colorFirst;
+        cursor: pointer;
+    }
                 }
             }
         }
@@ -207,7 +223,7 @@
         flex-direction: column;
         padding-top: 54px;
         padding-bottom: 54px;
-        background-color: $colorFirst;
+        background-color: white;
         
 
         h4 {
@@ -1036,10 +1052,17 @@
 
                 a {
                     font-size: 16px;
-                    font-family: 'MainFont_light';
+                    font-family: 'MainFont_lightItalic';
+                    text-decoration: none;
                     margin: 16px auto;
                     text-align: center;
                     color: $colorLightGrey;
+                    padding: 5px 9px;
+                    &:hover {
+                        color: $colorDarkGrey;
+                        background-color: $colorFirst;
+                        
+                    }
                 }
             }
         }
@@ -1051,7 +1074,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
             margin: auto;
-            overflow: scroll;
+            // overflow: scroll;
             width: 70%;
             grid-gap: 25px;
             // margin-bottom: 22px;
@@ -1101,7 +1124,7 @@
         &_list {
             list-style-type: none;
             margin: 54px auto;
-            overflow: scroll;
+            // overflow: scroll;
             &_item {
                 a {
                     color: $colorDarkGrey;

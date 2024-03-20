@@ -138,7 +138,7 @@ function OneProject() {
 
             {/* PRODUCTION */}
             {project.productionList && project.productionList.length > 0 &&    
-            <Collapse title="Production" style='color'>
+            <Collapse title="Production" style='white'>
                 <div className='oneProject_productionBlocks'>
                     <div className='oneProject_productionBlocks_container'>
                         {prodTypeArray.map((prodType, index) => (
