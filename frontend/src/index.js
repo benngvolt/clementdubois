@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './index.scss';
 
 import reportWebVitals from './reportWebVitals';
 import Edit from './pages/Edit/Edit';
@@ -19,14 +19,14 @@ root.render(
   <React.StrictMode> 
     <Router>
       <ProjectsProvider>
-          <Header/>
-          <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/projects" element={<AllProjects/>} />
-            <Route path="/projects/:id" element={<OneProject/>} />
-            <Route path="/about" element={<About/>} />
-            <Route path="/edit" element={<Edit/>} />
-          </Routes>
+        <Header/>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/projects" element={<AllProjects/>} />
+          <Route path="/projects/:id" element={<OneProject/>} />
+          <Route path="/about" element={<About/>} />
+          <Route path="/edit" element={<Edit/>} />
+        </Routes>
         <Footer/>
       </ProjectsProvider>
     </Router>

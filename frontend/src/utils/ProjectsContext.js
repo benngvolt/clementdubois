@@ -125,7 +125,7 @@ export const ProjectsProvider = ({ children }) => {
     }
 
     return (
-        <ProjectsContext.Provider value={{ projects, setProjects, handleLoadProjects, loadProjects, loaderDisplay, setLoaderDisplay, displayHeader, closeHeader, openHeader, randomImagesSelection, hideHeader, hideFooter, projectCategories, productionCategories}}>
+        <ProjectsContext.Provider value={{ projects, setProjects, handleLoadProjects, loadProjects, loaderDisplay, setLoaderDisplay, displayHeader, closeHeader, openHeader, randomImagesSelection, hideHeader, hideFooter, projectCategories, productionCategories, setDisplayHeader}}>
             {children}
         </ProjectsContext.Provider>
     )

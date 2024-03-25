@@ -247,11 +247,12 @@
     transform: rotate(180deg);
   }
 }
-@-webkit-keyframes openCarrousel {
+@-webkit-keyframes openCollapseChildren {
   0% {
     height: 0%;
     opacity: 0;
     padding-bottom: 0px;
+    display: none;
   }
   50% {
     height: auto;
@@ -264,11 +265,12 @@
     padding-bottom: 54px;
   }
 }
-@keyframes openCarrousel {
+@keyframes openCollapseChildren {
   0% {
     height: 0%;
     opacity: 0;
     padding-bottom: 0px;
+    display: none;
   }
   50% {
     height: auto;
@@ -281,7 +283,7 @@
     padding-bottom: 54px;
   }
 }
-@-webkit-keyframes closeCarrousel {
+@-webkit-keyframes closeCollapseChildren {
   0% {
     height: auto;
     opacity: 1;
@@ -296,9 +298,10 @@
     height: 0px;
     opacity: 0;
     padding-bottom: 0px;
+    display: none;
   }
 }
-@keyframes closeCarrousel {
+@keyframes closeCollapseChildren {
   0% {
     height: auto;
     opacity: 1;
@@ -313,9 +316,28 @@
     height: 0px;
     opacity: 0;
     padding-bottom: 0px;
+    display: none;
+  }
+}
+@-webkit-keyframes appearOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes appearOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 .allProjects {
+  -webkit-animation: appearOpacity 2s ease forwards;
+          animation: appearOpacity 2s ease forwards;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -326,37 +348,36 @@
   flex-direction: row;
   -moz-column-gap: 30px;
        column-gap: 30px;
-  margin: 54px;
+  margin: 114px 54px;
 }
 .allProjects_buttonsContainer_button--notSelected {
   margin: auto;
   font-family: "SpecialFont";
-  color: #0c0c0c;
+  color: #E9E9E9;
+  background-color: #0c0c0c;
   font-size: 25px;
   padding: 10px;
   border: none;
-  background-color: rgb(238, 255, 0);
   margin: 0;
 }
 .allProjects_buttonsContainer_button--notSelected:hover {
-  color: #E9E9E9;
-  background-color: #0c0c0c;
+  color: #0c0c0c;
+  background-color: rgb(255, 242, 0);
   cursor: pointer;
 }
 .allProjects_buttonsContainer_button--selected {
   font-family: "SpecialFont";
-  color: #E9E9E9;
   font-size: 25px;
   padding: 10px;
   border: none;
-  background-color: #0c0c0c;
+  color: #0c0c0c;
+  background-color: rgb(255, 242, 0);
 }
 .allProjects_buttonsContainer_button--selected:hover {
-  color: #E9E9E9;
-  background-color: #0c0c0c;
   cursor: pointer;
 }
 .allProjects_projectCard {
+  padding-left: 54px;
   width: 100%;
   height: 490px;
   text-decoration: none;
@@ -371,7 +392,7 @@
 }
 .allProjects_projectCard:hover {
   cursor: pointer;
-  background-color: rgb(238, 255, 0);
+  background-color: rgb(255, 242, 0);
 }
 .allProjects_projectCard:hover .allProjects_projectCard_infos {
   -webkit-animation: heightRetract 0.5s ease forwards;
@@ -381,38 +402,38 @@
   padding-left: 54px;
   padding-top: 54px;
   width: 1%;
+  margin: auto;
 }
 .allProjects_projectCard_infos {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin: auto;
+  justify-content: flex-start;
   box-sizing: border-box;
-  border-left: solid 1px #0c0c0c;
-  padding-left: 30px;
   width: 40%;
-  height: 80%;
+  height: 100%;
   -webkit-animation: heightRetractInvert 0.5s ease forwards;
           animation: heightRetractInvert 0.5s ease forwards;
 }
 .allProjects_projectCard_infos_title {
   font-family: "SpecialFont";
   font-size: 50px;
+  margin: 30px 0;
 }
 .allProjects_projectCard_infos_projectInfos {
   font-family: "MainFont_bold";
   font-size: 19px;
+  margin: auto 0;
 }
 .allProjects_projectCard_infos_creationDate {
   font-family: "MainFont_light";
   font-size: 19px;
   color: #0c0c0c;
+  margin: auto 0;
 }
 .allProjects_projectCard_infos_summary {
   font-family: "MainFont_light";
   font-size: 16px;
   height: 161px;
-  overflow: scroll;
 }
 .allProjects_projectCard_imageContainer {
   width: 60%;

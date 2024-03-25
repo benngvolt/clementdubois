@@ -247,11 +247,12 @@
     transform: rotate(180deg);
   }
 }
-@-webkit-keyframes openCarrousel {
+@-webkit-keyframes openCollapseChildren {
   0% {
     height: 0%;
     opacity: 0;
     padding-bottom: 0px;
+    display: none;
   }
   50% {
     height: auto;
@@ -264,11 +265,12 @@
     padding-bottom: 54px;
   }
 }
-@keyframes openCarrousel {
+@keyframes openCollapseChildren {
   0% {
     height: 0%;
     opacity: 0;
     padding-bottom: 0px;
+    display: none;
   }
   50% {
     height: auto;
@@ -281,7 +283,7 @@
     padding-bottom: 54px;
   }
 }
-@-webkit-keyframes closeCarrousel {
+@-webkit-keyframes closeCollapseChildren {
   0% {
     height: auto;
     opacity: 1;
@@ -296,9 +298,10 @@
     height: 0px;
     opacity: 0;
     padding-bottom: 0px;
+    display: none;
   }
 }
-@keyframes closeCarrousel {
+@keyframes closeCollapseChildren {
   0% {
     height: auto;
     opacity: 1;
@@ -313,6 +316,23 @@
     height: 0px;
     opacity: 0;
     padding-bottom: 0px;
+    display: none;
+  }
+}
+@-webkit-keyframes appearOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes appearOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 .projectForm {
@@ -327,6 +347,8 @@
   overflow: scroll;
   font-family: "MainFont_bold";
   position: relative;
+  -webkit-animation: appearOpacity 2s ease forwards;
+          animation: appearOpacity 2s ease forwards;
 }
 .projectForm_stickyCancelButton {
   width: auto;
@@ -346,14 +368,20 @@
 }
 .projectForm_welcomeContainer {
   width: 70%;
-  margin: auto;
+  margin: 54px auto;
+  background-color: rgb(255, 206, 213);
 }
 .projectForm_welcomeContainer_mainWelcome {
   font-family: "SpecialFont";
-  font-size: 25px;
-  margin: 35px auto;
+  font-size: 35px;
+  padding: 10px;
+  margin: 62px auto 35px auto;
   text-align: center;
-  color: rgb(131, 109, 255);
+  color: #E9E9E9;
+  background-color: #0c0c0c;
+  width: 40%;
+  rotate: -5deg;
+  filter: drop-shadow(10px 10px 0px rgb(255, 242, 0));
 }
 .projectForm_welcomeContainer_imageWelcome {
   display: flex;
@@ -364,6 +392,7 @@
   font-family: "MainFont_light";
   text-align: center;
   margin-bottom: 54px;
+  color: #E9E9E9;
 }
 .projectForm_mainInfosContainer {
   width: 70%;
@@ -381,14 +410,13 @@
   justify-content: space-between;
   margin: 10px 0;
   box-sizing: border-box;
-  border-bottom: solid 1px #0c0c0c;
 }
 .projectForm_mainInfosContainer_textField label, .projectForm_mainInfosContainer_arrayField label {
   width: 50%;
 }
 .projectForm_mainInfosContainer_textField input, .projectForm_mainInfosContainer_textField #inputProjectType, .projectForm_mainInfosContainer_arrayField input, .projectForm_mainInfosContainer_arrayField #inputProjectType {
   border: none;
-  background-color: rgb(238, 255, 0);
+  background-color: rgb(255, 242, 0);
   font-family: "MainFont_light";
   font-size: 16px;
   width: 70%;
@@ -401,6 +429,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: auto;
   margin: 30px auto 0 auto;
   box-sizing: border-box;
 }
@@ -408,28 +437,28 @@
   display: flex;
   flex-direction: column;
   vertical-align: middle;
-  width: 50%;
+  height: auto;
 }
 .projectForm_imagesFieldsContainer_projectImagesContainer_imageField label, .projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField label {
   margin: auto;
   margin: auto;
   font-family: "SpecialFont";
-  color: #0c0c0c;
+  color: #E9E9E9;
+  background-color: #0c0c0c;
   font-size: 25px;
   padding: 10px;
   border: none;
-  background-color: rgb(238, 255, 0);
   font-family: "MainFont_light";
   font-size: 16px;
 }
 .projectForm_imagesFieldsContainer_projectImagesContainer_imageField label:hover, .projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField label:hover {
-  color: #E9E9E9;
-  background-color: #0c0c0c;
+  color: #0c0c0c;
+  background-color: rgb(255, 242, 0);
   cursor: pointer;
 }
 .projectForm_imagesFieldsContainer_projectImagesContainer_imageField input, .projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField input {
   border: none;
-  background-color: rgb(238, 255, 0);
+  background-color: rgb(255, 242, 0);
   font-family: "MainFont_light";
   font-size: 16px;
   margin-right: 12px;
@@ -453,17 +482,17 @@
 .projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn button, .projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn button {
   margin: auto;
   font-family: "SpecialFont";
-  color: #0c0c0c;
+  color: #E9E9E9;
+  background-color: #0c0c0c;
   font-size: 25px;
   padding: 10px;
   border: none;
-  background-color: rgb(238, 255, 0);
   font-size: 16px;
   font-family: "MainFont_light";
 }
 .projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn button:hover, .projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn button:hover {
-  color: #E9E9E9;
-  background-color: #0c0c0c;
+  color: #0c0c0c;
+  background-color: rgb(255, 242, 0);
   cursor: pointer;
 }
 .projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOff, .projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer_buttonsSystem--displayOff {
@@ -471,14 +500,15 @@
 }
 .projectForm_imagesFieldsContainer_projectImagesContainer p, .projectForm_imagesFieldsContainer_makingOfImagesContainer p {
   font-family: "MainFont_bold";
-  margin-bottom: 25px;
+  margin: 16px auto;
 }
 .projectForm_imagesFieldsContainer_makingOfImagesContainer {
-  background-color: rgb(238, 255, 0);
+  background-color: rgb(255, 242, 0);
   padding-bottom: 54px;
 }
 .projectForm_imagesFieldsContainer_makingOfImagesContainer p {
   padding: 30px;
+  margin: auto;
   box-sizing: border-box;
 }
 .projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField {
@@ -495,6 +525,7 @@
   margin: 30px auto 0 auto;
   display: flex;
   flex-direction: column;
+  row-gap: 35px;
 }
 .projectForm_descriptionsContainer_textField {
   margin: 10px 0;
@@ -503,7 +534,7 @@
 }
 .projectForm_descriptionsContainer_textField_textarea {
   border: none;
-  background-color: rgb(238, 255, 0);
+  background-color: rgb(255, 242, 0);
   font-family: "MainFont_light";
   font-size: 16px;
   margin-right: 12px;
@@ -534,20 +565,18 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 25px;
-  -moz-column-gap: 16px;
-       column-gap: 16px;
+  -moz-column-gap: 5px;
+       column-gap: 5px;
   width: 100%;
   margin-top: 8px;
-  border-bottom: solid 1px #0c0c0c;
 }
 .projectForm_arraysContainer_arrayField_fields_line {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
   margin: 0;
-  -moz-column-gap: 15px;
-       column-gap: 15px;
+  -moz-column-gap: 5px;
+       column-gap: 5px;
   width: 100%;
 }
 .projectForm_arraysContainer_arrayField_fields_line label {
@@ -557,21 +586,21 @@
   width: auto;
 }
 .projectForm_arraysContainer_arrayField_fields_line input {
-  width: 60%;
+  width: 100%;
   box-sizing: border-box;
 }
 .projectForm_arraysContainer_arrayField input, .projectForm_arraysContainer_arrayField_textarea, .projectForm_arraysContainer_arrayField select {
   border: none;
-  background-color: rgb(238, 255, 0);
+  background-color: rgb(255, 242, 0);
   font-family: "MainFont_light";
   font-size: 16px;
   margin-right: 6px;
 }
 .projectForm_arraysContainer_arrayField input, .projectForm_arraysContainer_arrayField_textarea {
-  width: 90%;
+  width: 95%;
 }
 .projectForm_arraysContainer_arrayField select {
-  width: 100px;
+  width: 95%;
 }
 .projectForm_arraysContainer_arrayField button {
   margin: auto;
@@ -586,6 +615,7 @@
   line-height: 50%;
   height: auto;
   margin-top: 16px;
+  margin-bottom: 0;
 }
 .projectForm_arraysContainer_arrayField button:hover {
   color: #E9E9E9;
@@ -607,15 +637,15 @@
 .projectForm_buttons button {
   margin: auto;
   font-family: "SpecialFont";
-  color: #0c0c0c;
+  color: #E9E9E9;
+  background-color: #0c0c0c;
   font-size: 25px;
   padding: 10px;
   border: none;
-  background-color: rgb(238, 255, 0);
 }
 .projectForm_buttons button:hover {
-  color: #E9E9E9;
-  background-color: #0c0c0c;
+  color: #0c0c0c;
+  background-color: rgb(255, 242, 0);
   cursor: pointer;
 }
 .projectForm_loaderContainer--displayOn {

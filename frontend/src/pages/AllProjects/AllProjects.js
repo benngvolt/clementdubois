@@ -6,13 +6,14 @@ import DOMPurify from 'dompurify';
 
 function AllProjects() {
 
-    const { projects, projectCategories } = useContext(ProjectsContext);
+    const { projects, projectCategories, setDisplayHeader } = useContext(ProjectsContext);
 
     const [filteredProjects, setFilteredProjects] = useState(projects);
     const [categoryProjects, setCategoryProjects] = useState('tous');
 
     useEffect(() => {
         setFilteredProjects(projects);
+        setDisplayHeader(false);
     },[projects]);
     
     // Trier les projets en fonction de leurs dates numériques (AAAAMM) dans l'ordre décroissant

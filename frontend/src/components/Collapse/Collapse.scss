@@ -1,6 +1,13 @@
 @import '../../utils/mixins';
 
 .collapse {
+        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+           
+        }
+        
+        @media only screen and (max-width:$mobileMaxWidth){
+            
+        } 
 
         &--white {
             background-color: white;
@@ -19,6 +26,14 @@
         } 
 
         &_collapseButton {
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                height: 73px;
+            }
+            
+            @media only screen and (max-width:$mobileMaxWidth){
+                height: 73px;
+            } 
+            
             &--white {
                 background-color: white;
                 color: $colorDarkGrey;
@@ -53,32 +68,64 @@
             }
 
             p {  
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                line-height: 200%;
                 font-family: 'SpecialFont';
                 font-size: 30px;
                 padding-top: 22px;
                 padding-bottom: 22px;
+                margin: 0;
+
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    font-size: 19px;
+                    margin: 0;
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    font-size: 19px;
+                    margin: 0;
+                } 
             }
             &_icon--closed {
                 font-size: 19px;
                 margin: auto 0px;
                 animation: closeCollapse 0.5s ease forwards;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    font-size: 16px;
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    font-size: 16px;
+                } 
             }
             &_icon--opened {
                 font-size: 19px;
                 margin: auto 0px;
                 animation: openCollapse 0.5s ease forwards;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    font-size: 16px;
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    font-size: 16px;
+                } 
             }
-            
         }
 
         &_children {
-        
+            
             &--opened {
                 animation: openCollapseChildren 1s ease forwards;
+                height: auto;
+                padding-bottom: 35px;
+                
             }
             
             &--closed {
                 animation: closeCollapseChildren 1s ease forwards;
+                overflow: hidden;
             }
         }
     

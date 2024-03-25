@@ -7,6 +7,13 @@
     flex-direction: column;
     justify-content: flex-start;
     row-gap: 4px;
+    @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+        @include responsiveMarginLeft;
+    }
+    
+    @media only screen and (max-width:$mobileMaxWidth){
+        @include responsiveMarginLeft;
+    } 
 
     &_buttonsContainer {
 
@@ -14,7 +21,13 @@
         flex-direction: row;
         column-gap: 30px;
         margin: 114px 54px;
-
+        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+            margin: 35px 0 73px 0;
+        }
+        
+        @media only screen and (max-width:$mobileMaxWidth){
+            margin: 35px 0 73px 0;
+        } 
         
         &_button {
             
@@ -42,6 +55,22 @@
         column-gap: 40px;
         box-sizing: border-box;
 
+        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+            padding-left: 0px;
+            flex-direction: column;
+            height: auto;
+            row-gap: 16px;
+            margin-bottom: 35px;
+        }
+        
+        @media only screen and (max-width:$mobileMaxWidth){
+            padding-left: 0px;
+            flex-direction: column;
+            height: auto;
+            row-gap: 9px;
+            margin-bottom: 35px;
+        } 
+
         &:hover {
 
             cursor: pointer;
@@ -59,30 +88,49 @@
             margin: auto;
         }
 
-        
-
         &_infos {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             box-sizing: border-box;
-            // border-left: solid 1px $colorDarkGrey;
-            // padding-left: 30px;
             width: 40%;
             height: 100%;
             animation: heightRetractInvert 0.5s ease forwards;
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                width: 95%;
+            }
+            
+            @media only screen and (max-width:$mobileMaxWidth){
+                width: 95%;
+            } 
             
 
             &_title {
                 font-family: 'SpecialFont';
                 font-size: 50px;
                 margin: 30px 0;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    font-size: 35px;
+                    margin: 0;
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    font-size: 35px;
+                    margin: 0;
+                } 
             }
 
             &_projectInfos {    
                 font-family: 'MainFont_bold';
                 font-size: 19px;
                 margin: auto 0;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    font-size: 19px;
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    font-size: 14px;
+                } 
             }
 
             &_creationDate {
@@ -90,13 +138,21 @@
                 font-size: 19px;
                 color: $colorDarkGrey;
                 margin: auto 0;
+                
             }
 
             &_summary {   
                 font-family: 'MainFont_light';
                 font-size: 16px;
                 height: 161px;
-                // overflow: scroll;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    height: auto;
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    display: none;
+                    height: auto;
+                } 
             }
 
         }
@@ -105,121 +161,31 @@
 
             width: 60%;
             box-sizing: border-box;
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                width: 95%;
+            }
+            
+            @media only screen and (max-width:$mobileMaxWidth){
+                width: 95%;
+            } 
 
             img {
                 width: 100%;
                 height: 490px;
                 object-fit: cover;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    height: auto;
+                    aspect-ratio: 2;
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    height: auto;
+                    aspect-ratio: 2;
+                } 
                 
             }
             
         }
 
     }
-
-    // &_projectCard {
-
-    //     width: 100%;
-    //     height: 600px;
-    //     text-decoration: none;
-    //     text-align: justify;
-    //     color: $colorDarkGrey;
-    //     display: flex;
-    //     flex-direction: row;
-    //     justify-content: space-between;
-    //     column-gap: 40px;
-    //     position: relative;
-    //     // box-sizing: border-box;
-
-    //     &:hover {
-
-    //         cursor: pointer;
-    //         background-color: $colorFirst;
-
-    //         .allProjects_projectCard_infos {
-    //             color: $colorLightGrey;
-    //             background-color: $colorDarkGrey;
-    //         }
-    //         img {
-    //             filter:grayscale(0);
-    //         }
-
-    //         // .allProjects_projectCard_infos {
-    //         //     animation: heightRetract 0.5s ease forwards;
-    //         // }
-    //     }
-
-    //     // &_creationDate {
-    //     //     padding-left: 54px;
-    //     //     padding-top: 54px;
-    //     //     width: 1%;
-    //     //     position: absolute;
-    //     // }
-
-        
-
-    //     &_infos {
-    //         z-index: 2;
-    //         background-color: $colorFirst;
-    //         position: absolute;
-    //         left: 5%;
-    //         bottom: 10%;
-    //         display: flex;
-    //         flex-direction: column;
-    //         justify-content: center;
-    //         margin: auto;
-    //         box-sizing: border-box;
-    //         row-gap: 16px;
-    //         // border-left: solid 1px $colorDarkGrey;
-    //         padding-left: 30px;
-    //         padding-right: 30px;
-    //         width: 40%;
-    //         height: 45%;
-    //         animation: heightRetractInvert 0.5s ease forwards;
-            
-
-    //         &_title {
-    //             font-family: 'SpecialFont';
-    //             font-size: 50px;
-    //             margin: 0;
-    //         }
-
-    //         &_projectInfos {    
-    //             font-family: 'MainFont_bold';
-    //             font-size: 19px;
-    //             margin: 0;
-    //         }
-
-    //         &_creationDate {
-    //             font-family: 'MainFont_light';
-    //             font-size: 14px;
-    //             margin: 0;
-    //             padding: 0;
-    //             margin: 0;
-    //         }
-
-    //         &_summary {   
-    //             font-family: 'MainFont_light';
-    //             font-size: 14px;
-    //             margin: 0;
-    //             overflow: scroll;
-    //         }
-
-    //     }
-
-    //     &_imageContainer {
-    //         z-index: 1;
-    //         width: 100%;
-    //         box-sizing: border-box;
-
-    //         img {
-    //             width: 100%;
-    //             height: 100%;
-    //             object-fit: cover;
-    //             filter:grayscale(1);
-    //         }
-            
-    //     }
-
-    // }
 }

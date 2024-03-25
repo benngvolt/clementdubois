@@ -4,14 +4,21 @@
 
    
     margin: 54px 0 25px 0;
-    // margin-top: 25px;
-    border-bottom: 1px solid $colorDarkGrey;
-    // border-top: 1px solid $colorDarkGrey;
-    background-color: $colorLightGrey;
+    background-color: $colorFirst;
     position: -webkit-sticky; /* Pour la prise en charge de WebKit (Safari, Chrome) */
     position: sticky;
     top: 0px;
     z-index: 3;
+    @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+        position: fixed;
+        height: 100vh;
+    }
+    
+    @media only screen and (max-width:$mobileMaxWidth){
+        position: fixed;
+        height: 100vh;
+    } 
+    
 
     &--displayOff {
         display: none;
@@ -20,11 +27,25 @@
     &--open {
         animation: openHeader 0.5s ease forwards;
         margin:0;
+        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+            animation: openVerticalHeader 0.5s ease forwards;
+        }
+        
+        @media only screen and (max-width:$mobileMaxWidth){
+            animation: openVerticalHeader 0.5s ease forwards;
+        } 
     }
 
     &--close {
         animation: closeHeader 0.5s ease forwards;
         margin:0;
+        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+            animation: closeVerticalHeader 0.5s ease forwards;
+        }
+        
+        @media only screen and (max-width:$mobileMaxWidth){
+            animation: closeVerticalHeader 0.5s ease forwards;
+        } 
     }
 
     &_hamburger {
@@ -52,7 +73,6 @@
             animation: navOpenInvert 0.5s ease forwards;
             display: none;
         }
-
         &--displayOn {
             animation: navOpen 0.5s ease forwards;
             display: flex;
@@ -62,35 +82,62 @@
         flex-direction: row;
         justify-content: space-between;
 
+        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+            flex-direction: column;
+            justify-content: center;
+        };
+        @media only screen and (max-width:$mobileMaxWidth){
+            flex-direction: column;
+            justify-content: center;
+        }  
+
         &_menu {
             display: flex;
             flex-direction: row;
-            column-gap: 54px;
+            width: 90%;
+            column-gap: 1vw;
             margin-left: 54px;
             
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                flex-direction: column;
+                row-gap: 16px;
+                margin: auto;
+                justify-content: center;
+                width: 100%;
+            };
+            @media only screen and (max-width:$mobileMaxWidth){
+                flex-direction: column;
+                margin: auto;
+                row-gap: 16px;
+                justify-content: center;
+                width: 100%;
+            }  
+
             &_item {
                 display: flex;
-                
                 background: none;
                 border: none;
                 color: $colorDarkGrey;
                 font-family: 'SpecialFont';
-                font-size: 35px;
                 text-decoration: none;
                 padding: 0;
                 margin: auto 0;
                 height: 100%;
                 
                 &--selected {
-                    background-color: $colorFirst;
+                    text-decoration: underline;
                 }
+
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    margin: auto;
+                };
+                @media only screen and (max-width:$mobileMaxWidth){
+                    margin: auto;
+                }  
 
                 p:hover {
                     cursor: pointer;
-                    // color: $colorLightGrey;
-                    // text-decoration: underline;
-                    background-color: $colorFirst;
-                    
+                    text-decoration: underline;
                 }
 
                 h2, p {
@@ -104,6 +151,12 @@
                 margin: 0;
                 text-decoration: none;
                 height: 100%;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    font-size: 35px;
+                };
+                @media only screen and (max-width:$mobileMaxWidth){
+                    font-size: 1.5rem;
+                }  
                 }
             }
         }
@@ -111,10 +164,19 @@
         &_socials {
             display: flex;
             flex-direction: row;
-            column-gap: 46px;
+            column-gap: 1.8vw;
             margin: auto 54px auto 0px;
             box-sizing: border-box;
-
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                flex-direction: column;
+                margin: auto;
+                justify-content: center;
+            };
+            @media only screen and (max-width:$mobileMaxWidth){
+                flex-direction: column;
+                margin: auto;
+                justify-content: center;
+            }  
             a svg {
                 color: $colorDarkGrey;
                 height: 30px;

@@ -1,13 +1,11 @@
 .dndGrid {
-    width: 100%;
-    aspect-ratio: 1/2;
+    width: 40%;
     display: grid;
     justify-content: center;
     align-items: center;
     margin: auto;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 2px;
-    // row-gap: 10px;
 
     &_item {
         width: auto;
@@ -28,7 +26,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     box-sizing: content-box;
-    // justify-content: center;
     align-items: center;
     margin: auto;
     grid-gap: 19px;

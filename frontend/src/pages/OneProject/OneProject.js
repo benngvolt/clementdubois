@@ -1,7 +1,8 @@
 import './OneProject.scss'
 import { API_URL } from '../../utils/constants'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
+import { ProjectsContext } from '../../utils/ProjectsContext'
 import DOMPurify from 'dompurify';
 import Collapse from '../../components/Collapse/Collapse';
 import ImageFocus from '../../components/ImageFocus/ImageFocus';
@@ -10,6 +11,7 @@ function OneProject() {
 
     const { id } = useParams();
     const [project, setProject] = useState([]);
+    const { setDisplayHeader } = useContext(ProjectsContext);
     
     const [imageFocusUrl, setImageFocusUrl]=useState('');
     const [displayImageFocus, setDisplayImageFocus]= useState(false);
@@ -23,6 +25,7 @@ function OneProject() {
             .then((res) => res.json())
             .then((data) => {
                 setProject(data);
+                setDisplayHeader(false);
             })
             .catch((error) => console.log(error.message));
     }, [id]);

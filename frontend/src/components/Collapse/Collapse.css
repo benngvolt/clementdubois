@@ -247,11 +247,12 @@
     transform: rotate(180deg);
   }
 }
-@-webkit-keyframes openCarrousel {
+@-webkit-keyframes openCollapseChildren {
   0% {
     height: 0%;
     opacity: 0;
     padding-bottom: 0px;
+    display: none;
   }
   50% {
     height: auto;
@@ -264,11 +265,12 @@
     padding-bottom: 54px;
   }
 }
-@keyframes openCarrousel {
+@keyframes openCollapseChildren {
   0% {
     height: 0%;
     opacity: 0;
     padding-bottom: 0px;
+    display: none;
   }
   50% {
     height: auto;
@@ -281,7 +283,7 @@
     padding-bottom: 54px;
   }
 }
-@-webkit-keyframes closeCarrousel {
+@-webkit-keyframes closeCollapseChildren {
   0% {
     height: auto;
     opacity: 1;
@@ -296,9 +298,10 @@
     height: 0px;
     opacity: 0;
     padding-bottom: 0px;
+    display: none;
   }
 }
-@keyframes closeCarrousel {
+@keyframes closeCollapseChildren {
   0% {
     height: auto;
     opacity: 1;
@@ -313,6 +316,23 @@
     height: 0px;
     opacity: 0;
     padding-bottom: 0px;
+    display: none;
+  }
+}
+@-webkit-keyframes appearOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes appearOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 .collapse--white {
@@ -325,7 +345,7 @@
   background-color: #E9E9E9;
 }
 .collapse--color {
-  background-color: rgb(238, 255, 0);
+  background-color: rgb(255, 242, 0);
 }
 .collapse_collapseButton {
   width: 100%;
@@ -351,7 +371,7 @@
   color: #0c0c0c;
 }
 .collapse_collapseButton--color {
-  background-color: rgb(238, 255, 0);
+  background-color: rgb(255, 242, 0);
   color: #0c0c0c;
 }
 .collapse_collapseButton:hover {
@@ -376,10 +396,10 @@
           animation: openCollapse 0.5s ease forwards;
 }
 .collapse_children--opened {
-  -webkit-animation: openCarrousel 1s ease forwards;
-          animation: openCarrousel 1s ease forwards;
+  -webkit-animation: openCollapseChildren 1s ease forwards;
+          animation: openCollapseChildren 1s ease forwards;
 }
 .collapse_children--closed {
-  -webkit-animation: closeCarrousel 1s ease forwards;
-          animation: closeCarrousel 1s ease forwards;
+  -webkit-animation: closeCollapseChildren 1s ease forwards;
+          animation: closeCollapseChildren 1s ease forwards;
 }/*# sourceMappingURL=Collapse.css.map */

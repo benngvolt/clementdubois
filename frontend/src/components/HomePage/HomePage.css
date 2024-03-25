@@ -247,11 +247,12 @@
     transform: rotate(180deg);
   }
 }
-@-webkit-keyframes openCarrousel {
+@-webkit-keyframes openCollapseChildren {
   0% {
     height: 0%;
     opacity: 0;
     padding-bottom: 0px;
+    display: none;
   }
   50% {
     height: auto;
@@ -264,11 +265,12 @@
     padding-bottom: 54px;
   }
 }
-@keyframes openCarrousel {
+@keyframes openCollapseChildren {
   0% {
     height: 0%;
     opacity: 0;
     padding-bottom: 0px;
+    display: none;
   }
   50% {
     height: auto;
@@ -281,7 +283,7 @@
     padding-bottom: 54px;
   }
 }
-@-webkit-keyframes closeCarrousel {
+@-webkit-keyframes closeCollapseChildren {
   0% {
     height: auto;
     opacity: 1;
@@ -296,9 +298,10 @@
     height: 0px;
     opacity: 0;
     padding-bottom: 0px;
+    display: none;
   }
 }
-@keyframes closeCarrousel {
+@keyframes closeCollapseChildren {
   0% {
     height: auto;
     opacity: 1;
@@ -313,6 +316,23 @@
     height: 0px;
     opacity: 0;
     padding-bottom: 0px;
+    display: none;
+  }
+}
+@-webkit-keyframes appearOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes appearOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 .homePage {
@@ -339,18 +359,26 @@
 .homePage_image--blackBg {
   background-color: #0c0c0c;
 }
+.homePage_button {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 80%;
+  left: 10%;
+}
 .homePage_button a {
-  padding: 0 25px;
-  width: 500px;
-  background-color: rgb(238, 255, 0);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 30px;
+  box-sizing: border-box;
+  width: 400px;
+  height: 114px;
+  background-color: #0c0c0c;
   border: none;
   font-family: "SpecialFont";
   text-decoration: none;
-  color: #0c0c0c;
-  top: 80%;
-  left: 20%;
-  transform: translate(-50%, -50%);
-  position: fixed;
+  color: #E9E9E9;
   margin: auto;
 }
 .homePage_button a h1 {
@@ -358,6 +386,6 @@
 }
 .homePage_button a:hover {
   cursor: pointer;
-  color: #E9E9E9;
-  background-color: #0c0c0c;
+  color: #0c0c0c;
+  background-color: rgb(255, 242, 0);
 }/*# sourceMappingURL=HomePage.css.map */

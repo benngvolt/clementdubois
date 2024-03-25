@@ -3,22 +3,37 @@
 .contactModal {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     width: 50%;
-    height: 50vh;
+    height: 40vh;
     background-color: $colorLightGrey;
     margin: auto;
     position: relative;
     animation: appearOpacity 2s ease forwards;
+    padding-bottom: 35px;
+    @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
+            
+    }
+    
+    @media only screen and (max-width:$mobileMaxWidth){
+        width: 80%;
+    }  
 
 
     &_title {
         display: flex;
-        // flex-direction: row;
         justify-content: center;
         width: 100%;
         font-family: 'SpecialFont';
         font-size: 54px;
-        margin: 54px auto;
+        margin: 35px auto;
+        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
+            font-size: 35px;
+        }
+        
+        @media only screen and (max-width:$mobileMaxWidth){
+            font-size: 22px;
+        }  
     }
 
     &_closeButton {
@@ -30,6 +45,14 @@
         position: absolute;
         top: 20px;
         left: 20px;
+        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
+            
+        }
+        
+        @media only screen and (max-width:$mobileMaxWidth){
+            top: 10px;
+            left: 10px;
+        }  
         
         &_icon {
             height: 2em;
@@ -43,12 +66,31 @@
     &_tel {
         font-family: 'MainFont_bold';
         font-size: 19px;
-        margin: 25px 98px;
+        margin: 0 98px;
+        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
+            font-size: 16px;
+            margin: 0 54px;
+        }
+        
+        @media only screen and (max-width:$mobileMaxWidth){
+            font-size: 12px;
+            margin: 0 35px;
+        }  
+        
     }
 
     &_address, &_mail {
         font-family: 'MainFont_light';
         font-size: 19px;
-        margin: 25px 98px;
+        margin: 0 98px;
+        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
+            font-size: 16px;
+            margin: 0 54px;
+        }
+        
+        @media only screen and (max-width:$mobileMaxWidth){
+            font-size: 12px;
+            margin: 0 35px;
+        }  
     }
 }

@@ -79,9 +79,13 @@
 }
 
 @mixin mainGalleryRatio1 {
-    width: 100%;
-    aspect-ratio: 2.5/1;
+    aspect-ratio: 2/1;
 }
+
+@mixin responsiveMarginLeft {
+    margin-left: 10%;
+}
+
 /*-------------------
 ----- VARIABLES -----
 -------------------*/
@@ -89,11 +93,13 @@
 $colorLightGrey: #E9E9E9;
 $colorDarkGrey: #0c0c0c;
 $colorFields: aqua;
-// $colorButtons: rgb(96, 54, 151);
 $colorFirst: rgb(255, 242, 0);
 $colorThird: rgb(65, 65, 65);
 $colorSecond: rgb(255, 206, 213);
 
+$mobileMaxWidth: 768px;
+$padMinWidth: 769px;
+$padMaxWidth: 991px;
 
 /*-------------------
 ----- KEYFRAMES -----
@@ -189,6 +195,26 @@ $colorSecond: rgb(255, 206, 213);
     }
 }
 
+@keyframes closeVerticalHeader {
+    0% {  
+        width: 40%;
+    }
+    
+    100% { 
+        width: 6%;
+    }
+}
+
+@keyframes openVerticalHeader {
+    0% {  
+        width: 6%;
+    }
+    
+    100% { 
+        width: 40%;
+    }
+}
+
 @keyframes closeHeader {
     0% {  
         height: 98px;
@@ -212,6 +238,7 @@ $colorSecond: rgb(255, 206, 213);
 }
 
 @keyframes closeCollapse {
+
     0% {  
         transform: rotate(180deg);
     }
@@ -219,6 +246,7 @@ $colorSecond: rgb(255, 206, 213);
     100% { 
         transform: rotate(0deg);
     }
+    
 }
 
 @keyframes openCollapse {
@@ -233,21 +261,21 @@ $colorSecond: rgb(255, 206, 213);
 
 @keyframes openCollapseChildren {
     0% {  
-        height: 0%;
+        height: 0px;
         opacity: 0;
-        padding-bottom: 0px;
-        display: none;
+        // padding-bottom: 0px;
+        // display: none;
     }
     50% { 
         height: auto;
         opacity: 0;
-        padding-bottom: 54px;
+        // padding-bottom: 22px;
     }
 
     100% { 
         height: auto;
         opacity: 1;
-        padding-bottom: 54px;
+        // padding-bottom: 22px;
     }
 }
 
@@ -255,19 +283,15 @@ $colorSecond: rgb(255, 206, 213);
     0% {  
         height: auto;
         opacity: 1;
-        padding-bottom: 54px;
     }
     50% {  
         height: auto;
         opacity: 0;
-        padding-bottom: 54px;
     }
 
     100% { 
         height: 0px;
         opacity: 0;
-        padding-bottom: 0px;
-        display: none;
     }
 }
 
@@ -280,3 +304,14 @@ $colorSecond: rgb(255, 206, 213);
     }
 
 }
+
+
+@media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+
+}
+
+@media only screen and (max-width:$mobileMaxWidth){
+    
+}  
+
+

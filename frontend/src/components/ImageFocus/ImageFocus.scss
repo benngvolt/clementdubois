@@ -4,6 +4,8 @@
     display: flex;
     flex-direction: row;
     margin: auto;
+    width: 90%;
+    
     
 
     img {
@@ -11,6 +13,16 @@
         height: 80vh;
         object-fit: cover;
         padding: auto;
+        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+            width: 88%;
+            
+        }
+        
+        @media only screen and (max-width:$mobileMaxWidth){
+            width: 80%;
+            height: 60%;
+            aspect-ratio: 1;
+        } 
     }
     &_icon {
         color: $colorLightGrey;
@@ -20,5 +32,13 @@
         &:hover {
             cursor: pointer;
         }
+        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+            font-size: 25px;   
+        }
+        
+        @media only screen and (max-width:$mobileMaxWidth){
+            font-size: 16px; 
+            margin: auto 5%;  
+        } 
     }
 }

@@ -11,12 +11,21 @@
             font-size: 98px;
             font-family: 'SpecialFont';
         }
+
         &_img { 
             width: 100%; 
             aspect-ratio: 2/1;
             object-fit: cover;
             filter: grayscale(1);
             margin: 0;
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                                
+            }
+            
+            @media only screen and (max-width:$mobileMaxWidth){
+                aspect-ratio: 1.2/1;
+                width: 100%;
+            } 
         }
 
         &_introductionContainer {
@@ -24,18 +33,43 @@
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                @include responsiveMarginLeft;                
+            }
+            
+            @media only screen and (max-width:$mobileMaxWidth){
+                
+                @include responsiveMarginLeft;
+            } 
             
             
             p {
 
-            width: 40%;
-            text-align: justify;
-            font-family: 'MainFont_light';
-            font-size: 19px;
-            margin: 0 54px;
-            padding-top: 98px;
-            padding-bottom: 98px;
-            
+                width: 40%;
+                text-align: justify;
+                font-family: 'MainFont_light';
+                font-size: 16px;
+                margin: 0 54px;
+                padding-top: 98px;
+                padding-bottom: 98px;
+
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    width: 95%;
+                    
+                    margin: 0;
+                    padding-top: 46px;
+                    padding-bottom: 46px;            
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    width: 95%;
+                    font-size: 12px;
+                    margin: 0;
+                    padding-top: 35px;
+                    padding-bottom: 35px;
+                    
+                } 
+                
             }
         }
 
@@ -44,6 +78,15 @@
             padding-right: 54px;
             background-color: $colorFirst;
             margin: 0;
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                padding-left: 10%;
+                padding-right: 0;                
+            }
+            
+            @media only screen and (max-width:$mobileMaxWidth){
+                padding-left: 10%;
+                padding-right: 0;
+            } 
 
             &_title {
                 display: flex;
@@ -54,6 +97,15 @@
                 font-size: 54px;
                 padding-top: 98px;
                 margin: auto;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    font-size: 54px;
+                    padding-top: 54px;            
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    font-size: 22px;
+                    padding-top: 35px;
+                } 
             }
             &_secondTitle {
                 display: flex;
@@ -62,6 +114,17 @@
                 font-family: 'SpecialFont';
                 font-size: 35px;
                 padding-top: 98px;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    width: 100%;
+                    padding-top: 54px;           
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    font-size: 16px;
+                    width: 100%;  
+                    padding-top: 22px;
+                } 
+                
 
             }
 
@@ -70,7 +133,15 @@
                 text-align: justify;
                 width: 50%;
                 font-family: 'MainFont_light';
-                font-size: 19px;
+                font-size: 16px;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    width: 95%;           
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    font-size: 12px;
+                    width: 95%;  
+                } 
             }
 
             &_list {
@@ -81,6 +152,15 @@
                 justify-content: space-between;
                 row-gap: 35px;
                 list-style-type: none;
+                width: 95%;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){  
+                    padding: 54px 0;      
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    padding: 35px 0;      
+                    
+                } 
     
                 &_item {
                     
@@ -88,6 +168,18 @@
                         font-family: 'SpecialFont';
                         font-size: 25px;
                         margin: auto;
+                        text-align: left;
+                        
+                        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
+                            font-size: 16px;
+                            text-align: left;
+                        }
+                        
+                        @media only screen and (max-width:$mobileMaxWidth){
+                            font-size: 14px;
+                            text-align: center;
+                            
+                        } 
                     }
                 }
             }
@@ -99,28 +191,76 @@
             display: flex;
             text-align: justify;
             width: 50%;
-            margin: auto;
-            padding: 98px;
+            margin: 0;
             font-family: 'MainFont_light';
             font-size: 19px;
+            padding-top: 98px;
+            padding-left: 10%;
+            padding-right: 0; 
+            
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
+                font-size: 16px;
+                width: 85%;
+                padding-top: 54px
+            }
+            
+            @media only screen and (max-width:$mobileMaxWidth){
+                font-size: 12px;
+                width: 85%;
+                padding-top: 35px;
+                
+            }  
+             
         }
         
         &_collabsGrid {
             padding-top: 54px;
             padding-bottom: 54px;
-            width: 30%;
+            padding-left: 10%;
+            padding-right: 0; 
+            width: 600px;
             margin: auto;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             row-gap: 22px;
             list-style-type: none;
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
+                
+                width: 500px;
+                padding-top: 54px
+            }
+            
+            @media only screen and (max-width:$mobileMaxWidth){
+                margin: 0;
+                width: 85%;
+                padding-top: 35px;
+                
+            }  
 
             &_item {
 
                 width: 100px;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
+                    margin: auto;
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    margin: auto;
+                    width: 60px;
+                }  
 
                 img {
                     width: 100px;
+                    @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
+                        width: 80px;
+                        margin: auto;
+                    }
+                    
+                    @media only screen and (max-width:$mobileMaxWidth){
+                        width: 60px;
+                        margin: auto;
+                        align-items: center;
+                    }  
                 }
             }
         }

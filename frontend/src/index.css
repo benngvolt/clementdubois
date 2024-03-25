@@ -1,14 +1,348 @@
+@charset "UTF-8";
+/*---------------
+----- FONTS -----
+---------------*/
+@font-face {
+  font-family: "SpecialFont";
+  src: url("../../public/assets/fonts/Mermaid1001.ttf") format("truetype");
+  /* Ajouter ici les autres formats de police (.woff2, .ttf, .eot, etc.) pour la compatibilité des navigateurs */
+}
+@font-face {
+  font-family: "MainFont_light";
+  src: url("../../public/assets/fonts/ProximaNova-Light.ttf") format("truetype");
+  /* Ajouter ici les autres formats de police (.woff2, .ttf, .eot, etc.) pour la compatibilité des navigateurs */
+}
+@font-face {
+  font-family: "MainFont_lightItalic";
+  src: url("../../public/assets/fonts/ProximaNova-LightIt.ttf") format("truetype");
+  /* Ajouter ici les autres formats de police (.woff2, .ttf, .eot, etc.) pour la compatibilité des navigateurs */
+}
+@font-face {
+  font-family: "MainFont_bold";
+  src: url("../../public/assets/fonts/ProximaNova-Bold.ttf") format("truetype");
+  /* Ajouter ici les autres formats de police (.woff2, .ttf, .eot, etc.) pour la compatibilité des navigateurs */
+}
+/*----------------
+----- MIXINS -----
+----------------*/
+/*-------------------
+----- VARIABLES -----
+-------------------*/
+/*-------------------
+----- KEYFRAMES -----
+-------------------*/
+@-webkit-keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+  50% {
+    transform: translatey(-20px);
+  }
+  100% {
+    transform: translatey(0px);
+  }
+}
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+  50% {
+    transform: translatey(-20px);
+  }
+  100% {
+    transform: translatey(0px);
+  }
+}
+@-webkit-keyframes heightRetract {
+  0% {
+    padding-top: 0%;
+    padding-bottom: 0%;
+  }
+  25% {
+    padding-top: 0%;
+    padding-bottom: 0%;
+  }
+  100% {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+}
+@keyframes heightRetract {
+  0% {
+    padding-top: 0%;
+    padding-bottom: 0%;
+  }
+  25% {
+    padding-top: 0%;
+    padding-bottom: 0%;
+  }
+  100% {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+}
+@-webkit-keyframes heightRetractInvert {
+  0% {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  100% {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+@keyframes heightRetractInvert {
+  0% {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  100% {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+@-webkit-keyframes navOpen {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes navOpen {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes navOpenInvert {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes navOpenInvert {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes showHamburger {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes showHamburger {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes hideHamburger {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes hideHamburger {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes openHeader {
+  0% {
+    height: 30px;
+  }
+  100% {
+    height: 98px;
+  }
+}
+@keyframes openHeader {
+  0% {
+    height: 30px;
+  }
+  100% {
+    height: 98px;
+  }
+}
+@-webkit-keyframes closeHeader {
+  0% {
+    height: 98px;
+  }
+  100% {
+    height: 30px;
+  }
+}
+@keyframes closeHeader {
+  0% {
+    height: 98px;
+  }
+  100% {
+    height: 30px;
+  }
+}
+@-webkit-keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+@keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+@-webkit-keyframes closeCollapse {
+  0% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@keyframes closeCollapse {
+  0% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@-webkit-keyframes openCollapse {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+@keyframes openCollapse {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+@-webkit-keyframes openCollapseChildren {
+  0% {
+    height: 0%;
+    opacity: 0;
+    padding-bottom: 0px;
+    display: none;
+  }
+  50% {
+    height: auto;
+    opacity: 0;
+    padding-bottom: 54px;
+  }
+  100% {
+    height: auto;
+    opacity: 1;
+    padding-bottom: 54px;
+  }
+}
+@keyframes openCollapseChildren {
+  0% {
+    height: 0%;
+    opacity: 0;
+    padding-bottom: 0px;
+    display: none;
+  }
+  50% {
+    height: auto;
+    opacity: 0;
+    padding-bottom: 54px;
+  }
+  100% {
+    height: auto;
+    opacity: 1;
+    padding-bottom: 54px;
+  }
+}
+@-webkit-keyframes closeCollapseChildren {
+  0% {
+    height: auto;
+    opacity: 1;
+    padding-bottom: 54px;
+  }
+  50% {
+    height: auto;
+    opacity: 0;
+    padding-bottom: 54px;
+  }
+  100% {
+    height: 0px;
+    opacity: 0;
+    padding-bottom: 0px;
+    display: none;
+  }
+}
+@keyframes closeCollapseChildren {
+  0% {
+    height: auto;
+    opacity: 1;
+    padding-bottom: 54px;
+  }
+  50% {
+    height: auto;
+    opacity: 0;
+    padding-bottom: 54px;
+  }
+  100% {
+    height: 0px;
+    opacity: 0;
+    padding-bottom: 0px;
+    display: none;
+  }
+}
+@-webkit-keyframes appearOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes appearOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(233, 233, 233);
+  background-color: #E9E9E9;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}/*# sourceMappingURL=index.css.map */

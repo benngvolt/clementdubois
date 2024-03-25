@@ -19,6 +19,12 @@ import Collapse from '../../components/Collapse/Collapse';
 
 function About() {
 
+    const { setDisplayHeader } = useContext(ProjectsContext);
+
+    useEffect(() => {
+        setDisplayHeader(false);
+    },[]);
+
     return (      
         <section className='about'>
             <img className='about_img' src={portrait} alt='Clément Dubois'/>
