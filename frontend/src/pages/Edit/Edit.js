@@ -90,71 +90,73 @@ function Edit() {
 
     return  (      
         <aside className='edit'>
-            <ul className='edit_list'>
-                {projects.map((project)=>(
-                    <li className='edit_list_item'>
-                        {project.projectImages && project.projectImages.length > 0 &&
-                            <img className='edit_list_item_image' src={project.projectImages[project.mainImageIndex].imageUrl} />
-                        }
-                        <p className='edit_list_item_title'>{project.title}</p>
-                        <div className='edit_list_item_buttonsBox'>
-                            <button type='button' onClick={()=> handleProjectDeleteMode(project)}>SUPPRIMER</button>
-                            <button type='button' onClick={()=> editProject(project)}>MODIFIER</button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-            <button onClick={() => addProject()} type='button' className='edit_addButton'>+ ajouter</button>
-            <div>
-                <ConfirmBox
-                    affirmativeChoice = {deleteProject}
-                    confirmBoxState={confirmBoxState}
-                    negativeChoice={closeConfirmBox}
-                    attribut={null}
-                    />
-            </div>
-            <div className={handleDisplayProjectForm===false ? "edit_form--displayOff" : "edit_form--displayOn"}>
-                <ProjectForm 
-                    projectEdit={projectEdit} 
-                    projectFormMode={projectFormMode}
-                    artistsList={artistsList}
-                    setArtistsList={setArtistsList}
-                    productionList={productionList}
-                    setProductionList={setProductionList}
-                    pressList={pressList}
-                    setPressList={setPressList}
-                    linksList={linksList}
-                    setLinksList={setLinksList}
-                    diffusionList={diffusionList}
-                    setDiffusionList={setDiffusionList}
-                    imageFiles={imageFiles}
-                    setImageFiles={setImageFiles}
-                    moImageFiles={moImageFiles}
-                    setMoImageFiles={setMoImageFiles}
-                    mainImageIndex={mainImageIndex}
-                    mainMoImageIndex={mainMoImageIndex}
-                    setMainImageIndex={setMainImageIndex}
-                    setMainMoImageIndex={setMainMoImageIndex}
-                    setHandleDisplayProjectForm={setHandleDisplayProjectForm}
-                    handleDisplayProjectForm={handleDisplayProjectForm}
-                    handleLoadProjects={handleLoadProjects}
-                    />
-            </div>
-            <div className='edit_randomImages'>
-                <p className='edit_randomImages_title'>IMAGES LANDING PAGE</p>
-                <div className='edit_randomImages_list'>
-                    {randomImagesSelection.map((imageUrl) => (
-                    <div className='edit_randomImages_list_item'>
-                        <img className='edit_randomImages_list_item_img' src={imageUrl} alt='Clément Dubois'/>
-                        {/* <button type='button' aria-label="Définir cette image comme image random de la landing-page" className='edit_randomImages_list_item_inRandomSelectionButton'
-                            onMouseDown={() => console.log('hola')} >
-                            <FontAwesomeIcon icon={faBolt} 
-                            className = 'edit_randomImages_list_item'
-                            // className={props.item.inRandomSelection === true ? 'dndItem_buttons_inRandomSelectionButton--isOrange' : 'dndItem_buttons_inRandomSelectionButton--isWhite'} 
-                            />
-                        </button> */}
-                    </div>
+            <div className='edit_wrapper'>
+                <ul className='edit_list'>
+                    {projects.map((project)=>(
+                        <li className='edit_list_item'>
+                            {project.projectImages && project.projectImages.length > 0 &&
+                                <img className='edit_list_item_image' src={project.projectImages[project.mainImageIndex].imageUrl} />
+                            }
+                            <p className='edit_list_item_title'>{project.title}</p>
+                            <div className='edit_list_item_buttonsBox'>
+                                <button type='button' onClick={()=> handleProjectDeleteMode(project)}>SUPPRIMER</button>
+                                <button type='button' className='edit_list_item_buttonsBox_modif' onClick={()=> editProject(project)}>MODIFIER</button>
+                            </div>
+                        </li>
                     ))}
+                </ul>
+                <button onClick={() => addProject()} type='button' className='edit_addButton'>+ ajouter</button>
+                <div>
+                    <ConfirmBox
+                        affirmativeChoice = {deleteProject}
+                        confirmBoxState={confirmBoxState}
+                        negativeChoice={closeConfirmBox}
+                        attribut={null}
+                        />
+                </div>
+                <div className={handleDisplayProjectForm===false ? "edit_form--displayOff" : "edit_form--displayOn"}>
+                    <ProjectForm 
+                        projectEdit={projectEdit} 
+                        projectFormMode={projectFormMode}
+                        artistsList={artistsList}
+                        setArtistsList={setArtistsList}
+                        productionList={productionList}
+                        setProductionList={setProductionList}
+                        pressList={pressList}
+                        setPressList={setPressList}
+                        linksList={linksList}
+                        setLinksList={setLinksList}
+                        diffusionList={diffusionList}
+                        setDiffusionList={setDiffusionList}
+                        imageFiles={imageFiles}
+                        setImageFiles={setImageFiles}
+                        moImageFiles={moImageFiles}
+                        setMoImageFiles={setMoImageFiles}
+                        mainImageIndex={mainImageIndex}
+                        mainMoImageIndex={mainMoImageIndex}
+                        setMainImageIndex={setMainImageIndex}
+                        setMainMoImageIndex={setMainMoImageIndex}
+                        setHandleDisplayProjectForm={setHandleDisplayProjectForm}
+                        handleDisplayProjectForm={handleDisplayProjectForm}
+                        handleLoadProjects={handleLoadProjects}
+                        />
+                </div>
+                <div className='edit_randomImages'>
+                    <p className='edit_randomImages_title'>IMAGES LANDING PAGE</p>
+                    <div className='edit_randomImages_list'>
+                        {randomImagesSelection.map((imageUrl) => (
+                        <div className='edit_randomImages_list_item'>
+                            <img className='edit_randomImages_list_item_img' src={imageUrl} alt='Clément Dubois'/>
+                            {/* <button type='button' aria-label="Définir cette image comme image random de la landing-page" className='edit_randomImages_list_item_inRandomSelectionButton'
+                                onMouseDown={() => console.log('hola')} >
+                                <FontAwesomeIcon icon={faBolt} 
+                                className = 'edit_randomImages_list_item'
+                                // className={props.item.inRandomSelection === true ? 'dndItem_buttons_inRandomSelectionButton--isOrange' : 'dndItem_buttons_inRandomSelectionButton--isWhite'} 
+                                />
+                            </button> */}
+                        </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </aside>

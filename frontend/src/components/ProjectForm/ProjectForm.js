@@ -333,7 +333,6 @@ function ProjectForm({
     return  (      
         
         <form onSubmit={(event) => projectFormSubmit(event)} method="post" className='projectForm'>
-
             <button type='button' className='projectForm_stickyCancelButton' onClick={() => closeForm()}>
                 <FontAwesomeIcon icon={faXmark} className='projectForm_stickyCancelButton_icon'/>
             </button>

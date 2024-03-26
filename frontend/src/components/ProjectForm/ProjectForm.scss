@@ -69,7 +69,7 @@
     
         
     &_mainInfosContainer {
-        width: 70%;
+        width: 85%;
         margin: auto;
         flex-direction: column;
         justify-content: space-between;
@@ -99,7 +99,7 @@
     }
 
     &_imagesFieldsContainer {
-        width: 70%;
+        width: 85%;
         margin: auto;
         
 
@@ -108,22 +108,22 @@
             flex-direction: column;
             width: 100%;
             height: auto;
-            
             margin: 30px auto 0 auto;
             box-sizing: border-box;
 
             &_imageField {
                 display: flex;
                 flex-direction: column;
-                vertical-align: middle;
-                // width: 50%;
+                justify-content: center;
                 height: auto;
+                
 
                 label {
                     margin: auto;
                     @include Button;
                     font-family: 'MainFont_light';
                     font-size: 16px;
+                    
                 }
                 
                 input {
@@ -133,6 +133,8 @@
                     font-size: 16px;
                     margin-right: 12px;
                     width: auto;
+                    
+                    
                 }
                 
                 &_sampleContainer {
@@ -198,7 +200,7 @@
 
     &_descriptionsContainer {
 
-        width: 70%;
+        width: 85%;
         margin: 30px auto 0 auto;
         display: flex;
         flex-direction: column;
@@ -229,7 +231,7 @@
     }
     
     &_arraysContainer {
-        width: 70%;
+        width: 85%;
         margin: auto;
         display: flex;
         flex-direction: column;

@@ -1,50 +1,120 @@
 @import '../../utils/mixins';
 
 .edit {
-    margin: auto 54px;
-    display: flex;
-    flex-direction: column;
+    margin-left: 54px;
+    
     animation: appearOpacity 2s ease forwards;
+    @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+        @include responsiveMarginLeft;
+    }
+    
+    @media only screen and (max-width:$mobileMaxWidth){
+        @include responsiveMarginLeft;
+    } 
+
+    &_wrapper {
+        
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    &_confirmBoxWrapper {
+        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+            width: 95%;
+            @include responsiveMarginLeft;
+        }
+        
+        @media only screen and (max-width:$mobileMaxWidth){
+            width: 95%;
+            @include responsiveMarginLeft;
+        }
+    }
 
 
     &_list {
 
-        margin: 54px auto;
+        margin: 54px 0;
         padding: 0;
-        width: 80%;
+        
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        // grid-gap: 25px;
+        grid-template-columns: 1fr 1fr 1fr;
+        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        @media only screen and (max-width:$mobileMaxWidth){
+            display: flex;
+            flex-direction: column;
+        } 
         
         &_item {
             display: flex;
             flex-direction: column;
             row-gap: 12px;
+            margin-bottom: 22px;
 
             &_image {
-                width: 300px;
-                height: 200px;
+                width: 80%;
+                aspect-ratio: 1.5/1;
                 object-fit: cover;
+                margin: auto;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    width: 60%;
+                } 
             }
 
             &_title {
                 font-family: 'SpecialFont';
-                font-size: 25px;
+                font-size: 22px;
                 color: $colorDarkGrey;
-                margin: 0;
-
+                margin: auto;
             }
 
             &_buttonsBox {
                 display: flex;
                 flex-direction: row;
-                column-gap: 16px;
+                column-gap: 12px;
                 margin-bottom: 16px;
+                margin: auto;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    flex-direction: column;
+                    row-gap: 12px;
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    flex-direction: column;
+                    row-gap: 12px;
+                } 
+
+                &_modif {
+                    @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                        display: none
+                    }
+                    
+                    @media only screen and (max-width:$mobileMaxWidth){
+                        display: none
+                    } 
+                }
+        
                 button {
                     font-family: 'MainFont_light';
                     font-size: 16px;
+                    color: $colorDarkGrey;
                     background-color: $colorFirst;
                     border: none;
+                    @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                        width: auto;
+                    }
+                    
+                    @media only screen and (max-width:$mobileMaxWidth){
+                        width: auto;
+                    } 
                     &:hover {
                         cursor: pointer;
                         background-color: $colorDarkGrey;
@@ -56,9 +126,10 @@
     }
 
     &_addButton {
-        margin: 54px auto;
+        margin: auto;
         @include Button;
     }
+  
 
     &_form {
 
@@ -82,27 +153,28 @@
         
         display: flex;
         flex-direction: column;
-        
+        margin-top: 98px;
 
         &_title {
-            width: 80%;
-            margin: 25px auto;
+            width: 95%;
+            margin: auto;
+            text-align: center;
+            margin-bottom: 46px;
         }
 
         &_list {
             width: 80%;
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 16px;
             flex-wrap: wrap;
             margin: 0 auto 54px auto;
-            // grid-template-columns: 1fr 1fr 1fr 1fr;
-            // grid-gap: 25px;
 
             &_item {
                 img {
                     width: 200px;
-                    margin-bottom: 8px;
+                    aspect-ratio: 1.5/1;
                 }
             }
         }  
