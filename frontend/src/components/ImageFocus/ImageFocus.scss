@@ -3,19 +3,28 @@
 .imageFocus {
     display: flex;
     flex-direction: row;
+    
     margin: auto;
-    width: 90%;
+    width: auto;
+    @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+        width: auto;
+    }
+    
+    @media only screen and (max-width:$mobileMaxWidth){
+        width: 90%;
+    } 
     
     
 
     img {
-        width: 80vw;
+        aspect-ratio: 1;
         height: 80vh;
         object-fit: cover;
         padding: auto;
+        margin: auto;
         @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
             width: 88%;
-            
+            aspect-ratio: 1;
         }
         
         @media only screen and (max-width:$mobileMaxWidth){

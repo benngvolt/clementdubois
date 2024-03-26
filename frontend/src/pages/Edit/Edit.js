@@ -2,7 +2,7 @@ import './Edit.scss'
 import ProjectForm from '../../components/ProjectForm/ProjectForm'
 import ConfirmBox from '../../components/ConfirmBox/ConfirmBox'
 import { API_URL } from '../../utils/constants'
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { ProjectsContext } from '../../utils/ProjectsContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faBolt} from '@fortawesome/free-solid-svg-icons'
@@ -25,7 +25,11 @@ function Edit() {
     const [mainImageIndex, setMainImageIndex]= useState(0);
     const [mainMoImageIndex, setMainMoImageIndex]= useState(0);
 
-    const { projects, handleLoadProjects, randomImagesSelection } = useContext(ProjectsContext);
+    const { projects, handleLoadProjects, randomImagesSelection, setDisplayHeader } = useContext(ProjectsContext);
+
+    useEffect(() => {
+        setDisplayHeader(false);
+    },[]);
 
     function addProject() {
         resetFields();

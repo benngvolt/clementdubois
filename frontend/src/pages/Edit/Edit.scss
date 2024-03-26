@@ -20,19 +20,6 @@
     }
 
 
-    &_confirmBoxWrapper {
-        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-            width: 95%;
-            @include responsiveMarginLeft;
-        }
-        
-        @media only screen and (max-width:$mobileMaxWidth){
-            width: 95%;
-            @include responsiveMarginLeft;
-        }
-    }
-
-
     &_list {
 
         margin: 54px 0;
