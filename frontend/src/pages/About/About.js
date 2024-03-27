@@ -26,19 +26,19 @@ function About() {
     },[]);
 
     return (      
-        <section className='about'>
+        <main className='about'>
             <img className='about_img' src={portrait} alt='Clément Dubois'/>
-            <div className='about_introductionContainer'>
+            <section className='about_introductionContainer'>
                 <p> Clément Dubois, scénographe, allie sa riche expérience de comédien et de technicien à sa formation en design. Chaque création, fruit d'une analyse approfondie, fusionne l'esthétique et la fonctionnalité pour susciter l’imaginaire des spectateurs et faciliter le travail des acteurs. Ses décors deviennent des acteurs à part entière, invitant à explorer des univers visuels singuliers, méticuleusement adaptés à chaque récit avec une dramaturgie spécifique.
                     Sa méthodologie de travail encourage la collaboration et l'expression pour tous les contributeurs impliqués dans la conception. Il crée des espaces où la scénographie se transforme en un véritable terrain de jeu artistique, un espace où l'art et la technique se rencontrent, tout en demeurant accessible à tous.<br/><br/>
                     En parallèle de ses créations, il partage sa démarche créative à travers des médiations, stages et workshop destinés tant aux publics professionnels qu'amateurs.
                     Depuis 2020, il contribue activement au projet ARTEX, une initiative dédiée au développement de l’éco-création et du réemploi dans les milieux culturels et artistiques de la région Auvergne-Rhône-Alpes.
                     Il est aussi membre de la commission éco-conception de l’Union Des Scénographe et de l’Augures Lab Scénogrrrraphie, réseau professionnel collaboratif et prospectif , qui s’inspire des “4R” de l’économie circulaire (Réparer, Réemployer, Refabriquer, Recycler) pour développer l’écoscénographie.
                 </p>
-            </div>
+            </section>
             <img className='about_img' src={atelier1} alt='Clément Dubois'/>
-            <div className='about_manifestoContainer'>
-                <h3 className='about_manifestoContainer_title'>Manifeste</h3>
+            <section className='about_manifestoContainer'>
+                <h5 className='about_manifestoContainer_title'>Manifeste</h5>
                 <p className='about_manifestoContainer_secondTitle'>En premier lieu</p> 
                 <p className='about_manifestoContainer_description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.
                 </p>    
@@ -49,7 +49,7 @@ function About() {
                     </li>
                     ))}
                 </ul>
-            </div>
+            </section>
             <img className='about_img' src={atelier2} alt='Clément Dubois'/>
             <Collapse title="Mentions légales" style='dark'>
                 <p className='about_mentionsText'> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.<br/><br/>
@@ -84,7 +84,7 @@ function About() {
                     </li>
                 </ul>
             </Collapse>
-        </section>
+        </main>
     )
 }
 

@@ -22,7 +22,7 @@ function Footer() {
                     <li className={location.pathname===`/projects/${project._id}`?'footer_list_item footer_list_item--selected':'footer_list_item'}> 
                         <Link to={`/projects/${project._id}`} onClick={()=>scrollToTop()}>
                             {project.projectImages && project.projectImages.length > 0 &&
-                                <img src={`${project.projectImages[project.mainImageIndex].imageUrl}`}/>
+                            <img src={`${project.projectImages[project.mainImageIndex].imageUrl}`}/>
                             }
                             <p>{project.title}</p>
                         </Link>

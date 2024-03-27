@@ -4,9 +4,9 @@ import HomePage from '../../components/HomePage/HomePage'
 function Home ({loaderDisplay}) {
 
     return (
-        <div >
+        <main>
            <HomePage loaderDisplay={loaderDisplay}/>
-        </div>
+        </main>
     )
 }
 

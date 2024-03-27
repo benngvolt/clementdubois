@@ -7,39 +7,67 @@
     flex-direction: column;
     justify-content: flex-start;
     row-gap: 4px;
+    
     @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
         @include responsiveMarginLeft;
     }
-    
     @media only screen and (max-width:$mobileMaxWidth){
         @include responsiveMarginLeft;
     } 
 
-    &_buttonsContainer {
+    ul {
+        list-style: none;
+        padding: 0;
+        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+            
+        }
+        @media only screen and (max-width:$mobileMaxWidth){
+            display: flex;
+            flex-direction: column;
+            row-gap: 9px;
+        } 
+    }
 
+    &_buttonsContainer {
         display: flex;
         flex-direction: row;
         column-gap: 30px;
         margin: 114px 54px;
+        
         @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
             margin: 35px 0 73px 0;
-        }
-        
+        } 
         @media only screen and (max-width:$mobileMaxWidth){
-            margin: 35px 0 73px 0;
+            margin: 35px 0 35px 0;
         } 
         
         &_button {
+            list-style-type: none;
             
-
             &--notSelected {
-                @include Button;
-                margin: 0;
-            };
+                border: none;
+                padding: 0;
+                h3 {
+                    margin: 0;
+                    @include Button;
+                } 
+            }
+
             &--selected {
-                @include ButtonSelected;
+                border: none;
+                padding: 0;
+                h3 {
+                    margin: 0;
+                    @include ButtonSelected;
+                }    
             }
         }
+    }
+
+    &_projectsList {
+        display: flex;
+        flex-direction: column;
+        row-gap: 3px;
     }
 
     &_projectCard {
@@ -62,7 +90,6 @@
             row-gap: 16px;
             margin-bottom: 35px;
         }
-        
         @media only screen and (max-width:$mobileMaxWidth){
             padding-left: 0px;
             flex-direction: column;
@@ -96,6 +123,7 @@
             width: 40%;
             height: 100%;
             animation: heightRetractInvert 0.5s ease forwards;
+            
             @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                 width: 95%;
             }
@@ -109,11 +137,11 @@
                 font-family: 'SpecialFont';
                 font-size: 50px;
                 margin: 30px 0;
+
                 @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                     font-size: 35px;
                     margin: 0;
-                }
-                
+                } 
                 @media only screen and (max-width:$mobileMaxWidth){
                     font-size: 35px;
                     margin: 0;
@@ -124,10 +152,10 @@
                 font-family: 'MainFont_bold';
                 font-size: 19px;
                 margin: auto 0;
+
                 @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                     font-size: 19px;
                 }
-                
                 @media only screen and (max-width:$mobileMaxWidth){
                     font-size: 14px;
                 } 
@@ -138,54 +166,50 @@
                 font-size: 19px;
                 color: $colorDarkGrey;
                 margin: auto 0;
-                
             }
 
             &_summary {   
                 font-family: 'MainFont_light';
                 font-size: 16px;
                 height: 161px;
+
                 @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                     height: auto;
                 }
-                
                 @media only screen and (max-width:$mobileMaxWidth){
                     display: none;
                     height: auto;
                 } 
             }
-
         }
 
         &_imageContainer {
-
             width: 60%;
             box-sizing: border-box;
+            margin: 0;
+
             @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-                width: 95%;
+               @include responsiveMarginRight;
             }
             
             @media only screen and (max-width:$mobileMaxWidth){
-                width: 95%;
+                @include responsiveMarginRight;
             } 
 
             img {
                 width: 100%;
                 height: 490px;
                 object-fit: cover;
+
                 @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                     height: auto;
                     aspect-ratio: 2;
                 }
-                
                 @media only screen and (max-width:$mobileMaxWidth){
                     height: auto;
                     aspect-ratio: 2;
-                } 
-                
-            }
-            
+                }                 
+            }            
         }
-
     }
 }

@@ -29,47 +29,37 @@
         }
 
         &_introductionContainer {
-            // background-color: $colorFirst;
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
-            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+            
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth) {
                 @include responsiveMarginLeft;                
             }
-            
-            @media only screen and (max-width:$mobileMaxWidth){
-                
+            @media only screen and (max-width:$mobileMaxWidth) {
                 @include responsiveMarginLeft;
             } 
-            
-            
+                  
             p {
-
                 width: 40%;
                 text-align: justify;
                 font-family: 'MainFont_light';
                 font-size: 16px;
-                margin: 0 54px;
+                margin-left: 0 54px;
                 padding-top: 98px;
                 padding-bottom: 98px;
 
-                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-                    width: 95%;
-                    
-                    margin: 0;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth) {
+                    @include responsiveMarginRight;
                     padding-top: 46px;
                     padding-bottom: 46px;            
                 }
-                
-                @media only screen and (max-width:$mobileMaxWidth){
-                    width: 95%;
+                @media only screen and (max-width:$mobileMaxWidth) {
+                    @include responsiveMarginRight;
                     font-size: 12px;
-                    margin: 0;
                     padding-top: 35px;
                     padding-bottom: 35px;
-                    
-                } 
-                
+                }
             }
         }
 
@@ -78,19 +68,18 @@
             padding-right: 54px;
             background-color: $colorFirst;
             margin: 0;
+
             @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-                padding-left: 10%;
-                padding-right: 0;                
+                padding-left: 50px;
+                padding-right: 15px;                
             }
-            
             @media only screen and (max-width:$mobileMaxWidth){
-                padding-left: 10%;
-                padding-right: 0;
+                padding-left: 50px;
+                padding-right: 15px;
             } 
 
             &_title {
                 display: flex;
-                // flex-direction: row;
                 justify-content: center;
                 width: 100%;
                 font-family: 'SpecialFont';
@@ -114,18 +103,16 @@
                 font-family: 'SpecialFont';
                 font-size: 35px;
                 padding-top: 98px;
+
                 @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                     width: 100%;
                     padding-top: 54px;           
                 }
-                
                 @media only screen and (max-width:$mobileMaxWidth){
                     font-size: 16px;
                     width: 100%;  
                     padding-top: 22px;
                 } 
-                
-
             }
 
             &_description {
@@ -135,12 +122,14 @@
                 font-family: 'MainFont_light';
                 font-size: 16px;
                 @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-                    width: 95%;           
+                    margin: 0;
+                    width: auto;
                 }
                 
                 @media only screen and (max-width:$mobileMaxWidth){
                     font-size: 12px;
-                    width: 95%;  
+                    margin: 0;
+                    width: auto;
                 } 
             }
 
@@ -200,13 +189,13 @@
             
             @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
                 font-size: 16px;
-                width: 85%;
+                @include responsiveMarginRight;
                 padding-top: 54px
             }
             
             @media only screen and (max-width:$mobileMaxWidth){
                 font-size: 12px;
-                width: 85%;
+                @include responsiveMarginRight;
                 padding-top: 35px;
                 
             }  

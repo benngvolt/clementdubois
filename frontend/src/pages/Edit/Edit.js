@@ -93,8 +93,8 @@ function Edit() {
 
 
     return  (      
-        <aside className='edit'>
-            <div className='edit_wrapper'>
+        <main className='edit'>
+            <aside className='edit_wrapper'>
                 <ul className='edit_list'>
                     {projects.map((project)=>(
                         <li className='edit_list_item'>
@@ -162,8 +162,8 @@ function Edit() {
                         ))}
                     </div>
                 </div>
-            </div>
-        </aside>
+            </aside>
+        </main>
     )
 }
 

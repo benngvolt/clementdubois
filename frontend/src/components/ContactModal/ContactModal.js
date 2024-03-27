@@ -12,7 +12,7 @@ function ContactModal({setdisplayContactModal}) {
             <button type='button' className='contactModal_closeButton' onClick={()=>setdisplayContactModal(false)}>
                 <FontAwesomeIcon icon={faXmark} className='contactModal_closeButton_icon'/>
             </button>
-            <h3 className='contactModal_title'>Contact</h3>
+            <h2 className='contactModal_title'>Contact</h2>
             <p className='contactModal_tel'>
                         06 59 17 44 74
             </p>
