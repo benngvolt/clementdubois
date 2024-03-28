@@ -107,7 +107,7 @@ function DNDGallery ({ imageFiles, setImageFiles, mainImageIndex, setMainImageIn
             <img  className='projectForm_DNDGallery_overlayImage'
                   itemId={activeId} 
                   index={items.indexOf(activeId)} 
-                  alt='' 
+                  alt={`image ${activeId}`}
                   src={items.find(item => item._id === activeId).imageUrl}/>
           ) : null}
         </DragOverlay>

@@ -11,19 +11,18 @@ function OneProject() {
 
     const { id } = useParams();
     const [project, setProject] = useState([]);
-    const { setDisplayHeader } = useContext(ProjectsContext);
+    const { setDisplayHeader, displayHeader } = useContext(ProjectsContext);
     
     const [imageFocusUrl, setImageFocusUrl]=useState('');
     const [displayImageFocus, setDisplayImageFocus]= useState(false);
     const cleanedAboutShow = DOMPurify.sanitize(project.aboutShow);
     const cleanedAboutSceno = DOMPurify.sanitize(project.aboutSceno);
 
-
-
     useEffect(() => {
         fetch(`${API_URL}/api/projects/${id}`)
             .then((res) => res.json())
             .then((data) => {
+                window.scrollTo(0, 0);
                 setProject(data);
                 setDisplayHeader(false);
             })
@@ -33,7 +32,7 @@ function OneProject() {
     const prodTypeArray = Array.from(new Set(project.productionList?.map(prod => prod.prodType) || []));
 
     return  (      
-        <main className='oneProject'>
+        <main onClick={()=>displayHeader===true && setDisplayHeader(false)} className='oneProject'>
             
             {/* TITRE/SOUS-TITRE/INFOS*/}
             <div className='oneProject_titleContainer'>
@@ -47,7 +46,7 @@ function OneProject() {
             {/* IMAGE 1*/}
             {project.projectImages && project.projectImages.length > 0 && 
             <div className='oneProject_firstImageContainer'>
-                <img src={project.projectImages[0].imageUrl} alt="Project" />                
+                <img src={project.projectImages[0].imageUrl} alt={`image 1 du projet ${project.title}`} />                
             </div>
             }
             
@@ -75,7 +74,7 @@ function OneProject() {
                         <h5>Distribution</h5>
                         <ul className='oneProject_firstInfosBlock_distributionAndLinks_distribution_list'>
                             {project.artistsList.map((artist)=>(
-                            <li className='oneProject_firstInfosBlock_distributionAndLinks_distribution_list_item'>
+                            <li key={artist._id} className='oneProject_firstInfosBlock_distributionAndLinks_distribution_list_item'>
                                 <p><span>{artist.artistFunction}</span> {artist.artistName}</p>
                             </li>
                             ))}
@@ -85,8 +84,13 @@ function OneProject() {
                     {project.links && project.links.length > 0 &&
                     <ul className='oneProject_firstInfosBlock_distributionAndLinks_links'>
                         {project.links.map((link) => (
-                        <li>
-                            <a href={link.linkUrl} target='_blank' rel='noreferrer'>{link.linkName}</a>
+                        <li key={link._id}>
+                            <a href={link.linkUrl} 
+                                target='_blank' 
+                                rel='noreferrer'
+                                aria-label={`Accéder au lien ${link.linkName}`}>
+                                    {link.linkName}
+                                </a>
                         </li>
                         ))
                     }
@@ -99,7 +103,7 @@ function OneProject() {
             {project.projectImages?.length > 1 && 
             <section className={`oneProject_secondImageContainer_${project.projectImages.length}`}>
                 {project.projectImages.slice(1, 4).map((image, index) => (
-                <img className={`oneProject_secondImageContainer_${project.projectImages.length}_img_${index}`} key={index} src={image.imageUrl} alt="Project" />
+                <img className={`oneProject_secondImageContainer_${project.projectImages.length}_img_${index}`} key={index} src={image.imageUrl} alt={`image ${index + 2} du projet ${project.title}`} />
                 ))}
             </section>
             }
@@ -109,10 +113,14 @@ function OneProject() {
             <section className='oneProject_pressBlocks'>
                 <ul className='oneProject_pressBlocks_container'>
                     {project.press.map((press)=>(
-                    <li className='oneProject_pressBlocks_container_item'>
+                    <li key={press._id} className='oneProject_pressBlocks_container_item'>
                         <h6>{press.mediaName}</h6>
                         <p>{press.quote}</p>
-                        <a href={press.mediaLink} target='_blank' rel='noreferrer'>lien vers l'article</a>
+                        <a href={press.mediaLink} 
+                            target='_blank' rel='noreferrer' 
+                            aria-label={`Accéder à l'article de ${press.mediaName}`}>
+                                lien vers l'article
+                        </a>
                     </li>
                     ))}
                 </ul>
@@ -123,7 +131,7 @@ function OneProject() {
             {project.projectImages?.length > 4 && project.projectImages?.length <= 15 &&
             <section className={`oneProject_thirdImageContainer oneProject_thirdImageContainer_${project.projectImages.length}`}> 
                 {project.projectImages.slice(4, 15).map((image, index) => (
-                <img className={`oneProject_thirdImageContainer_${project.projectImages.length}_img_${index}`} key={index} src={image.imageUrl} alt="Project" />
+                <img className={`oneProject_thirdImageContainer_${project.projectImages.length}_img_${index}`} key={index} src={image.imageUrl} alt={`image ${index + 5} du projet ${project.title}`}  />
                 ))}
             </section>}
 
@@ -132,7 +140,11 @@ function OneProject() {
             <Collapse title="Making Of" style='dark'>
                 <div className="oneProject_makingOfImageContainer_imagesGrid">
                     {project.makingOfImages.map((image, index) => (
-                    <img key={index} src={image.imageUrl} alt="Project" onClick={()=>{ 
+                    <img key={index} 
+                        src={image.imageUrl} 
+                        alt={`image ${index} du making of du projet ${project.title}`}
+                        aria-label="Agrandir l'\image"
+                        onClick={()=>{ 
                         setImageFocusUrl(image.imageUrl);
                         setDisplayImageFocus(true);
                     }}/>
@@ -151,7 +163,7 @@ function OneProject() {
                                 <h6>{prodType}</h6>
                                 <ul className='oneProject_productionBlocks_container_block_list'>
                                     {project.productionList?.filter(prodFiltered => prodFiltered.prodType === prodType).map((prod) => (
-                                        <li key={prod.prodName} className='oneProject_productionBlocks_container_block_list_item'>
+                                        <li key={prod._id} className='oneProject_productionBlocks_container_block_list_item'>
                                             <a href={prod.prodLink}>{prod.prodName}</a>
                                             <span> {prod.prodInfos}</span>
                                         </li>
@@ -170,7 +182,7 @@ function OneProject() {
                 <div className='oneProject_diffBlock'>
                     <ul className='oneProject_diffBlock_list'>
                         {project.diffusionList.map((diff)=>(
-                            <li className='oneProject_diffBlock_list_item'>
+                            <li key={diff._id} className='oneProject_diffBlock_list_item'>
                                 <a href={diff.placeLink} target='_blank' rel='noreferrer'>{diff.placeName}</a><span> {diff.city} {diff.dates}</span>
                             </li>  
                         ))}

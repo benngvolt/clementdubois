@@ -1,9 +1,8 @@
 @import '../../utils/mixins';
 
 .imageFocus {
-    display: flex;
-    flex-direction: row;
-    
+
+    padding-left: 35px;
     margin: auto;
     width: auto;
     @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
@@ -11,10 +10,15 @@
     }
     
     @media only screen and (max-width:$mobileMaxWidth){
-        width: 90%;
+        margin: auto;
     } 
     
-    
+    &_container {
+        display: flex;
+        flex-direction: row;
+        margin: auto;
+
+    }
 
     img {
         aspect-ratio: 1;
@@ -31,6 +35,7 @@
             width: 80%;
             height: 60%;
             aspect-ratio: 1;
+            margin: 0;
         } 
     }
     &_icon {
@@ -46,8 +51,9 @@
         }
         
         @media only screen and (max-width:$mobileMaxWidth){
+
             font-size: 16px; 
-            margin: auto 5%;  
+            margin: auto;  
         } 
     }
 }

@@ -5,6 +5,7 @@ import {
     faChevronLeft,
     faChevronRight,
 } from '@fortawesome/free-solid-svg-icons'
+
 function ImageFocus ({imageFocusUrl, setDisplayImageFocus, setImageFocusUrl, imagesArray}) {
     const modalRef = useRef(null);
     const imagesArrayLength = imagesArray.length;
@@ -38,14 +39,24 @@ function ImageFocus ({imageFocusUrl, setDisplayImageFocus, setImageFocusUrl, ima
 
     return (
         <div className='imageFocus' ref={modalRef}>
-            {imagesArrayLength > 1 &&
-            <FontAwesomeIcon icon={faChevronLeft} className='imageFocus_icon' onClick={()=>displayPrevImage()}/>
-            }
-            <img src={imageFocusUrl}/>
-            {imagesArrayLength > 1 &&
-            <FontAwesomeIcon icon={faChevronRight} className='imageFocus_icon' onClick={()=>displayNextImage()}/>
-            }
-         </div>
+            <div className='imageFocus_container'>
+                {imagesArrayLength > 1 &&
+                <FontAwesomeIcon 
+                    icon={faChevronLeft} 
+                    className='imageFocus_icon'
+                    aria-label="Afficher l\'image précédente"
+                    onClick={()=>displayPrevImage()}/>
+                }
+                <img src={imageFocusUrl} alt={`image ${imagesArray[currentIndex]}`}/>
+                {imagesArrayLength > 1 &&
+                <FontAwesomeIcon 
+                    icon={faChevronRight} 
+                    className='imageFocus_icon'
+                    aria-label="Afficher l\'image suivante" 
+                    onClick={()=>displayNextImage()}/>
+                }
+            </div>
+        </div>
     )
 }
 

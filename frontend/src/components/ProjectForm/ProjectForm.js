@@ -36,7 +36,9 @@ function ProjectForm({
     setHandleDisplayProjectForm,
     handleDisplayProjectForm,
     handleLoadProjects
-    }) {
+    })
+
+    {
 
     const inputProjectTitleRef = useRef(null);
     const inputProjectSubtitleRef = useRef(null);
@@ -385,7 +387,7 @@ function ProjectForm({
                             onChange={(e) => setProjectType(e.target.value)}>
                         <option value=""></option>
                         {projectCategories.map((projectCategory)=>(
-                            <option value={projectCategory}>{projectCategory}</option>
+                            <option key={projectCategory} value={projectCategory}>{projectCategory}</option>
                         ))}
                     </select>
                 </div>
@@ -401,7 +403,7 @@ function ProjectForm({
                         <label htmlFor='inputProjectImageFile'>{isImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
                         <input type='file' id='inputProjectImageFile' name="images" ref={inputProjectImageFileRef} onChange={displaySample} style={{ display: 'none' }}></input>
                         <div  className="projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer">
-                            <img id='imageSample' ref={projectMainImageSampleRef} src='' alt=''/>
+                            <img id='imageSample' ref={projectMainImageSampleRef} src='' alt='aperçu image'/>
                             <div className={isImageLoaded ? "projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOff"}>
                                 <button aria-label="Ajouter l'image" onClick={handleAddImageFile} type="button">AJOUTER</button>
                                 <button aria-label="Annuler" onClick={cancelAddImageFile} type="button">ANNULER</button>
@@ -419,7 +421,7 @@ function ProjectForm({
                         <label htmlFor='inputProjectMoImageFile'>{isMoImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
                         <input type='file' id='inputProjectMoImageFile' name="moImages" ref={inputProjectMoImageFileRef} onChange={displayMoSample} style={{ display: 'none' }}></input>
                         <div  className="projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer">
-                            <img id='moImageSample' ref={projectMainMoImageSampleRef} src='' alt=''/>
+                            <img id='moImageSample' ref={projectMainMoImageSampleRef} src='' alt='aperçu image making of'/>
                             <div className={isMoImageLoaded ? "projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer_buttonsSystem--displayOff"}>
                                 <button aria-label="Ajouter l'image" onClick={handleAddMoImageFile} type="button">AJOUTER</button>
                                 <button aria-label="Annuler" onClick={cancelAddMoImageFile} type="button">ANNULER</button>

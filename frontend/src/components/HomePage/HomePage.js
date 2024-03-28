@@ -16,13 +16,13 @@ function HomePage() {
                 <Loader className='loader--opaque' loaderDisplay={loaderDisplay}/>
             </div>
             {homeImage &&
-                <img className='homePage_image'src={homeImage} alt="Project" />
+                <img className='homePage_image'src={homeImage} alt="image d'accueil" />
             }
             {!homeImage &&
                 <div className='homePage_image homePage_image--blackBg'></div>
             }
             <div className='homePage_button'>
-                <Link to="/projects"><h1> Clément Dubois<br/>Scénographe </h1></Link>
+                <Link to="/projects" aria-label="Accéder à la page Projets"><h1> Clément Dubois<br/>Scénographe </h1></Link>
             </div>
         </div>
     )

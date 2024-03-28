@@ -4,8 +4,6 @@ import ConfirmBox from '../../components/ConfirmBox/ConfirmBox'
 import { API_URL } from '../../utils/constants'
 import React, { useState, useContext, useEffect } from 'react'
 import { ProjectsContext } from '../../utils/ProjectsContext'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faBolt} from '@fortawesome/free-solid-svg-icons'
 
 function Edit() {
 
@@ -25,9 +23,10 @@ function Edit() {
     const [mainImageIndex, setMainImageIndex]= useState(0);
     const [mainMoImageIndex, setMainMoImageIndex]= useState(0);
 
-    const { projects, handleLoadProjects, randomImagesSelection, setDisplayHeader } = useContext(ProjectsContext);
+    const { projects, handleLoadProjects, randomImagesSelection, setDisplayHeader, displayHeader } = useContext(ProjectsContext);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         setDisplayHeader(false);
     },[]);
 
@@ -93,13 +92,13 @@ function Edit() {
 
 
     return  (      
-        <main className='edit'>
+        <main className='edit' onClick={()=>displayHeader===true && setDisplayHeader(false)}>
             <aside className='edit_wrapper'>
                 <ul className='edit_list'>
-                    {projects.map((project)=>(
-                        <li className='edit_list_item'>
+                    {projects.map((project, index)=>(
+                        <li key={project._id} className='edit_list_item'>
                             {project.projectImages && project.projectImages.length > 0 &&
-                                <img className='edit_list_item_image' src={project.projectImages[project.mainImageIndex].imageUrl} />
+                                <img className='edit_list_item_image' src={project.projectImages[project.mainImageIndex].imageUrl} alt={`image principale du projet ${project.title}(${index})`}/>
                             }
                             <p className='edit_list_item_title'>{project.title}</p>
                             <div className='edit_list_item_buttonsBox'>
@@ -148,9 +147,9 @@ function Edit() {
                 <div className='edit_randomImages'>
                     <p className='edit_randomImages_title'>IMAGES LANDING PAGE</p>
                     <div className='edit_randomImages_list'>
-                        {randomImagesSelection.map((imageUrl) => (
-                        <div className='edit_randomImages_list_item'>
-                            <img className='edit_randomImages_list_item_img' src={imageUrl} alt='Clément Dubois'/>
+                        {randomImagesSelection.map((imageUrl, index) => (
+                        <div key={index} className='edit_randomImages_list_item'>
+                            <img className='edit_randomImages_list_item_img' src={imageUrl} alt={`image random (${index})`}/>
                             {/* <button type='button' aria-label="Définir cette image comme image random de la landing-page" className='edit_randomImages_list_item_inRandomSelectionButton'
                                 onMouseDown={() => console.log('hola')} >
                                 <FontAwesomeIcon icon={faBolt} 

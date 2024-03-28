@@ -6,11 +6,12 @@ import DOMPurify from 'dompurify';
 
 function AllProjects() {
 
-    const { projects, projectCategories, setDisplayHeader } = useContext(ProjectsContext);
+    const { projects, projectCategories, setDisplayHeader, displayHeader } = useContext(ProjectsContext);
     const [filteredProjects, setFilteredProjects] = useState(projects);
     const [categoryProjects, setCategoryProjects] = useState('tous');
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         setFilteredProjects(projects);
         setDisplayHeader(false);
     },[projects]);
@@ -29,10 +30,12 @@ function AllProjects() {
    
     
     return  (      
-        <main className='allProjects'>
+        <main className='allProjects' onClick={()=>displayHeader===true && setDisplayHeader(false)} >
             <ul className='allProjects_buttonsContainer'>
-                <li className='allProjects_buttonsContainer_button'>
+                <li key='allProjects' className='allProjects_buttonsContainer_button'>
                     <button className={categoryProjects==='tous'?'allProjects_buttonsContainer_button--selected':'allProjects_buttonsContainer_button--notSelected'} type='button' 
+                        aria-pressed={categoryProjects==='tous'? true : false }
+                        aria-label="Afficher toutes les catégories de projets"
                         onClick={() => {
                             setFilteredProjects(projects);
                             setCategoryProjects('tous');
@@ -41,8 +44,11 @@ function AllProjects() {
                 </li>
                 {projectCategories.map((projectCategory) => (
                 projects.some(project => project.projectType === `${projectCategory}`) &&
-                <li className='allProjects_buttonsContainer_button'>
-                    <button className={categoryProjects===`${projectCategory}`?'allProjects_buttonsContainer_button--selected':'allProjects_buttonsContainer_button--notSelected'} type='button' 
+                <li key={projectCategory} className='allProjects_buttonsContainer_button'>
+                    <button className={categoryProjects===`${projectCategory}`?'allProjects_buttonsContainer_button--selected':'allProjects_buttonsContainer_button--notSelected'} 
+                        type='button' 
+                        aria-pressed={categoryProjects===`${projectCategory}`? true : false }
+                        aria-label={`Afficher les projets correspondants à la catégorie ${projectCategory}`}
                         onClick={()=> {
                             setFilteredProjects(projects.filter((project)=>project.projectType===`${projectCategory}`));
                             setCategoryProjects(`${projectCategory}`);
@@ -52,9 +58,10 @@ function AllProjects() {
                 ))}
             </ul>
             <ul className='allProjects_projectsList'>
-                {sortedProjects.map((project)=> (
-                <li>
-                    <Link to={`/projects/${project._id}`} className='allProjects_projectCard'>
+                {sortedProjects.map((project, index)=> (
+                <li key={project._id}>
+                    <Link to={`/projects/${project._id}`} className='allProjects_projectCard' 
+                        aria-label={`Accéder à la page du projet ${project.title}`}>
                         <div className='allProjects_projectCard_infos'>
                             <h4 className='allProjects_projectCard_infos_title'>{project.title}</h4>
                             <p className='allProjects_projectCard_infos_projectInfos'>{project.projectInfos}</p>
@@ -65,7 +72,7 @@ function AllProjects() {
                         </div>
                         <figure className='allProjects_projectCard_imageContainer'>
                         {project.projectImages && project.projectImages.length > 0 &&
-                            <img src={`${project.projectImages[project.mainImageIndex].imageUrl}`}/>
+                            <img src={`${project.projectImages[project.mainImageIndex].imageUrl}`} alt={`image principale du projet ${project.title}(${index})`}/>
                         }
                         </figure>
                     </Link>

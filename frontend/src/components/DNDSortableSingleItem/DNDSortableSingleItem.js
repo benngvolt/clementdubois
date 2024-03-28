@@ -1,5 +1,4 @@
 import './DNDSortableSingleItem.scss'
-import { useEffect } from 'react'
 import {useSortable} from '@dnd-kit/sortable'
 import {CSS} from '@dnd-kit/utilities'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -48,7 +47,7 @@ function handleRandomImageSelection() {
       {...listeners}>
       <img className={props.displayClass==='grid'?'dndItem_image':'dndRowItem_image'}
         src={props.item.imageUrl ?? (props.item instanceof File ? props.item.sampleImageUrl : '')}
-        alt=''/>
+        alt={`image ${props.item._id}`}/>
       <div className='dndItem_buttons'>
           <button type='button' aria-label="Supprimer l'image" className='dndItem_buttons_supprButton'
             onMouseDown={() => {

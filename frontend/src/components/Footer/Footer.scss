@@ -26,11 +26,10 @@
         column-gap: 25px;
         padding: 0;
         margin: 0;
-        // overflow: scroll;
+        overflow: auto;
 
        
         &_item {
-            // height: 70%;
             padding: 21px 0 12px 0;
             margin: auto 0;
             list-style-type: none;

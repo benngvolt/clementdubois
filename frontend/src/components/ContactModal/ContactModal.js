@@ -1,4 +1,3 @@
-import { useEffect, useContext } from 'react';
 import './ContactModal.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faXmark} from '@fortawesome/free-solid-svg-icons'
@@ -9,8 +8,14 @@ function ContactModal({setdisplayContactModal}) {
     
     return  (      
         <section className='contactModal'>
-            <button type='button' className='contactModal_closeButton' onClick={()=>setdisplayContactModal(false)}>
-                <FontAwesomeIcon icon={faXmark} className='contactModal_closeButton_icon'/>
+            <button 
+                type='button' 
+                className='contactModal_closeButton' 
+                aria-label="Fermer la modale Contact"
+                onClick={()=>setdisplayContactModal(false)}>
+                <FontAwesomeIcon 
+                    icon={faXmark} 
+                    className='contactModal_closeButton_icon'/>
             </button>
             <h2 className='contactModal_title'>Contact</h2>
             <p className='contactModal_tel'>
