@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/clementdubois/static/css/main.bfab9207.css",
-    "main.js": "/clementdubois/static/js/main.b7bba0d9.js",
+    "main.css": "/clementdubois/static/css/main.137a8287.css",
+    "main.js": "/clementdubois/static/js/main.ec7ec9ae.js",
     "static/js/787.9e9f4ffd.chunk.js": "/clementdubois/static/js/787.9e9f4ffd.chunk.js",
     "static/media/welcome01.png": "/clementdubois/static/media/welcome01.bf1faa40242248c76d0c.png",
     "static/media/clementDubois.jpg": "/clementdubois/static/media/clementDubois.37f8422b13b868b028b7.jpg",
@@ -15,12 +15,12 @@
     "static/media/porte mine.png": "/clementdubois/static/media/porte mine.4d7232c329e3a91c34b8.png",
     "static/media/artex.webp": "/clementdubois/static/media/artex.a2ba70a0aee6926739a7.webp",
     "index.html": "/clementdubois/index.html",
-    "main.bfab9207.css.map": "/clementdubois/static/css/main.bfab9207.css.map",
-    "main.b7bba0d9.js.map": "/clementdubois/static/js/main.b7bba0d9.js.map",
+    "main.137a8287.css.map": "/clementdubois/static/css/main.137a8287.css.map",
+    "main.ec7ec9ae.js.map": "/clementdubois/static/js/main.ec7ec9ae.js.map",
     "787.9e9f4ffd.chunk.js.map": "/clementdubois/static/js/787.9e9f4ffd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bfab9207.css",
-    "static/js/main.b7bba0d9.js"
+    "static/css/main.137a8287.css",
+    "static/js/main.ec7ec9ae.js"
   ]
 }
