@@ -23,7 +23,7 @@ function Edit() {
     const [mainImageIndex, setMainImageIndex]= useState(0);
     const [mainMoImageIndex, setMainMoImageIndex]= useState(0);
 
-    const { projects, handleLoadProjects, randomImagesSelection, setDisplayHeader, displayHeader } = useContext(ProjectsContext);
+    const { projects, handleLoadProjects, randomImagesSelection, setDisplayHeader, displayHeader, isAuthenticated } = useContext(ProjectsContext);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -93,7 +93,8 @@ function Edit() {
 
     return  (      
         <main className='edit' onClick={()=>displayHeader===true && setDisplayHeader(false)}>
-            <aside className='edit_wrapper'>
+            <p className={isAuthenticated===true?'edit_warning--displayOff':'edit_warning'}>Accès réservé</p>
+            <aside className={isAuthenticated===true?'edit_wrapper':'edit_wrapper--displayOff'}>
                 <ul className='edit_list'>
                     {projects.map((project, index)=>(
                         <li key={project._id} className='edit_list_item'>

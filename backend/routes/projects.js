@@ -13,22 +13,25 @@ const deleteImages = require('../middlewares/deleteImages').deleteImages;
 // Dans cet exemple, il envoie une réponse JSON contenant le message "Votre requête a bien été reçue !" à chaque requête entrante.
 // l'argument next permet de passer au middleware suivant
 
-router.post('/', 
+router.post('/',
+            auth,
             multer.fields([{ name: 'images' }, { name: 'moImages' }]), 
             uploadImages, 
             projectsCtrl.createProject);
             
-router.get('/', 
+router.get('/',
             projectsCtrl.getAllProjects);
 
 router.get('/:id', 
             projectsCtrl.getOneProject);
 
-router.delete ('/:id', 
+router.delete ('/:id',
+            auth, 
             projectsCtrl.deleteOneProject, 
             deleteImages);
 
-router.put ('/:id', 
+router.put ('/:id',
+            auth, 
             multer.fields([{ name: 'images' }, { name: 'moImages' }]), 
             uploadImages, 
             projectsCtrl.updateOneProject, 

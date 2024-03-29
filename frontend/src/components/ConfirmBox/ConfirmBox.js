@@ -7,8 +7,11 @@ function ConfirmBox({confirmBoxState, affirmativeChoice, negativeChoice, attribu
             <div className='editWorkModal_confirmBox_container'>
                 <p className='editWorkModal_confirmBox_container_question'>Es-tu sûr ?</p>
                 <div className='editWorkModal_confirmBox_container_buttons'>
-                    <button aria-label="Valider la suppression" onClick={() => affirmativeChoice(attribut)} type='button'>OUI</button>
-                    <button aria-label="Annuler la suppression" onClick={() => negativeChoice() } type='button'>NON</button>
+                    <button aria-label="oui" onClick={() => { 
+                                                affirmativeChoice(attribut);
+                                                negativeChoice();
+                    }} type='button'>OUI</button>
+                    <button aria-label="non" onClick={() => negativeChoice() } type='button'>NON</button>
                 </div>
             </div>
         </div>

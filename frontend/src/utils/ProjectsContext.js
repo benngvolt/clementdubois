@@ -10,13 +10,14 @@ export const ProjectsProvider = ({ children }) => {
     ----- MISE À JOUR ÉTAT D'AUTH -----
     ---------------------------------*/
 
-    // const [isAuthenticated, setIsAuthenticated] = useState(false);
-    // const setLoggedIn = () => {
-    //     setIsAuthenticated(true) ;
-    // };
-    // const setLoggedOut = () => {
-    //     setIsAuthenticated(false) ;
-    // };    
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const setLoggedIn = () => {
+        setIsAuthenticated(true) ;
+    };
+    const setLoggedOut = () => {
+        setIsAuthenticated(false) ;
+    };    
+
     // GESTION STATE LOCAL SERIES + RELOAD 
 
     const [loadProjects, setLoadProjects] = useState(false);
@@ -125,7 +126,25 @@ export const ProjectsProvider = ({ children }) => {
     }
 
     return (
-        <ProjectsContext.Provider value={{ projects, setProjects, handleLoadProjects, loadProjects, loaderDisplay, setLoaderDisplay, displayHeader, closeHeader, openHeader, randomImagesSelection, hideHeader, hideFooter, projectCategories, productionCategories, setDisplayHeader}}>
+        <ProjectsContext.Provider value={{ 
+                projects, 
+                setProjects, 
+                handleLoadProjects, 
+                loadProjects, 
+                loaderDisplay, 
+                setLoaderDisplay, 
+                displayHeader, 
+                closeHeader, 
+                openHeader, 
+                randomImagesSelection, 
+                hideHeader, 
+                hideFooter, 
+                projectCategories, 
+                productionCategories, 
+                setDisplayHeader, 
+                setLoggedOut, 
+                setLoggedIn,
+                isAuthenticated}}>
             {children}
         </ProjectsContext.Provider>
     )

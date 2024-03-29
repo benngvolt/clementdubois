@@ -23,7 +23,7 @@ const projectsRoutes = require('./routes/projects');
 // const maininfosRoutes = require('./routes/maininfos');
 // const eventsRoutes = require('./routes/events');
 // const emailRoutes = require('./routes/email');
-// const usersRoutes = require('./routes/users');
+const usersRoutes = require('./routes/users');
 
 /* --------------------------------------------------------
 
@@ -75,7 +75,7 @@ app.use(express.json());
 ----------------------------------------------------------*/
 
 // on utilise les routers importés
-// app.use ('/api/users', usersRoutes);
+app.use ('/api/users', usersRoutes);
 app.use ('/api/projects', projectsRoutes);
 // app.use ('/api/maininfos', maininfosRoutes);
 // app.use ('/api/events', eventsRoutes);

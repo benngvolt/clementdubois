@@ -127,6 +127,13 @@
                 padding: 0;
                 margin: auto 0;
                 height: 100%;
+
+                &--displayOn {
+                    display: flex;
+                }
+                &--displayOff {
+                    display: none;
+                }
                 
                 &--selected {
                     text-decoration: underline;
@@ -161,6 +168,10 @@
                 @media only screen and (max-width:$mobileMaxWidth){
                     font-size: 1.5rem;
                 }  
+                }
+
+                &_dashboardNav {
+                    opacity: 0.5;
                 }
             }
         }

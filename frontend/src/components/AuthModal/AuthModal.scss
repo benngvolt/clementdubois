@@ -1,0 +1,98 @@
+@import '../../utils/mixins';
+
+.authModal {  
+        position: fixed;
+        z-index: 1;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background:rgba(0, 0, 0, 0.8);
+    
+
+    &--displayOff {
+        display: none;
+    };
+    &--displayOn {
+        display: flex;
+        flex-direction: column;
+    }
+
+    // &_form {
+    //     display: flex;
+    //     flex-direction: column;
+    //     width: 630px;
+    //     height: auto;
+
+    //     &_title {
+    //         margin: 0 auto 5px auto;
+    //         font-family: 'MainFont';
+    //         color: $colorDarkGrey;
+    //         display: flex;
+    //         justify-content: center;
+    //         width: 50%;
+    //         @include MainFont;
+    //         background-color: $colorSelection;
+    //         padding: 12px 0;
+    //         font-size: 16px;
+    //     }
+
+    //     &_usernameField, &_passwordField {
+    //         display: flex;
+    //         flex-direction: column;
+    //         width: 50%;
+    //         margin: 0 auto 10px auto;
+
+    //         label {
+    //             font-family: 'TitleFont';
+    //             border: none;
+    //             background: none;
+    //             color: $colorSelection;
+    //             width: 50%;
+    //             margin: 5% auto 0 0;
+    //             padding: 2% 0;
+    //             font-size: 18px;
+    //         }
+
+    //         input {
+    //             width: 100%;
+    //             max-width: 100%;
+    //             min-width: 100%;
+    //             height: 25px;
+    //             border: none;
+    //             padding: 10px 0;
+    //             background-color: rgb(238, 238, 238);
+    //             box-sizing: border-box;
+    //             font-family: 'MainFont';
+    //             font-size: 14px;
+    //             box-sizing: border-box;
+    //         }
+    //     }
+
+    //     &_button {
+    //         font-family: 'TitleFont';
+    //         border: none;
+    //         background: none;
+    //         color: $colorSelection;
+    //         width: 50%;
+    //         margin: 0 auto;
+    //         padding: 5px;
+    //         font-size: 18px;
+    //         &:hover {
+    //             cursor: pointer;
+    //             color: $colorLightGrey;
+    //         }
+    //     }    
+    // }
+    // &_alertTextStyle {
+    //     &--displayOn {
+    //         @include AlertTextStyle;
+    //         margin: 10px auto;
+    //     }
+    //     &--displayOff {
+    //         display: none;
+    //     }
+    // }
+}

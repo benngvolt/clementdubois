@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faXmark} from '@fortawesome/free-solid-svg-icons'
 import Loader from '../Loader/Loader'
 import welcomeImage from '../../assets/welcome01.png'
+import ConfirmBox from '../ConfirmBox/ConfirmBox'
 
 
 
@@ -69,6 +70,17 @@ function ProjectForm({
     const [projectType, setProjectType] = useState(projectFormMode === 'edit' ? projectEdit.projectType : '');
 
     const { loaderDisplay, setLoaderDisplay, projectCategories, productionCategories } = useContext(ProjectsContext);
+
+    /*------------------------------
+    ----- OUVERTURE CONFIRMBOX -----
+    ------------------------------*/
+    const [confirmBoxState, setConfirmBoxState] = useState (false);
+    /*------------------------------------
+    ----- FERMETURE CONFIRMBOX -----
+    ------------------------------------*/
+    function closeConfirmBox() {
+        setConfirmBoxState(false);
+    }
 
     // Réinitialisation des valuers input lorsque le formulaire s'ouvre / se ferme.
     useEffect(() => {
@@ -335,7 +347,7 @@ function ProjectForm({
     return  (      
         
         <form onSubmit={(event) => projectFormSubmit(event)} method="post" className='projectForm'>
-            <button type='button' className='projectForm_stickyCancelButton' onClick={() => closeForm()}>
+            <button type='button' className='projectForm_stickyCancelButton' onClick={() => setConfirmBoxState(true)}>
                 <FontAwesomeIcon icon={faXmark} className='projectForm_stickyCancelButton_icon'/>
             </button>
 
@@ -703,11 +715,19 @@ function ProjectForm({
                 </div>
                 <div className='projectForm_buttons'>
                     <button type='submit'>VALIDER</button>
-                    <button type='button' onClick={() => closeForm()}>ANNULER</button>
+                    <button type='button' onClick={() => setConfirmBoxState(true)}>ANNULER</button>
                 </div>
             </div>
             <div className={loaderDisplay===true?'projectForm_loaderContainer--displayOn':'projectForm_loaderContainer--displayOff'} >
                 <Loader className='loader--translucent' loaderDisplay={loaderDisplay}/>
+            </div>
+            <div>
+                <ConfirmBox
+                    affirmativeChoice = {closeForm}
+                    attribut = {null}
+                    confirmBoxState = {confirmBoxState}
+                    negativeChoice = {closeConfirmBox}
+                />
             </div>
         </form>
     )

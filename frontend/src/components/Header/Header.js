@@ -1,10 +1,12 @@
 import './Header.scss'
 import { Link } from 'react-router-dom'
-import { useContext, useState} from 'react';
+import { useContext, useState, useEffect} from 'react';
 import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ProjectsContext } from '../../utils/ProjectsContext';
+import AuthModal from '../AuthModal/AuthModal'
 import ContactModal from '../ContactModal/ContactModal';
+import ConfirmBox from '../ConfirmBox/ConfirmBox';
 import {
     faFacebook,
     faSquareInstagram,
@@ -19,8 +21,59 @@ import {
 function Header() {
     
     const [displayContactModal, setdisplayContactModal]= useState(false);
-    const { displayHeader, openHeader, closeHeader, hideHeader } = useContext(ProjectsContext);
+    const { displayHeader, openHeader, closeHeader, hideHeader, isAuthenticated, setLoggedOut } = useContext(ProjectsContext);
     const location = useLocation();
+    
+    /*------------------------------
+    ----- OUVERTURE CONFIRMBOX -----
+    ------------------------------*/
+    const [confirmBoxState, setConfirmBoxState] = useState (false);
+    /*------------------------------------
+    ----- FERMETURE CONFIRMBOX -----
+    ------------------------------------*/
+    function closeConfirmBox() {
+        setConfirmBoxState(false);
+    }
+
+    /*-------------------------------------------------------
+    ----- USE EFFECT POUR ECOUTER EVENEMENT KONAMI CODE -----
+    -------------------------------------------------------*/
+
+    useEffect(() => {
+        document.addEventListener('keydown', keyHandler, false);
+    
+        return () => {
+          document.removeEventListener('keydown', keyHandler, false);
+        };
+      }, []);
+
+    /*--------------------------------------------------------
+    ----- IMPLÉMENTATION DU KONAMI CODE POUR MODALE AUTH -----
+    --------------------------------------------------------*/
+
+    let konamiPattern = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
+    let current = 0;
+    const keyHandler = (event) => {
+        if (konamiPattern.indexOf(event.key) < 0 || event.key !== konamiPattern[current])  {
+            current = 0;
+            return;
+        }
+        current++;
+        if (konamiPattern.length === current) {
+            current = 0;
+            handleAuthModal();
+        }
+    }
+
+    /*-------------------------------------------------------
+    ----- GESTION OUVERTURE/FERMETURE DE LA MODALE AUTH -----
+    -------------------------------------------------------*/
+
+    const [authModalDisplay, setAuthModalDisplay] = useState(false);
+
+    const handleAuthModal = () => {
+        setAuthModalDisplay(authModalDisplay === false ? true : false );
+    }
 
     return  (
         <header className={hideHeader===true?'header header--displayOff' : (displayHeader===true ? 'header header--open':' header header--close')}>
@@ -36,7 +89,13 @@ function Header() {
                     <Link aria-label='Accéder à la page Projets' to="/projects" className={location.pathname==='/projects' ? 'header_nav_menu_item header_nav_menu_item--selected':'header_nav_menu_item'}><h2>créations</h2></Link>
                     <Link aria-label='Accéder à la page A Propos' to="/about" className={location.pathname==='/about' ? 'header_nav_menu_item header_nav_menu_item--selected':'header_nav_menu_item'}><h2>à propos</h2></Link>
                     <button aria-label='Afficher la fenêtre Contact' type='button' className='header_nav_menu_item' onClick={()=>setdisplayContactModal(true)}><h2>contact</h2></button>
-                    <Link aria-label='Accéder au tableau de bord' to="/edit" className={location.pathname==='/edit' ? 'header_nav_menu_item header_nav_menu_item--selected':'header_nav_menu_item'}><p>dashboard</p></Link>
+                    <Link aria-label='Accéder au tableau de bord' to="/edit" className={isAuthenticated === true ? (location.pathname==='/edit' ? 'header_nav_menu_item header_nav_menu_item--selected':'header_nav_menu_item') : 'header_nav_menu_item header_nav_menu_item--displayOff' }><p className='header_nav_menu_item_dashboardNav'>dashboard</p></Link>
+                    <button onClick={() => {
+                                setConfirmBoxState(true);
+                            }}
+                            className={isAuthenticated === false ? 'header_nav_menu_item header_nav_menu_item--displayOff' : 'header_nav_menu_item header_nav_menu_item--displayOn'}>
+                        <p className='header_nav_menu_item_dashboardNav'>logout</p>
+                    </button>
                 </nav>
                 <nav className='header_nav_socials'>
                     <a aria-label='Accéder à la page Facebook de Clément Dubois' href='https://www.facebook.com/clementduboisscenographe' target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faFacebook} /></a>
@@ -48,6 +107,15 @@ function Header() {
             <section className={displayContactModal===true ? 'header_contactModal header_contactModal--open':' header_contactModal header_contactModal--close'}>
                 < ContactModal setdisplayContactModal={setdisplayContactModal}/>
             </section>
+            <div>
+                <ConfirmBox
+                    affirmativeChoice = {setLoggedOut}
+                    attribut = {null}
+                    confirmBoxState = {confirmBoxState}
+                    negativeChoice = {closeConfirmBox}
+                />
+            </div>
+            <AuthModal handleAuthModal={handleAuthModal} authModalDisplay={authModalDisplay}/>
         </header>
     )
 }

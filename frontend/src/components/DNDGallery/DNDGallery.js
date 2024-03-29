@@ -113,10 +113,10 @@ function DNDGallery ({ imageFiles, setImageFiles, mainImageIndex, setMainImageIn
         </DragOverlay>
         <div>
           <ConfirmBox
-            affirmativeChoice ={deleteImage}
+            affirmativeChoice = {deleteImage}
             attribut = {indexImageToDelete}
-            confirmBoxState={confirmBoxState}
-            negativeChoice={closeConfirmBox}
+            confirmBoxState = {confirmBoxState}
+            negativeChoice = {closeConfirmBox}
           />
         </div>
       </DndContext>
