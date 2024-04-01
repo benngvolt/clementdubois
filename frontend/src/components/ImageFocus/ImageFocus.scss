@@ -21,20 +21,21 @@
     }
 
     img {
-        aspect-ratio: 1;
+        // aspect-ratio: 1;
         height: 80vh;
+        max-width: 100%;
         object-fit: cover;
         padding: auto;
         margin: auto;
         @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
             width: 88%;
-            aspect-ratio: 1;
+            // aspect-ratio: 1;
         }
         
         @media only screen and (max-width:$mobileMaxWidth){
             width: 80%;
             height: 60%;
-            aspect-ratio: 1;
+            // aspect-ratio: 1;
             margin: 0;
         } 
     }

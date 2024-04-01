@@ -75,6 +75,14 @@
     }
 }
 
+@mixin AlertTextStyle {
+    font-family:'MainFont_light';
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    color: $colorDarkGrey;
+}
+
 @mixin mainGalleryRatio1 {
     aspect-ratio: 2/1;
 }

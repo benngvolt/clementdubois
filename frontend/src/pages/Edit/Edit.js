@@ -4,6 +4,7 @@ import ConfirmBox from '../../components/ConfirmBox/ConfirmBox'
 import { API_URL } from '../../utils/constants'
 import React, { useState, useContext, useEffect } from 'react'
 import { ProjectsContext } from '../../utils/ProjectsContext'
+import ErrorText from '../../components/ErrorText/ErrorText'
 
 function Edit() {
 
@@ -18,6 +19,8 @@ function Edit() {
     const [diffusionList, setDiffusionList] = useState([]);
     const [projectToDelete, setProjectToDelete] = useState('');
 
+    const [displayError, setDisplayError] = useState (false);
+
     const [imageFiles, setImageFiles] = useState([]);
     const [moImageFiles, setMoImageFiles] = useState([]);
     const [mainImageIndex, setMainImageIndex]= useState(0);
@@ -28,6 +31,7 @@ function Edit() {
     useEffect(() => {
         window.scrollTo(0, 0);
         setDisplayHeader(false);
+        setDisplayError(false)
     },[]);
 
     function addProject() {
@@ -58,12 +62,16 @@ function Edit() {
         .then((response) => {
             if(response.ok) {
                 console.log(response);
+                setDisplayError(false);
             }
             setHandleDisplayProjectForm(false);
             setConfirmBoxState (false);
             handleLoadProjects();
         })
-        .catch((error) => console.log(error.message))
+        .catch((error) => {
+            console.log(error.message)
+            setDisplayError(true)
+        })
     }
 
     async function editProject(project) {
@@ -94,6 +102,7 @@ function Edit() {
     return  (      
         <main className='edit' onClick={()=>displayHeader===true && setDisplayHeader(false)}>
             <p className={isAuthenticated===true?'edit_warning--displayOff':'edit_warning'}>Accès réservé</p>
+            <ErrorText errorText={'Impossible de supprimer ce projet dû à une erreur serveur'} state={displayError}/>
             <aside className={isAuthenticated===true?'edit_wrapper':'edit_wrapper--displayOff'}>
                 <ul className='edit_list'>
                     {projects.map((project, index)=>(
@@ -116,7 +125,7 @@ function Edit() {
                         confirmBoxState={confirmBoxState}
                         negativeChoice={closeConfirmBox}
                         attribut={null}
-                        />
+                    />
                 </div>
                 <div className={handleDisplayProjectForm===false ? "edit_form--displayOff" : "edit_form--displayOn"}>
                     <ProjectForm 

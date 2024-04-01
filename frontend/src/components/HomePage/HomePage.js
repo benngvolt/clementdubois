@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
     
 function HomePage() {
 
-    const { loaderDisplay, randomImagesSelection } = useContext(ProjectsContext);
-    const randomIndex = Math.floor(Math.random() * randomImagesSelection.length)
-    const homeImage = randomImagesSelection[randomIndex];
+    const { loaderDisplay, homeImage } = useContext(ProjectsContext);
+    // const randomIndex = Math.floor(Math.random() * randomImagesSelection.length)
+    // const homeImage = randomImagesSelection[randomIndex];
 
     return (
         <div className='homePage'>

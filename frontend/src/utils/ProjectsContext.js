@@ -27,6 +27,7 @@ export const ProjectsProvider = ({ children }) => {
     const [hideFooter, setHideFooter] = useState(true)
     const [loaderDisplay, setLoaderDisplay] = useState(false);
     const [randomImagesSelection, setRandomImageSelection] = useState ([]);
+    const [homeImage, setHomeImage] = useState ('');
 
     // définition des catégories de projets
     const projectCategories = ['spectacle vivant','évènement', 'médiation']
@@ -35,6 +36,7 @@ export const ProjectsProvider = ({ children }) => {
     /*---------------------------------------------
     ----- Chargement des projets et stockage ------
     ---------------------------------------------*/
+
     useEffect(() => {
         displayLoader();
         fetch(`${API_URL}/api/projects`)
@@ -42,7 +44,6 @@ export const ProjectsProvider = ({ children }) => {
             .then((data) => {
                 setProjects(data);
                 hideLoader();
-                console.log('Projets chargés');
             })
             .catch((error) => {
                 console.log(error.message);
@@ -50,25 +51,30 @@ export const ProjectsProvider = ({ children }) => {
             });
     }, [loadProjects]);
 
-    const handleLoadProjects = () => { 
-        setLoadProjects(loadProjects === false ? true : false);
-    };
+   
+
+
 
     /*----------------------------------------------------------------------
     ----- Création d'un tableau d'images random pour la landinng page ------
     ----------------------------------------------------------------------*/
+    const handleLoadProjects = () => { 
+        setLoadProjects(loadProjects === false ? true : false);
+    };
 
-    const randomImagesUrlArray = projects
+    useEffect(() => {
+        const randomImagesUrlArray = projects
         .map(item => 
             item.projectImages
         .filter(image => image.inRandomSelection === true)
         .map(image => image.imageUrl)
-            )
+        )
         .flat();
-
-    useEffect(() => {
         setRandomImageSelection(randomImagesUrlArray);
+        const randomIndex = Math.floor(Math.random() * randomImagesSelection.length)
+        setHomeImage (randomImagesSelection[randomIndex]);
     }, [projects]);
+
 
     /*----------------------------------------
     ----- Gestion d'affichage du header ------
@@ -144,7 +150,8 @@ export const ProjectsProvider = ({ children }) => {
                 setDisplayHeader, 
                 setLoggedOut, 
                 setLoggedIn,
-                isAuthenticated}}>
+                isAuthenticated,
+                homeImage}}>
             {children}
         </ProjectsContext.Provider>
     )

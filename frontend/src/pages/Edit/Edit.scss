@@ -75,10 +75,13 @@
             }
 
             &_title {
+                width: 80%;
                 font-family: 'SpecialFont';
-                font-size: 22px;
+                font-size: 19px;
+                overflow: hidden;
                 color: $colorDarkGrey;
                 margin: auto;
+                text-align: center;
             }
 
             &_buttonsBox {

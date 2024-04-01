@@ -10,6 +10,7 @@ import {faXmark} from '@fortawesome/free-solid-svg-icons'
 import Loader from '../Loader/Loader'
 import welcomeImage from '../../assets/welcome01.png'
 import ConfirmBox from '../ConfirmBox/ConfirmBox'
+import ErrorText from '../ErrorText/ErrorText'
 
 
 
@@ -69,6 +70,9 @@ function ProjectForm({
     const [summary, setSummary] = useState(projectFormMode === 'edit' ? cleanedSummary : '');
     const [projectType, setProjectType] = useState(projectFormMode === 'edit' ? projectEdit.projectType : '');
 
+    const [displayServerError, setDisplayServerError] = useState(false);
+    const [displayError, setDisplayError] = useState(false);
+
     const { loaderDisplay, setLoaderDisplay, projectCategories, productionCategories } = useContext(ProjectsContext);
 
     /*------------------------------
@@ -84,6 +88,7 @@ function ProjectForm({
 
     // Réinitialisation des valuers input lorsque le formulaire s'ouvre / se ferme.
     useEffect(() => {
+        console.log(creationDate);
       if (projectFormMode === 'edit') {
         setProjectTitle(projectEdit.title);
         setProjectSubtitle(projectEdit.subtitle);
@@ -115,6 +120,8 @@ function ProjectForm({
         setLoaderDisplay(false);
         setHandleDisplayProjectForm(false);
         handleLoadProjects();
+        setDisplayError(false);
+        setDisplayServerError(false);
     }
 
     /* -------------------------------
@@ -242,7 +249,7 @@ function ProjectForm({
 
         event.preventDefault();
         setLoaderDisplay(true);
-        // const token = window.sessionStorage.getItem('1');
+        const token = window.sessionStorage.getItem('1');
         const projectFormData = new FormData();
         projectFormData.append('title', inputProjectTitleRef.current.value);
         projectFormData.append('subtitle', inputProjectSubtitleRef.current.value);
@@ -292,53 +299,68 @@ function ProjectForm({
             }
         });
 
-        if (projectFormMode==='add') {
-            
-            fetch(`${API_URL}/api/projects`, {
-                method: "POST",
-                headers: {
-                    // 'Content-Type': 'application/json',
-                    // 'Authorization': 'Bearer ' + token,
-                },
-                body: projectFormData,
-                })
-                .then((response) => {
-                    if (response.ok) {
+        if (
+            !inputProjectTitleRef.current.value ||
+            !inputProjectTypeRef.current.value ||
+            !inputCreationDateRef.current.value
+        ) {
+            setLoaderDisplay(false);
+            setDisplayError(true);
+            return;
+        }
+        else {
+            if (projectFormMode==='add') {
+                
+                fetch(`${API_URL}/api/projects`, {
+                    method: "POST",
+                    headers: {
+                        // 'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token,
+                    },
+                    body: projectFormData,
+                    })
+                    .then((response) => {
+                        if (response.ok) {
+                            return response;
+                        } else {
+                            setDisplayServerError(true);
+                            throw new Error('La requête a échoué');
+                        }
+                    })
+                    .then(()=> {
+                        closeForm();
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        setDisplayServerError(true);
+                });
+            } else if (projectFormMode==='edit') {
+                fetch(`${API_URL}/api/projects/${projectEdit._id}`, {
+                    method: "PUT",
+                    headers: {
+                        // 'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token,
+                    },
+                    body: projectFormData,
+                    })
+                    .then((response) => {
+                        if (response.ok) {
+                            return response;
+                        } else {
+                            setDisplayServerError(true);
+                            throw new Error('La requête a échoué');
+                        }
+                    })
+                    .then(()=> {
                         
-                        return response;
-                    } else {
-                        
-                        throw new Error('La requête a échoué');
-                    }
-                })
-                .then(()=> {
-                    
-                    closeForm();
-                })
-                .catch((error) => console.error(error));
-        } else if (projectFormMode==='edit') {
-            fetch(`${API_URL}/api/projects/${projectEdit._id}`, {
-                method: "PUT",
-                headers: {
-                    // 'Content-Type': 'application/json',
-                    // 'Authorization': 'Bearer ' + token,
-                },
-                body: projectFormData,
-                })
-                .then((response) => {
-                    if (response.ok) {
-                        
-                        return response;
-                    } else {
-                        
-                        throw new Error('La requête a échoué');
-                    }
-                })
-                .then(()=> {
-                    
-                    closeForm();
-                })
-                .catch((error) => console.error(error));
+                        closeForm();
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        setDisplayServerError(true);
+                        setLoaderDisplay(false);
+                });
+            }
         }
     }
 
@@ -375,7 +397,7 @@ function ProjectForm({
                 {/* CHAMPS DATE DE CRÉATION */}
                 <div className='projectForm_mainInfosContainer_textField'>
                     <label htmlFor='inputCreationDate'>DATE DE CRÉATION*</label>
-                    <input type='month' id='inputCreationDate' ref={inputCreationDateRef} value={creationDate} onChange={(e) => setCreationDate(e.target.value)}></input>
+                    <input type='year' id='inputCreationDate' ref={inputCreationDateRef} value={creationDate} onChange={(e) => setCreationDate(e.target.value)}></input>
                 </div>
 
                 {/* CHAMPS INFOS COMPAGNIE*/}
@@ -713,6 +735,8 @@ function ProjectForm({
                     ))}
                     <button type='button' onClick={() =>handleAddDiff()} >+ AJOUTER UN LIEU</button>
                 </div>
+                <ErrorText errorText={"Une erreur s\'est produite"} state={displayServerError}/>
+                <ErrorText errorText={"Tous les champs marqués d'une * doivent être remplis"} state={displayError}/>
                 <div className='projectForm_buttons'>
                     <button type='submit'>VALIDER</button>
                     <button type='button' onClick={() => setConfirmBoxState(true)}>ANNULER</button>

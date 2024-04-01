@@ -46,11 +46,11 @@
             width: 400px;
             aspect-ratio: 4;
             // height: 114px;
-            background-color: $colorDarkGrey;
+            background-color: $colorFirst;
             border: none;
             font-family: 'SpecialFont';
             text-decoration: none;
-            color: $colorLightGrey;
+            color: $colorDarkGrey;
             margin: auto;
             @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
 
@@ -74,8 +74,8 @@
 
         &:hover {
             cursor: pointer;
-            color: $colorDarkGrey;
-            background-color: $colorFirst;
+            color: $colorLightGrey;
+            background-color: $colorDarkGrey;
         }
     }
     }

@@ -8,7 +8,7 @@ const { storage, bucket } = require('../config/storage');
 exports.getAllProjects = (req, res) => {
     Project.find()
       .then (projects =>res.status(200).json(projects))
-      .catch (error => res.status (400).json({error}))
+      .catch (error => res.status (500).json({error}))
   }
 
 /*------------------------
@@ -17,7 +17,7 @@ exports.getAllProjects = (req, res) => {
 exports.getOneProject = (req, res) => {
   Project.findOne({_id: req.params.id})
     .then (project =>res.status(200).json(project))
-    .catch (error => res.status (400).json({error}))
+    .catch (error => res.status (500).json({error}))
 }
 
 /*------------------------
@@ -37,18 +37,13 @@ exports.createProject = async (req, res) => {
   const aboutShowWithBr = req.body.aboutShow.replace(/(\r\n|\n|\r)/g, "<br>");
   const aboutScenoWithBr = req.body.aboutSceno.replace(/(\r\n|\n|\r)/g, "<br>");
 
-  // const projectDescriptionWithBr = projectData.description.replace(/(\r\n|\n|\r)/g, "<br>");
-
   if (!projectData.title || !projectData.projectType) {
     return res.status(400).json({ error: 'Le champ "title" ou "state" est manquant dans la demande.' });
   }
 
   try {
-    // if (serieImages.length === req.newImagesObjects.length) {
-      // Si toutes les images ont été traitées, créez une nouvelle instance du modèle Serie
       const project = new Project({
         ... projectData,
-        // description: projectDescriptionWithBr,
         artistsList: artistsList,
         productionList: productionList,
         press: pressList,
@@ -65,7 +60,7 @@ exports.createProject = async (req, res) => {
     // }
   } catch (error) {
     console.error(error);
-    res.status(400).json({ error });
+    res.status(500).json({ error });
   }
 };
 
@@ -80,10 +75,6 @@ exports.deleteOneProject = async (req, res, next) => {
       if (!deletedProject) {
         return res.status(404).json({ message: 'Projet non trouvé' });
       }
-  
-      // Appeler la fonction de suppression d'images après avoir supprimé la série
-      // await deleteImageFiles(req);
-      // await deleteMoImageFiles(req);
       
       res.status(200).json({ message: 'Projet supprimé !' });
       next();
