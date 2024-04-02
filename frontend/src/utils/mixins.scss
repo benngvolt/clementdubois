@@ -104,8 +104,8 @@ $colorLightGrey: #E9E9E9;
 $colorDarkGrey: #0c0c0c;
 $colorFields: aqua;
 $colorFirst: rgb(255, 242, 0);
-$colorThird: rgb(65, 65, 65);
-$colorSecond: rgb(255, 206, 213);
+$colorThird: rgb(230, 0, 255);
+$colorSecond: rgb(255, 181, 192);
 
 $mobileMaxWidth: 768px;
 $padMinWidth: 769px;
@@ -247,6 +247,32 @@ $padMaxWidth: 991px;
     }
 }
 
+@keyframes disappearValidBox {
+    0% {  
+        opacity: 1;
+    }
+
+    70% {  
+        opacity: 1;
+    }
+
+    100% { 
+        opacity: 0;
+    }
+}
+
+@keyframes darkAppear {
+    0% {  
+        filter: brightness(0);
+    }
+    20% {  
+        filter: brightness(0);
+    }
+    100% { 
+        filter: brightness(1);
+    }
+}
+
 @keyframes closeCollapse {
 
     0% {  
@@ -272,20 +298,16 @@ $padMaxWidth: 991px;
 @keyframes openCollapseChildren {
     0% {  
         height: 0px;
-        opacity: 0;
-        // padding-bottom: 0px;
-        // display: none;
+        opacity: 0; 
     }
     50% { 
         height: auto;
         opacity: 0;
-        // padding-bottom: 22px;
     }
 
     100% { 
         height: auto;
         opacity: 1;
-        // padding-bottom: 22px;
     }
 }
 
@@ -314,7 +336,6 @@ $padMaxWidth: 991px;
     }
 
 }
-
 
 @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
 

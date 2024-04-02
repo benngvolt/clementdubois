@@ -1,6 +1,5 @@
 .dndGrid {
-  width: 100%;
-  aspect-ratio: 1/2;
+  width: 400px;
   display: grid;
   justify-content: center;
   align-items: center;

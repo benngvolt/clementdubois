@@ -1,14 +1,35 @@
 import './HomePage.scss'
 import Loader from '../Loader/Loader'
 import { ProjectsContext } from '../../utils/ProjectsContext';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
     
 function HomePage() {
 
-    const { loaderDisplay, homeImage } = useContext(ProjectsContext);
-    // const randomIndex = Math.floor(Math.random() * randomImagesSelection.length)
-    // const homeImage = randomImagesSelection[randomIndex];
+    const { loaderDisplay, projects} = useContext(ProjectsContext);
+    const [randomImagesSelection, setRandomImageSelection] = useState ([]);
+    const [homeImage, setHomeImage] = useState ('');
+    /*----------------------------------------------------------------------
+    ----- Création d'un tableau d'images random pour la landing page ------
+    ----------------------------------------------------------------------*/
+    const randomImagesUrlArray = projects
+            .map(item => 
+                item.projectImages
+            .filter(image => image.inRandomSelection === true)
+            .map(image => image.imageUrl)
+            )
+            .flat();
+    
+    useEffect(() => {
+        setRandomImageSelection(randomImagesUrlArray);
+    }, [projects]);
+    
+    useEffect(() => {
+        if (randomImagesSelection.length > 0) {
+            const randomIndex = Math.floor(Math.random() * randomImagesSelection.length);
+            setHomeImage(randomImagesSelection[randomIndex]);
+        }
+    }, [randomImagesSelection]);
 
     return (
         <div className='homePage'>

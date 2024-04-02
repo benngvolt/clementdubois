@@ -30,7 +30,7 @@ function Edit() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        setDisplayHeader(false);
+        // setDisplayHeader(true); 
         setDisplayError(false)
     },[]);
 
@@ -56,7 +56,7 @@ function Edit() {
         fetch(`${API_URL}/api/projects/${projectToDelete._id}`, {
             method: 'DELETE',
             headers: {
-                // Authorization: `Bearer ${sessionStorage.getItem('1')}`,
+                Authorization: `Bearer ${sessionStorage.getItem('1')}`,
             },
         })
         .then((response) => {

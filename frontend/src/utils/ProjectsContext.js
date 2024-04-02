@@ -27,7 +27,6 @@ export const ProjectsProvider = ({ children }) => {
     const [hideFooter, setHideFooter] = useState(true)
     const [loaderDisplay, setLoaderDisplay] = useState(false);
     const [randomImagesSelection, setRandomImageSelection] = useState ([]);
-    const [homeImage, setHomeImage] = useState ('');
 
     // définition des catégories de projets
     const projectCategories = ['spectacle vivant','évènement', 'médiation']
@@ -51,30 +50,9 @@ export const ProjectsProvider = ({ children }) => {
             });
     }, [loadProjects]);
 
-   
-
-
-
-    /*----------------------------------------------------------------------
-    ----- Création d'un tableau d'images random pour la landinng page ------
-    ----------------------------------------------------------------------*/
     const handleLoadProjects = () => { 
         setLoadProjects(loadProjects === false ? true : false);
     };
-
-    useEffect(() => {
-        const randomImagesUrlArray = projects
-        .map(item => 
-            item.projectImages
-        .filter(image => image.inRandomSelection === true)
-        .map(image => image.imageUrl)
-        )
-        .flat();
-        setRandomImageSelection(randomImagesUrlArray);
-        const randomIndex = Math.floor(Math.random() * randomImagesSelection.length)
-        setHomeImage (randomImagesSelection[randomIndex]);
-    }, [projects]);
-
 
     /*----------------------------------------
     ----- Gestion d'affichage du header ------
@@ -150,8 +128,8 @@ export const ProjectsProvider = ({ children }) => {
                 setDisplayHeader, 
                 setLoggedOut, 
                 setLoggedIn,
-                isAuthenticated,
-                homeImage}}>
+                isAuthenticated
+                }}>
             {children}
         </ProjectsContext.Provider>
     )

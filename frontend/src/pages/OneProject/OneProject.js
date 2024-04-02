@@ -22,9 +22,9 @@ function OneProject() {
         fetch(`${API_URL}/api/projects/${id}`)
             .then((res) => res.json())
             .then((data) => {
+                // setDisplayHeader(true);
                 window.scrollTo(0, 0);
                 setProject(data);
-                setDisplayHeader(false);
             })
             .catch((error) => console.log(error.message));
     }, [id]);
@@ -56,13 +56,15 @@ function OneProject() {
                 <div className='oneProject_firstInfosBlock_showAndSceno'>
                     {cleanedAboutShow && 
                     <div className='oneProject_firstInfosBlock_showAndSceno_showBlock'>
-                        <h5>La pièce</h5>
+                        <h5>{project.projectType==='spectacle vivant'?'La pièce':(project.projectType==='évènement'?'L\'évènement':'Le contexte')}</h5>
                         <p dangerouslySetInnerHTML={{__html:cleanedAboutShow}}></p>
                     </div>
                     }
                     {cleanedAboutSceno && 
                     <div className='oneProject_firstInfosBlock_showAndSceno_scenoBlock'>
+                        {project.projectType==='spectacle vivant'|| project.projectType==='évènement' &&
                         <h5>La scénographie</h5>
+                        }
                         <p dangerouslySetInnerHTML={{__html:cleanedAboutSceno}}></p>
                     </div>
                     }
@@ -71,7 +73,7 @@ function OneProject() {
                 <div className='oneProject_firstInfosBlock_distributionAndLinks'>
                     {project.artistsList && project.artistsList.length > 0 &&
                     <div className='oneProject_firstInfosBlock_distributionAndLinks_distribution'>
-                        <h5>Distribution</h5>
+                        <h5>{project.projectType==='spectacle vivant'?'Distribution':'L\'équipe'}</h5>
                         <ul className='oneProject_firstInfosBlock_distributionAndLinks_distribution_list'>
                             {project.artistsList.map((artist)=>(
                             <li key={artist._id} className='oneProject_firstInfosBlock_distributionAndLinks_distribution_list_item'>
@@ -137,7 +139,7 @@ function OneProject() {
 
             {/* IMAGES MAKING OF */}
             {project.makingOfImages && project.makingOfImages.length > 0 &&
-            <Collapse title="Making Of" style='dark'>
+            <Collapse title="Processus" style='dark'>
                 <div className="oneProject_makingOfImageContainer_imagesGrid">
                     {project.makingOfImages.map((image, index) => (
                     <img key={index} 

@@ -48,12 +48,33 @@
     }
 
     &_hamburger {
-
         height: 100%;
         border: none;
         background: none;
         margin: auto;
 
+        &_desktop {
+            display: flex;
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                display: flex;
+            }
+            
+            @media only screen and (max-width:$mobileMaxWidth){
+                display: flex; 
+            } 
+        }
+
+        &_responsive {
+            display: none;
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                display: flex;
+            }
+            
+            @media only screen and (max-width:$mobileMaxWidth){
+                display: flex; 
+            } 
+        }
+        
         &_icon {
             height: 16px;
             margin: auto;
@@ -68,7 +89,6 @@
 
         &--displayOn {
             animation: showHamburger 0.5s ease forwards;
-            display: flex;
         }
     }
 
@@ -89,10 +109,18 @@
         @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
             flex-direction: column;
             justify-content: center;
+            padding-top: 20%;
+            padding-bottom: 20%;
+            box-sizing: border-box;
+            
         };
         @media only screen and (max-width:$mobileMaxWidth){
             flex-direction: column;
             justify-content: center;
+            height: 100%;
+            padding-top: 20%;
+            padding-bottom: 20%;
+            box-sizing: border-box;
         }  
 
         &_menu {
@@ -152,22 +180,26 @@
                 }
 
                 h2, p {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                color: $colorDarkGrey;
-                font-family: 'SpecialFont';
-                font-size: 35px;
-                padding: 0 9px;
-                margin: 0;
-                text-decoration: none;
-                height: 100%;
-                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-                    font-size: 35px;
-                };
-                @media only screen and (max-width:$mobileMaxWidth){
-                    font-size: 1.5rem;
-                }  
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    color: $colorDarkGrey;
+                    font-family: 'SpecialFont';
+                    font-size: 33px;
+                    padding: 0 5px;
+                    margin: 0;
+                    text-decoration: none;
+                    height: 100%;
+                    @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                        font-size: 35px;
+                    };
+                    @media only screen and (max-width:$mobileMaxWidth){
+                        font-size: 1.5rem;
+                    }
+                    
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
 
                 &_dashboardNav {
@@ -194,12 +226,12 @@
             }  
             a svg {
                 color: $colorDarkGrey;
-                height: 30px;
-                width: 30px;
+                height: 28px;
+                width: 28px;
                 margin: auto;
-                padding: 6px;
+                padding: 4px;
                 box-sizing: border-box;
-                border-radius: 30px;
+                border-radius: 28px;
 
                 &:hover {
                     color: $colorFirst;

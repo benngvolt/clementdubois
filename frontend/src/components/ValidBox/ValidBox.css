@@ -395,154 +395,7 @@
     opacity: 1;
   }
 }
-.edit {
-  margin-left: 54px;
-  -webkit-animation: appearOpacity 2s ease forwards;
-          animation: appearOpacity 2s ease forwards;
-}
-@media only screen and (min-width: 769px) and (max-width: 991px) {
-  .edit {
-    margin-left: 50px;
-  }
-}
-@media only screen and (max-width: 768px) {
-  .edit {
-    margin-left: 50px;
-  }
-}
-.edit_warning {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 35px;
-  color: #0c0c0c;
-  width: 100%;
-  margin-top: 25%;
-  font-family: "SpecialFont";
-}
-.edit_warning--displayOff {
-  display: none;
-}
-.edit_wrapper {
-  width: 95%;
-  display: flex;
-  flex-direction: column;
-}
-.edit_wrapper--displayOff {
-  display: none;
-}
-.edit_list {
-  margin: 54px 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-@media only screen and (min-width: 769px) and (max-width: 991px) {
-  .edit_list {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-@media only screen and (max-width: 768px) {
-  .edit_list {
-    display: flex;
-    flex-direction: column;
-  }
-}
-.edit_list_item {
-  display: flex;
-  flex-direction: column;
-  row-gap: 12px;
-  margin-bottom: 22px;
-}
-.edit_list_item_image {
-  width: 80%;
-  aspect-ratio: 1.5/1;
-  -o-object-fit: cover;
-     object-fit: cover;
-  margin: auto;
-}
-@media only screen and (max-width: 768px) {
-  .edit_list_item_image {
-    width: 60%;
-  }
-}
-.edit_list_item_title {
-  width: 80%;
-  font-family: "SpecialFont";
-  font-size: 19px;
-  overflow: hidden;
-  color: #0c0c0c;
-  margin: auto;
-  text-align: center;
-}
-.edit_list_item_buttonsBox {
-  display: flex;
-  flex-direction: row;
-  -moz-column-gap: 12px;
-       column-gap: 12px;
-  margin-bottom: 16px;
-  margin: auto;
-}
-@media only screen and (min-width: 769px) and (max-width: 991px) {
-  .edit_list_item_buttonsBox {
-    flex-direction: column;
-    row-gap: 12px;
-  }
-}
-@media only screen and (max-width: 768px) {
-  .edit_list_item_buttonsBox {
-    flex-direction: column;
-    row-gap: 12px;
-  }
-}
-@media only screen and (min-width: 769px) and (max-width: 991px) {
-  .edit_list_item_buttonsBox_modif {
-    display: none;
-  }
-}
-@media only screen and (max-width: 768px) {
-  .edit_list_item_buttonsBox_modif {
-    display: none;
-  }
-}
-.edit_list_item_buttonsBox button {
-  font-family: "MainFont_light";
-  font-size: 16px;
-  color: #0c0c0c;
-  background-color: rgb(255, 242, 0);
-  border: none;
-}
-@media only screen and (min-width: 769px) and (max-width: 991px) {
-  .edit_list_item_buttonsBox button {
-    width: auto;
-  }
-}
-@media only screen and (max-width: 768px) {
-  .edit_list_item_buttonsBox button {
-    width: auto;
-  }
-}
-.edit_list_item_buttonsBox button:hover {
-  cursor: pointer;
-  background-color: #0c0c0c;
-  color: #E9E9E9;
-}
-.edit_addButton {
-  margin: auto;
-  margin: auto;
-  font-family: "SpecialFont";
-  color: #E9E9E9;
-  background-color: #0c0c0c;
-  font-size: 25px;
-  padding: 10px;
-  border: none;
-}
-.edit_addButton:hover {
-  color: #0c0c0c;
-  background-color: rgb(255, 242, 0);
-  cursor: pointer;
-}
-.edit_form--displayOn {
+.validBox {
   z-index: 1;
   position: fixed;
   align-items: center;
@@ -553,30 +406,39 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
 }
-.edit_form--displayOff {
+.validBox--displayOn {
+  display: flex;
+  -webkit-animation: disappearValidBox 2s ease forwards;
+          animation: disappearValidBox 2s ease forwards;
+}
+.validBox--displayOff {
   display: none;
 }
-.edit_randomImages {
+.validBox_container {
   display: flex;
   flex-direction: column;
-  margin-top: 98px;
+  row-gap: 16px;
+  padding-top: 22px;
+  padding-bottom: 22px;
+  width: 100%;
+  height: auto;
+  background: none;
 }
-.edit_randomImages_title {
-  width: 95%;
+.validBox_container p {
+  color: #0c0c0c;
+  font-family: "MainFont_light";
+  background-color: #E9E9E9;
+  font-size: 22px;
+  padding: 35px;
   margin: auto;
-  text-align: center;
-  margin-bottom: 46px;
 }
-.edit_randomImages_list {
-  width: 80%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin: 0 auto 54px auto;
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+  .validBox_container {
+    width: 40%;
+  }
 }
-.edit_randomImages_list_item img {
-  width: 200px;
-  aspect-ratio: 1.5/1;
-}/*# sourceMappingURL=Edit.css.map */
+@media only screen and (max-width: 768px) {
+  .validBox_container {
+    width: 70%;
+  }
+}/*# sourceMappingURL=ValidBox.css.map */

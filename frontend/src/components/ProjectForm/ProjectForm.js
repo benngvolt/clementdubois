@@ -11,6 +11,7 @@ import Loader from '../Loader/Loader'
 import welcomeImage from '../../assets/welcome01.png'
 import ConfirmBox from '../ConfirmBox/ConfirmBox'
 import ErrorText from '../ErrorText/ErrorText'
+import ValidBox from '../ValidBox/ValidBox'
 
 
 
@@ -72,6 +73,7 @@ function ProjectForm({
 
     const [displayServerError, setDisplayServerError] = useState(false);
     const [displayError, setDisplayError] = useState(false);
+    const [displayValidBox, setDisplayValidBox] = useState(false);
 
     const { loaderDisplay, setLoaderDisplay, projectCategories, productionCategories } = useContext(ProjectsContext);
 
@@ -85,6 +87,16 @@ function ProjectForm({
     function closeConfirmBox() {
         setConfirmBoxState(false);
     }
+
+    /*------------------------------------
+    ----- OUVERTURE VALIDBOX -----
+    ------------------------------------*/
+    const openValidBox = () => {
+        setDisplayValidBox(true);
+        setTimeout(() => {
+            setDisplayValidBox(false);
+        }, 2000); // Masquer la boîte après 2 secondes (2000 ms)
+    };
 
     // Réinitialisation des valuers input lorsque le formulaire s'ouvre / se ferme.
     useEffect(() => {
@@ -176,35 +188,44 @@ function ProjectForm({
         const image = inputProjectImageFileRef.current.files[0];
         if (image) {
             if (!image.inRandomSelection) {
-                image.inRandomSelection = false
+                image.inRandomSelection = false;
             }
-            setNewImage (image);
+            setIsImageLoaded(true);
             const id = uuidv4(); // Générez un identifiant unique
             image._id = id;
-            image.sampleImageUrl= URL.createObjectURL(image);
-            projectMainImageSampleRef.current.setAttribute("src", image.sampleImageUrl);
-            projectMainImageSampleRef.current.setAttribute("alt", "");
-            setIsImageLoaded(true);
+            image.sampleImageUrl = URL.createObjectURL(image);
+            setNewImage(image); // Mettre à jour newImage
         } else {
             setIsImageLoaded(false);
-        }    
+        }
     }
+    useEffect(() => {
+        if (newImage) {
+            projectMainImageSampleRef.current.setAttribute("src", newImage.sampleImageUrl);
+            projectMainImageSampleRef.current.setAttribute("alt", "");
+        }
+    }, [newImage]);
 
     function displayMoSample() {
         const image = inputProjectMoImageFileRef.current.files[0];
-
         if (image) {
-            setNewMoImage (image);
             const id = uuidv4(); // Générez un identifiant unique
             image._id = id;
-            image.sampleImageUrl= URL.createObjectURL(image);
-            projectMainMoImageSampleRef.current.setAttribute("src", image.sampleImageUrl);
-            projectMainMoImageSampleRef.current.setAttribute("alt", "");
+            image.sampleImageUrl = URL.createObjectURL(image);
+            setNewMoImage(image); // Mettre à jour newMoImage
+    
             setIsMoImageLoaded(true);
         } else {
             setIsMoImageLoaded(false);
-        }    
+        }
     }
+    
+    useEffect(() => {
+        if (newMoImage) {
+            projectMainMoImageSampleRef.current.setAttribute("src", newMoImage.sampleImageUrl);
+            projectMainMoImageSampleRef.current.setAttribute("alt", "");
+        }
+    }, [newMoImage]);
 
     function cancelAddImageFile() {
         setNewImage (null);
@@ -328,7 +349,8 @@ function ProjectForm({
                         }
                     })
                     .then(()=> {
-                        closeForm();
+                        setLoaderDisplay(false);
+                        openValidBox();
                     })
                     .catch((error) => {
                         console.error(error);
@@ -352,8 +374,8 @@ function ProjectForm({
                         }
                     })
                     .then(()=> {
-                        
-                        closeForm();
+                        setLoaderDisplay(false);
+                        openValidBox();
                     })
                     .catch((error) => {
                         console.error(error);
@@ -397,7 +419,7 @@ function ProjectForm({
                 {/* CHAMPS DATE DE CRÉATION */}
                 <div className='projectForm_mainInfosContainer_textField'>
                     <label htmlFor='inputCreationDate'>DATE DE CRÉATION*</label>
-                    <input type='year' id='inputCreationDate' ref={inputCreationDateRef} value={creationDate} onChange={(e) => setCreationDate(e.target.value)}></input>
+                    <input type='month' id='inputCreationDate' ref={inputCreationDateRef} value={creationDate} onChange={(e) => setCreationDate(e.target.value)}></input>
                 </div>
 
                 {/* CHAMPS INFOS COMPAGNIE*/}
@@ -437,7 +459,9 @@ function ProjectForm({
                         <label htmlFor='inputProjectImageFile'>{isImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
                         <input type='file' id='inputProjectImageFile' name="images" ref={inputProjectImageFileRef} onChange={displaySample} style={{ display: 'none' }}></input>
                         <div  className="projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer">
-                            <img id='imageSample' ref={projectMainImageSampleRef} src='' alt='aperçu image'/>
+                            { newImage &&
+                                <img id='imageSample' ref={projectMainImageSampleRef} src={newImage.imageUrl} alt='aperçu image'/>
+                            }
                             <div className={isImageLoaded ? "projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOff"}>
                                 <button aria-label="Ajouter l'image" onClick={handleAddImageFile} type="button">AJOUTER</button>
                                 <button aria-label="Annuler" onClick={cancelAddImageFile} type="button">ANNULER</button>
@@ -448,14 +472,16 @@ function ProjectForm({
                     
                 </div>
                 <div className='projectForm_imagesFieldsContainer_makingOfImagesContainer'>
-                    <p>IMAGES DU WORK-IN-PROCESS</p>
+                    <p>IMAGES DU PROCESSUS</p>
                     <DNDGallery imageFiles={moImageFiles} setImageFiles={setMoImageFiles} mainImageIndex={mainMoImageIndex} setMainImageIndex={setMainMoImageIndex} displayClass={'row'} /> 
                     {moImageFiles.length < 10 &&
                     <div className='projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField'>
                         <label htmlFor='inputProjectMoImageFile'>{isMoImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
                         <input type='file' id='inputProjectMoImageFile' name="moImages" ref={inputProjectMoImageFileRef} onChange={displayMoSample} style={{ display: 'none' }}></input>
                         <div  className="projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer">
-                            <img id='moImageSample' ref={projectMainMoImageSampleRef} src='' alt='aperçu image making of'/>
+                            { newMoImage &&
+                                <img id='moImageSample' ref={projectMainMoImageSampleRef} src={newMoImage.imageUrl} alt='aperçu image making of'/>
+                            }
                             <div className={isMoImageLoaded ? "projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField_sampleContainer_buttonsSystem--displayOff"}>
                                 <button aria-label="Ajouter l'image" onClick={handleAddMoImageFile} type="button">AJOUTER</button>
                                 <button aria-label="Annuler" onClick={cancelAddMoImageFile} type="button">ANNULER</button>
@@ -738,8 +764,8 @@ function ProjectForm({
                 <ErrorText errorText={"Une erreur s\'est produite"} state={displayServerError}/>
                 <ErrorText errorText={"Tous les champs marqués d'une * doivent être remplis"} state={displayError}/>
                 <div className='projectForm_buttons'>
-                    <button type='submit'>VALIDER</button>
-                    <button type='button' onClick={() => setConfirmBoxState(true)}>ANNULER</button>
+                    <button type='submit'>ENVOYER</button>
+                    <button type='button' onClick={() => setConfirmBoxState(true)}>SORTIR</button>
                 </div>
             </div>
             <div className={loaderDisplay===true?'projectForm_loaderContainer--displayOn':'projectForm_loaderContainer--displayOff'} >
@@ -753,6 +779,7 @@ function ProjectForm({
                     negativeChoice = {closeConfirmBox}
                 />
             </div>
+            <ValidBox validBoxState={displayValidBox}/>
         </form>
     )
 }

@@ -1,0 +1,53 @@
+@import '../../utils/mixins';
+
+.validBox {
+
+        &--displayOn {
+            display: flex;
+            animation: disappearValidBox 2s ease forwards;
+        }
+
+        &--displayOff {
+            display: none;
+        }
+
+        z-index: 1;
+        position: fixed;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background:rgba(0, 0, 0, 0.8);
+
+        &_container {
+            display: flex;
+            flex-direction: column;
+            row-gap: 16px;
+            padding-top: 22px;
+            padding-bottom: 22px;
+            width: 100%;
+            height: auto;
+            background: none;
+
+            p {
+                color: $colorDarkGrey;
+                font-family: 'MainFont_light';
+                background-color: $colorLightGrey;
+                font-size: 22px;
+                padding: 35px;
+                margin: auto;
+
+            }
+
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                width: 40%;
+            }
+            
+            @media only screen and (max-width:$mobileMaxWidth){
+                width: 70%;
+            }    
+        }
+    }
+

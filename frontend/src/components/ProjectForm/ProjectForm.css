@@ -167,7 +167,7 @@
 }
 @-webkit-keyframes openHeader {
   0% {
-    height: 30px;
+    height: 35px;
   }
   100% {
     height: 98px;
@@ -175,10 +175,42 @@
 }
 @keyframes openHeader {
   0% {
-    height: 30px;
+    height: 35px;
   }
   100% {
     height: 98px;
+  }
+}
+@-webkit-keyframes closeVerticalHeader {
+  0% {
+    width: 40%;
+  }
+  100% {
+    width: 35px;
+  }
+}
+@keyframes closeVerticalHeader {
+  0% {
+    width: 40%;
+  }
+  100% {
+    width: 35px;
+  }
+}
+@-webkit-keyframes openVerticalHeader {
+  0% {
+    width: 35px;
+  }
+  100% {
+    width: 40%;
+  }
+}
+@keyframes openVerticalHeader {
+  0% {
+    width: 35px;
+  }
+  100% {
+    width: 40%;
   }
 }
 @-webkit-keyframes closeHeader {
@@ -186,7 +218,7 @@
     height: 98px;
   }
   100% {
-    height: 30px;
+    height: 35px;
   }
 }
 @keyframes closeHeader {
@@ -194,7 +226,7 @@
     height: 98px;
   }
   100% {
-    height: 30px;
+    height: 35px;
   }
 }
 @-webkit-keyframes disappear {
@@ -213,6 +245,50 @@
   100% {
     opacity: 0;
     display: none;
+  }
+}
+@-webkit-keyframes disappearValidBox {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes disappearValidBox {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes darkAppear {
+  0% {
+    filter: brightness(0);
+  }
+  20% {
+    filter: brightness(0);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+@keyframes darkAppear {
+  0% {
+    filter: brightness(0);
+  }
+  20% {
+    filter: brightness(0);
+  }
+  100% {
+    filter: brightness(1);
   }
 }
 @-webkit-keyframes closeCollapse {
@@ -249,74 +325,58 @@
 }
 @-webkit-keyframes openCollapseChildren {
   0% {
-    height: 0%;
+    height: 0px;
     opacity: 0;
-    padding-bottom: 0px;
-    display: none;
   }
   50% {
     height: auto;
     opacity: 0;
-    padding-bottom: 54px;
   }
   100% {
     height: auto;
     opacity: 1;
-    padding-bottom: 54px;
   }
 }
 @keyframes openCollapseChildren {
   0% {
-    height: 0%;
+    height: 0px;
     opacity: 0;
-    padding-bottom: 0px;
-    display: none;
   }
   50% {
     height: auto;
     opacity: 0;
-    padding-bottom: 54px;
   }
   100% {
     height: auto;
     opacity: 1;
-    padding-bottom: 54px;
   }
 }
 @-webkit-keyframes closeCollapseChildren {
   0% {
     height: auto;
     opacity: 1;
-    padding-bottom: 54px;
   }
   50% {
     height: auto;
     opacity: 0;
-    padding-bottom: 54px;
   }
   100% {
     height: 0px;
     opacity: 0;
-    padding-bottom: 0px;
-    display: none;
   }
 }
 @keyframes closeCollapseChildren {
   0% {
     height: auto;
     opacity: 1;
-    padding-bottom: 54px;
   }
   50% {
     height: auto;
     opacity: 0;
-    padding-bottom: 54px;
   }
   100% {
     height: 0px;
     opacity: 0;
-    padding-bottom: 0px;
-    display: none;
   }
 }
 @-webkit-keyframes appearOpacity {
@@ -369,7 +429,7 @@
 .projectForm_welcomeContainer {
   width: 70%;
   margin: 54px auto;
-  background-color: rgb(255, 206, 213);
+  background-color: rgb(255, 181, 192);
 }
 .projectForm_welcomeContainer_mainWelcome {
   font-family: "SpecialFont";
@@ -395,7 +455,7 @@
   color: #E9E9E9;
 }
 .projectForm_mainInfosContainer {
-  width: 70%;
+  width: 85%;
   margin: auto;
   flex-direction: column;
   justify-content: space-between;
@@ -422,7 +482,7 @@
   width: 70%;
 }
 .projectForm_imagesFieldsContainer {
-  width: 70%;
+  width: 85%;
   margin: auto;
 }
 .projectForm_imagesFieldsContainer_projectImagesContainer, .projectForm_imagesFieldsContainer_makingOfImagesContainer {
@@ -436,7 +496,7 @@
 .projectForm_imagesFieldsContainer_projectImagesContainer_imageField, .projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField {
   display: flex;
   flex-direction: column;
-  vertical-align: middle;
+  justify-content: center;
   height: auto;
 }
 .projectForm_imagesFieldsContainer_projectImagesContainer_imageField label, .projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField label {
@@ -515,13 +575,13 @@
   margin: 54px auto 0 auto;
 }
 .projectForm_imagesFieldsContainer_makingOfImagesContainer_imageField label {
-  background-color: #E9E9E9;
+  background-color: #0c0c0c;
 }
 .projectForm_imagesFieldsContainer_projectImagesContainer_imageField {
   margin: 54px auto;
 }
 .projectForm_descriptionsContainer {
-  width: 70%;
+  width: 85%;
   margin: 30px auto 0 auto;
   display: flex;
   flex-direction: column;
@@ -548,7 +608,7 @@
   line-height: 100%;
 }
 .projectForm_arraysContainer {
-  width: 70%;
+  width: 85%;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -632,7 +692,7 @@
   flex-direction: row;
   -moz-column-gap: 25px;
        column-gap: 25px;
-  margin: 98px auto 132px auto;
+  margin: 32px auto 98px auto;
 }
 .projectForm_buttons button {
   margin: auto;

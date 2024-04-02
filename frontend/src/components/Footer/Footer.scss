@@ -1,6 +1,10 @@
 @import '../../utils/mixins';
 
 .footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    column-gap: 22px;
     height: auto;
     padding: 0 54px 0 54px;
     box-sizing: border-box;
@@ -18,6 +22,35 @@
     &--displayOff {
         display: none;
     } 
+
+    &_leftButtonContainer, &_rightButtonContainer {
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: auto;
+        
+        &_button {
+
+            width: 22px;
+            
+            &_icon {
+                
+                font-size: 19px; 
+
+                &--displayOff {
+                    display: none;
+                }
+                &--displayOn {
+                    animation: appearOpacity 1s ease forwards;
+                    display: block;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
 
     &_list {
         display: flex;
@@ -56,7 +89,7 @@
 
                 img {
                     
-                    width: 132px;
+                    width: 100%;
                     aspect-ratio: 2/1;
                     object-fit: cover;
                     
@@ -68,7 +101,7 @@
                     font-size: 16px;
                     margin: 9px 3px 0px 3px;
                     width: 132px;
-                    height: 30px;
+                    height: 16px;
                     overflow: hidden;
                     
                 }

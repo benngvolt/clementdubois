@@ -28,7 +28,6 @@ function uploadImages(req, res, next) {
     return new Promise(async(resolve, reject) => {
       try {
         const { originalname, buffer } = file;
-        
         // Redimensionnez et convertissez l'image avec Sharp
         const resizedImageBuffer = await sharp(buffer)
           .resize({
@@ -159,8 +158,6 @@ function uploadImages(req, res, next) {
       res.status(500).json({ error: 'Erreur lors du traitement des images.' });
     });
 };
-
-
 
 
   function uploadImage(req, res, next) {

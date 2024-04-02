@@ -9,11 +9,11 @@ function AllProjects() {
     const { projects, projectCategories, setDisplayHeader, displayHeader } = useContext(ProjectsContext);
     const [filteredProjects, setFilteredProjects] = useState(projects);
     const [categoryProjects, setCategoryProjects] = useState('tous');
+    
 
     useEffect(() => {
         window.scrollTo(0, 0);
         setFilteredProjects(projects);
-        setDisplayHeader(false);
     },[projects]);
     
     // Tri des projets en fonction de leurs dates numériques (AAAAMM) dans l'ordre décroissant
@@ -64,6 +64,7 @@ function AllProjects() {
                         aria-label={`Accéder à la page du projet ${project.title}`}>
                         <div className='allProjects_projectCard_infos'>
                             <h4 className='allProjects_projectCard_infos_title'>{project.title}</h4>
+                            <p className='allProjects_projectCard_infos_subtitle'>{project.subtitle}</p>
                             <p className='allProjects_projectCard_infos_projectInfos'>{project.projectInfos}</p>
                             <p className='allProjects_projectCard_infos_creationDate'>{project.creationDate.split("-")[0]}</p>
                             {project.summary &&

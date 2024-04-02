@@ -167,7 +167,7 @@
 }
 @-webkit-keyframes openHeader {
   0% {
-    height: 30px;
+    height: 35px;
   }
   100% {
     height: 98px;
@@ -175,10 +175,42 @@
 }
 @keyframes openHeader {
   0% {
-    height: 30px;
+    height: 35px;
   }
   100% {
     height: 98px;
+  }
+}
+@-webkit-keyframes closeVerticalHeader {
+  0% {
+    width: 40%;
+  }
+  100% {
+    width: 35px;
+  }
+}
+@keyframes closeVerticalHeader {
+  0% {
+    width: 40%;
+  }
+  100% {
+    width: 35px;
+  }
+}
+@-webkit-keyframes openVerticalHeader {
+  0% {
+    width: 35px;
+  }
+  100% {
+    width: 40%;
+  }
+}
+@keyframes openVerticalHeader {
+  0% {
+    width: 35px;
+  }
+  100% {
+    width: 40%;
   }
 }
 @-webkit-keyframes closeHeader {
@@ -186,7 +218,7 @@
     height: 98px;
   }
   100% {
-    height: 30px;
+    height: 35px;
   }
 }
 @keyframes closeHeader {
@@ -194,7 +226,7 @@
     height: 98px;
   }
   100% {
-    height: 30px;
+    height: 35px;
   }
 }
 @-webkit-keyframes disappear {
@@ -213,6 +245,50 @@
   100% {
     opacity: 0;
     display: none;
+  }
+}
+@-webkit-keyframes disappearValidBox {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes disappearValidBox {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes darkAppear {
+  0% {
+    filter: brightness(0);
+  }
+  20% {
+    filter: brightness(0);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+@keyframes darkAppear {
+  0% {
+    filter: brightness(0);
+  }
+  20% {
+    filter: brightness(0);
+  }
+  100% {
+    filter: brightness(1);
   }
 }
 @-webkit-keyframes closeCollapse {
@@ -249,74 +325,58 @@
 }
 @-webkit-keyframes openCollapseChildren {
   0% {
-    height: 0%;
+    height: 0px;
     opacity: 0;
-    padding-bottom: 0px;
-    display: none;
   }
   50% {
     height: auto;
     opacity: 0;
-    padding-bottom: 54px;
   }
   100% {
     height: auto;
     opacity: 1;
-    padding-bottom: 54px;
   }
 }
 @keyframes openCollapseChildren {
   0% {
-    height: 0%;
+    height: 0px;
     opacity: 0;
-    padding-bottom: 0px;
-    display: none;
   }
   50% {
     height: auto;
     opacity: 0;
-    padding-bottom: 54px;
   }
   100% {
     height: auto;
     opacity: 1;
-    padding-bottom: 54px;
   }
 }
 @-webkit-keyframes closeCollapseChildren {
   0% {
     height: auto;
     opacity: 1;
-    padding-bottom: 54px;
   }
   50% {
     height: auto;
     opacity: 0;
-    padding-bottom: 54px;
   }
   100% {
     height: 0px;
     opacity: 0;
-    padding-bottom: 0px;
-    display: none;
   }
 }
 @keyframes closeCollapseChildren {
   0% {
     height: auto;
     opacity: 1;
-    padding-bottom: 54px;
   }
   50% {
     height: auto;
     opacity: 0;
-    padding-bottom: 54px;
   }
   100% {
     height: 0px;
     opacity: 0;
-    padding-bottom: 0px;
-    display: none;
   }
 }
 @-webkit-keyframes appearOpacity {
@@ -343,6 +403,27 @@
   justify-content: flex-start;
   row-gap: 4px;
 }
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+  .allProjects {
+    margin-left: 50px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .allProjects {
+    margin-left: 50px;
+  }
+}
+.allProjects ul {
+  list-style: none;
+  padding: 0;
+}
+@media only screen and (max-width: 768px) {
+  .allProjects ul {
+    display: flex;
+    flex-direction: column;
+    row-gap: 9px;
+  }
+}
 .allProjects_buttonsContainer {
   display: flex;
   flex-direction: row;
@@ -350,7 +431,25 @@
        column-gap: 30px;
   margin: 114px 54px;
 }
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+  .allProjects_buttonsContainer {
+    margin: 35px 0 73px 0;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .allProjects_buttonsContainer {
+    margin: 35px 0 35px 0;
+  }
+}
+.allProjects_buttonsContainer_button {
+  list-style-type: none;
+}
 .allProjects_buttonsContainer_button--notSelected {
+  border: none;
+  padding: 0;
+}
+.allProjects_buttonsContainer_button--notSelected h3 {
+  margin: 0;
   margin: auto;
   font-family: "SpecialFont";
   color: #E9E9E9;
@@ -358,14 +457,18 @@
   font-size: 25px;
   padding: 10px;
   border: none;
-  margin: 0;
 }
-.allProjects_buttonsContainer_button--notSelected:hover {
+.allProjects_buttonsContainer_button--notSelected h3:hover {
   color: #0c0c0c;
   background-color: rgb(255, 242, 0);
   cursor: pointer;
 }
 .allProjects_buttonsContainer_button--selected {
+  border: none;
+  padding: 0;
+}
+.allProjects_buttonsContainer_button--selected h3 {
+  margin: 0;
   font-family: "SpecialFont";
   font-size: 25px;
   padding: 10px;
@@ -373,8 +476,13 @@
   color: #0c0c0c;
   background-color: rgb(255, 242, 0);
 }
-.allProjects_buttonsContainer_button--selected:hover {
+.allProjects_buttonsContainer_button--selected h3:hover {
   cursor: pointer;
+}
+.allProjects_projectsList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3px;
 }
 .allProjects_projectCard {
   padding-left: 54px;
@@ -389,6 +497,24 @@
   -moz-column-gap: 40px;
        column-gap: 40px;
   box-sizing: border-box;
+}
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+  .allProjects_projectCard {
+    padding-left: 0px;
+    flex-direction: column;
+    height: auto;
+    row-gap: 16px;
+    margin-bottom: 35px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .allProjects_projectCard {
+    padding-left: 0px;
+    flex-direction: column;
+    height: auto;
+    row-gap: 9px;
+    margin-bottom: 35px;
+  }
 }
 .allProjects_projectCard:hover {
   cursor: pointer;
@@ -414,15 +540,52 @@
   -webkit-animation: heightRetractInvert 0.5s ease forwards;
           animation: heightRetractInvert 0.5s ease forwards;
 }
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+  .allProjects_projectCard_infos {
+    width: 95%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .allProjects_projectCard_infos {
+    width: 95%;
+  }
+}
 .allProjects_projectCard_infos_title {
   font-family: "SpecialFont";
   font-size: 50px;
-  margin: 30px 0;
+  margin: 30px 0 0 0;
+  text-align: left;
+}
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+  .allProjects_projectCard_infos_title {
+    font-size: 35px;
+    margin: 0;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .allProjects_projectCard_infos_title {
+    font-size: 35px;
+    margin: 0;
+  }
+}
+.allProjects_projectCard_infos_subtitle {
+  font-family: "MainFont_light";
+  font-size: 22px;
 }
 .allProjects_projectCard_infos_projectInfos {
   font-family: "MainFont_bold";
   font-size: 19px;
   margin: auto 0;
+}
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+  .allProjects_projectCard_infos_projectInfos {
+    font-size: 19px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .allProjects_projectCard_infos_projectInfos {
+    font-size: 14px;
+  }
 }
 .allProjects_projectCard_infos_creationDate {
   font-family: "MainFont_light";
@@ -435,13 +598,50 @@
   font-size: 16px;
   height: 161px;
 }
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+  .allProjects_projectCard_infos_summary {
+    height: auto;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .allProjects_projectCard_infos_summary {
+    display: none;
+    height: auto;
+  }
+}
 .allProjects_projectCard_imageContainer {
   width: 60%;
+  height: 100%;
   box-sizing: border-box;
+  margin: 0;
+}
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+  .allProjects_projectCard_imageContainer {
+    width: auto;
+    margin-right: 15px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .allProjects_projectCard_imageContainer {
+    width: auto;
+    margin-right: 15px;
+  }
 }
 .allProjects_projectCard_imageContainer img {
   width: 100%;
   height: 490px;
   -o-object-fit: cover;
      object-fit: cover;
+}
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+  .allProjects_projectCard_imageContainer img {
+    height: auto;
+    aspect-ratio: 2;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .allProjects_projectCard_imageContainer img {
+    height: auto;
+    aspect-ratio: 2;
+  }
 }/*# sourceMappingURL=AllProjects.css.map */

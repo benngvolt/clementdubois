@@ -167,7 +167,7 @@
 }
 @-webkit-keyframes openHeader {
   0% {
-    height: 30px;
+    height: 35px;
   }
   100% {
     height: 98px;
@@ -175,10 +175,42 @@
 }
 @keyframes openHeader {
   0% {
-    height: 30px;
+    height: 35px;
   }
   100% {
     height: 98px;
+  }
+}
+@-webkit-keyframes closeVerticalHeader {
+  0% {
+    width: 40%;
+  }
+  100% {
+    width: 35px;
+  }
+}
+@keyframes closeVerticalHeader {
+  0% {
+    width: 40%;
+  }
+  100% {
+    width: 35px;
+  }
+}
+@-webkit-keyframes openVerticalHeader {
+  0% {
+    width: 35px;
+  }
+  100% {
+    width: 40%;
+  }
+}
+@keyframes openVerticalHeader {
+  0% {
+    width: 35px;
+  }
+  100% {
+    width: 40%;
   }
 }
 @-webkit-keyframes closeHeader {
@@ -186,7 +218,7 @@
     height: 98px;
   }
   100% {
-    height: 30px;
+    height: 35px;
   }
 }
 @keyframes closeHeader {
@@ -194,7 +226,7 @@
     height: 98px;
   }
   100% {
-    height: 30px;
+    height: 35px;
   }
 }
 @-webkit-keyframes disappear {
@@ -213,6 +245,50 @@
   100% {
     opacity: 0;
     display: none;
+  }
+}
+@-webkit-keyframes disappearValidBox {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes disappearValidBox {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes darkAppear {
+  0% {
+    filter: brightness(0);
+  }
+  20% {
+    filter: brightness(0);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+@keyframes darkAppear {
+  0% {
+    filter: brightness(0);
+  }
+  20% {
+    filter: brightness(0);
+  }
+  100% {
+    filter: brightness(1);
   }
 }
 @-webkit-keyframes closeCollapse {
@@ -249,74 +325,58 @@
 }
 @-webkit-keyframes openCollapseChildren {
   0% {
-    height: 0%;
+    height: 0px;
     opacity: 0;
-    padding-bottom: 0px;
-    display: none;
   }
   50% {
     height: auto;
     opacity: 0;
-    padding-bottom: 54px;
   }
   100% {
     height: auto;
     opacity: 1;
-    padding-bottom: 54px;
   }
 }
 @keyframes openCollapseChildren {
   0% {
-    height: 0%;
+    height: 0px;
     opacity: 0;
-    padding-bottom: 0px;
-    display: none;
   }
   50% {
     height: auto;
     opacity: 0;
-    padding-bottom: 54px;
   }
   100% {
     height: auto;
     opacity: 1;
-    padding-bottom: 54px;
   }
 }
 @-webkit-keyframes closeCollapseChildren {
   0% {
     height: auto;
     opacity: 1;
-    padding-bottom: 54px;
   }
   50% {
     height: auto;
     opacity: 0;
-    padding-bottom: 54px;
   }
   100% {
     height: 0px;
     opacity: 0;
-    padding-bottom: 0px;
-    display: none;
   }
 }
 @keyframes closeCollapseChildren {
   0% {
     height: auto;
     opacity: 1;
-    padding-bottom: 54px;
   }
   50% {
     height: auto;
     opacity: 0;
-    padding-bottom: 54px;
   }
   100% {
     height: 0px;
     opacity: 0;
-    padding-bottom: 0px;
-    display: none;
   }
 }
 @-webkit-keyframes appearOpacity {
@@ -336,23 +396,99 @@
   }
 }
 .contactModal {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  height: 50vh;
+  width: auto;
   background-color: #E9E9E9;
   margin: auto;
   position: relative;
   -webkit-animation: appearOpacity 2s ease forwards;
           animation: appearOpacity 2s ease forwards;
 }
-.contactModal_title {
+@media only screen and (max-width: 768px) {
+  .contactModal {
+    width: 90%;
+  }
+}
+.contactModal_container {
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  width: 100%;
+  padding: 35px 54px;
+  height: 220px;
+  margin: 0 35px;
+}
+@media only screen and (max-width: 768px) {
+  .contactModal_container {
+    padding: 0;
+  }
+}
+.contactModal_container_yellowBlock {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 98px;
+  height: 160px;
+  background-color: rgb(255, 242, 0);
+  justify-content: center;
+}
+@media only screen and (max-width: 768px) {
+  .contactModal_container_yellowBlock {
+    margin: auto 0;
+    display: none;
+  }
+}
+.contactModal_container_datas {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 16px;
+  margin-left: 35px;
+}
+@media only screen and (max-width: 768px) {
+  .contactModal_container_datas {
+    margin-left: 0;
+  }
+}
+.contactModal_container_datas_title {
+  display: flex;
+  justify-content: flex-start;
   font-family: "SpecialFont";
-  font-size: 54px;
-  margin: 54px auto;
+  font-size: 35px;
+  margin: 0;
+}
+@media only screen and (max-width: 768px) {
+  .contactModal_container_datas_title {
+    font-size: 27px;
+  }
+}
+.contactModal_container_datas_tel {
+  font-family: "MainFont_light";
+  font-size: 22px;
+  margin: 0;
+}
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+  .contactModal_container_datas_tel {
+    font-size: 22px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .contactModal_container_datas_tel {
+    font-size: 14px;
+  }
+}
+.contactModal_container_datas_address, .contactModal_container_datas_mail {
+  font-family: "MainFont_light";
+  font-size: 22px;
+  margin: 0;
+}
+@media only screen and (min-width: 769px) and (max-width: 991px) {
+  .contactModal_container_datas_address, .contactModal_container_datas_mail {
+    font-size: 22px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .contactModal_container_datas_address, .contactModal_container_datas_mail {
+    font-size: 14px;
+  }
 }
 .contactModal_closeButton {
   width: auto;
@@ -364,19 +500,15 @@
   top: 20px;
   left: 20px;
 }
+@media only screen and (max-width: 768px) {
+  .contactModal_closeButton {
+    top: 10px;
+    left: 10px;
+  }
+}
 .contactModal_closeButton_icon {
   height: 2em;
 }
 .contactModal_closeButton_icon:hover {
   cursor: pointer;
-}
-.contactModal_tel {
-  font-family: "MainFont_bold";
-  font-size: 19px;
-  margin: 25px 98px;
-}
-.contactModal_address, .contactModal_mail {
-  font-family: "MainFont_light";
-  font-size: 19px;
-  margin: 25px 98px;
 }/*# sourceMappingURL=ContactModal.css.map */

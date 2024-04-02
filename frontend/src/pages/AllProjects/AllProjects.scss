@@ -136,7 +136,7 @@
             &_title {
                 font-family: 'SpecialFont';
                 font-size: 50px;
-                margin: 30px 0;
+                margin: 30px 0 0 0;
                 text-align: left;
 
                 @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
@@ -147,6 +147,11 @@
                     font-size: 35px;
                     margin: 0;
                 } 
+            }
+
+            &_subtitle {
+                font-family: 'MainFont_light';
+                font-size: 22px;
             }
 
             &_projectInfos {    

@@ -1,39 +1,114 @@
 @import '../../utils/mixins';
 
 .contactModal {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 50%;
-    height: 40vh;
+    
+    width: auto;
     background-color: $colorLightGrey;
     margin: auto;
     position: relative;
     animation: appearOpacity 2s ease forwards;
-    padding-bottom: 35px;
+    
+
     @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
             
     }
     
     @media only screen and (max-width:$mobileMaxWidth){
-        width: 80%;
-    }  
-
-
-    &_title {
+        width: 90%;
+    } 
+    
+    &_container {
         display: flex;
+        flex-direction: row;
         justify-content: center;
-        width: 100%;
-        font-family: 'SpecialFont';
-        font-size: 54px;
-        margin: 35px auto;
+        padding: 35px 54px;
+        height: 220px;
+        margin: 0 35px;
         @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
-            font-size: 35px;
+                    
         }
-        
         @media only screen and (max-width:$mobileMaxWidth){
-            font-size: 22px;
+            padding: 0;
         }  
+        
+
+        &_yellowBlock {
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            width: 98px;
+            height: 160px;
+            background-color: $colorFirst;
+            justify-content: center;
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
+                    
+            }
+            @media only screen and (max-width:$mobileMaxWidth){
+                margin: auto 0;
+                display: none;
+                
+            }  
+        }
+
+        &_datas {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            row-gap: 16px;
+            margin-left: 35px;
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
+                    
+            }
+            @media only screen and (max-width:$mobileMaxWidth){
+                margin-left: 0;
+            }  
+
+            &_title {
+                display: flex;
+                justify-content: flex-start;
+                font-family: 'SpecialFont';
+                font-size: 35px;
+                margin: 0;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
+                    
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    font-size: 27px;
+                }  
+            }
+
+            &_tel {
+                font-family: 'MainFont_light';
+                font-size: 22px;
+                margin: 0;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
+                    font-size: 22px;
+                    
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    font-size: 14px;
+                   
+                }  
+                
+            }
+
+            &_address, &_mail {
+                font-family: 'MainFont_light';
+                font-size: 22px;
+                margin: 0;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
+                    font-size: 22px;
+                    
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    font-size: 14px;
+       
+                }  
+            }
+        }
     }
 
     &_closeButton {
@@ -63,34 +138,5 @@
         }
     }
 
-    &_tel {
-        font-family: 'MainFont_bold';
-        font-size: 19px;
-        margin: 0 98px;
-        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
-            font-size: 16px;
-            margin: 0 54px;
-        }
-        
-        @media only screen and (max-width:$mobileMaxWidth){
-            font-size: 12px;
-            margin: 0 35px;
-        }  
-        
-    }
-
-    &_address, &_mail {
-        font-family: 'MainFont_light';
-        font-size: 19px;
-        margin: 0 98px;
-        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
-            font-size: 16px;
-            margin: 0 54px;
-        }
-        
-        @media only screen and (max-width:$mobileMaxWidth){
-            font-size: 12px;
-            margin: 0 35px;
-        }  
-    }
+    
 }

@@ -17,18 +17,25 @@ function ContactModal({setdisplayContactModal}) {
                     icon={faXmark} 
                     className='contactModal_closeButton_icon'/>
             </button>
-            <h2 className='contactModal_title'>Contact</h2>
-            <p className='contactModal_tel'>
-                        06 59 17 44 74
-            </p>
-            <p className='contactModal_address'>
-                        Le portemine <br/>
-                        36 Rue Fontgieve <br/>
-                        63000 Clermont-Ferrand
-            </p>
-            <p className='contactModal_mail'>
-                        ecrire@clement-dubois.com
-            </p>
+
+            <div className='contactModal_container'>
+                <div className='contactModal_container_yellowBlock'>
+                </div>
+                <div className='contactModal_container_datas'>
+                    <h2 className='contactModal_container_datas_title'>Clément Dubois<br/>Scénographe</h2>
+                    <p className='contactModal_container_datas_tel'>
+                                +33 6 59 17 44 74
+                    </p>
+                    {/* <p className='contactModal_container_datas_address'>
+                                Le portemine <br/>
+                                36 Rue Fontgieve <br/>
+                                63000 Clermont-Ferrand
+                    </p> */}
+                    <p className='contactModal_container_datas_mail'>
+                                ecrire@clement-dubois.com
+                    </p>
+                </div>
+            </div>
         </section>
     )
 }
