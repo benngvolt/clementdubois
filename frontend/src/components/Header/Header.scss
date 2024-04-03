@@ -100,6 +100,12 @@
         &--displayOn {
             animation: navOpen 0.5s ease forwards;
             display: flex;
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                animation: navOpen 2s ease forwards;
+            };
+            @media only screen and (max-width:$mobileMaxWidth){
+                animation: navOpen 2s ease forwards;
+            } 
         }
 
         height: 100%;

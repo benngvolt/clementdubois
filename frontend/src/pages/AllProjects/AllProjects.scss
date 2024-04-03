@@ -9,10 +9,10 @@
     row-gap: 4px;
     
     @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-        @include responsiveMarginLeft;
+        
     }
     @media only screen and (max-width:$mobileMaxWidth){
-        @include responsiveMarginLeft;
+        
     } 
 
     ul {
@@ -35,10 +35,12 @@
         margin: 114px 54px;
         
         @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-            margin: 35px 0 73px 0;
+            margin: 35px 0 73px 50px;
+            
         } 
         @media only screen and (max-width:$mobileMaxWidth){
-            margin: 35px 0 35px 0;
+            margin: 35px 0 35px 50px;
+            
         } 
         
         &_button {
@@ -84,14 +86,14 @@
         box-sizing: border-box;
 
         @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-            padding-left: 0px;
+            padding-left: 50px;
             flex-direction: column;
             height: auto;
             row-gap: 16px;
             margin-bottom: 35px;
         }
         @media only screen and (max-width:$mobileMaxWidth){
-            padding-left: 0px;
+            padding-left: 50px;
             flex-direction: column;
             height: auto;
             row-gap: 9px;
@@ -178,6 +180,7 @@
                 font-family: 'MainFont_light';
                 font-size: 16px;
                 height: 161px;
+                overflow: auto;
 
                 @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                     height: auto;

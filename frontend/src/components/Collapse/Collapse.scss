@@ -70,9 +70,17 @@
             h5 {
                 font-family: 'SpecialFont';
                 font-size: 30px;
-                text-align: start;
+                text-align: center;
                 margin: 22px 0;
-                padding-left: 54px;      
+                padding-left: 54px;
+                width: 30%; 
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    font-size: 22px;
+                }      
             }
 
             p {  

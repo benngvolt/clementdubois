@@ -1264,12 +1264,12 @@
         color: $colorLightGrey;
         @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
 
-            width: auto;
+            width: 100%;
         }
         
         @media only screen and (max-width:$mobileMaxWidth){
 
-            width: auto;
+            width: 100%;
         } 
 
         h5 {
@@ -1293,7 +1293,7 @@
             column-gap: 98px;
             @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                 padding: 22px 0;
-                
+                flex-direction: column;
             }
             
             @media only screen and (max-width:$mobileMaxWidth){
@@ -1301,6 +1301,7 @@
                 padding: 22px 0;
                 row-gap: 16px;
                 flex-direction: column;
+                width: 100%;
             } 
 
             &_item {
@@ -1308,6 +1309,16 @@
                 display: flex;
                 flex-direction: column;
                 width: 20%;
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    width: 80%;
+                    margin: auto;
+                        
+                }
+                
+                @media only screen and (max-width:$mobileMaxWidth){
+                    width: 80%;
+                    margin: auto;
+                } 
 
                 h6 {
                     font-family: 'SpecialFont';
