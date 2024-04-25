@@ -90,7 +90,7 @@ export const ProjectsProvider = ({ children }) => {
 
     // affichage/dissimulation du footer
     useEffect(() => {
-        if (location.pathname==='/edit'||location.pathname==='/' ) {
+        if (location.pathname === '/edit' || location.pathname === '/' ) {
             setHideFooter(true);
         } else {
             setHideFooter(false);
@@ -128,7 +128,8 @@ export const ProjectsProvider = ({ children }) => {
                 setDisplayHeader, 
                 setLoggedOut, 
                 setLoggedIn,
-                isAuthenticated
+                isAuthenticated,
+                setHideFooter
                 }}>
             {children}
         </ProjectsContext.Provider>

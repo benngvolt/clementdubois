@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-start": "env-cmd -f ./env/.env nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "react-scripts build"
   },
   "author": "Benjamin Gibert",
   "license": "ISC",

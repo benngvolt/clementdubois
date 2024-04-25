@@ -297,32 +297,32 @@ $padMaxWidth: 991px;
 
 @keyframes openCollapseChildren {
     0% {  
-        height: 0px;
+        max-height: 0px;
         opacity: 0; 
     }
     50% { 
-        height: auto;
+        max-height: 1000px;
         opacity: 0;
     }
 
     100% { 
-        height: auto;
+        max-height: 1000px;
         opacity: 1;
     }
 }
 
 @keyframes closeCollapseChildren {
     0% {  
-        height: auto;
+        max-height: 1000px;
         opacity: 1;
     }
-    50% {  
-        height: auto;
+    10% {  
+        max-height: 1000px;
         opacity: 0;
     }
 
     100% { 
-        height: 0px;
+        max-height: 0px;
         opacity: 0;
     }
 }

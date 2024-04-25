@@ -72,13 +72,14 @@
                 font-size: 30px;
                 text-align: center;
                 margin: 22px 0;
-                padding-left: 54px;
+                // padding-left: 54px;
                 width: 30%; 
                 @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                     
                 }
                 
                 @media only screen and (max-width:$mobileMaxWidth){
+                    width: 60%; 
                     font-size: 22px;
                 }      
             }

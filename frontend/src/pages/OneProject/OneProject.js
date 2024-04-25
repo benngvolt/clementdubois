@@ -17,7 +17,7 @@ function OneProject() {
     const [displayImageFocus, setDisplayImageFocus]= useState(false);
     const cleanedAboutShow = DOMPurify.sanitize(project.aboutShow);
     const cleanedAboutSceno = DOMPurify.sanitize(project.aboutSceno);
-
+    console.log(project.projectType);
     useEffect(() => {
         fetch(`${API_URL}/api/projects/${id}`)
             .then((res) => res.json())
@@ -62,7 +62,7 @@ function OneProject() {
                     }
                     {cleanedAboutSceno && 
                     <div className='oneProject_firstInfosBlock_showAndSceno_scenoBlock'>
-                        {project.projectType==='spectacle vivant'|| project.projectType==='évènement' &&
+                        {(project.projectType==='spectacle vivant'|| project.projectType==='évènement') &&
                         <h5>La scénographie</h5>
                         }
                         <p dangerouslySetInnerHTML={{__html:cleanedAboutSceno}}></p>

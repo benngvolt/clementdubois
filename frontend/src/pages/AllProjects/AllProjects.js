@@ -60,7 +60,7 @@ function AllProjects() {
             <ul className='allProjects_projectsList'>
                 {sortedProjects.map((project, index)=> (
                 <li key={project._id}>
-                    <Link to={`/projects/${project._id}`} className='allProjects_projectCard' 
+                    <Link to={`/projets/${project._id}`} className='allProjects_projectCard' 
                         aria-label={`Accéder à la page du projet ${project.title}`}>
                         <div className='allProjects_projectCard_infos'>
                             <h4 className='allProjects_projectCard_infos_title'>{project.title}</h4>

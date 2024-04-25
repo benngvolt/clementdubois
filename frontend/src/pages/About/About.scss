@@ -178,34 +178,38 @@
 
             color: $colorLightGrey;
             display: flex;
-            text-align: justify;
+            flex-direction: column;
+            text-align: center;
             width: 50%;
             margin: 0;
             font-family: 'MainFont_light';
-            font-size: 19px;
-            padding-top: 98px;
-            padding-left: 10%;
+            margin: auto;
+            font-size: 16px;
+            padding-top: 35px;
             padding-right: 0; 
             
             @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
                 font-size: 16px;
-                @include responsiveMarginRight;
-                padding-top: 54px
+                padding-top: 54px;
+                width: 70%;
             }
             
             @media only screen and (max-width:$mobileMaxWidth){
                 font-size: 12px;
-                @include responsiveMarginRight;
+                margin: 0 auto 0 20%;
                 padding-top: 35px;
-                
+                width: 70%;
             }  
+
+            a {
+                color: $colorLightGrey;
+            }
              
         }
         
         &_collabsGrid {
             padding-top: 54px;
             padding-bottom: 54px;
-            padding-left: 10%;
             padding-right: 0; 
             width: 600px;
             margin: auto;

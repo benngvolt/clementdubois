@@ -161,10 +161,10 @@ function Header() {
             </button>
             <div id="headerNav" className={displayHeader===false ? 'header_nav header_nav--displayOff':'header_nav header_nav--displayOn'} onMouseLeave={()=>closeHeader()}>
                 <nav className='header_nav_menu'>
-                    <Link aria-label='Accéder à la page Projets' to="/projects" className={location.pathname==='/projects' ? 'header_nav_menu_item header_nav_menu_item--selected':'header_nav_menu_item'}><h2>créations</h2></Link>
-                    <Link aria-label='Accéder à la page A Propos' to="/about" className={location.pathname==='/about' ? 'header_nav_menu_item header_nav_menu_item--selected':'header_nav_menu_item'}><h2>à propos</h2></Link>
+                    <Link aria-label='Accéder à la page Projets' to="/projets" className={location.pathname==='/projects' ? 'header_nav_menu_item header_nav_menu_item--selected':'header_nav_menu_item'}><h2>créations</h2></Link>
+                    <Link aria-label='Accéder à la page A Propos' to="/infos" className={location.pathname==='/about' ? 'header_nav_menu_item header_nav_menu_item--selected':'header_nav_menu_item'}><h2>à propos</h2></Link>
                     <button aria-label='Afficher la fenêtre Contact' type='button' className='header_nav_menu_item' onClick={()=>setdisplayContactModal(true)}><h2>contact</h2></button>
-                    <Link aria-label='Accéder au tableau de bord' to="/edit" className={isAuthenticated === true ? (location.pathname==='/edit' ? 'header_nav_menu_item header_nav_menu_item--selected':'header_nav_menu_item') : 'header_nav_menu_item header_nav_menu_item--displayOff' }><p className='header_nav_menu_item_dashboardNav'>dashboard</p></Link>
+                    <Link aria-label='Accéder au tableau de bord' to="/console" className={isAuthenticated === true ? (location.pathname==='/edit' ? 'header_nav_menu_item header_nav_menu_item--selected':'header_nav_menu_item') : 'header_nav_menu_item header_nav_menu_item--displayOff' }><p className='header_nav_menu_item_dashboardNav'>dashboard</p></Link>
                     <button onClick={() => {
                                 setConfirmBoxState(true);
                             }}
