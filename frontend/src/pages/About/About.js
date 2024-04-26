@@ -14,6 +14,22 @@ import kube from '../../assets/logos/kube.png';
 import laFauvette from '../../assets/logos/laFauvette.png';
 import operaClermont from '../../assets/logos/operaClermont.png';
 import porteMine from '../../assets/logos/porte mine.png';
+
+import pelican from '../../assets/logos/theatre_du_pelican.png';
+import voltaire from '../../assets/logos/ville_ferney_voltaire.png';
+import grandesTables from '../../assets/logos/grandes_tables.png';
+import aucm from '../../assets/logos/AUCM.png';
+import biscuit from '../../assets/logos/biscuit_production.png';
+import clermont from '../../assets/logos/ville_clermont_ferrand.jpeg';
+import vulcania from '../../assets/logos/vulcania.jpeg';
+import bruitCloches from '../../assets/logos/le_bruit_des_cloches.jpeg';
+import caméléon from '../../assets/logos/le_cameleon.png';
+
+import comedieClermont from '../../assets/logos/comedie_clermont.png';
+import orchestreIdf from '../../assets/logos/orchestre_national_idf.jpeg';
+import souffleur from '../../assets/logos/souffleurDeVerre.png';
+
+
 import Collapse from '../../components/Collapse/Collapse';
 
 
@@ -77,6 +93,42 @@ function About() {
                     </li>
                     <li className='about_collabsGrid_item'> 
                         <img src={laFauvette} alt='Logo La Fauvette'/>
+                    </li>
+                    <li className='about_collabsGrid_item'> 
+                        <img src={pelican} alt='Logo Théâtre le Pélican'/>
+                    </li>
+                    <li className='about_collabsGrid_item'> 
+                        <img src={voltaire} alt='Logo Ville de Ferney-Voltaire'/>
+                    </li>
+                    <li className='about_collabsGrid_item'> 
+                        <img src={grandesTables} alt='Logo Les Grandes Tables'/>
+                    </li>
+                    <li className='about_collabsGrid_item'> 
+                        <img src={aucm} alt='Logo AUCM'/>
+                    </li>
+                    <li className='about_collabsGrid_item'> 
+                        <img src={biscuit} alt='Logo Biscuit Production'/>
+                    </li>
+                    <li className='about_collabsGrid_item'> 
+                        <img src={clermont} alt='Logo Ville de Clermont-Ferrand'/>
+                    </li>
+                    <li className='about_collabsGrid_item'> 
+                        <img src={vulcania} alt='Logo Vulcania'/>
+                    </li>
+                    <li className='about_collabsGrid_item'> 
+                        <img src={bruitCloches} alt='Logo Le Bruit des Cloches'/>
+                    </li>
+                    <li className='about_collabsGrid_item'> 
+                        <img src={caméléon} alt='Logo Le Caméléon'/>
+                    </li>
+                    <li className='about_collabsGrid_item'> 
+                        <img src={comedieClermont} alt='Logo La Comédie de Clermont-Ferrand'/>
+                    </li>
+                    <li className='about_collabsGrid_item'> 
+                        <img src={orchestreIdf} alt="Logo Orchestre National d\'Île de France"/>
+                    </li>
+                    <li className='about_collabsGrid_item'> 
+                        <img src={souffleur} alt='Logo Le Souffleur de Verre'/>
                     </li>
                 </ul>
             </Collapse>

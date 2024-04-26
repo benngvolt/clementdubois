@@ -211,22 +211,27 @@
             padding-top: 54px;
             padding-bottom: 54px;
             padding-right: 0; 
+            
             width: 600px;
             margin: auto;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            row-gap: 22px;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            row-gap: 35px;
+            column-gap: 35px;
             list-style-type: none;
             @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
-                
+                row-gap: 22px;
                 width: 500px;
                 padding-top: 54px
             }
             
             @media only screen and (max-width:$mobileMaxWidth){
+                grid-template-columns: 1fr 1fr 1fr;
                 margin: 0;
                 width: 85%;
                 padding-top: 35px;
+                row-gap: 22px;
+                padding-left: 48px;
                 
             }  
 
