@@ -6,7 +6,7 @@ import portrait from '../../assets/clementDubois.jpg';
 import atelier1 from '../../assets/atelier1.jpeg';
 import atelier2 from '../../assets/atelier2.jpeg';
 import antoineEvents from '../../assets/logos/antoine evenements.jpeg';
-import artex from '../../assets/logos/artex.webp';
+import artex from '../../assets/logos/artex.jpg';
 import daruma from '../../assets/logos/daruma.png';
 import etonnantFestin from '../../assets/logos/etonnantFestin.jpeg';
 import fnau from '../../assets/logos/FNAU.jpg';
@@ -129,6 +129,9 @@ function About() {
                     </li>
                     <li className='about_collabsGrid_item'> 
                         <img src={souffleur} alt='Logo Le Souffleur de Verre'/>
+                    </li>
+                    <li className='about_collabsGrid_item'> 
+                        <img src={daruma} alt='Logo Daruma'/>
                     </li>
                 </ul>
             </Collapse>
