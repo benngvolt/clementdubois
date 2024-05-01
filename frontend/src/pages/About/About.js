@@ -24,7 +24,6 @@ import clermont from '../../assets/logos/ville_clermont_ferrand.jpeg';
 import vulcania from '../../assets/logos/vulcania.jpeg';
 import bruitCloches from '../../assets/logos/le_bruit_des_cloches.jpeg';
 import caméléon from '../../assets/logos/le_cameleon.png';
-
 import comedieClermont from '../../assets/logos/comedie_clermont.png';
 import orchestreIdf from '../../assets/logos/orchestre_national_idf.jpeg';
 import souffleur from '../../assets/logos/souffleurDeVerre.png';
@@ -36,6 +35,114 @@ import Collapse from '../../components/Collapse/Collapse';
 function About() {
 
     const { setDisplayHeader, displayHeader } = useContext(ProjectsContext);
+    const collabs = [
+        {
+            name: 'Antoine Évènements',
+            logo: antoineEvents,
+            link: 'https://www.antoineevenements.fr/'
+        },
+        {
+            name: 'Artex',
+            logo: artex,
+            link: 'https://artex63.fr/'
+        },
+        {
+            name: 'Porte Mine',
+            logo: porteMine,
+            link: 'https://www.leportemine.fr/'
+        },
+        {
+            name: 'Etonnant Festin',
+            logo: etonnantFestin,
+            link: 'https://www.letonnantfestin.com/'
+        },
+        {
+            name: 'FNAU',
+            logo: fnau,
+            link: 'https://www.fnau.org/fr/accueil/'
+        },
+        {
+            name: 'Opera Clermont',
+            logo: operaClermont,
+            link: 'https://clermont-auvergne-opera.com/'
+        },
+        {
+            name: 'Kube',
+            logo: kube,
+            link: 'https://www.agencekube.com/'
+        },
+        {
+            name: 'La Fauvette',
+            logo: laFauvette,
+            link: 'https://www.cielafauvette.com/'
+        },
+        {
+            name: 'Théâtre le Pélican',
+            logo: pelican,
+            link: 'https://billetterie-c3c.clermont-ferrand.fr/'
+        },
+        {
+            name: 'Ville de Ferney-Voltaire',
+            logo: voltaire,
+            link: 'https://www.ferney-voltaire.fr/decouvrir-et-sortir/saison-culturelle/fete-a-voltaire/'
+        },
+        {
+            name: 'Les Grandes Tables',
+            logo: grandesTables,
+            link: 'https://lesgrandestables.com/la-comedie/'
+        },
+        {
+            name: 'AUCM',
+            logo: aucm,
+            link: 'https://aucm.fr/'
+        },
+        {
+            name: 'Biscuit Production',
+            logo: biscuit,
+            link: 'http://www.biscuit-production.fr/'
+        },
+        {
+            name: 'Ville de Clermont-Ferrand',
+            logo: clermont,
+            link: 'https://clermont-ferrand.fr/'
+        },
+        {
+            name: 'Vulcania',
+            logo: vulcania,
+            link: 'https://www.vulcania.com/'
+        },
+        {
+            name: 'Le Bruit des Cloches',
+            logo: bruitCloches,
+            link: 'https://www.facebook.com/lebruitdescloches/?locale=fr_FR'
+        },
+        {
+            name: 'Le Caméléon',
+            logo: caméléon,
+            link: 'https://www.pontduchateau.fr/bouger-me-divertir/culture/les-rendez-vous-du-cameleon/'
+        },
+
+        {
+            name: 'La Comédie de Clermont-Ferrand',
+            logo: comedieClermont,
+            link: 'https://lacomediedeclermont.com'
+        },
+        {
+            name: 'Orchestre National d\'Île de France',
+            logo: orchestreIdf,
+            link: 'https://www.orchestre-ile.com/'
+        },
+        {
+            name: 'Le Souffleur de Verre',
+            logo: souffleur,
+            link: 'http://souffleurdeverre.fr/'
+        },
+        {
+            name: 'Daruma',
+            logo: daruma,
+            link: 'https://www.ciedaruma.com/'
+        }
+    ]
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -70,69 +177,15 @@ function About() {
             <img className='about_img' src={atelier2} alt='Seconde image atelier de Clément Dubois'/>
             <Collapse title="Collaborations" style='white'>
                 <ul className='about_collabsGrid'>
+                    {collabs.map((collab)=>(
                     <li className='about_collabsGrid_item'> 
-                        <img src={antoineEvents} alt='Logo Antoine Evenements'/>
+                        <a href={collab.link} 
+                                target='_blank' 
+                                rel='noreferrer'
+                                aria-label={`Accéder au lien ${collab.name}`}><img src={collab.logo} alt={`Logo ${collab.name}`}/>
+                        </a>
                     </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={artex} alt='Logo Artex'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={porteMine} alt='Logo Porte Mine'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={etonnantFestin} alt='Logo Etonnant Festin'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={fnau} alt='Logo FNAU'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={operaClermont} alt='Logo Opera Clermont'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={kube} alt='Logo Kube'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={laFauvette} alt='Logo La Fauvette'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={pelican} alt='Logo Théâtre le Pélican'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={voltaire} alt='Logo Ville de Ferney-Voltaire'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={grandesTables} alt='Logo Les Grandes Tables'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={aucm} alt='Logo AUCM'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={biscuit} alt='Logo Biscuit Production'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={clermont} alt='Logo Ville de Clermont-Ferrand'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={vulcania} alt='Logo Vulcania'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={bruitCloches} alt='Logo Le Bruit des Cloches'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={caméléon} alt='Logo Le Caméléon'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={comedieClermont} alt='Logo La Comédie de Clermont-Ferrand'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={orchestreIdf} alt="Logo Orchestre National d\'Île de France"/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={souffleur} alt='Logo Le Souffleur de Verre'/>
-                    </li>
-                    <li className='about_collabsGrid_item'> 
-                        <img src={daruma} alt='Logo Daruma'/>
-                    </li>
+                    ))}
                 </ul>
             </Collapse>
             <Collapse title="Mentions légales" style='dark'>
