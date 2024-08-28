@@ -37,8 +37,8 @@ function OneProject() {
             {/* TITRE/SOUS-TITRE/INFOS*/}
             <div className='oneProject_titleContainer'>
                 <div className='oneProject_titleContainer_title'>
-                    <h4>{project.title}</h4>
-                    <p>{project.subtitle}</p>
+                    <h4 translate="no">{project.title}</h4>
+                    <p translate="no">{project.subtitle}</p>
                 </div>
                 <p className='oneProject_titleContainer_projectInfos'>{project.projectInfos}</p>
             </div>
@@ -56,7 +56,7 @@ function OneProject() {
                 <div className='oneProject_firstInfosBlock_showAndSceno'>
                     {cleanedAboutShow && 
                     <div className='oneProject_firstInfosBlock_showAndSceno_showBlock'>
-                        <h5>{project.projectType==='spectacle vivant'?'La pièce':(project.projectType==='évènement'?'L\'évènement':'Le contexte')}</h5>
+                        <h5 >{project.projectType==='spectacle vivant'?'La pièce':(project.projectType==='évènement'?'L\'évènement':'Le contexte')}</h5>
                         <p dangerouslySetInnerHTML={{__html:cleanedAboutShow}}></p>
                     </div>
                     }

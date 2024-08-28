@@ -15,8 +15,9 @@ export const ProjectsProvider = ({ children }) => {
         setIsAuthenticated(true) ;
     };
     const setLoggedOut = () => {
+        window.sessionStorage.removeItem('1');
         setIsAuthenticated(false) ;
-    };    
+    };
 
     // GESTION STATE LOCAL SERIES + RELOAD 
 

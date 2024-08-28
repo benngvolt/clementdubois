@@ -63,8 +63,8 @@ function AllProjects() {
                     <Link to={`/projets/${project._id}`} className='allProjects_projectCard' 
                         aria-label={`Accéder à la page du projet ${project.title}`}>
                         <div className='allProjects_projectCard_infos'>
-                            <h4 className='allProjects_projectCard_infos_title'>{project.title}</h4>
-                            <p className='allProjects_projectCard_infos_subtitle'>{project.subtitle}</p>
+                            <h4 translate="no" className='allProjects_projectCard_infos_title'>{project.title}</h4>
+                            <p translate="no" className='allProjects_projectCard_infos_subtitle'>{project.subtitle}</p>
                             <p className='allProjects_projectCard_infos_projectInfos'>{project.projectInfos}</p>
                             <p className='allProjects_projectCard_infos_creationDate'>{project.creationDate.split("-")[0]}</p>
                             {project.summary &&

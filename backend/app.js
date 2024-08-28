@@ -20,9 +20,6 @@ const SECRET_MONGODBKEY = process.env.SECRET_MONGODBKEY;
 
 
 const projectsRoutes = require('./routes/projects');
-// const maininfosRoutes = require('./routes/maininfos');
-// const eventsRoutes = require('./routes/events');
-// const emailRoutes = require('./routes/email');
 const usersRoutes = require('./routes/users');
 
 /* --------------------------------------------------------

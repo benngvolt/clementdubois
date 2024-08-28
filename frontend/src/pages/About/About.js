@@ -200,6 +200,8 @@ function About() {
                 APE : 9003B <br/><br/>
 
                 Direction de la publication : Clément Dubois <br/><br/>
+                Crédit photo 1 : © Julien Bruhat<br/>
+                Crédits photos 2 et 3 : © Laurent Garlaschi<br/><br/>
 
                 Webdesign, développement web :<br/> 
                 <a href='http://www.bengibert.com'>Ben Gibert</a><br/>

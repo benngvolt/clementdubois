@@ -154,8 +154,9 @@ function Header() {
                     handleMouseOver()
                 }}
                     aria-label='Ouvrir la barre de menu'
-                    aria-controls='headerNav' 
-                    aria-expanded={displayHeader===false? false : true}className={hideHeader===true?'header header--displayOff' : (displayHeader===true ? 'header header--open':' header header--close')}>
+                    aria-controls='headerNav'
+                    aria-expanded={displayHeader===false? false : true}
+                    className={hideHeader===true?'header header--displayOff' : (displayHeader===true ? 'header header--open':' header header--close')}>
             <button className={displayHeader===true ? 'header_hamburger header_hamburger_desktop header_hamburger--displayOff':'header_hamburger header_hamburger_desktop header_hamburger--displayOn'} >
                 <FontAwesomeIcon icon={faBars} className='header_hamburger_icon'/>
             </button>
@@ -178,7 +179,7 @@ function Header() {
                 <nav className='header_nav_socials'>
                     <a aria-label='Accéder à la page Facebook de Clément Dubois' href='https://www.facebook.com/clementduboisscenographe' target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faFacebook} /></a>
                     <a aria-label='Accéder à la page Instagram de Clément Dubois' href='https://www.instagram.com/duboisscenographe/' target="_blank" rel='noreferrer'><FontAwesomeIcon icon={faSquareInstagram} target="_blank" rel='noreferrer' /></a>
-                    <a aria-label='Accéder à la page Tiktok de Clément Dubois' href='' target="_blank" rel='noreferrer'><FontAwesomeIcon icon={faTiktok} /></a>
+                    <a aria-label='Accéder à la page Tiktok de Clément Dubois' href='https://www.tiktok.com/@duboisscenographe/' target="_blank" rel='noreferrer'><FontAwesomeIcon icon={faTiktok} /></a>
                     <a aria-label='Accéder à la page LinnkedIn de Clément Dubois' href='https://www.linkedin.com/in/clément-dubois-scenographe' target="_blank" rel='noreferrer'><FontAwesomeIcon icon={faLinkedin} /></a>
                 </nav>
             </div>

@@ -75,7 +75,7 @@ function Footer() {
                             {project.projectImages && project.projectImages.length > 0 &&
                             <img src={`${project.projectImages[project.mainImageIndex].imageUrl}`} alt={`image du projet ${project.title}(${index})`}/>
                             }
-                            <p>{project.title}</p>
+                            <p translate="no">{project.title}</p>
                         </Link>
                     </li>
                 ))}
