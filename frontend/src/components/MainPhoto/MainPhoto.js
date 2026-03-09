@@ -1,10 +1,10 @@
-import './HomePage.scss'
+import './MainPhoto.scss'
 import Loader from '../Loader/Loader'
 import { ProjectsContext } from '../../utils/ProjectsContext';
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
     
-function HomePage() {
+function MainPhoto() {
 
     const { loaderDisplay, projects} = useContext(ProjectsContext);
     const [randomImagesSelection, setRandomImageSelection] = useState ([]);
@@ -32,21 +32,21 @@ function HomePage() {
     }, [randomImagesSelection]);
 
     return (
-        <div className='homePage'>
-            <div className={loaderDisplay===true?'homePage_loader--displayOn':'homePage_loader--displayOff'}>
+        <div className='mainPhoto'>
+            <div className={loaderDisplay===true?'mainPhoto_loader--displayOn':'mainPhoto_loader--displayOff'}>
                 <Loader className='loader--opaque' loaderDisplay={loaderDisplay}/>
             </div>
             {homeImage &&
-                <img className='homePage_image'src={homeImage} alt="image d'accueil" />
+                <img className='mainPhoto_image'src={homeImage} alt="image d'accueil" />
             }
             {!homeImage &&
-                <div className='homePage_image homePage_image--blackBg'></div>
+                <div className='mainPhoto_image mainPhoto_image--blackBg'></div>
             }
-            <div className='homePage_button'>
+            {/* <div className='mainPhoto_button'>
                 <Link to="/projets" aria-label="Accéder à la page Projets"><h1> Clément Dubois<br/>Scénographe </h1></Link>
-            </div>
+            </div> */}
         </div>
     )
 }
 
-export default HomePage
+export default MainPhoto

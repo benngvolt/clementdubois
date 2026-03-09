@@ -63,3 +63,9 @@ body {
 	background-color: rgb(233, 233, 233);
 }	
 
+@media (hover: none) {
+	*:hover {
+	  all: unset;
+	}
+  }
+

@@ -4,6 +4,7 @@ const validator = require('validator');
 const projectSchema = mongoose.Schema({
     title: {type: String, required: true},
     subtitle: {type: String, required: false},
+    slug: {type: String, required: true, unique: true},
     summary: {type: String, required: false},
     projectInfos: {type: String, required: false},
     moreInfos: {type: String, required: false},

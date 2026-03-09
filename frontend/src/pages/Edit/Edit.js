@@ -5,8 +5,11 @@ import { API_URL } from '../../utils/constants'
 import React, { useState, useContext, useEffect } from 'react'
 import { ProjectsContext } from '../../utils/ProjectsContext'
 import ErrorText from '../../components/ErrorText/ErrorText'
+import InformationsForm from '../../components/InformationsForm/InformationsForm'
 
 function Edit() {
+
+    
 
     const [projectFormMode, setProjectFormMode] = useState('add');
     const [projectEdit, setProjectEdit] = useState('');
@@ -25,6 +28,21 @@ function Edit() {
     const [moImageFiles, setMoImageFiles] = useState([]);
     const [mainImageIndex, setMainImageIndex]= useState(0);
     const [mainMoImageIndex, setMainMoImageIndex]= useState(0);
+
+    const [handleDisplayInformationsForm, setHandleDisplayInformationsForm] = useState(false)
+    const [informationsEdit, setInformationsEdit] = useState(null)
+
+    async function loadInformations() {
+    const res = await fetch(`${API_URL}/api/informations`)
+    const data = await res.json()
+    setInformationsEdit(data)
+    }
+
+    useEffect(() => { loadInformations() }, [])
+
+    function editInformations() {
+    setHandleDisplayInformationsForm(true)
+    }
 
     const { projects, handleLoadProjects, randomImagesSelection, setDisplayHeader, displayHeader, isAuthenticated } = useContext(ProjectsContext);
 
@@ -154,22 +172,26 @@ function Edit() {
                         handleLoadProjects={handleLoadProjects}
                         />
                 </div>
+                
                 <div className='edit_randomImages'>
-                    <p className='edit_randomImages_title'>IMAGES LANDING PAGE</p>
+                    <p className='edit_randomImages_title'>SÉLECTION D'IMAGES RANDOM :</p>
                     <div className='edit_randomImages_list'>
                         {randomImagesSelection.map((imageUrl, index) => (
                         <div key={index} className='edit_randomImages_list_item'>
                             <img className='edit_randomImages_list_item_img' src={imageUrl} alt={`image random (${index})`}/>
-                            {/* <button type='button' aria-label="Définir cette image comme image random de la landing-page" className='edit_randomImages_list_item_inRandomSelectionButton'
-                                onMouseDown={() => console.log('hola')} >
-                                <FontAwesomeIcon icon={faBolt} 
-                                className = 'edit_randomImages_list_item'
-                                // className={props.item.inRandomSelection === true ? 'dndItem_buttons_inRandomSelectionButton--isOrange' : 'dndItem_buttons_inRandomSelectionButton--isWhite'} 
-                                />
-                            </button> */}
                         </div>
                         ))}
                     </div>
+                </div>
+                <button className='edit_addButton edit_aboutEditButton' type="button" onClick={editInformations}>+ éditer la page À Propos</button>
+
+                    <div className={handleDisplayInformationsForm ? 'edit_form--displayOn' : 'edit_form--displayOff'}>
+                    <InformationsForm
+                        informationsEdit={informationsEdit}
+                        setHandleDisplayInformationsForm={setHandleDisplayInformationsForm}
+                        handleDisplayInformationsForm={handleDisplayInformationsForm}
+                        handleReloadInformations={loadInformations}
+                    />
                 </div>
             </aside>
         </main>

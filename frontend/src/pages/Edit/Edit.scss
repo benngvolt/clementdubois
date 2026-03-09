@@ -18,7 +18,8 @@
         font-size: 35px;
         color: $colorDarkGrey;
         width: 100%;
-        margin-top: 25%;
+        height: 100%;
+        margin-bottom: 45vh;
         font-family: 'SpecialFont';
         
         &--displayOff {
@@ -137,11 +138,16 @@
         margin: auto;
         @include Button;
     }
+
+    &_aboutEditButton {
+        margin-bottom: 90px;
+    }
   
 
     &_form {
 
         &--displayOn{
+            overflow: scroll;
             z-index: 1;
             position: fixed;
             align-items: center;
@@ -168,6 +174,9 @@
             margin: auto;
             text-align: center;
             margin-bottom: 46px;
+            font-family: 'MainFont_light';
+            font-size: 20px;
+            color: $colorDarkGrey;
         }
 
         &_list {

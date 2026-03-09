@@ -9,7 +9,7 @@ import ImageFocus from '../../components/ImageFocus/ImageFocus';
  
 function OneProject() {
 
-    const { id } = useParams();
+    const { slug } = useParams();
     const [project, setProject] = useState([]);
     const { setDisplayHeader, displayHeader } = useContext(ProjectsContext);
     
@@ -17,17 +17,16 @@ function OneProject() {
     const [displayImageFocus, setDisplayImageFocus]= useState(false);
     const cleanedAboutShow = DOMPurify.sanitize(project.aboutShow);
     const cleanedAboutSceno = DOMPurify.sanitize(project.aboutSceno);
-    console.log(project.projectType);
+  
     useEffect(() => {
-        fetch(`${API_URL}/api/projects/${id}`)
+        fetch(`${API_URL}/api/projects/${slug}`)
             .then((res) => res.json())
             .then((data) => {
-                // setDisplayHeader(true);
                 window.scrollTo(0, 0);
                 setProject(data);
             })
             .catch((error) => console.log(error.message));
-    }, [id]);
+    }, [slug]);
 
     const prodTypeArray = Array.from(new Set(project.productionList?.map(prod => prod.prodType) || []));
 
@@ -138,7 +137,7 @@ function OneProject() {
             </section>}
 
             {/* IMAGES MAKING OF */}
-            {project.makingOfImages && project.makingOfImages.length > 0 &&
+            {/* {project.makingOfImages && project.makingOfImages.length > 0 &&
             <Collapse title="Processus" style='dark'>
                 <div className="oneProject_makingOfImageContainer_imagesGrid">
                     {project.makingOfImages.map((image, index) => (
@@ -153,7 +152,7 @@ function OneProject() {
                     ))}
                 </div>
             </Collapse>
-            }
+            } */}
 
             {/* PRODUCTION */}
             {project.productionList && project.productionList.length > 0 &&    
@@ -193,11 +192,11 @@ function OneProject() {
             </Collapse>
             }
             {/* On sort la modale de focus hors d'un block pour qu'elle reste au premier plan. */}
-            {project.makingOfImages &&
+            {/* {project.makingOfImages &&
             <div className={displayImageFocus===true?'oneProject_makingOfImageContainer_imageFocusContainer--displayOn':'oneProject_makingOfImageContainer_imageFocusContainer--displayOff'}>
                 <ImageFocus imageFocusUrl={imageFocusUrl} setImageFocusUrl={setImageFocusUrl} imagesArray={project.makingOfImages} setDisplayImageFocus={setDisplayImageFocus}/>
             </div>
-            }
+            } */}
 
         </main>
     )

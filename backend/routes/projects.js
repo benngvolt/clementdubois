@@ -22,15 +22,15 @@ router.post('/',
 router.get('/',
             projectsCtrl.getAllProjects);
 
-router.get('/:id', 
+router.get('/:slugOrId', 
             projectsCtrl.getOneProject);
 
-router.delete ('/:id',
+router.delete ('/:slugOrId',
             auth, 
             projectsCtrl.deleteOneProject, 
             deleteImages);
 
-router.put ('/:id',
+router.put ('/:slugOrId',
             auth, 
             multer.fields([{ name: 'images' }, { name: 'moImages' }]), 
             uploadImages, 

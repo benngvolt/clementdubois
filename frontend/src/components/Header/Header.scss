@@ -17,11 +17,14 @@
     @media only screen and (max-width:$mobileMaxWidth){
         position: fixed;
         height: 100vh;
+        margin: 0;
     } 
     
     &--displayOff {
         display: none;
     }
+
+
 
     &--open {
         animation: openHeader 0.5s ease forwards;
@@ -46,6 +49,16 @@
             animation: closeVerticalHeader 0.5s ease forwards;
         } 
     }
+
+    // &_overlay {
+    //     background-color:rgba(0, 0, 0, 0.8);
+    //     width: 100vw;
+    //     height: 100vh;
+    //     z-index: 2;
+    //     position: fixed;
+    //     top: 0;
+    //     left: 0;
+    // }
 
     &_hamburger {
         height: 100%;

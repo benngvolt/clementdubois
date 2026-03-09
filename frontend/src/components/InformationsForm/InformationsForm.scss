@@ -1,0 +1,426 @@
+@import '../../utils/mixins';
+
+.informationsForm {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    margin: 5vh auto;
+    background: $colorLightGrey;
+    padding: 16px 46px;
+    box-sizing: border-box;
+    position: relative;
+    font-family: 'MainFont_bold';
+    
+    position: relative;
+    animation: appearOpacity 2s ease forwards;
+
+    &_welcomeContainer {
+        width: 70%;
+        margin: 54px auto;
+        background-color: $colorSecond;
+        
+        
+        &_mainWelcome {
+            
+            
+        }
+
+        &_imageWelcome {
+            display: flex;
+            width: 50%;
+            margin: 54px auto 54px auto;
+        }
+
+        &_secondWelcome {
+            font-family: 'MainFont_light';
+            text-align: center;
+            margin-bottom: 54px;
+            color: $colorLightGrey;
+        }
+    }
+
+    &_stickyCancelButton {
+        width: auto;
+        display: flex;
+        color: $colorDarkGrey;
+        background: none;
+        border: none;
+        position: sticky;
+        top: 90px;
+        
+        &_icon {
+            height: 2em;
+            
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    
+        
+    &_bioContainer {
+        width: 85%;
+        margin: auto;
+        flex-direction: column;
+        justify-content: space-between;
+        column-gap: 54px;
+        display: flex;
+
+        &_textField, &_arrayField {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 10px 0;
+            box-sizing: border-box;
+            // border-bottom: solid 1px $colorDarkGrey;
+
+            label {
+                width: 50%;
+                margin: 22px 0;
+            }
+
+            input, #inputProjectType {
+                border: none;
+                background-color: $colorFirst;
+                font-family: 'MainFont_light';
+                font-size: 16px;
+                width: 70%;
+            }
+            margin: 10px 0;
+            
+    
+            &_textarea {
+                border: none;
+                background-color: $colorFirst;
+                font-family: 'MainFont_light';
+                font-size: 16px;
+                margin-right: 12px;
+                padding: 16px;
+                box-sizing: border-box;
+                width: auto;
+                max-width: 100%;
+                min-width: 100%;
+                min-height: 300px;
+                resize: vertical;
+                line-height: 100%;
+            }
+        }
+        
+    }
+
+    &_imagesFieldsContainer {
+        width: 85%;
+        margin: auto;
+        overflow: scroll;
+        &_projectImagesContainer {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: auto;
+            margin: 30px auto 0 auto;
+            box-sizing: border-box;
+            height: 100%;
+
+            &_title {
+
+                margin: 22px 0;
+            }
+
+            &_imagesGrid {
+                margin: auto;
+                gap: 90px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            &_imageCard {
+                
+                display: flex;
+                flex-direction: column;
+                p {
+                    
+                    margin-bottom: 22px ;
+
+                }
+
+                &_preview {
+
+                    width: 500px;
+                    aspect-ratio: 1.7/1;
+                    object-fit: cover;
+                }
+
+                &_button {
+                    @include AddFieldButton;
+                    font-family: 'MainFont_light';
+                    font-size: 16px;
+                    line-height: 50%;
+                    height: auto;
+                    margin: 16px auto 0 auto;
+
+                    &:hover {
+                        background-color: $colorFirst;
+                        color: rgb(0, 0, 0);
+                        cursor: pointer;
+                    }
+                }
+                
+            }
+
+            &_imageField {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                height: auto;
+                
+
+                label {
+                    
+                    margin: auto;
+                    @include Button;
+                    font-family: 'MainFont_light';
+                    font-size: 16px;
+                    
+                }
+                
+                input {
+                    border: none;
+                    background-color: $colorFirst;
+                    font-family: 'MainFont_light';
+                    font-size: 16px;
+                    margin-right: 12px;
+                    width: auto;
+                    
+                    
+                }
+                
+                &_sampleContainer {
+                    margin: auto;
+
+                    img {
+                        width: 300px;
+                        margin: 30px auto;
+                    }
+                }
+            }
+
+       
+        }
+
+        
+        &_projectImagesContainer {
+            overflow: visible;
+            &_imageField {
+                margin: 54px auto;
+
+            }
+        }
+    }
+
+    &_manifestoContainer {
+        width: 85%;
+        margin: auto;
+        overflow: scroll;
+        &_title {
+            margin: 45px 0 22px 0;
+        }
+
+        &_fields {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            margin: 12px 0;
+
+            &_line {
+                width: 100%;
+            }
+
+            input {
+                width: 100%;
+                border: none;
+                background-color: $colorFirst;
+                font-family: 'MainFont_light';
+                font-size: 16px;
+                margin-right: 12px;
+                padding: 4px 16px;
+                box-sizing: border-box;
+            }
+       
+        }
+        &_addButton {
+            @include AddFieldButton;
+            font-family: 'MainFont_light';
+            font-size: 16px;
+            line-height: 50%;
+            height: auto;
+            margin: 16px auto 0 auto;
+
+            &:hover {
+                background-color: $colorFirst;
+                color: rgb(0, 0, 0);
+                cursor: pointer;
+            }
+        }
+    }
+
+    // 
+    
+    &_partnersContainer {
+        width: 85%;
+        margin: auto;
+        overflow: scroll;
+        box-sizing: border-box;
+        
+        &_title {
+            margin: 90px 0 22px 0;
+        }
+
+        &_grid {
+            display: grid;
+            gap: 45px;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        &_fields {
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            column-gap: 5px;
+            width: 100%;
+            margin-top: 8px;
+            height: 376px;
+            padding: 12px;
+            box-sizing: border-box;
+            
+            label {
+                margin: 6px 0;
+            }
+
+            &_line {
+                display: flex;
+                flex-direction: column;
+                margin: 0;
+                width: 100%;
+                
+                &_logoLine {
+                    font-size: 16px;
+                    line-height: 200%;
+                    font-family:'MainFont_bold';
+                    width: auto;
+                    margin: 22px auto;
+                    display: flex;
+                    flex-direction: column;
+
+                    label {
+                        
+                        &:hover {
+                            cursor: pointer;
+                            color: $colorFirst;
+                        }
+                    }
+                
+                    img {
+                        height: 100px;
+                        object-fit: contain;
+                    }
+                }
+
+                input {
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+
+                &_button {
+                    @include AddFieldButton;
+                    font-family: 'MainFont_light';
+                    font-size: 16px;
+                    line-height: 50%;
+                    height: auto;
+                    margin: 16px auto;
+
+                    &:hover {
+                        background-color: $colorFirst;
+                        color: rgb(0, 0, 0);
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            &--addCollab {
+                background-color: $colorFirst;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                width: 100%;
+                margin: auto;
+                height: 350px;
+               
+                box-sizing: border-box;
+
+                &_button {
+                    @include AddFieldButton;
+                    font-family: 'MainFont_light';
+                    font-size: 16px;
+                    line-height: 50%;
+                    height: auto;
+                    margin: 16px auto 0 auto;
+
+                    &:hover {
+                        background-color: white;
+                        color: rgb(0, 0, 0);
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        input, &_textarea, select {
+            border: none;
+            background-color: $colorFirst;
+            font-family: 'MainFont_light';
+            font-size: 16px;
+            margin-right: 6px;
+        }
+
+        input, &_textarea {
+            width: 95%;
+        }
+
+        select {
+            width: 95%;
+        }
+
+        &_textarea {
+            // max-width: 100%;
+            // min-width: 100%;
+            height: auto;
+            line-height: 100%;
+            resize: vertical;
+        }
+        
+    }
+
+    &_buttons {
+        display: flex;
+        flex-direction: row;
+        column-gap: 25px;
+        margin: 90px auto;
+    
+        button {
+            @include Button;
+        }
+    }
+
+    &_loaderContainer {
+        &--displayOn {
+            display: block;
+        }
+        &--displayOff {
+            display: none;
+        }
+    }
+}

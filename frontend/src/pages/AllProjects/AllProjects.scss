@@ -206,7 +206,7 @@
                 @include responsiveMarginRight;
             } 
 
-            img {
+            img, video {
                 width: 100%;
                 height: 490px;
                 object-fit: cover;

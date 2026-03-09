@@ -22,7 +22,9 @@ export const ProjectsProvider = ({ children }) => {
     // GESTION STATE LOCAL SERIES + RELOAD 
 
     const [loadProjects, setLoadProjects] = useState(false);
+    const [loadInformations, setLoadInformations] = useState(false);
     const [projects, setProjects] = useState([]);
+    const [informations, setInformations] = useState([]);
     const [displayHeader, setDisplayHeader] = useState(true)
     const [hideHeader, setHideHeader] = useState(true)
     const [hideFooter, setHideFooter] = useState(true)
@@ -30,7 +32,7 @@ export const ProjectsProvider = ({ children }) => {
     const [randomImagesSelection, setRandomImageSelection] = useState ([]);
 
     // définition des catégories de projets
-    const projectCategories = ['spectacle vivant','évènement', 'médiation']
+    const projectCategories = ['spectacle vivant','évènement', 'médiation', 'exposition', 'projet participatif']
     const productionCategories = ['Production','Co-production', 'Accueil en résidence de création', 'Aide à la création','Aide à la résidence d\'écriture', 'Soutien', 'Remerciements']
 
     /*---------------------------------------------
@@ -55,6 +57,41 @@ export const ProjectsProvider = ({ children }) => {
         setLoadProjects(loadProjects === false ? true : false);
     };
 
+    useEffect(() => {
+        
+        fetch(`${API_URL}/api/informations`)
+            .then((res) => res.json())
+            .then((data) => {
+                setInformations(data);
+                
+            })
+            .catch((error) => {
+                console.log(error.message);
+                
+            });
+    }, [loadInformations]);
+
+
+    useEffect(() => {
+        if (!Array.isArray(projects)) return;
+      
+        const selectedImages = projects.flatMap((project) =>
+          Array.isArray(project.projectImages)
+            ? project.projectImages
+                .filter((image) => image.inRandomSelection === true && image.imageUrl)
+                .map((image) => image.imageUrl)
+            : []
+        );
+      
+        const uniqueImages = [...new Set(selectedImages)];
+      
+        setRandomImageSelection(uniqueImages);
+      }, [projects]);
+    
+    const handleLoadInformations = () => { 
+        setLoadInformations(loadInformations === false ? true : false);
+    };
+
     /*----------------------------------------
     ----- Gestion d'affichage du header ------
     ----------------------------------------*/
@@ -63,26 +100,24 @@ export const ProjectsProvider = ({ children }) => {
     const location = useLocation();
 
     function openHeader() {
-        if (location.pathname==='/') {
-            return;
-        }
+        // if (location.pathname==='/') {
+        //     return;
+        // }
         setDisplayHeader(true)
     }
 
     function closeHeader() {
-        if (location.pathname==='/') {
-            return;
-        }
+        // if (location.pathname==='/') {
+        //     return;
+        // }
         setDisplayHeader(false)
     }
 
     // affichage/dissimulation du header
     useEffect(() => {
-        if (location.pathname==='/') {
-            setHideHeader(true);
-        } else {
+        
             setHideHeader(false);
-        }
+        
     }, [location.pathname]);
 
     /*----------------------------------------
@@ -91,7 +126,7 @@ export const ProjectsProvider = ({ children }) => {
 
     // affichage/dissimulation du footer
     useEffect(() => {
-        if (location.pathname === '/edit' || location.pathname === '/' ) {
+        if (location.pathname === '/edit') {
             setHideFooter(true);
         } else {
             setHideFooter(false);
@@ -114,7 +149,10 @@ export const ProjectsProvider = ({ children }) => {
         <ProjectsContext.Provider value={{ 
                 projects, 
                 setProjects, 
+                informations,
+                setInformations,
                 handleLoadProjects, 
+                handleLoadInformations,
                 loadProjects, 
                 loaderDisplay, 
                 setLoaderDisplay, 

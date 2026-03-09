@@ -56,6 +56,7 @@ function ProjectForm({
     const inputProjectMoImageFileRef = useRef(null);
     const projectMainImageSampleRef = useRef(null);
     const projectMainMoImageSampleRef = useRef(null);
+    const inputProjectSlugRef = useRef(null);
 
     const cleanedAboutSceno = DOMPurify.sanitize(projectEdit.aboutSceno);
     const cleanedAboutShow = DOMPurify.sanitize(projectEdit.aboutShow);
@@ -70,6 +71,7 @@ function ProjectForm({
     const [aboutSceno, setAboutSceno] = useState(projectFormMode === 'edit' ? cleanedAboutSceno : '');
     const [summary, setSummary] = useState(projectFormMode === 'edit' ? cleanedSummary : '');
     const [projectType, setProjectType] = useState(projectFormMode === 'edit' ? projectEdit.projectType : '');
+    const [projectSlug, setProjectSlug] = useState(projectFormMode === 'edit' ? projectEdit.slug : '');
 
     const [displayServerError, setDisplayServerError] = useState(false);
     const [displayError, setDisplayError] = useState(false);
@@ -95,8 +97,28 @@ function ProjectForm({
         setDisplayValidBox(true);
         setTimeout(() => {
             setDisplayValidBox(false);
+            closeForm();
         }, 2000); // Masquer la boîte après 2 secondes (2000 ms)
     };
+    /*------------------------------------
+    ----- ON NETTOIE LE SLUG PUIS ON MET UN SLUG PAR DEFAUT VIA LE TITRE-----
+    ------------------------------------*/
+    function slugify(value) {
+        return value
+            ?.normalize('NFD') // sépare les accents
+            .replace(/[\u0300-\u036f]/g, '') // supprime les accents
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9\s-]/g, '') // supprime caractères spéciaux
+            .replace(/\s+/g, '-') // remplace espaces par tirets
+            .replace(/-+/g, '-'); // évite les doubles tirets
+    }
+
+    useEffect(() => {
+        if (projectFormMode === 'add') {
+            setProjectSlug(slugify(projectTitle));
+        }
+    }, [projectTitle, projectFormMode]);
 
     // Réinitialisation des valuers input lorsque le formulaire s'ouvre / se ferme.
     useEffect(() => {
@@ -104,6 +126,7 @@ function ProjectForm({
       if (projectFormMode === 'edit') {
         setProjectTitle(projectEdit.title);
         setProjectSubtitle(projectEdit.subtitle);
+        setProjectSlug(projectEdit.slug || slugify(projectEdit.title));
         setCreationDate(projectEdit.creationDate);
         setProjectInfos(projectEdit.projectInfos);
         setMoreInfos(projectEdit.projectInfos);
@@ -114,6 +137,7 @@ function ProjectForm({
       } else {
         setProjectTitle('');
         setProjectSubtitle('');
+        setProjectSlug('');
         setCreationDate('');
         setProjectInfos('');
         setMoreInfos('');
@@ -274,6 +298,7 @@ function ProjectForm({
         const projectFormData = new FormData();
         projectFormData.append('title', inputProjectTitleRef.current.value);
         projectFormData.append('subtitle', inputProjectSubtitleRef.current.value);
+        projectFormData.append('slug', slugify(inputProjectSlugRef.current.value || inputProjectTitleRef.current.value));
         projectFormData.append('creationDate', inputCreationDateRef.current.value);
         projectFormData.append('projectInfos', inputProjectInfosRef.current.value);
         projectFormData.append('moreInfos', inputMoreInfosRef.current.value);
@@ -342,7 +367,7 @@ function ProjectForm({
                     })
                     .then((response) => {
                         if (response.ok) {
-                            return response;
+                            return response;       
                         } else {
                             setDisplayServerError(true);
                             throw new Error('La requête a échoué');
@@ -416,6 +441,18 @@ function ProjectForm({
                     <input type='text' id='inputProjectSubtitle' ref={inputProjectSubtitleRef} value={projectSubtitle} onChange={(e) => setProjectSubtitle(e.target.value)}></input>
                 </div>
 
+                 {/* CHAMPS SLUG */}
+                 <div className='projectForm_mainInfosContainer_textField'>
+                    <label htmlFor='inputProjectSlug'>SLUG</label>
+                    <input
+                        type='text'
+                        id='inputProjectSlug'
+                        ref={inputProjectSlugRef}
+                        value={projectSlug}
+                        onChange={(e) => setProjectSlug(slugify(e.target.value))}
+                    />
+                </div>
+
                 {/* CHAMPS DATE DE CRÉATION */}
                 <div className='projectForm_mainInfosContainer_textField'>
                     <label htmlFor='inputCreationDate'>DATE DE CRÉATION*</label>
@@ -471,7 +508,7 @@ function ProjectForm({
                     }
                     
                 </div>
-                <div className='projectForm_imagesFieldsContainer_makingOfImagesContainer'>
+                {/* <div className='projectForm_imagesFieldsContainer_makingOfImagesContainer'>
                     <p>IMAGES DU PROCESSUS</p>
                     <DNDGallery imageFiles={moImageFiles} setImageFiles={setMoImageFiles} mainImageIndex={mainMoImageIndex} setMainImageIndex={setMainMoImageIndex} displayClass={'row'} /> 
                     {moImageFiles.length < 10 &&
@@ -489,7 +526,7 @@ function ProjectForm({
                         </div>
                     </div>
                     }
-                </div>
+                </div> */}
             </div>
 
             {/* DESCRIPTIFS */}
