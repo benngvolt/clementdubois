@@ -4,6 +4,7 @@
   "description": "backend du site web de Clément Dubois scénographe",
   "main": "server.js",
   "scripts": {
+    "gcp-build": "",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-start": "env-cmd -f ./env/.env nodemon server.js",
     "start": "node server.js",
@@ -24,6 +25,7 @@
     "node-fetch": "^3.3.2",
     "nodemailer": "^8.0.1",
     "nodemon": "^3.1.14",
+    "p-limit": "^3.1.0",
     "package": "^1.0.1",
     "sharp": "^0.34.5",
     "valid-url": "^1.0.9",

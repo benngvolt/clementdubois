@@ -10,7 +10,29 @@ function AllProjects() {
     const { projects, projectCategories, setDisplayHeader, displayHeader } = useContext(ProjectsContext);
     const [filteredProjects, setFilteredProjects] = useState(projects);
     const [categoryProjects, setCategoryProjects] = useState('tous');
+    const scrollWithOffset = (element, offset = 100) => {
+        const y = element.getBoundingClientRect().top + window.scrollY - offset;
     
+        window.scrollTo({
+            top: y,
+            behavior: "smooth"
+        });
+    };
+    
+    const handleCategoryClick = (e, category) => {
+    
+        if (category === "tous") {
+            setFilteredProjects(projects);
+        } else {
+            setFilteredProjects(
+                projects.filter(project => project.projectType === category)
+            );
+        }
+    
+        setCategoryProjects(category);
+    
+        scrollWithOffset(e.currentTarget, 100);
+    };
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -33,31 +55,46 @@ function AllProjects() {
     return  (      
         <main className='allProjects' onClick={()=>displayHeader===true && setDisplayHeader(false)} >
             <MainPhoto/>
-            <ul className='allProjects_buttonsContainer'>
-                <li key='allProjects' className='allProjects_buttonsContainer_button'>
-                    <button className={categoryProjects==='tous'?'allProjects_buttonsContainer_button--selected':'allProjects_buttonsContainer_button--notSelected'} type='button' 
-                        aria-pressed={categoryProjects==='tous'? true : false }
+            <ul className="allProjects_buttonsContainer">
+                <li className="allProjects_buttonsContainer_button">
+                    <button
+                        className={
+                            categoryProjects === "tous"
+                                ? "allProjects_buttonsContainer_button--selected"
+                                : "allProjects_buttonsContainer_button--notSelected"
+                        }
+                        type="button"
+                        aria-pressed={categoryProjects === "tous"}
                         aria-label="Afficher toutes les catégories de projets"
-                        onClick={() => {
-                            setFilteredProjects(projects);
-                            setCategoryProjects('tous');
-                        }}><h3>Tous</h3>
+                        onClick={(e) => handleCategoryClick(e, "tous")}
+                    >
+                        <h3>Tous</h3>
                     </button>
                 </li>
-                {projectCategories.map((projectCategory) => (
-                projects.some(project => project.projectType === `${projectCategory}`) &&
-                <li key={projectCategory} className='allProjects_buttonsContainer_button'>
-                    <button className={categoryProjects===`${projectCategory}`?'allProjects_buttonsContainer_button--selected':'allProjects_buttonsContainer_button--notSelected'} 
-                        type='button' 
-                        aria-pressed={categoryProjects===`${projectCategory}`? true : false }
-                        aria-label={`Afficher les projets correspondants à la catégorie ${projectCategory}`}
-                        onClick={()=> {
-                            setFilteredProjects(projects.filter((project)=>project.projectType===`${projectCategory}`));
-                            setCategoryProjects(`${projectCategory}`);
-                        }}><h3 className='allProjects_buttonsContainer_button_h3'>{projectCategory}</h3>
-                    </button>
-                </li>
-                ))}
+
+                {projectCategories
+                    .filter(category =>
+                        projects.some(project => project.projectType === category)
+                    )
+                    .map(category => (
+                        <li key={category} className="allProjects_buttonsContainer_button">
+                            <button
+                                className={
+                                    categoryProjects === category
+                                        ? "allProjects_buttonsContainer_button--selected"
+                                        : "allProjects_buttonsContainer_button--notSelected"
+                                }
+                                type="button"
+                                aria-pressed={categoryProjects === category}
+                                aria-label={`Afficher les projets correspondants à la catégorie ${category}`}
+                                onClick={(e) => handleCategoryClick(e, category)}
+                            >
+                                <h3 className="allProjects_buttonsContainer_button_h3">
+                                    {category}
+                                </h3>
+                            </button>
+                        </li>
+                    ))}
             </ul>
             <ul className='allProjects_projectsList'>
                 {sortedProjects.map((project, index)=> (

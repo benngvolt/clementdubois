@@ -15,7 +15,11 @@ const deleteImages = require('../middlewares/deleteImages').deleteImages;
 
 router.post('/',
             auth,
-            multer.fields([{ name: 'images' }, { name: 'moImages' }]), 
+            // multer.fields([{ name: 'images' }, { name: 'moImages' }]), 
+            multer.fields([
+                { name: 'images', maxCount: 10 },
+                { name: 'moImages', maxCount: 10 }
+            ]),
             uploadImages, 
             projectsCtrl.createProject);
             
@@ -32,7 +36,11 @@ router.delete ('/:slugOrId',
 
 router.put ('/:slugOrId',
             auth, 
-            multer.fields([{ name: 'images' }, { name: 'moImages' }]), 
+            // multer.fields([{ name: 'images' }, { name: 'moImages' }]),
+            multer.fields([
+                { name: 'images', maxCount: 10 },
+                { name: 'moImages', maxCount: 10 }
+            ]),
             uploadImages, 
             projectsCtrl.updateOneProject, 
             deleteImages);

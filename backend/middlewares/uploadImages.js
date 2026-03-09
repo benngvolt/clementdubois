@@ -2,6 +2,8 @@ const { storage, bucket } = require('../config/storage');
  // should be your bucket name
 const sharp = require('sharp')
 const { format } = require('url'); 
+const pLimit = require('p-limit');
+const limit = pLimit(3);
 
 
 function uploadImages(req, res, next) {
@@ -12,140 +14,192 @@ function uploadImages(req, res, next) {
   const fileIndexes = req.body.fileIndexes;
   const moFileIndexes = req.body.moFileIndexes;
 
-  const files = req.files.images;
-  console.log(files);
-  const moFiles = req.files.moImages;
+  const files = req.files?.images || [];
+  const moFiles = req.files?.moImages || [];
   
-  if (!files && !moFiles) {
-    // Aucune image n'a été téléchargée, appeler next() et sortir de la fonction
+  if (files.length === 0 && moFiles.length === 0) {
     return next();
   }
 
 
   // Créez un tableau de promesses pour gérer chaque fichier individuellement
-  const uploadPromises = files?.map( (file, index) => {
+  // const uploadPromises = files?.map( (file, index) => {
     
-    return new Promise(async(resolve, reject) => {
-      try {
-        const { originalname, buffer } = file;
-        // Redimensionnez et convertissez l'image avec Sharp
-        const resizedImageBuffer = await sharp(buffer)
-          .resize({
-            width: 1920,
-            fit: 'cover',
-            kernel: 'lanczos3',
-          })
-          .toFormat('webp')
-          .toBuffer();
+  //   return new Promise(async(resolve, reject) => {
+  //     try {
+  //       const { originalname, buffer } = file;
+  //       // Redimensionnez et convertissez l'image avec Sharp
+  //       const resizedImageBuffer = await sharp(buffer)
+  //         .resize({
+  //           width: 1920,
+  //           fit: 'cover',
+  //           kernel: 'lanczos3',
+  //         })
+  //         .toFormat('webp')
+  //         .toBuffer();
   
-        // Créez un blob dans le stockage Google Cloud Storage
-        const blob = bucket.file('project_images/' + originalname);
-        const blobStream = blob.createWriteStream({
-          resumable: false
-        });
-        blobStream.on('error', (err) => {
-          console.error(`Error creating blob for image ${originalname}:`, err);
-          reject(`Unable to create blob for image: ${originalname}`);
-        });
+  //       // Créez un blob dans le stockage Google Cloud Storage
+  //       const blob = bucket.file('project_images/' + originalname);
+  //       const blobStream = blob.createWriteStream({
+  //         resumable: false
+  //       });
+  //       blobStream.on('error', (err) => {
+  //         console.error(`Error creating blob for image ${originalname}:`, err);
+  //         reject(`Unable to create blob for image: ${originalname}`);
+  //       });
         
   
-        blobStream.on('finish', () => {
-          const publicUrl = format(
-            `https://storage.googleapis.com/${bucket.name}/${blob.name}`
-          );
-          console.log('ça marche');
+  //       blobStream.on('finish', () => {
+  //         const publicUrl = format(
+  //           `https://storage.googleapis.com/${bucket.name}/${blob.name}`
+  //         );
+  //         console.log('ça marche');
   
-          // Pousser les données dans le tableau newImagesObject
-          if (fileIndexes) {
-            newImagesObjects.push({
-              imageUrl: publicUrl,
-              index: JSON.parse(fileIndexes[index]),
-              inRandomSelection: false,
-            });
-            console.log()
-          } else {
-            newImagesObjects.push({
-              imageUrl: publicUrl,
-              inRandomSelection: false,
-            });
-          }
+  //         // Pousser les données dans le tableau newImagesObject
+  //         if (fileIndexes) {
+  //           newImagesObjects.push({
+  //             imageUrl: publicUrl,
+  //             index: JSON.parse(fileIndexes[index]),
+  //             inRandomSelection: false,
+  //           });
+  //           console.log()
+  //         } else {
+  //           newImagesObjects.push({
+  //             imageUrl: publicUrl,
+  //             inRandomSelection: false,
+  //           });
+  //         }
 
-          // Continuer avec la prochaine promesse
-          resolve(publicUrl);
-        }).on('error', () => {
-          reject(`Unable to upload image: ${originalname}`);
-        }).end(resizedImageBuffer);
-      } catch (error) {
-        // Gérez les erreurs ici...
-        console.error(`Error processing image ${file.originalname}:`, error);
-        reject(`Unable to process image: ${file.originalname}`);
-      }
-    })
-  });
+  //         // Continuer avec la prochaine promesse
+  //         resolve(publicUrl);
+  //       }).on('error', () => {
+  //         reject(`Unable to upload image: ${originalname}`);
+  //       }).end(resizedImageBuffer);
+  //     } catch (error) {
+  //       // Gérez les erreurs ici...
+  //       console.error(`Error processing image ${file.originalname}:`, error);
+  //       reject(`Unable to process image: ${file.originalname}`);
+  //     }
+  //   })
+  // });
 
-   // Créez un tableau de promesses pour gérer chaque fichier individuellement
-   const moUploadPromises = moFiles?.map( (file, index) => {
+  //  // Créez un tableau de promesses pour gérer chaque fichier individuellement
+  //  const moUploadPromises = moFiles?.map( (file, index) => {
     
-    return new Promise(async(resolve, reject) => {
-      try {
-        const { originalname, buffer } = file;
+  //   return new Promise(async(resolve, reject) => {
+  //     try {
+  //       const { originalname, buffer } = file;
         
-        // Redimensionnez et convertissez l'image avec Sharp
-        const resizedImageBuffer = await sharp(buffer)
-          .resize({
-            width: 1920,
-            fit: 'cover',
-            kernel: 'lanczos3',
-          })
-          .toFormat('webp')
-          .toBuffer();
+  //       // Redimensionnez et convertissez l'image avec Sharp
+  //       const resizedImageBuffer = await sharp(buffer)
+  //         .resize({
+  //           width: 1920,
+  //           fit: 'cover',
+  //           kernel: 'lanczos3',
+  //         })
+  //         .toFormat('webp')
+  //         .toBuffer();
   
-        // Créez un blob dans le stockage Google Cloud Storage
-        const blob = bucket.file('makingOf_images/' + originalname);
-        const blobStream = blob.createWriteStream({
-          resumable: false
-        });
-        blobStream.on('error', (err) => {
-          console.error(`Error creating blob for image ${originalname}:`, err);
-          reject(`Unable to create blob for image: ${originalname}`);
-        });
+  //       // Créez un blob dans le stockage Google Cloud Storage
+  //       const blob = bucket.file('makingOf_images/' + originalname);
+  //       const blobStream = blob.createWriteStream({
+  //         resumable: false
+  //       });
+  //       blobStream.on('error', (err) => {
+  //         console.error(`Error creating blob for image ${originalname}:`, err);
+  //         reject(`Unable to create blob for image: ${originalname}`);
+  //       });
         
   
-        blobStream.on('finish', () => {
-          const publicUrl = format(
-            `https://storage.googleapis.com/${bucket.name}/${blob.name}`
-          );
-          console.log('ça marche');
+  //       blobStream.on('finish', () => {
+  //         const publicUrl = format(
+  //           `https://storage.googleapis.com/${bucket.name}/${blob.name}`
+  //         );
+  //         console.log('ça marche');
   
-          // Pousser les données dans le tableau newImagesObject
-          if (moFileIndexes) {
-            newMoImagesObjects.push({
-              imageUrl: publicUrl,
-              index: JSON.parse(moFileIndexes[index])
-            });
-          } else {
-            newMoImagesObjects.push({
-              imageUrl: publicUrl,
-            });
-          }
-          // Continuer avec la prochaine promesse
-          resolve(publicUrl);
-        }).on('error', () => {
-          reject(`Unable to upload image: ${originalname}`);
-        }).end(resizedImageBuffer);
-      } catch (error) {
-        // Gérez les erreurs ici...
-        console.error(`Error processing image ${file.originalname}:`, error);
-        reject(`Unable to process image: ${file.originalname}`);
-      }
-    })
-  });
+  //         // Pousser les données dans le tableau newImagesObject
+  //         if (moFileIndexes) {
+  //           newMoImagesObjects.push({
+  //             imageUrl: publicUrl,
+  //             index: JSON.parse(moFileIndexes[index])
+  //           });
+  //         } else {
+  //           newMoImagesObjects.push({
+  //             imageUrl: publicUrl,
+  //           });
+  //         }
+  //         // Continuer avec la prochaine promesse
+  //         resolve(publicUrl);
+  //       }).on('error', () => {
+  //         reject(`Unable to upload image: ${originalname}`);
+  //       }).end(resizedImageBuffer);
+  //     } catch (error) {
+  //       // Gérez les erreurs ici...
+  //       console.error(`Error processing image ${file.originalname}:`, error);
+  //       reject(`Unable to process image: ${file.originalname}`);
+  //     }
+  //   })
+  // });
+  async function processAndUploadImage(file, index, indexes, targetArray, folderName) {
+    const { originalname, buffer } = file;
+  
+    const safeFileName = `${Date.now()}-${Math.round(Math.random() * 1e9)}.webp`;
+  
+    const resizedImageBuffer = await sharp(buffer)
+      .resize({
+        width: 1920,
+        fit: 'inside',
+        withoutEnlargement: true,
+      })
+      .webp({ quality: 82 })
+      .toBuffer();
+  
+    const blob = bucket.file(`${folderName}/${safeFileName}`);
+  
+    await new Promise((resolve, reject) => {
+      const blobStream = blob.createWriteStream({
+        resumable: false,
+        metadata: {
+          contentType: 'image/webp',
+        },
+      });
+  
+      blobStream.on('error', reject);
+      blobStream.on('finish', resolve);
+      blobStream.end(resizedImageBuffer);
+    });
+  
+    const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
+  
+    const imageObject = {
+      imageUrl: publicUrl,
+      inRandomSelection: false,
+    };
+  
+    if (indexes && indexes[index] !== undefined) {
+      imageObject.index = Number(indexes[index]);
+    }
+  
+    targetArray.push(imageObject);
+  
+    return publicUrl;
+  }
+
+  const uploadPromises = files?.map((file, index) =>
+  limit(() => processAndUploadImage(file, index, fileIndexes, newImagesObjects, 'project_images'))
+);
+
+  const moUploadPromises = moFiles?.map((file, index) =>
+    limit(() => processAndUploadImage(file, index, moFileIndexes, newMoImagesObjects, 'makingOf_images'))
+  );
+
+  
 
   // Utilisez Promise.all pour attendre que toutes les promesses d'upload se terminent
   Promise.all([
-      ...(uploadPromises || []),
-      ...(moUploadPromises || [])
-    ])
+    ...uploadPromises,
+    ...moUploadPromises
+  ])
     .then(() => {
       // Stockez newImagesObjects dans l'objet req pour qu'il soit disponible dans le contrôleur
       req.newImagesObjects = newImagesObjects;
