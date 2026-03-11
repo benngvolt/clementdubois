@@ -44,8 +44,10 @@
         font-size: 25px;
         display: flex;
         margin: auto 25px;
-        &:hover {
-            cursor: pointer;
+        @media (hover: hover) {
+            &:hover {
+                cursor: pointer;
+            }
         }
         @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
             font-size: 25px;   

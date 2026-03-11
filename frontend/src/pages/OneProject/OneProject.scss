@@ -198,7 +198,7 @@
                     } 
                 }
 
-                &_list {
+                ul {
                     display: flex;
                     flex-direction: column;
                     list-style-type: none;
@@ -206,7 +206,7 @@
                     margin: 0;
                     
 
-                    &_item {
+                    li {
                         
                         p {
                             
@@ -278,10 +278,12 @@
                     } 
    
                     // border-radius: 50rem;
-                    &:hover {
-                        color: $colorDarkGrey;
-                        background-color: $colorFirst;
-                        cursor: pointer;
+                    @media (hover: hover) {
+                        &:hover {
+                            color: $colorDarkGrey;
+                            background-color: $colorFirst;
+                            cursor: pointer;
+                        }
                     }
                 }
             }
@@ -290,6 +292,7 @@
     }
     &_secondImageContainer {
         @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+            
         }
         
         @media only screen and (max-width:$mobileMaxWidth){
@@ -342,12 +345,15 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-gap: 3px;
+
             @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                 width: auto;
+                padding-left: 50px;
             }
             
             @media only screen and (max-width:$mobileMaxWidth){
                 width: auto;
+                padding-left: 50px;
             } 
 
             &_img_0 {
@@ -390,17 +396,16 @@
         flex-direction: column;
         padding-top: 54px;
         padding-bottom: 54px;
+        
         background-color: white;
         
         @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-            padding-top: 0;
-            padding-bottom: 0;
+            padding: 0 0 0 60px;
             width: auto;
         }
         
         @media only screen and (max-width:$mobileMaxWidth){
-            padding-top: 0;
-            padding-bottom: 0; 
+            padding: 0 0 0 60px;
             width: auto;
         } 
 
@@ -451,19 +456,19 @@
                         } 
                     }
                 
-                &_list {
+                ul {
                     display: flex;
                     flex-direction: column;
                     list-style-type: none;
                     padding: 0;
                     margin: 0;
 
-                    &_item {
+                    li {
                         a {
                             font-size: 16px;
                             font-family: 'MainFont_light';
                             text-decoration: underline;
-                            color: $colorDarkGrey;
+                            color: $colorDarkGrey !important;
                             @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                                 
                             }
@@ -506,9 +511,10 @@
         
         @media only screen and (max-width:$mobileMaxWidth){
             width: auto;
-            padding-left: 35px;
+            padding-left: 50px;
             box-sizing: border-box;
         } 
+       
         
         &_5 {
 
@@ -1312,7 +1318,7 @@
                 width: 100%;
             } 
 
-            &_item {
+            li {
                 list-style-type: none;
                 display: flex;
                 flex-direction: column;
@@ -1366,10 +1372,12 @@
                     background-color: $colorLightGrey;
                     color: $colorDarkGrey;
                     padding: 5px 9px;
-                    &:hover {
-                        color: $colorDarkGrey;
-                        background-color: $colorFirst;
-                        
+                    @media (hover: hover) {
+                        &:hover {
+                            color: $colorDarkGrey;
+                            background-color: $colorFirst;
+                            
+                        }
                     }
                     @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                                 
@@ -1406,9 +1414,10 @@
                 margin: auto;
                 aspect-ratio: 1/1;
                 width: 100%;
-
-                &:hover {
-                    cursor: pointer;
+                @media (hover: hover) {
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
             }
         }
@@ -1461,7 +1470,7 @@
             margin: 22px auto;
         }
 
-        &_list {
+        ul {
             list-style-type: none;
             margin: 54px auto;
                 @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
@@ -1472,7 +1481,7 @@
                     margin: 16px auto;
                 } 
             
-            &_item {
+            li {
                 font-size: 16px; 
                 font-family: 'MainFont_light';   
                 @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
@@ -1487,13 +1496,15 @@
                 }
 
                 a {
-                    color: $colorDarkGrey;
+                    color: $colorDarkGrey !important;
                     font-family: 'MainFont_bold';
                     text-decoration: none;
                     margin-right: 12px;
-                    &:hover {
-                        color: $colorSecond;
-                    } 
+                    @media (hover: hover) {
+                        &:hover {
+                            color: $colorSecond;
+                        } 
+                    }
                     @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                             
                     }

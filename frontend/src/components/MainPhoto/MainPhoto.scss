@@ -73,12 +73,13 @@
                     font-size: 25px;
                 }  
             }
-
-        &:hover {
-            cursor: pointer;
-            color: $colorLightGrey;
-            background-color: $colorDarkGrey;
+                @media (hover: hover) {
+                &:hover {
+                    cursor: pointer;
+                    color: $colorLightGrey;
+                    background-color: $colorDarkGrey;
+                }
+            }
         }
-    }
     }
 }

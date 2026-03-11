@@ -62,9 +62,10 @@
             margin: 0 auto;
             column-gap: 19px;
             background: $colorDarkGrey;
-           
-            &:hover {
-                cursor: pointer;
+            @media (hover: hover) {
+                &:hover {
+                    cursor: pointer;
+                }
             }
 
             h5 {

@@ -111,9 +111,39 @@ function AllProjects() {
                             }
                         </div>
                         <figure className='allProjects_projectCard_imageContainer'>
-                        {project.projectImages && project.projectImages.length > 0 &&
-                            <img src={`${project.projectImages[project.mainImageIndex].imageUrl}`} alt={`image principale du projet ${project.title}(${index})`}/>
-                        }
+                        {project.projectImages && project.projectImages.length > 0 && (() => {
+                            const mainMedia = project.projectImages[project.mainImageIndex];
+                            const fileType = mainMedia?.fileType || '';
+
+                            const isVideo = fileType ? fileType.startsWith('video/') : false;
+                            const isImage = fileType
+                                ? fileType.startsWith('image/')
+                                : !!mainMedia?.imageUrl;
+
+                            if (isVideo) {
+                                return (
+                                    <video
+                                        src={mainMedia.imageUrl}
+                                        muted
+                                        playsInline
+                                        autoPlay
+                                        loop
+                                        preload="metadata"
+                                    />
+                                );
+                            }
+
+                            if (isImage) {
+                                return (
+                                    <img
+                                        src={mainMedia.imageUrl}
+                                        alt={`image principale du projet ${project.title} (${index})`}
+                                    />
+                                );
+                            }
+
+                            return null;
+                        })()}
                         </figure>
                     </Link>
                 </li>

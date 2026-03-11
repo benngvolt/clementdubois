@@ -189,9 +189,10 @@
             margin: 0 auto 54px auto;
 
             &_item {
-                img {
+                img, video {
                     width: 200px;
                     aspect-ratio: 1.5/1;
+                    object-fit: cover;
                 }
             }
         }  

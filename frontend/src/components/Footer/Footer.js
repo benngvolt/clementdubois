@@ -21,10 +21,51 @@ function Footer() {
         });
     };
 
+    function getMediaType(media) {
+        const fileType = media?.fileType || '';
+
+        if (fileType.startsWith('video/')) return 'video';
+        if (fileType.startsWith('image/')) return 'image';
+        if (media?.imageUrl) return 'image'; // legacy
+        return null;
+    }
+
+    function renderProjectMedia(media, alt = '') {
+        if (!media?.imageUrl) return null;
+
+        const mediaType = getMediaType(media);
+
+        if (mediaType === 'video') {
+            return (
+                <video
+                    src={media.imageUrl}
+                    muted
+                    autoPlay
+                    loop
+                    playsInline
+                    preload="metadata"
+                />
+            );
+        }
+
+        if (mediaType === 'image') {
+            return (
+                <img
+                    src={media.imageUrl}
+                    alt={alt}
+                />
+            );
+        }
+
+        return null;
+    }
+
     useEffect(() => {
         const footerList = document.querySelector('.footer_list');
+
         if (footerList) {
             footerList.addEventListener('scroll', handleScroll);
+
             return () => {
                 footerList.removeEventListener('scroll', handleScroll);
             };
@@ -35,12 +76,14 @@ function Footer() {
         const scrollLeft = event.target.scrollLeft;
         const scrollWidth = event.target.scrollWidth;
         const clientWidth = event.target.clientWidth;
+
         setShowLeftButton(scrollLeft > 0);
         setShowRightButton(scrollWidth - scrollLeft !== clientWidth);
     };
 
     const scrollLeft = () => {
         const footerList = document.querySelector('.footer_list');
+
         if (footerList) {
             footerList.scrollBy({
                 left: -1000,
@@ -51,6 +94,7 @@ function Footer() {
 
     const scrollRight = () => {
         const footerList = document.querySelector('.footer_list');
+
         if (footerList) {
             footerList.scrollBy({
                 left: 1000,
@@ -61,28 +105,61 @@ function Footer() {
 
     return  (      
         <footer className={hideFooter===false?'footer':'footer footer--displayOff'}>
-            <div className='footer_leftButtonContainer' >
+            <div className='footer_leftButtonContainer'>
                 <div className='footer_leftButtonContainer_button'>
-                    <FontAwesomeIcon className={showLeftButton ? 'footer_leftButtonContainer_button_icon footer_leftButtonContainer_button_icon--displayOn':'footer_leftButtonContainer_button_icon footer_leftButtonContainer_button_icon--displayOff'} icon={faChevronLeft} onClick={scrollLeft}/>
+                    <FontAwesomeIcon
+                        className={
+                            showLeftButton
+                                ? 'footer_leftButtonContainer_button_icon footer_leftButtonContainer_button_icon--displayOn'
+                                : 'footer_leftButtonContainer_button_icon footer_leftButtonContainer_button_icon--displayOff'
+                        }
+                        icon={faChevronLeft}
+                        onClick={scrollLeft}
+                    />
                 </div>
             </div>
+
             <ul className='footer_list'>
-                {projects?.map((project, index)=>(
-                    <li key={project._id} className={location.pathname===`/projets/${project._id}`?'footer_list_item footer_list_item--selected':'footer_list_item'}> 
-                        <Link to={`/projets/${project._id}`} 
-                            onClick={()=>scrollToTop()}
-                            aria-label={`Accéder à la page du projet ${project.title}`}>
-                            {project.projectImages && project.projectImages.length > 0 &&
-                            <img src={`${project.projectImages[project.mainImageIndex].imageUrl}`} alt={`image du projet ${project.title}(${index})`}/>
+                {projects?.map((project, index) => {
+                    const mainMedia = project.projectImages?.[project.mainImageIndex];
+
+                    return (
+                        <li
+                            key={project._id}
+                            className={
+                                location.pathname===`/projets/${project._id}`
+                                    ? 'footer_list_item footer_list_item--selected'
+                                    : 'footer_list_item'
                             }
-                            <p translate="no">{project.title}</p>
-                        </Link>
-                    </li>
-                ))}
+                        > 
+                            <Link
+                                to={`/projets/${project._id}`}
+                                onClick={() => scrollToTop()}
+                                aria-label={`Accéder à la page du projet ${project.title}`}
+                            >
+                                {renderProjectMedia(
+                                    mainMedia,
+                                    `média du projet ${project.title} (${index})`
+                                )}
+
+                                <p translate="no">{project.title}</p>
+                            </Link>
+                        </li>
+                    );
+                })}
             </ul>
-            <div className='footer_rightButtonContainer' >
+
+            <div className='footer_rightButtonContainer'>
                 <div className='footer_rightButtonContainer_button'>
-                    <FontAwesomeIcon className={showRightButton ? 'footer_rightButtonContainer_button_icon footer_rightButtonContainer_button_icon--displayOn' : 'footer_rightButtonContainer_button_icon footer_rightButtonContainer_button_icon--displayOff' } icon={faChevronRight} onClick={scrollRight}/>
+                    <FontAwesomeIcon
+                        className={
+                            showRightButton
+                                ? 'footer_rightButtonContainer_button_icon footer_rightButtonContainer_button_icon--displayOn'
+                                : 'footer_rightButtonContainer_button_icon footer_rightButtonContainer_button_icon--displayOff'
+                        }
+                        icon={faChevronRight}
+                        onClick={scrollRight}
+                    />
                 </div>
             </div>
         </footer>

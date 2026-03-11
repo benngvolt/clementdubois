@@ -131,9 +131,10 @@
         
         &_icon {
             height: 2em;
-            
-            &:hover {
-                cursor: pointer;
+            @media (hover: hover) {
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
     }

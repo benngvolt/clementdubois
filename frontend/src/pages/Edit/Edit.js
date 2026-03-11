@@ -123,18 +123,54 @@ function Edit() {
             <ErrorText errorText={'Impossible de supprimer ce projet dû à une erreur serveur'} state={displayError}/>
             <aside className={isAuthenticated===true?'edit_wrapper':'edit_wrapper--displayOff'}>
                 <ul className='edit_list'>
-                    {projects.map((project, index)=>(
+                {projects.map((project, index) => {
+                    const mainMedia = project.projectImages?.[project.mainImageIndex];
+
+                    const fileType = mainMedia?.fileType || '';
+                    const isVideo = fileType ? fileType.startsWith('video/') : false;
+                    const isImage = fileType
+                        ? fileType.startsWith('image/')
+                        : !!mainMedia?.imageUrl;
+
+                    return (
                         <li key={project._id} className='edit_list_item'>
-                            {project.projectImages && project.projectImages.length > 0 &&
-                                <img className='edit_list_item_image' src={project.projectImages[project.mainImageIndex].imageUrl} alt={`image principale du projet ${project.title}(${index})`}/>
-                            }
+                            {mainMedia && isImage && (
+                                <img
+                                    className='edit_list_item_image'
+                                    src={mainMedia.imageUrl}
+                                    alt={`image principale du projet ${project.title} (${index})`}
+                                />
+                            )}
+
+                            {mainMedia && isVideo && (
+                                <video
+                                    className='edit_list_item_image'
+                                    src={mainMedia.imageUrl}
+                                    autoPlay
+                                    muted
+                                    loop
+                                    playsInline
+                                    preload="metadata"
+                                />
+                            )}
+
                             <p className='edit_list_item_title'>{project.title}</p>
+
                             <div className='edit_list_item_buttonsBox'>
-                                <button type='button' onClick={()=> handleProjectDeleteMode(project)}>SUPPRIMER</button>
-                                <button type='button' className='edit_list_item_buttonsBox_modif' onClick={()=> editProject(project)}>MODIFIER</button>
+                                <button type='button' onClick={() => handleProjectDeleteMode(project)}>
+                                    SUPPRIMER
+                                </button>
+                                <button
+                                    type='button'
+                                    className='edit_list_item_buttonsBox_modif'
+                                    onClick={() => editProject(project)}
+                                >
+                                    MODIFIER
+                                </button>
                             </div>
                         </li>
-                    ))}
+                    );
+                })}
                 </ul>
                 <button onClick={() => addProject()} type='button' className='edit_addButton'>+ ajouter</button>
                 <div>
@@ -176,11 +212,34 @@ function Edit() {
                 <div className='edit_randomImages'>
                     <p className='edit_randomImages_title'>SÉLECTION D'IMAGES RANDOM :</p>
                     <div className='edit_randomImages_list'>
-                        {randomImagesSelection.map((imageUrl, index) => (
-                        <div key={index} className='edit_randomImages_list_item'>
-                            <img className='edit_randomImages_list_item_img' src={imageUrl} alt={`image random (${index})`}/>
-                        </div>
-                        ))}
+                        {randomImagesSelection.map((mediaUrl, index) => {
+
+                            const isVideo = /\.(mp4|webm|ogg)$/i.test(mediaUrl);
+
+                            return (
+                                <div key={index} className='edit_randomImages_list_item'>
+
+                                    {isVideo ? (
+                                        <video
+                                            className='edit_randomImages_list_item_img'
+                                            src={mediaUrl}
+                                            muted
+                                            autoPlay
+                                            loop
+                                            playsInline
+                                            preload="metadata"
+                                        />
+                                    ) : (
+                                        <img
+                                            className='edit_randomImages_list_item_img'
+                                            src={mediaUrl}
+                                            alt={`image random (${index})`}
+                                        />
+                                    )}
+
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
                 <button className='edit_addButton edit_aboutEditButton' type="button" onClick={editInformations}>+ éditer la page À Propos</button>

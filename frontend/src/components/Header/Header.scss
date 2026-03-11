@@ -50,16 +50,6 @@
         } 
     }
 
-    // &_overlay {
-    //     background-color:rgba(0, 0, 0, 0.8);
-    //     width: 100vw;
-    //     height: 100vh;
-    //     z-index: 2;
-    //     position: fixed;
-    //     top: 0;
-    //     left: 0;
-    // }
-
     &_hamburger {
         height: 100%;
         border: none;
@@ -192,10 +182,11 @@
                 @media only screen and (max-width:$mobileMaxWidth){
                     margin: auto;
                 }  
-
-                p:hover {
-                    cursor: pointer;
-                    text-decoration: underline;
+                @media (hover: hover) {
+                    p:hover {
+                        cursor: pointer;
+                        text-decoration: underline;
+                    }
                 }
 
                 h2, p {
@@ -215,9 +206,10 @@
                     @media only screen and (max-width:$mobileMaxWidth){
                         font-size: 1.5rem;
                     }
-                    
-                    &:hover {
-                        cursor: pointer;
+                    @media (hover: hover) {
+                        &:hover {
+                            cursor: pointer;
+                        }
                     }
                 }
 

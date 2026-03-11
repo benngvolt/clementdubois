@@ -53,7 +53,8 @@ const projectSchema = mongoose.Schema({
         {
         imageUrl: {type: String, required: false},
         photograph: {type: String, required: false},
-        inRandomSelection: {type: Boolean, required: false}
+        inRandomSelection: {type: Boolean, required: false},
+        fileType: {type: String, required: false}
         }
     ],
     makingOfImages: [

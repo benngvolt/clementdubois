@@ -10,14 +10,65 @@ import ImageFocus from '../../components/ImageFocus/ImageFocus';
 function OneProject() {
 
     const { slug } = useParams();
-    const [project, setProject] = useState([]);
+    const [project, setProject] = useState({});
     const { setDisplayHeader, displayHeader } = useContext(ProjectsContext);
     
     const [imageFocusUrl, setImageFocusUrl]=useState('');
     const [displayImageFocus, setDisplayImageFocus]= useState(false);
+
     const cleanedAboutShow = DOMPurify.sanitize(project.aboutShow);
     const cleanedAboutSceno = DOMPurify.sanitize(project.aboutSceno);
-  
+
+    /* -------------------------
+       MEDIA HELPERS
+    ------------------------- */
+
+    function getMediaType(media) {
+        const fileType = media?.fileType || '';
+
+        if (fileType.startsWith('video/')) return 'video';
+        if (fileType.startsWith('image/')) return 'image';
+        if (media?.imageUrl) return 'image'; // legacy images
+        return null;
+    }
+
+    function renderProjectMedia(media, className = '', alt = '') {
+
+        if (!media?.imageUrl) return null;
+
+        const mediaType = getMediaType(media);
+
+        if (mediaType === 'video') {
+            return (
+                <video
+                    className={className}
+                    src={media.imageUrl}
+                    muted
+                    autoPlay
+                    loop
+                    playsInline
+                    preload="metadata"
+                />
+            );
+        }
+
+        if (mediaType === 'image') {
+            return (
+                <img
+                    className={className}
+                    src={media.imageUrl}
+                    alt={alt}
+                />
+            );
+        }
+
+        return null;
+    }
+
+    /* -------------------------
+       FETCH PROJECT
+    ------------------------- */
+
     useEffect(() => {
         fetch(`${API_URL}/api/projects/${slug}`)
             .then((res) => res.json())
@@ -28,175 +79,282 @@ function OneProject() {
             .catch((error) => console.log(error.message));
     }, [slug]);
 
-    const prodTypeArray = Array.from(new Set(project.productionList?.map(prod => prod.prodType) || []));
+    const prodTypeArray = Array.from(
+        new Set(project.productionList?.map(prod => prod.prodType) || [])
+    );
 
     return  (      
-        <main onClick={()=>displayHeader===true && setDisplayHeader(false)} className='oneProject'>
+        <main
+            onClick={()=>displayHeader===true && setDisplayHeader(false)}
+            className='oneProject'
+        >
             
-            {/* TITRE/SOUS-TITRE/INFOS*/}
+            {/* TITRE */}
             <div className='oneProject_titleContainer'>
                 <div className='oneProject_titleContainer_title'>
                     <h4 translate="no">{project.title}</h4>
                     <p translate="no">{project.subtitle}</p>
                 </div>
-                <p className='oneProject_titleContainer_projectInfos'>{project.projectInfos}</p>
+
+                <p className='oneProject_titleContainer_projectInfos'>
+                    {project.projectInfos}
+                </p>
             </div>
 
-            {/* IMAGE 1*/}
-            {project.projectImages && project.projectImages.length > 0 && 
+            {/* MEDIA 1 */}
+            {project.projectImages?.length > 0 && 
             <div className='oneProject_firstImageContainer'>
-                <img src={project.projectImages[0].imageUrl} alt={`image 1 du projet ${project.title}`} />                
+                {renderProjectMedia(
+                    project.projectImages[0],
+                    '',
+                    `média 1 du projet ${project.title}`
+                )}
             </div>
             }
             
-            {/* A PROPOS SCENO/A PROPOS PROJET/DISTRIBUTION */}
+            {/* INFOS */}
             <section className='oneProject_firstInfosBlock'>
+
                 {cleanedAboutShow && cleanedAboutSceno &&
                 <div className='oneProject_firstInfosBlock_showAndSceno'>
+
                     {cleanedAboutShow && 
                     <div className='oneProject_firstInfosBlock_showAndSceno_showBlock'>
-                        <h5 >{project.projectType==='spectacle vivant'?'La pièce':(project.projectType==='évènement'?'L\'évènement':'Le contexte')}</h5>
+                        <h5>
+                            {project.projectType==='spectacle vivant'
+                                ? 'La pièce'
+                                : (project.projectType==='évènement'
+                                    ? "L'évènement"
+                                    : 'Le contexte')}
+                        </h5>
+
                         <p dangerouslySetInnerHTML={{__html:cleanedAboutShow}}></p>
                     </div>
                     }
+
                     {cleanedAboutSceno && 
                     <div className='oneProject_firstInfosBlock_showAndSceno_scenoBlock'>
-                        {(project.projectType==='spectacle vivant'|| project.projectType==='évènement') &&
-                        <h5>La scénographie</h5>
+
+                        {(project.projectType==='spectacle vivant'
+                            || project.projectType==='évènement') &&
+                            <h5>La scénographie</h5>
                         }
+
                         <p dangerouslySetInnerHTML={{__html:cleanedAboutSceno}}></p>
                     </div>
                     }
+
                 </div>
                 }
+
+                {/* DISTRIBUTION */}
                 <div className='oneProject_firstInfosBlock_distributionAndLinks'>
-                    {project.artistsList && project.artistsList.length > 0 &&
+
+                    {project.artistsList?.length > 0 &&
                     <div className='oneProject_firstInfosBlock_distributionAndLinks_distribution'>
-                        <h5>{project.projectType==='spectacle vivant'?'Distribution':'L\'équipe'}</h5>
+
+                        <h5>
+                            {project.projectType==='spectacle vivant'
+                                ? 'Distribution'
+                                : "L'équipe"}
+                        </h5>
+
                         <ul className='oneProject_firstInfosBlock_distributionAndLinks_distribution_list'>
                             {project.artistsList.map((artist)=>(
-                            <li key={artist._id} className='oneProject_firstInfosBlock_distributionAndLinks_distribution_list_item'>
-                                <p><span>{artist.artistFunction}</span> {artist.artistName}</p>
+                            <li key={artist._id}>
+                                <p>
+                                    <span>{artist.artistFunction}</span>
+                                    {artist.artistName}
+                                </p>
                             </li>
                             ))}
                         </ul>
+
                     </div>
                     }
-                    {project.links && project.links.length > 0 &&
+
+                    {project.links?.length > 0 &&
                     <ul className='oneProject_firstInfosBlock_distributionAndLinks_links'>
+
                         {project.links.map((link) => (
                         <li key={link._id}>
-                            <a href={link.linkUrl} 
-                                target='_blank' 
+                            <a
+                                href={link.linkUrl}
+                                target='_blank'
                                 rel='noreferrer'
-                                aria-label={`Accéder au lien ${link.linkName}`}>
-                                    {link.linkName}
-                                </a>
+                                aria-label={`Accéder au lien ${link.linkName}`}
+                            >
+                                {link.linkName}
+                            </a>
                         </li>
-                        ))
-                    }
+                        ))}
+
                     </ul>
                     }
+
                 </div>
+
             </section>
-            
-            {/* IMAGES 2 à 4 */}
+
+            {/* MEDIA 2 à 4 */}
+
             {project.projectImages?.length > 1 && 
             <section className={`oneProject_secondImageContainer_${project.projectImages.length}`}>
-                {project.projectImages.slice(1, 4).map((image, index) => (
-                <img className={`oneProject_secondImageContainer_${project.projectImages.length}_img_${index}`} key={index} src={image.imageUrl} alt={`image ${index + 2} du projet ${project.title}`} />
+
+                {project.projectImages.slice(1, 4).map((media, index) => (
+                    <React.Fragment key={media._id || media.imageUrl || index}>
+                        {renderProjectMedia(
+                            media,
+                            `oneProject_secondImageContainer_${project.projectImages.length}_img_${index}`,
+                            `média ${index + 2} du projet ${project.title}`
+                        )}
+                    </React.Fragment>
                 ))}
+
             </section>
             }
-            
+
             {/* PRESSE */}
-            {project.press && project.press.length > 0 && 
+
+            {project.press?.length > 0 && 
             <section className='oneProject_pressBlocks'>
+
                 <ul className='oneProject_pressBlocks_container'>
+
                     {project.press.map((press)=>(
-                    <li key={press._id} className='oneProject_pressBlocks_container_item'>
+                    <li key={press._id}>
+
                         <h6>{press.mediaName}</h6>
+
                         <p>{press.quote}</p>
-                        <a href={press.mediaLink} 
-                            target='_blank' rel='noreferrer' 
-                            aria-label={`Accéder à l'article de ${press.mediaName}`}>
-                                lien vers l'article
+
+                        <a
+                            href={press.mediaLink}
+                            target='_blank'
+                            rel='noreferrer'
+                        >
+                            lien vers l'article
                         </a>
+
                     </li>
                     ))}
+
                 </ul>
+
             </section>
             }
 
-            {/* IMAGES 5 à 15 */}
-            {project.projectImages?.length > 4 && project.projectImages?.length <= 15 &&
+            {/* MEDIA 5 à 15 */}
+
+            {project.projectImages?.length > 4 &&
+            project.projectImages?.length <= 15 &&
+
             <section className={`oneProject_thirdImageContainer oneProject_thirdImageContainer_${project.projectImages.length}`}> 
-                {project.projectImages.slice(4, 15).map((image, index) => (
-                <img className={`oneProject_thirdImageContainer_${project.projectImages.length}_img_${index}`} key={index} src={image.imageUrl} alt={`image ${index + 5} du projet ${project.title}`}  />
+
+                {project.projectImages.slice(4, 15).map((media, index) => (
+
+                    <React.Fragment key={media._id || media.imageUrl || index}>
+
+                        {renderProjectMedia(
+                            media,
+                            `oneProject_thirdImageContainer_${project.projectImages.length}_img_${index}`,
+                            `média ${index + 5} du projet ${project.title}`
+                        )}
+
+                    </React.Fragment>
+
                 ))}
+
             </section>}
 
-            {/* IMAGES MAKING OF */}
-            {/* {project.makingOfImages && project.makingOfImages.length > 0 &&
-            <Collapse title="Processus" style='dark'>
-                <div className="oneProject_makingOfImageContainer_imagesGrid">
-                    {project.makingOfImages.map((image, index) => (
-                    <img key={index} 
-                        src={image.imageUrl} 
-                        alt={`image ${index} du making of du projet ${project.title}`}
-                        aria-label="Agrandir l'\image"
-                        onClick={()=>{ 
-                        setImageFocusUrl(image.imageUrl);
-                        setDisplayImageFocus(true);
-                    }}/>
-                    ))}
-                </div>
-            </Collapse>
-            } */}
-
             {/* PRODUCTION */}
-            {project.productionList && project.productionList.length > 0 &&    
+
+            {project.productionList?.length > 0 &&    
             <Collapse title="Production" style='white'>
+
                 <div className='oneProject_productionBlocks'>
+
                     <div className='oneProject_productionBlocks_container'>
+
                         {prodTypeArray.map((prodType, index) => (
-                            <div key={prodType} className={index % 2 === 0 ? 'oneProject_productionBlocks_container_block oneProject_productionBlocks_container_block--leftText' :'oneProject_productionBlocks_container_block oneProject_productionBlocks_container_block--rightText'} >
+
+                            <div
+                                key={prodType}
+                                className={
+                                    index % 2 === 0
+                                    ? 'oneProject_productionBlocks_container_block oneProject_productionBlocks_container_block--leftText'
+                                    : 'oneProject_productionBlocks_container_block oneProject_productionBlocks_container_block--rightText'
+                                }
+                            >
+
                                 <h6>{prodType}</h6>
-                                <ul className='oneProject_productionBlocks_container_block_list'>
-                                    {project.productionList?.filter(prodFiltered => prodFiltered.prodType === prodType).map((prod) => (
-                                        <li key={prod._id} className='oneProject_productionBlocks_container_block_list_item'>
-                                            <a href={prod.prodLink}>{prod.prodName}</a>
-                                            <span> {prod.prodInfos}</span>
+
+                                <ul>
+
+                                    {project.productionList
+                                    ?.filter(prodFiltered => prodFiltered.prodType === prodType)
+                                    .map((prod) => (
+
+                                        <li key={prod._id}>
+
+                                            <a href={prod.prodLink}>
+                                                {prod.prodName}
+                                            </a>
+
+                                            <span>{prod.prodInfos}</span>
+
                                         </li>
+
                                     ))}
+
                                 </ul>
+
                             </div>
+
                         ))}
+
                     </div>
+
                 </div>
+
             </Collapse>
             }
 
             {/* DIFFUSION */}
-            {project.diffusionList && project.diffusionList.length > 0 &&
+
+            {project.diffusionList?.length > 0 &&
             <Collapse title="Lieux de diffusion" style='light'>
+
                 <div className='oneProject_diffBlock'>
-                    <ul className='oneProject_diffBlock_list'>
+
+                    <ul>
+
                         {project.diffusionList.map((diff)=>(
-                            <li key={diff._id} className='oneProject_diffBlock_list_item'>
-                                <a href={diff.placeLink} target='_blank' rel='noreferrer'>{diff.placeName}</a><span> {diff.city} {diff.dates}</span>
-                            </li>  
+
+                            <li key={diff._id}>
+
+                                <a
+                                    href={diff.placeLink}
+                                    target='_blank'
+                                    rel='noreferrer'
+                                >
+                                    {diff.placeName}
+                                </a>
+
+                                <span>
+                                    {diff.city} {diff.dates}
+                                </span>
+
+                            </li>
+
                         ))}
+
                     </ul>
+
                 </div>
+
             </Collapse>
             }
-            {/* On sort la modale de focus hors d'un block pour qu'elle reste au premier plan. */}
-            {/* {project.makingOfImages &&
-            <div className={displayImageFocus===true?'oneProject_makingOfImageContainer_imageFocusContainer--displayOn':'oneProject_makingOfImageContainer_imageFocusContainer--displayOff'}>
-                <ImageFocus imageFocusUrl={imageFocusUrl} setImageFocusUrl={setImageFocusUrl} imagesArray={project.makingOfImages} setDisplayImageFocus={setDisplayImageFocus}/>
-            </div>
-            } */}
 
         </main>
     )

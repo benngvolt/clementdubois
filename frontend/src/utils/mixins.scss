@@ -37,10 +37,31 @@
     font-size: 25px;
     padding: 10px;
     border: none;
-    &:hover {
-        color: $colorDarkGrey;
-        background-color: $colorFirst;
-        cursor: pointer;
+    box-sizing: border-box;
+    @media (hover: hover) {
+        &:hover {
+            color: $colorDarkGrey;
+            background-color: $colorFirst;
+            cursor: pointer;
+        }
+    }
+}
+
+@mixin ButtonSelected {
+    margin: auto;
+    font-family:'SpecialFont';
+    color: $colorDarkGrey;
+    background-color: $colorFirst;
+    font-size: 25px;
+    padding: 10px;
+    border: none;
+    box-sizing: border-box;
+    @media (hover: hover) {
+        &:hover {
+            color: $colorLightGrey;
+            background-color: $colorDarkGrey;
+            cursor: pointer;
+        }
     }
 }
 
@@ -60,20 +81,7 @@
 }
 
 
-@mixin ButtonSelected {
-    // margin: auto;
-    font-family:'SpecialFont';
-    font-size: 25px;
-    padding: 10px;
-    border: none;
-    color: $colorDarkGrey;
-    background-color: $colorFirst;
-    // border-radius: 50rem;
-    &:hover {
-        
-        cursor: pointer;
-    }
-}
+
 
 @mixin AlertTextStyle {
     font-family:'MainFont_light';
@@ -88,7 +96,7 @@
 }
 
 @mixin responsiveMarginLeft {
-    margin-left: 50px;
+    margin-left: 60px;
 }
 
 @mixin responsiveMarginRight {
@@ -207,21 +215,21 @@ $padMaxWidth: 991px;
 
 @keyframes closeVerticalHeader {
     0% {  
-        width: 40%;
+        width: 200px;
     }
     
     100% { 
-        width: 35px;
+        width: 50px;
     }
 }
 
 @keyframes openVerticalHeader {
     0% {  
-        width: 35px;
+        width: 50px;
     }
     
     100% { 
-        width: 40%;
+        width: 200px;
     }
 }
 

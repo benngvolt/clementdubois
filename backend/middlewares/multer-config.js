@@ -1,22 +1,10 @@
-
-// const Multer = require('multer');
-
-// const multer = Multer({
-//   storage: Multer.memoryStorage(),
-//   // limits: {
-//   //   fileSize: 5 * 1024 * 1024, 
-//   // },
-// });
-
-// module.exports = multer;
-
 const multer = require('multer');
 
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
-    fileSize: 8 * 1024 * 1024, // 8 Mo par fichier
-    files: 12,                 // max total de fichiers par requête
+    fileSize: 30 * 1024 * 1024, // 50 Mo par fichier
+    files: 12,
     fields: 50,
   },
   fileFilter: (req, file, cb) => {
@@ -27,6 +15,9 @@ const upload = multer({
       'image/avif',
       'image/heic',
       'image/heif',
+      'video/mp4',
+      'video/quicktime',
+      'video/webm',
     ];
 
     if (!allowedMimeTypes.includes(file.mimetype)) {

@@ -2,131 +2,131 @@
 
 $width: 50px;
 
-// .loader {
-//   position: fixed;
-//   align-items: center;
-//   justify-content: center;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100%;
-//   margin: 0 auto;
+.loader {
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
 
-//   &--opaque {
-//     background:rgba(0, 0, 0, 1);
-//   }
+  &--opaque {
+    background:rgba(0, 0, 0, 1);
+  }
 
-//   &--translucent {
-//     background:rgba(0, 0, 0, 0.8);
-//   }
+  &--translucent {
+    background:rgba(0, 0, 0, 0.8);
+  }
 
-//   &:before {
-//     content: '';
-//     display: block;
-//     padding-top: 100%;
-//   }
+  &:before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
 
-//   &--displayOff {
-//     display: none;
-//   }
+  &--displayOff {
+    display: none;
+  }
   
-//   &--displayOn {
-//     display: block;
-//   }
-// }
+  &--displayOn {
+    display: block;
+  }
+}
 
-// .circular {
-//   animation: rotate 2s linear infinite;
-//   transform-origin: center center;
-//   width: 50px;
-//   position: absolute;
-//   top: 0;
-//   bottom: 0;
-//   left: 0;
-//   right: 0;
-//   margin: auto;
-// }
+.circular {
+  animation: rotate 2s linear infinite;
+  transform-origin: center center;
+  width: 50px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
 
-// .path {
-//   stroke-dasharray: 1, 200;
-//   stroke-dashoffset: 0;
-//   animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
-//   stroke-linecap: round;
-// }
+.path {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
+}
 
-// @keyframes rotate {
-//   100% {
-//     transform: rotate(360deg);
-//   }
-// }
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
-// @keyframes dash {
-//   0% {
-//     stroke-dasharray: 1, 200;
-//     stroke-dashoffset: 0;
-//   }
-//   50% {
-//     stroke-dasharray: 89, 200;
-//     stroke-dashoffset: -35px;
-//   }
-//   100% {
-//     stroke-dasharray: 89, 200;
-//     stroke-dashoffset: -124px;
-//   }
-// }
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
 
-// @keyframes color {
-//   100%,
-//   0% {
-//     stroke: $colorFirst;
-//   }
-//   90% {
-//     stroke: $colorFirst;
-//   }
-// }
+@keyframes color {
+  100%,
+  0% {
+    stroke: $colorFirst;
+  }
+  90% {
+    stroke: $colorFirst;
+  }
+}
 
 
 
 
 /* HTML: <div class="loader"></div> */
-.loader {
-   position: absolute;
-  align-items: center;
-  justify-content: center;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
+// .loader {
+//   position: absolute;
+//   align-items: center;
+//   justify-content: center;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   z-index: 2000;
   
-  height: 40px;
-  margin: 0 auto;
-  width: 40px;
-  aspect-ratio: 1;
-  --c: linear-gradient(rgb(255, 242, 0) 0 0);
-  --r1: radial-gradient(farthest-side at bottom,rgb(255, 242, 0) 93%,rgb(255, 242, 0));
-  --r2: radial-gradient(farthest-side at top   ,rgb(255, 242, 0) 93%,rgb(255, 242, 0));
-  background: 
-    var(--c) ,var(--r1),var(--r2),
-    var(--c) ,var(--r1),var(--r2),
-    var(--c) ,var(--r1),var(--r2);
-  background-repeat: no-repeat;
-  animation: l2 1s infinite alternate;
-}
-@keyframes l2 {
-  0%,25% {
-    background-size: 8px 0,8px 4px,8px 4px,8px 0,8px 4px,8px 4px,8px 0,8px 4px,8px 4px;
-    background-position: 0 50%,0 calc(50% - 2px),0 calc(50% + 2px),50% 50%,50% calc(50% - 2px),50% calc(50% + 2px),100% 50%,100% calc(50% - 2px),100% calc(50% + 2px);
- }
- 50% {
-    background-size: 8px 100%,8px 4px,8px 4px,8px 0,8px 4px,8px 4px,8px 0,8px 4px,8px 4px;
-    background-position: 0 50%,0 calc(0% - 2px),0 calc(100% + 2px),50% 50%,50% calc(50% - 2px),50% calc(50% + 2px),100% 50%,100% calc(50% - 2px),100% calc(50% + 2px);
- }
- 75% {
-    background-size: 8px 100%,8px 4px,8px 4px,8px 100%,8px 4px,8px 4px,8px 0,8px 4px,8px 4px;
-    background-position: 0 50%,0 calc(0% - 2px),0 calc(100% + 2px),50% 50%,50% calc(0% - 2px),50% calc(100% + 2px),100% 50%,100% calc(50% - 2px),100% calc(50% + 2px);
- }
- 95%,100% {
-    background-size: 8px 100%,8px 4px, 8px 4px,8px 100%,8px 4px,8px 4px,8px 100%,8px 4px,8px 4px;
-    background-position: 0 50%,0 calc(0% - 2px),0 calc(100% + 2px),50% 50%,50% calc(0% - 2px),50% calc(100% + 2px),100% 50%,100% calc(0% - 2px),100% calc(100% + 2px);
- }
-}
+//   height: 40px;
+//   margin: 0 auto;
+//   width: 40px;
+//   aspect-ratio: 1;
+//   --c: linear-gradient(rgb(255, 242, 0) 0 0);
+//   --r1: radial-gradient(farthest-side at bottom,rgb(255, 242, 0) 93%,rgb(255, 242, 0));
+//   --r2: radial-gradient(farthest-side at top   ,rgb(255, 242, 0) 93%,rgb(255, 242, 0));
+//   background: 
+//     var(--c) ,var(--r1),var(--r2),
+//     var(--c) ,var(--r1),var(--r2),
+//     var(--c) ,var(--r1),var(--r2);
+//   background-repeat: no-repeat;
+//   animation: l2 1s infinite alternate;
+// }
+// @keyframes l2 {
+//   0%,25% {
+//     background-size: 8px 0,8px 4px,8px 4px,8px 0,8px 4px,8px 4px,8px 0,8px 4px,8px 4px;
+//     background-position: 0 50%,0 calc(50% - 2px),0 calc(50% + 2px),50% 50%,50% calc(50% - 2px),50% calc(50% + 2px),100% 50%,100% calc(50% - 2px),100% calc(50% + 2px);
+//  }
+//  50% {
+//     background-size: 8px 100%,8px 4px,8px 4px,8px 0,8px 4px,8px 4px,8px 0,8px 4px,8px 4px;
+//     background-position: 0 50%,0 calc(0% - 2px),0 calc(100% + 2px),50% 50%,50% calc(50% - 2px),50% calc(50% + 2px),100% 50%,100% calc(50% - 2px),100% calc(50% + 2px);
+//  }
+//  75% {
+//     background-size: 8px 100%,8px 4px,8px 4px,8px 100%,8px 4px,8px 4px,8px 0,8px 4px,8px 4px;
+//     background-position: 0 50%,0 calc(0% - 2px),0 calc(100% + 2px),50% 50%,50% calc(0% - 2px),50% calc(100% + 2px),100% 50%,100% calc(50% - 2px),100% calc(50% + 2px);
+//  }
+//  95%,100% {
+//     background-size: 8px 100%,8px 4px, 8px 4px,8px 100%,8px 4px,8px 4px,8px 100%,8px 4px,8px 4px;
+//     background-position: 0 50%,0 calc(0% - 2px),0 calc(100% + 2px),50% 50%,50% calc(0% - 2px),50% calc(100% + 2px),100% 50%,100% calc(0% - 2px),100% calc(100% + 2px);
+//  }
+// }

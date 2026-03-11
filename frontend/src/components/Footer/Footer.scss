@@ -44,8 +44,10 @@
                 &--displayOn {
                     animation: appearOpacity 1s ease forwards;
                     display: block;
-                    &:hover {
-                        cursor: pointer;
+                    @media (hover: hover) {
+                        &:hover {
+                            cursor: pointer;
+                        }
                     }
                 }
             }
@@ -72,10 +74,11 @@
             &--selected {
                 background-color: $colorLightGrey;
             }
-
-            &:hover {
-                background-color: $colorLightGrey;
-                cursor: pointer;
+            @media (hover: hover) {
+                &:hover {
+                    background-color: $colorLightGrey;
+                    cursor: pointer;
+                }
             }
             a {
                 display: flex;
@@ -87,7 +90,7 @@
                 
                 
 
-                img {
+                img, video {
                     
                     width: 100%;
                     aspect-ratio: 2/1;

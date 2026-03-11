@@ -46,7 +46,9 @@
         &_button {
             list-style-type: none;
             
+            
             &--notSelected {
+                height: 50px;
                 border: none;
                 padding: 0;
                 h3 {
@@ -56,6 +58,7 @@
             }
 
             &--selected {
+                height: 50px;
                 border: none;
                 padding: 0;
                 h3 {
@@ -86,27 +89,28 @@
         box-sizing: border-box;
 
         @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-            padding-left: 50px;
+            padding-left: 60px;
             flex-direction: column;
             height: auto;
             row-gap: 16px;
             margin-bottom: 35px;
         }
         @media only screen and (max-width:$mobileMaxWidth){
-            padding-left: 50px;
+            padding-left: 60px;
             flex-direction: column;
             height: auto;
             row-gap: 9px;
             margin-bottom: 35px;
         } 
+        @media (hover: hover) {
+            &:hover {
 
-        &:hover {
+                cursor: pointer;
+                background-color: $colorFirst;
 
-            cursor: pointer;
-            background-color: $colorFirst;
-
-            .allProjects_projectCard_infos {
-                animation: heightRetract 0.5s ease forwards;
+                .allProjects_projectCard_infos {
+                    animation: heightRetract 0.5s ease forwards;
+                }
             }
         }
 

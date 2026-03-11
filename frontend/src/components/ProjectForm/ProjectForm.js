@@ -209,20 +209,59 @@ function ProjectForm({
     const [newMoImage, setNewMoImage] = useState(null);
 
     function displaySample() {
-        const image = inputProjectImageFileRef.current.files[0];
-        if (image) {
-            if (!image.inRandomSelection) {
-                image.inRandomSelection = false;
-            }
-            setIsImageLoaded(true);
-            const id = uuidv4(); // Générez un identifiant unique
-            image._id = id;
-            image.sampleImageUrl = URL.createObjectURL(image);
-            setNewImage(image); // Mettre à jour newImage
-        } else {
+
+        const file = inputProjectImageFileRef.current.files[0];
+    
+        if (!file) {
             setIsImageLoaded(false);
+            setNewImage(null);
+            return;
         }
+    
+        const isImage = file.type.startsWith('image/');
+        const isVideo = file.type.startsWith('video/');
+    
+        if (!isImage && !isVideo) {
+            alert("Format non supporté. Utilisez JPG, PNG, WEBP, AVIF ou MP4.");
+            inputProjectImageFileRef.current.value = '';
+            setIsImageLoaded(false);
+            setNewImage(null);
+            return;
+        }
+    
+        const MAX_IMAGE_SIZE = 8 * 1024 * 1024;   // 8MB
+        const MAX_VIDEO_SIZE = 30 * 1024 * 1024;  // 30MB (backend limit)
+    
+        if (isImage && file.size > MAX_IMAGE_SIZE) {
+            alert("L'image dépasse la taille maximale autorisée (8 Mo).");
+            inputProjectImageFileRef.current.value = '';
+            setIsImageLoaded(false);
+            setNewImage(null);
+            return;
+        }
+    
+        if (isVideo && file.size > MAX_VIDEO_SIZE) {
+            alert("La vidéo dépasse la taille maximale autorisée (30 Mo).");
+            inputProjectImageFileRef.current.value = '';
+            setIsImageLoaded(false);
+            setNewImage(null);
+            return;
+        }
+    
+        if (!file.inRandomSelection) {
+            file.inRandomSelection = false;
+        }
+    
+        const id = uuidv4();
+    
+        file._id = id;
+        file.sampleImageUrl = URL.createObjectURL(file);
+        file.fileType = file.type;
+    
+        setIsImageLoaded(true);
+        setNewImage(file);
     }
+
     useEffect(() => {
         if (newImage) {
             projectMainImageSampleRef.current.setAttribute("src", newImage.sampleImageUrl);
@@ -330,7 +369,8 @@ function ProjectForm({
         imagesWithIndex.forEach(({ index, image }) => {
             if (image instanceof File) {
                 projectFormData.append('images', image);
-                projectFormData.append('fileIndexes', index)
+                projectFormData.append('fileIndexes', index);
+                projectFormData.append('fileTypes', image.fileType || image.type || '');
             } else {
                 projectFormData.append(`existingImages[${index}]`, JSON.stringify(image));
             }
@@ -489,21 +529,57 @@ function ProjectForm({
             {/* IMAGES */}
             <div className='projectForm_imagesFieldsContainer'>
                 <div className='projectForm_imagesFieldsContainer_projectImagesContainer'>
-                    <p>IMAGES DU PROJET</p>
-                    <DNDGallery imageFiles={imageFiles} setImageFiles={setImageFiles} mainImageIndex={mainImageIndex} setMainImageIndex={setMainImageIndex} displayClass={'grid'} />
+                    <p>IMAGES / VIDÉOS DU PROJET</p>
+                    <DNDGallery
+                        imageFiles={imageFiles}
+                        setImageFiles={setImageFiles}
+                        mainImageIndex={mainImageIndex}
+                        setMainImageIndex={setMainImageIndex}
+                        displayClass={'grid'}
+                    />                    
                     {imageFiles.length < 15 && 
                     <div className='projectForm_imagesFieldsContainer_projectImagesContainer_imageField'>
-                        <label htmlFor='inputProjectImageFile'>{isImageLoaded ? 'CHANGER D\'IMAGE' : '+ AJOUTER UNE IMAGE'}</label>
-                        <input type='file' id='inputProjectImageFile' name="images" ref={inputProjectImageFileRef} onChange={displaySample} style={{ display: 'none' }}></input>
+                        
+                        
+                        {/* <input type='file' id='inputProjectImageFile' name="images" ref={inputProjectImageFileRef} onChange={displaySample} style={{ display: 'none' }}></input> */}
+                        <input
+                            type='file'
+                            id='inputProjectImageFile'
+                            name='images'
+                            ref={inputProjectImageFileRef}
+                            accept='image/*,video/*'
+                            onChange={displaySample}
+                            style={{ display: 'none' }}
+                        />
                         <div  className="projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer">
-                            { newImage &&
-                                <img id='imageSample' ref={projectMainImageSampleRef} src={newImage.imageUrl} alt='aperçu image'/>
-                            }
+                        {newImage && newImage.fileType?.startsWith('image/') && (
+                                <img
+                                    id='imageSample'
+                                    ref={projectMainImageSampleRef}
+                                    src={newImage.sampleImageUrl}
+                                    alt='aperçu média'
+                                />
+                            )}
+
+                            {newImage && newImage.fileType?.startsWith('video/') && (
+                                <video
+                                    id='imageSample'
+                                    ref={projectMainImageSampleRef}
+                                    src={newImage.sampleImageUrl}
+                                    controls
+                                    autoPlay
+                                    muted
+                                    loop
+                                    playsInline
+                                />
+                            )}
                             <div className={isImageLoaded ? "projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOn" :  "projectForm_imagesFieldsContainer_projectImagesContainer_imageField_sampleContainer_buttonsSystem--displayOff"}>
                                 <button aria-label="Ajouter l'image" onClick={handleAddImageFile} type="button">AJOUTER</button>
                                 <button aria-label="Annuler" onClick={cancelAddImageFile} type="button">ANNULER</button>
                             </div>
                         </div>
+                        <label htmlFor='inputProjectImageFile'>{isImageLoaded ? 'CHANGER DE MEDIA (IMAGE OU VIDEO)' : '+ AJOUTER UN MEDIA (IMAGE OU VIDEO)'}</label>
+                        <p className='projectForm_imagesFieldsContainer_projectImagesContainer_imageField--formatInfo'>Images : JPG, PNG, WEBP, AVIF, HEIC — max 8 Mo<br/>Vidéos : MP4 (recommandé), MOV, WEBM — max 50 Mo</p>
                     </div>
                     }
                     
@@ -806,7 +882,7 @@ function ProjectForm({
                 </div>
             </div>
             <div className={loaderDisplay===true?'projectForm_loaderContainer--displayOn':'projectForm_loaderContainer--displayOff'} >
-                <Loader className='loader--translucent' loaderDisplay={loaderDisplay}/>
+                <Loader className='loader' loaderDisplay={loaderDisplay}/>
             </div>
             <div>
                 <ConfirmBox
