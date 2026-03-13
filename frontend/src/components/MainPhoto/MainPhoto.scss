@@ -2,7 +2,7 @@
 
 .mainPhoto {
         width: 100vw;
-        height: 80vh;
+        height: calc(100vh - 110px);
         display: flex;
         position: relative;
         top: 0;
@@ -12,7 +12,7 @@
         }
         
         @media only screen and (max-width:$mobileMaxWidth){
-            height: 88vh;
+            height: 100vh;
         } 
 
     &_loader {

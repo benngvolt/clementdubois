@@ -17,11 +17,12 @@
 
     &_topContainer {
         width: 100vw;
-        height: 100vh;
+        // height: 100vh;
         display: flex;
         justify-content: flex-start;
         flex-direction: column;
         row-gap: 22px;
+        position: relative;
     }
 
     ul {
@@ -41,7 +42,9 @@
         display: flex;
         flex-direction: row;
         column-gap: 30px;
-        margin: 54px 54px;
+        margin: 0 54px 54px 54px;
+        padding-top: 45px !important;
+        
         
         @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
             margin: 35px 0 73px 50px;
@@ -54,7 +57,6 @@
         
         &_button {
             list-style-type: none;
-            
             
             &--notSelected {
                 height: 50px;
@@ -77,10 +79,34 @@
             }
 
             &--anchor {
+                position: absolute;
+                bottom: 5%;
+                left: 50%; 
+                transform: translateX(-50%);
                 display: flex;
                 width: 10%;
                 margin: 0 auto !important;
-                @include ButtonSelected;
+                margin: auto;
+                font-family:'SpecialFont';
+                color: $colorDarkGrey;
+                background-color: $colorFirst;
+                font-size: 25px;
+                padding: 10px;
+                border: none;
+                box-sizing: border-box;
+                @media (hover: hover) {
+                &:hover {
+                    color: $colorLightGrey;
+                    background-color: $colorDarkGrey;
+                    cursor: pointer;
+                }
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+              
+                }
+                @media only screen and (max-width:$mobileMaxWidth){
+               
+                } 
+    }
             
             svg {
                 height: 20px;
