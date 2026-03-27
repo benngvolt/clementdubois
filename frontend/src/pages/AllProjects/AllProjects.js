@@ -1,61 +1,273 @@
+// import './AllProjects.scss'
+// import React, { useState, useContext, useEffect, useRef } from 'react'
+// import { ProjectsContext } from '../../utils/ProjectsContext'
+// import { Link } from 'react-router-dom'
+// import DOMPurify from 'dompurify';
+// import MainPhoto from '../../components/MainPhoto/MainPhoto';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faAnglesDown } from '@fortawesome/free-solid-svg-icons'
+
+// function AllProjects() {
+//     const { projects, projectCategories, setDisplayHeader, displayHeader } = useContext(ProjectsContext);
+//     const [filteredProjects, setFilteredProjects] = useState(projects);
+//     const [categoryProjects, setCategoryProjects] = useState('tous');
+
+//     const filtersAnchorRef = useRef(null);
+
+//     const scrollWithOffset = (element, offset = 100) => {
+//         if (!element) return;
+
+//         const y = element.getBoundingClientRect().top + window.scrollY - offset;
+
+//         window.scrollTo({
+//             top: y,
+//             behavior: "smooth"
+//         });
+//     };
+
+//     const handleScrollToFilters = () => {
+//         scrollWithOffset(filtersAnchorRef.current, 100);
+//     };
+
+//     const handleCategoryClick = (category) => {
+//         if (category === "tous") {
+//             setFilteredProjects(projects);
+//         } else {
+//             setFilteredProjects(
+//                 projects.filter(project => project.projectType === category)
+//             );
+//         }
+
+//         setCategoryProjects(category);
+
+//         scrollWithOffset(filtersAnchorRef.current, 100);
+//     };
+
+//     function getMediaType(media) {
+//         const fileType = media?.fileType || '';
+
+//         if (fileType.startsWith('video/')) return 'video';
+//         if (fileType.startsWith('image/')) return 'image';
+//         if (media?.imageUrl) return 'image'; // legacy
+//         return null;
+//     }
+
+//     function renderProjectMedia(media, alt = '') {
+//         if (!media?.imageUrl) return null;
+
+//         const mediaType = getMediaType(media);
+
+//         if (mediaType === 'video') {
+//             return (
+//                 <video
+//                     src={media.imageUrl}
+//                     muted
+//                     playsInline
+//                     autoPlay
+//                     loop
+//                     preload="metadata"
+//                 />
+//             );
+//         }
+
+//         if (mediaType === 'image') {
+//             return (
+//                 <img
+//                     src={media.imageUrl}
+//                     alt={alt}
+//                 />
+//             );
+//         }
+
+//         return null;
+//     }
+
+//     useEffect(() => {
+//         window.scrollTo(0, 0);
+//         setFilteredProjects(projects);
+//     }, [projects]);
+
+//     const projectsWithNumericDate = filteredProjects.map(project => {
+//         const [year, month] = project.creationDate.split("-");
+//         return {
+//             ...project,
+//             numericDate: parseInt(year + month, 10)
+//         };
+//     });
+
+//     const sortedProjects = projectsWithNumericDate.sort((a, b) => b.numericDate - a.numericDate);
+
+//     return (
+//         <main
+//             className='allProjects'
+//             onClick={() => displayHeader === true && setDisplayHeader(false)}
+//         >
+//             <div className='allProjects_topContainer'>
+//                 <MainPhoto />
+
+//                 <button
+//                     className='allProjects_buttonsContainer_button--anchor '
+//                     type="button"
+//                     aria-label="Aller aux filtres projets"
+//                     onClick={handleScrollToFilters}
+//                 >
+//                     <FontAwesomeIcon icon={faAnglesDown} />
+//                 </button>
+//             </div>
+
+//             <ul
+//                 className="allProjects_buttonsContainer"
+//                 id="projects-filters"
+//                 ref={filtersAnchorRef}
+//             >
+//                 <li className="allProjects_buttonsContainer_button">
+//                     <button
+//                         className={
+//                             categoryProjects === "tous"
+//                                 ? "allProjects_buttonsContainer_button--selected"
+//                                 : "allProjects_buttonsContainer_button--notSelected"
+//                         }
+//                         type="button"
+//                         aria-pressed={categoryProjects === "tous"}
+//                         aria-label="Afficher toutes les catégories de projets"
+//                         onClick={() => handleCategoryClick("tous")}
+//                     >
+//                         <h3>Tous</h3>
+//                     </button>
+//                 </li>
+
+//                 {projectCategories
+//                     .filter(category =>
+//                         projects.some(project => project.projectType === category)
+//                     )
+//                     .map(category => (
+//                         <li key={category} className="allProjects_buttonsContainer_button">
+//                             <button
+//                                 className={
+//                                     categoryProjects === category
+//                                         ? "allProjects_buttonsContainer_button--selected"
+//                                         : "allProjects_buttonsContainer_button--notSelected"
+//                                 }
+//                                 type="button"
+//                                 aria-pressed={categoryProjects === category}
+//                                 aria-label={`Afficher les projets correspondants à la catégorie ${category}`}
+//                                 onClick={() => handleCategoryClick(category)}
+//                             >
+//                                 <h3 className="allProjects_buttonsContainer_button_h3">
+//                                     {category}
+//                                 </h3>
+//                             </button>
+//                         </li>
+//                     ))}
+//             </ul>
+
+//             <ul className='allProjects_projectsList'>
+//                 {sortedProjects.map((project, index) => {
+//                     const mainMedia = project.projectImages?.[project.mainImageIndex];
+
+//                     return (
+//                         <li key={project._id}>
+//                             <Link
+//                                 to={`/projets/${project.slug || project._id}`}
+//                                 className='allProjects_projectCard'
+//                                 aria-label={`Accéder à la page du projet ${project.title}`}
+//                             >
+//                                 <div className='allProjects_projectCard_infos'>
+//                                     <h4 translate="no" className='allProjects_projectCard_infos_title'>
+//                                         {project.title}
+//                                     </h4>
+
+//                                     <p translate="no" className='allProjects_projectCard_infos_subtitle'>
+//                                         {project.subtitle}
+//                                     </p>
+
+//                                     <p className='allProjects_projectCard_infos_projectInfos'>
+//                                         {project.projectInfos}
+//                                     </p>
+
+//                                     <p className='allProjects_projectCard_infos_creationDate'>
+//                                         {project.creationDate.split("-")[0]}
+//                                     </p>
+
+//                                     {project.summary &&
+//                                         <p
+//                                             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(project.summary) }}
+//                                             className='allProjects_projectCard_infos_summary'
+//                                         ></p>
+//                                     }
+//                                 </div>
+
+//                                 <figure className='allProjects_projectCard_imageContainer'>
+//                                     {renderProjectMedia(
+//                                         mainMedia,
+//                                         `image principale du projet ${project.title} (${index})`
+//                                     )}
+//                                 </figure>
+//                             </Link>
+//                         </li>
+//                     );
+//                 })}
+//             </ul>
+//         </main>
+//     )
+// }
+
+// export default AllProjects
+
 import './AllProjects.scss'
-import React, { useState, useContext, useEffect, useRef } from 'react'
+import React, { useState, useContext, useEffect, useRef, useMemo, useCallback } from 'react'
 import { ProjectsContext } from '../../utils/ProjectsContext'
 import { Link } from 'react-router-dom'
-import DOMPurify from 'dompurify';
-import MainPhoto from '../../components/MainPhoto/MainPhoto';
+import DOMPurify from 'dompurify'
+import MainPhoto from '../../components/MainPhoto/MainPhoto'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAnglesDown } from '@fortawesome/free-solid-svg-icons'
 
 function AllProjects() {
-    const { projects, projectCategories, setDisplayHeader, displayHeader } = useContext(ProjectsContext);
-    const [filteredProjects, setFilteredProjects] = useState(projects);
-    const [categoryProjects, setCategoryProjects] = useState('tous');
+    const {
+        projects,
+        projectCategories,
+        setDisplayHeader,
+        displayHeader
+    } = useContext(ProjectsContext)
 
-    const filtersAnchorRef = useRef(null);
+    const [categoryProjects, setCategoryProjects] = useState('tous')
+    const filtersAnchorRef = useRef(null)
 
-    const scrollWithOffset = (element, offset = 100) => {
-        if (!element) return;
+    const scrollWithOffset = useCallback((element, offset = 100) => {
+        if (!element) return
 
-        const y = element.getBoundingClientRect().top + window.scrollY - offset;
+        const y = element.getBoundingClientRect().top + window.scrollY - offset
 
         window.scrollTo({
             top: y,
-            behavior: "smooth"
-        });
-    };
+            behavior: 'smooth'
+        })
+    }, [])
 
-    const handleScrollToFilters = () => {
-        scrollWithOffset(filtersAnchorRef.current, 100);
-    };
+    const handleScrollToFilters = useCallback(() => {
+        scrollWithOffset(filtersAnchorRef.current, 100)
+    }, [scrollWithOffset])
 
-    const handleCategoryClick = (category) => {
-        if (category === "tous") {
-            setFilteredProjects(projects);
-        } else {
-            setFilteredProjects(
-                projects.filter(project => project.projectType === category)
-            );
-        }
+    const handleCategoryClick = useCallback((category) => {
+        setCategoryProjects(category)
+        scrollWithOffset(filtersAnchorRef.current, 100)
+    }, [scrollWithOffset])
 
-        setCategoryProjects(category);
+    const getMediaType = useCallback((media) => {
+        const fileType = media?.fileType || ''
 
-        scrollWithOffset(filtersAnchorRef.current, 100);
-    };
+        if (fileType.startsWith('video/')) return 'video'
+        if (fileType.startsWith('image/')) return 'image'
+        if (media?.imageUrl) return 'image' // legacy fallback
 
-    function getMediaType(media) {
-        const fileType = media?.fileType || '';
+        return null
+    }, [])
 
-        if (fileType.startsWith('video/')) return 'video';
-        if (fileType.startsWith('image/')) return 'image';
-        if (media?.imageUrl) return 'image'; // legacy
-        return null;
-    }
+    const renderProjectMedia = useCallback((media, alt = '') => {
+        if (!media?.imageUrl) return null
 
-    function renderProjectMedia(media, alt = '') {
-        if (!media?.imageUrl) return null;
-
-        const mediaType = getMediaType(media);
+        const mediaType = getMediaType(media)
 
         if (mediaType === 'video') {
             return (
@@ -67,7 +279,7 @@ function AllProjects() {
                     loop
                     preload="metadata"
                 />
-            );
+            )
         }
 
         if (mediaType === 'image') {
@@ -75,27 +287,42 @@ function AllProjects() {
                 <img
                     src={media.imageUrl}
                     alt={alt}
+                    loading="lazy"
+                    decoding="async"
                 />
-            );
+            )
         }
 
-        return null;
-    }
+        return null
+    }, [getMediaType])
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-        setFilteredProjects(projects);
-    }, [projects]);
+        window.scrollTo(0, 0)
+    }, [])
 
-    const projectsWithNumericDate = filteredProjects.map(project => {
-        const [year, month] = project.creationDate.split("-");
-        return {
-            ...project,
-            numericDate: parseInt(year + month, 10)
-        };
-    });
+    const availableCategories = useMemo(() => {
+        return projectCategories.filter(category =>
+            projects.some(project => project.projectType === category)
+        )
+    }, [projectCategories, projects])
 
-    const sortedProjects = projectsWithNumericDate.sort((a, b) => b.numericDate - a.numericDate);
+    const sortedProjects = useMemo(() => {
+        const filteredProjects =
+            categoryProjects === 'tous'
+                ? projects
+                : projects.filter(project => project.projectType === categoryProjects)
+
+        return [...filteredProjects]
+            .map(project => {
+                const [year = '0', month = '0'] = (project.creationDate || '').split('-')
+
+                return {
+                    ...project,
+                    numericDate: parseInt(`${year}${month}`, 10) || 0
+                }
+            })
+            .sort((a, b) => b.numericDate - a.numericDate)
+    }, [projects, categoryProjects])
 
     return (
         <main
@@ -106,7 +333,7 @@ function AllProjects() {
                 <MainPhoto />
 
                 <button
-                    className='allProjects_buttonsContainer_button--anchor '
+                    className='allProjects_buttonsContainer_button--anchor'
                     type="button"
                     aria-label="Aller aux filtres projets"
                     onClick={handleScrollToFilters}
@@ -116,68 +343,72 @@ function AllProjects() {
             </div>
 
             <ul
-                className="allProjects_buttonsContainer"
-                id="projects-filters"
+                className='allProjects_buttonsContainer'
+                id='projects-filters'
                 ref={filtersAnchorRef}
             >
-                <li className="allProjects_buttonsContainer_button">
+                <li className='allProjects_buttonsContainer_button'>
                     <button
                         className={
-                            categoryProjects === "tous"
-                                ? "allProjects_buttonsContainer_button--selected"
-                                : "allProjects_buttonsContainer_button--notSelected"
+                            categoryProjects === 'tous'
+                                ? 'allProjects_buttonsContainer_button--selected'
+                                : 'allProjects_buttonsContainer_button--notSelected'
                         }
-                        type="button"
-                        aria-pressed={categoryProjects === "tous"}
-                        aria-label="Afficher toutes les catégories de projets"
-                        onClick={() => handleCategoryClick("tous")}
+                        type='button'
+                        aria-pressed={categoryProjects === 'tous'}
+                        aria-label='Afficher toutes les catégories de projets'
+                        onClick={() => handleCategoryClick('tous')}
                     >
                         <h3>Tous</h3>
                     </button>
                 </li>
 
-                {projectCategories
-                    .filter(category =>
-                        projects.some(project => project.projectType === category)
-                    )
-                    .map(category => (
-                        <li key={category} className="allProjects_buttonsContainer_button">
-                            <button
-                                className={
-                                    categoryProjects === category
-                                        ? "allProjects_buttonsContainer_button--selected"
-                                        : "allProjects_buttonsContainer_button--notSelected"
-                                }
-                                type="button"
-                                aria-pressed={categoryProjects === category}
-                                aria-label={`Afficher les projets correspondants à la catégorie ${category}`}
-                                onClick={() => handleCategoryClick(category)}
-                            >
-                                <h3 className="allProjects_buttonsContainer_button_h3">
-                                    {category}
-                                </h3>
-                            </button>
-                        </li>
-                    ))}
+                {availableCategories.map(category => (
+                    <li key={category} className='allProjects_buttonsContainer_button'>
+                        <button
+                            className={
+                                categoryProjects === category
+                                    ? 'allProjects_buttonsContainer_button--selected'
+                                    : 'allProjects_buttonsContainer_button--notSelected'
+                            }
+                            type='button'
+                            aria-pressed={categoryProjects === category}
+                            aria-label={`Afficher les projets correspondants à la catégorie ${category}`}
+                            onClick={() => handleCategoryClick(category)}
+                        >
+                            <h3 className='allProjects_buttonsContainer_button_h3'>
+                                {category}
+                            </h3>
+                        </button>
+                    </li>
+                ))}
             </ul>
 
             <ul className='allProjects_projectsList'>
                 {sortedProjects.map((project, index) => {
-                    const mainMedia = project.projectImages?.[project.mainImageIndex];
+                    const mainMedia = project.projectImages?.[project.mainImageIndex]
+                    const projectUrl = `/projets/${project.slug || project._id}`
+                    const projectYear = project.creationDate?.split('-')[0]
 
                     return (
                         <li key={project._id}>
                             <Link
-                                to={`/projets/${project.slug || project._id}`}
+                                to={projectUrl}
                                 className='allProjects_projectCard'
                                 aria-label={`Accéder à la page du projet ${project.title}`}
                             >
                                 <div className='allProjects_projectCard_infos'>
-                                    <h4 translate="no" className='allProjects_projectCard_infos_title'>
+                                    <h4
+                                        translate='no'
+                                        className='allProjects_projectCard_infos_title'
+                                    >
                                         {project.title}
                                     </h4>
 
-                                    <p translate="no" className='allProjects_projectCard_infos_subtitle'>
+                                    <p
+                                        translate='no'
+                                        className='allProjects_projectCard_infos_subtitle'
+                                    >
                                         {project.subtitle}
                                     </p>
 
@@ -186,26 +417,28 @@ function AllProjects() {
                                     </p>
 
                                     <p className='allProjects_projectCard_infos_creationDate'>
-                                        {project.creationDate.split("-")[0]}
+                                        {projectYear}
                                     </p>
 
-                                    {project.summary &&
+                                    {project.summary && (
                                         <p
-                                            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(project.summary) }}
                                             className='allProjects_projectCard_infos_summary'
-                                        ></p>
-                                    }
+                                            dangerouslySetInnerHTML={{
+                                                __html: DOMPurify.sanitize(project.summary)
+                                            }}
+                                        />
+                                    )}
                                 </div>
 
                                 <figure className='allProjects_projectCard_imageContainer'>
                                     {renderProjectMedia(
                                         mainMedia,
-                                        `image principale du projet ${project.title} (${index})`
+                                        `image principale du projet ${project.title} (${index + 1})`
                                     )}
                                 </figure>
                             </Link>
                         </li>
-                    );
+                    )
                 })}
             </ul>
         </main>
