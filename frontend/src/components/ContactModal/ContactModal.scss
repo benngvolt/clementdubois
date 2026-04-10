@@ -63,6 +63,14 @@
                 margin-left: 0;
             }  
 
+            a {
+                color: $colorDarkGrey;
+                
+                &:hover {
+                    font-weight: bold;
+                }
+            }
+
             &_title {
                 display: flex;
                 justify-content: flex-start;

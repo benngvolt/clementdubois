@@ -26,14 +26,15 @@ function ContactModal({setdisplayContactModal}) {
                     <p className='contactModal_container_datas_tel'>
                                 +33 6 59 17 44 74
                     </p>
-                    {/* <p className='contactModal_container_datas_address'>
-                                Le portemine <br/>
-                                36 Rue Fontgieve <br/>
-                                63000 Clermont-Ferrand
-                    </p> */}
-                    <p className='contactModal_container_datas_mail'>
+                    <a 
+                        href="mailto:ecrire@clement-dubois.com"
+                        className='contactModal_container_datas_mail'
+                    >
+                        ecrire@clement-dubois.com
+                    </a>
+                    {/* <p className='contactModal_container_datas_mail'>
                                 ecrire@clement-dubois.com
-                    </p>
+                    </p> */}
                 </div>
             </div>
         </section>

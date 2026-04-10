@@ -112,26 +112,7 @@
                 animation: navOpen 2s ease forwards;
             } 
         }
-        h1 {
-            color: $colorDarkGrey;
-            font-family: 'SpecialFont';
-            text-align: center;
-            text-decoration: none;
-            font-size: 2rem;
-            margin: auto;
-            padding: 22px 0 22px 22px;
-            width: 45%;
-            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-                width: auto;
-                padding: 0;
-                font-size: 1.9rem;
-            };
-            @media only screen and (max-width:$mobileMaxWidth){
-                width: auto;
-                padding: 0;
-                font-size: 1.9rem;
-            }  
-        };
+        
 
         height: 100%;
         flex-direction: row;
@@ -177,7 +158,47 @@
                 justify-content: center;
                 width: 100%;
             };
+            &_itemTitle{
+                
+                width: 45%;
+                text-align: center;
+                text-decoration: none;
+                margin: auto;
+                
+                
+                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                    width: auto;
+                    padding: 0;
+                    
+                };
+                @media only screen and (max-width:$mobileMaxWidth){
+                    width: auto;
+                    padding: 0;
+                    
+                }  
+                h1 {
+                    color: $colorDarkGrey;
+                    font-family: 'SpecialFont';
+                    text-align: center;
+                    text-decoration: none;
+                    font-size: 2rem;
+                    margin: auto;
+                    padding: 22px 0 22px 22px;
+                    
+                    @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                        width: auto;
+                        padding: 0;
+                        font-size: 1.9rem;
+                    };
+                    @media only screen and (max-width:$mobileMaxWidth){
+                        width: auto;
+                        padding: 0;
+                        font-size: 1.9rem;
+                    }  
+                   
+                };
 
+            }
 
             &_item {
                 display: flex;

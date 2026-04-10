@@ -1,150 +1,107 @@
 @import '../../utils/mixins';
 
+
 .collapse {
-        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-           
+    &--white {
+      background-color: white;
+    }
+  
+    &--dark {
+      background-color: $colorDarkGrey;
+    }
+  
+    &--light {
+      background-color: $colorLightGrey;
+    }
+  
+    &--color {
+      background-color: $colorFirst;
+    }
+  
+    &_collapseButton {
+      width: 100%;
+      height: 73px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 19px;
+      margin: 0 auto;
+      background: $colorDarkGrey;
+  
+      @media (hover: hover) {
+        &:hover {
+          cursor: pointer;
         }
-        
-        @media only screen and (max-width:$mobileMaxWidth){
-            
-        } 
-
-        &--white {
-            background-color: white;
-        } 
-
-        &--dark {
-            background-color: $colorDarkGrey;
-        } 
-
-        &--light {
-            background-color: $colorLightGrey;
-        } 
-
-        &--color {
-            background-color: $colorFirst;
-        } 
-
-        &_collapseButton {
-            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-                height: 73px;
-            }
-            
-            @media only screen and (max-width:$mobileMaxWidth){
-                height: 73px;
-            } 
-            
-            &--white {
-                background-color: white;
-                color: $colorDarkGrey;
-            } 
-    
-            &--dark {
-                background-color: $colorDarkGrey;
-                color: $colorLightGrey;
-            } 
-    
-            &--light {
-                background-color: $colorLightGrey;
-                color: $colorDarkGrey;
-            } 
-    
-            &--color {
-                background-color: $colorFirst;
-                color: $colorDarkGrey;
-            } 
-            
-            width: 100%;
-            border: none;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            margin: 0 auto;
-            column-gap: 19px;
-            background: $colorDarkGrey;
-            @media (hover: hover) {
-                &:hover {
-                    cursor: pointer;
-                }
-            }
-
-            h5 {
-                font-family: 'SpecialFont';
-                font-size: 30px;
-                text-align: center;
-                margin: 22px 0;
-                // padding-left: 54px;
-                width: 30%; 
-                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-                    
-                }
-                
-                @media only screen and (max-width:$mobileMaxWidth){
-                    width: 60%; 
-                    font-size: 22px;
-                }      
-            }
-
-            p {  
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                line-height: 200%;
-                font-family: 'SpecialFont';
-                font-size: 30px;
-                padding-top: 22px;
-                padding-bottom: 22px;
-                margin: 0;
-
-                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-                    font-size: 19px;
-                    margin: 0;
-                }
-                
-                @media only screen and (max-width:$mobileMaxWidth){
-                    font-size: 19px;
-                    margin: 0;
-                } 
-            }
-            &_icon--closed {
-                font-size: 19px;
-                margin: auto 0px;
-                animation: closeCollapse 0.5s ease forwards;
-                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-                    font-size: 16px;
-                }
-                
-                @media only screen and (max-width:$mobileMaxWidth){
-                    font-size: 16px;
-                } 
-            }
-            &_icon--opened {
-                font-size: 19px;
-                margin: auto 0px;
-                animation: openCollapse 0.5s ease forwards;
-                @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-                    font-size: 16px;
-                }
-                
-                @media only screen and (max-width:$mobileMaxWidth){
-                    font-size: 16px;
-                } 
-            }
+      }
+  
+      &--white {
+        background-color: white;
+        color: $colorDarkGrey;
+      }
+  
+      &--dark {
+        background-color: $colorDarkGrey;
+        color: $colorLightGrey;
+      }
+  
+      &--light {
+        background-color: $colorLightGrey;
+        color: $colorDarkGrey;
+      }
+  
+      &--color {
+        background-color: $colorFirst;
+        color: $colorDarkGrey;
+      }
+  
+      h5 {
+        font-family: 'SpecialFont';
+        font-size: 30px;
+        text-align: center;
+        margin: 0;
+        width: 30%;
+  
+        @media only screen and (max-width: $mobileMaxWidth) {
+          width: 60%;
+          font-size: 22px;
         }
-
-        &_children {
-            
-            &--opened {
-                animation: openCollapseChildren 1s ease forwards;
-                height: auto;
-                padding-bottom: 35px;
-                
-            }
-            
-            &--closed {
-                animation: closeCollapseChildren 1s ease forwards;
-                overflow: hidden;
-            }
+      }
+  
+      &_icon {
+        flex: 0 0 auto;
+        font-size: 19px;
+        width: 19px;
+        height: 19px;
+        transition: transform 0.3s ease;
+        display: block;
+  
+        @media only screen and (max-width: $mobileMaxWidth) {
+          width: 16px;
+          height: 16px;
+          font-size: 16px;
         }
-    
-}
+  
+        &--closed {
+          transform: rotate(0deg);
+        }
+  
+        &--opened {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  
+    &_children {
+      &--opened {
+        animation: openCollapseChildren 1s ease forwards;
+        height: auto;
+        padding-bottom: 35px;
+      }
+  
+      &--closed {
+        animation: closeCollapseChildren 1s ease forwards;
+        overflow: hidden;
+      }
+    }
+  }
