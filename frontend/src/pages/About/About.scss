@@ -59,6 +59,7 @@
                     font-size: 12px;
                     padding-top: 35px;
                     padding-bottom: 35px;
+                    margin-left: 0;
                 }
             }
         }
@@ -152,12 +153,28 @@
                 } 
     
                 &_item {
-                    
+                    font-family: 'SpecialFont';
+                        font-size: 25px;
+                        margin: auto;
+                        text-align: left;
+                        line-height: 1em;
+                        
+                        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
+                            font-size: 16px;
+                            text-align: left;
+                        }
+                        
+                        @media only screen and (max-width:$mobileMaxWidth){
+                            font-size: 14px;
+                            text-align: center;
+                            
+                        } 
                     p {
                         font-family: 'SpecialFont';
                         font-size: 25px;
                         margin: auto;
                         text-align: left;
+                        line-height: 1em;
                         
                         @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){        
                             font-size: 16px;
