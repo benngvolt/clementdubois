@@ -4,6 +4,7 @@ import Loader from '../Loader/Loader'
 import { ProjectsContext } from '../../utils/ProjectsContext';
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getMediaUrl } from '../../utils/getMediaUrl'
 
 
     
@@ -53,7 +54,7 @@ function MainPhoto() {
             {homeMedia && homeMediaType === 'image' &&
                 <img
                     className='mainPhoto_image'
-                    src={homeMedia.imageUrl}
+                    src={getMediaUrl(homeMedia.imageUrl)}
                     alt="image d'accueil"
                 />
             }

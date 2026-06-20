@@ -5,6 +5,8 @@ import {
     faChevronLeft,
     faChevronRight,
 } from '@fortawesome/free-solid-svg-icons'
+import { getMediaUrl } from '../../utils/getMediaUrl'
+
 
 function ImageFocus ({imageFocusUrl, setDisplayImageFocus, setImageFocusUrl, imagesArray}) {
     const modalRef = useRef(null);
@@ -47,7 +49,7 @@ function ImageFocus ({imageFocusUrl, setDisplayImageFocus, setImageFocusUrl, ima
                     aria-label="Afficher l\'image précédente"
                     onClick={()=>displayPrevImage()}/>
                 }
-                <img src={imageFocusUrl} alt={`image ${imagesArray[currentIndex]}`}/>
+                <img src={getMediaUrl(imageFocusUrl)} alt={`image ${imagesArray[currentIndex]}`}/>
                 {imagesArrayLength > 1 &&
                 <FontAwesomeIcon 
                     icon={faChevronRight} 

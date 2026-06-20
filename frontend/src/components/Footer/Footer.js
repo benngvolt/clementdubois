@@ -6,6 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faChevronLeft, faChevronRight
 } from '@fortawesome/free-solid-svg-icons'
+import { getMediaUrl } from '../../utils/getMediaUrl'
+
+
  
 function Footer() {
 
@@ -38,7 +41,7 @@ function Footer() {
         if (mediaType === 'video') {
             return (
                 <video
-                    src={media.imageUrl}
+                    src={getMediaUrl(media.imageUrl)}
                     muted
                     autoPlay
                     loop
@@ -51,7 +54,7 @@ function Footer() {
         if (mediaType === 'image') {
             return (
                 <img
-                    src={media.imageUrl}
+                    src={getMediaUrl(media.imageUrl)}
                     alt={alt}
                 />
             );

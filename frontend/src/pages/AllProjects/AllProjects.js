@@ -6,6 +6,7 @@ import DOMPurify from 'dompurify'
 import MainPhoto from '../../components/MainPhoto/MainPhoto'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAnglesDown } from '@fortawesome/free-solid-svg-icons'
+import { getMediaUrl } from '../../utils/getMediaUrl'
 
 function AllProjects() {
     const {
@@ -48,15 +49,7 @@ function AllProjects() {
         return null
     }, [])
 
-    //HELPER POUR REMPLACER LES IMAGES TEMPORAIREMENT
-    const getMediaUrl = (src) => {
-        if (!src) return src;
-      
-        return src.replace(
-          "https://storage.googleapis.com/website-clement-dubois/",
-          "https://apicldub.bengibert.com/uploads/"
-        );
-      };
+    
 
 
     const renderProjectMedia = useCallback((media, alt = '') => {
