@@ -78,7 +78,7 @@ app.use('/', sitemapRoutes);
 app.use ('/api/users', usersRoutes);
 app.use ('/api/projects', projectsRoutes);
 app.use ('/api/informations', informationsRoutes);
-
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')))
 // app.use ('/api/events', eventsRoutes);
 // app.use ('/api/email', emailRoutes);
 
