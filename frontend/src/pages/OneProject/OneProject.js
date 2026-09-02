@@ -60,6 +60,7 @@ function OneProject() {
     const sectionTitle = useMemo(() => {
         if (project.projectType === 'spectacle vivant') return 'La pièce'
         if (project.projectType === 'évènement') return "L'évènement"
+        if (project.projectType === 'exposition') return "L'exposition"
         return 'Le contexte'
     }, [project.projectType])
 
@@ -70,7 +71,8 @@ function OneProject() {
     const showScenoTitle = useMemo(() => {
         return (
             project.projectType === 'spectacle vivant' ||
-            project.projectType === 'évènement'
+            project.projectType === 'évènement' ||
+            project.projectType === 'exposition'
         )
     }, [project.projectType])
 

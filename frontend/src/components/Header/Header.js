@@ -10,7 +10,8 @@ import {
     faFacebook,
     faSquareInstagram,
     faTiktok,
-    faLinkedin
+    faLinkedin,
+    faYoutube
 } from '@fortawesome/free-brands-svg-icons'
 
 import {
@@ -174,7 +175,7 @@ function Header() {
                     className="header_nav_menu_itemTitle"
                     onClick={handleGoTop}
                     >
-                    <h1>Clément Dubois <br /> scénographe</h1>
+                    <h1>Clément Dubois <br/><span className='header_nav_menu_itemTitle--small'>directeur artistique & scénographe</span></h1>
                 </Link>
 
                 <nav className='header_nav_menu'>
@@ -277,6 +278,14 @@ function Header() {
                         rel='noreferrer'
                     >
                         <FontAwesomeIcon icon={faLinkedin} />
+                    </a>
+                    <a
+                        aria-label='Accéder à la page Youtube de Clément Dubois'
+                        href='https://www.youtube.com/@clementduboisDA'
+                        target="_blank"
+                        rel='noreferrer'
+                    >
+                        <FontAwesomeIcon icon={faYoutube} />
                     </a>
                 </nav>
             </div>

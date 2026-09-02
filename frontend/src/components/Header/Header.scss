@@ -11,12 +11,12 @@
     z-index: 3;
     @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
         position: fixed;
-        height: 100vh;
+        height: 100%;
     }
     
     @media only screen and (max-width:$mobileMaxWidth){
         position: fixed;
-        height: 100vh;
+        height: 100%;
         margin: 0;
     } 
     
@@ -160,15 +160,16 @@
             };
             &_itemTitle{
                 
-                width: 45%;
-                text-align: center;
+                width: 52%;
+                text-align: left;
                 text-decoration: none;
-                margin: auto;
+                margin: auto 0;
                 
                 
                 @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                     width: auto;
-                    padding: 0;
+                    padding: 0 10px;
+                    margin-bottom: 10px;
                     
                 };
                 @media only screen and (max-width:$mobileMaxWidth){
@@ -176,6 +177,19 @@
                     padding: 0;
                     
                 }  
+
+                &--small {
+                    font-size: 1.2rem;
+                    
+                    @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                        font-size: 1.3rem;
+                        margin-top:  10px;
+                    };
+                    @media only screen and (max-width:$mobileMaxWidth){
+                        font-size: 1.3rem;
+                        margin-top:  10px;
+                    } 
+                }
                 h1 {
                     color: $colorDarkGrey;
                     font-family: 'SpecialFont';
@@ -194,7 +208,9 @@
                         width: auto;
                         padding: 0;
                         font-size: 1.7rem;
-                    }  
+                    } 
+                    
+                    
                    
                 };
 
@@ -296,12 +312,12 @@
             }  
             a svg {
                 color: $colorDarkGrey;
-                height: 28px;
-                width: 28px;
+                height: 32px;
+                width: 32px;
                 margin: auto;
                 padding: 4px;
                 box-sizing: border-box;
-                border-radius: 28px;
+                border-radius: 32px;
 
                 &:hover {
                     color: $colorFirst;
