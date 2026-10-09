@@ -1,4 +1,5 @@
 const { bucket } = require('../config/storage');
+const { deleteUploadedUrls } = require('./deleteImages');
 const sharp = require('sharp');
 const pLimit = require('p-limit');
 
@@ -52,6 +53,8 @@ function uploadImages(req, res, next) {
         resumable: true,
         metadata: {
           contentType,
+          // noms de fichiers uniques : le navigateur peut les garder en cache indéfiniment
+          cacheControl: 'public, max-age=31536000, immutable',
         },
       });
 
@@ -137,15 +140,23 @@ function uploadImages(req, res, next) {
     )
   );
 
-  Promise.all([...uploadPromises, ...moUploadPromises])
-    .then(() => {
+  // on attend la fin de tous les envois pour pouvoir nettoyer en cas d'échec partiel
+  Promise.allSettled([...uploadPromises, ...moUploadPromises])
+    .then(async (results) => {
+      const failure = results.find((result) => result.status === 'rejected');
+
+      if (failure) {
+        console.error(failure.reason);
+        // un fichier a échoué : on retire ceux déjà envoyés
+        await deleteUploadedUrls(
+          [...newImagesObjects, ...newMoImagesObjects].map((item) => item.imageUrl)
+        );
+        return res.status(500).json({ error: 'Erreur lors du traitement des médias.' });
+      }
+
       req.newImagesObjects = newImagesObjects;
       req.newMoImagesObjects = newMoImagesObjects;
       next();
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json({ error: 'Erreur lors du traitement des médias.' });
     });
 }
 

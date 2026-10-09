@@ -189,10 +189,54 @@
             margin: 0 auto 54px auto;
 
             &_item {
+                position: relative;
+                width: 200px;
+
                 img, video {
+                    display: block;
                     width: 200px;
                     aspect-ratio: 1.5/1;
                     object-fit: cover;
+                }
+
+                &_title {
+                    margin: 6px 0 0 0;
+                    font-family: 'MainFont_light';
+                    font-size: 14px;
+                    color: $colorDarkGrey;
+                }
+
+                // retire l'image de la sélection random de la landing-page
+                &_removeButton {
+                    position: absolute;
+                    top: 6px;
+                    right: 6px;
+                    display: flex;
+                    width: 28px;
+                    height: 28px;
+                    padding: 0;
+                    border: none;
+                    border-radius: 50%;
+                    color: $colorLightGrey;
+                    background-color: $colorDarkGrey;
+                    cursor: pointer;
+
+                    svg {
+                        height: 14px;
+                        margin: auto;
+                    }
+
+                    @media (hover: hover) {
+                        &:hover {
+                            color: $colorDarkGrey;
+                            background-color: $colorFirst;
+                        }
+                    }
+
+                    &:disabled {
+                        opacity: 0.4;
+                        cursor: wait;
+                    }
                 }
             }
         }  

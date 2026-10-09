@@ -95,21 +95,23 @@
     }
 
     &_firstInfosBlock{
-        width: 72%;
+
+        width: 90%;
         display: flex;
-        flex-direction: row;
+        flex-direction: row-reverse;
         justify-content: center;
         column-gap: 35px;
         margin: 54px auto;
         height: auto;
+        
         @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-            margin: 25px 0;
+            margin: 25px;
             width: auto;
             @include responsiveMarginLeft;
         }
         
         @media only screen and (max-width:$mobileMaxWidth){
-            margin: 16px 0;
+            margin: 16px 12px;
             width: auto;
             flex-direction: column;
             @include responsiveMarginLeft;
@@ -120,6 +122,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            
             @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                 width: 90%; 
             }
@@ -133,7 +136,7 @@
                 h5 {
                     font-family: 'SpecialFont';
                     font-size: 30px;
-                    text-align: end;
+                    text-align: justify;
                     margin: 22px 0;
                     @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                         font-size: 30px;
@@ -146,10 +149,11 @@
                     } 
                 }
                 p {
-                    text-align: right;
+                    text-align: left;
                     font-family: 'MainFont_light';
                     font-size: 16px;
                     margin: 22px 0;
+                    text-align: justify;
                     @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                         font-size: 16px;
                     }
@@ -169,10 +173,19 @@
             flex-direction: column;
             justify-content: flex-start;
             height: auto;
+            width: 40%;
+            
+            @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+                width: 50%;
+            }
+            @media only screen and (max-width:$mobileMaxWidth){
+                width: 100%;
+                } 
 
             &_distribution {
                 width: 100%;
                 display: flex;
+                
                 flex-direction: column;
                 justify-content: flex-start;
                 @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
@@ -225,6 +238,7 @@
                         span {
                             font-size: 16px;
                             font-family: 'MainFont_bold';
+                            margin-right: 10px;
                             @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                                 
                             }
@@ -263,7 +277,7 @@
                     font-family:'SpecialFont';
                     color: $colorLightGrey;
                     background-color: $colorDarkGrey;
-                    font-size: 25px;
+                    font-size: 19px;
                     padding: 10px;
                     border: none;
                     text-align: center;
@@ -274,7 +288,8 @@
                     
                     @media only screen and (max-width:$mobileMaxWidth){
                         font-size: 16px;
-                        width: 160px;
+                        width: 60%;
+                        margin: auto;
                     } 
    
                     // border-radius: 50rem;

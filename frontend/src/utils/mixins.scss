@@ -91,6 +91,40 @@
     color: $colorDarkGrey;
 }
 
+// typographies des infos projet (cartes de la liste + légende de l'image d'accueil)
+@mixin projectTitleText {
+    font-family: 'SpecialFont';
+    font-size: 50px;
+    text-align: left;
+
+    @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+        font-size: 35px;
+    }
+    @media only screen and (max-width:$mobileMaxWidth){
+        font-size: 35px;
+    }
+}
+
+@mixin projectSubtitleText {
+    font-family: 'MainFont_light';
+    font-size: 22px;
+}
+
+@mixin projectInfosText {
+    font-family: 'MainFont_bold';
+    font-size: 19px;
+
+    @media only screen and (max-width:$mobileMaxWidth){
+        font-size: 14px;
+    }
+}
+
+@mixin projectYearText {
+    font-family: 'MainFont_light';
+    font-size: 19px;
+    color: $colorDarkGrey;
+}
+
 @mixin mainGalleryRatio1 {
     aspect-ratio: 2/1;
 }

@@ -1,7 +1,8 @@
 const { bucket } = require('../config/storage')
 const sharp = require('sharp')
 const { format } = require('url')
-const { v4: uuidv4 } = require('uuid')
+const { randomUUID } = require('crypto')
+const { deleteUploadedUrls } = require('./deleteImages')
 
 function toPublicUrl(blob) {
   return format(`https://storage.googleapis.com/${bucket.name}/${blob.name}`)
@@ -23,6 +24,10 @@ function uploadBufferToGCS({ buffer, destinationPath }) {
     const blob = bucket.file(destinationPath)
     const blobStream = blob.createWriteStream({
       resumable: false,
+      metadata: {
+        contentType: 'image/webp',
+        cacheControl: 'public, max-age=31536000, immutable',
+      },
     })
 
     blobStream.on('error', (err) => {
@@ -40,7 +45,7 @@ function uploadBufferToGCS({ buffer, destinationPath }) {
 
 async function uploadOneImage(file) {
   const webpBuffer = await processToWebp(file.buffer, 1920)
-  const filename = `informations_images/${uuidv4()}.webp`
+  const filename = `informations_images/${randomUUID()}.webp`
   return uploadBufferToGCS({ buffer: webpBuffer, destinationPath: filename })
 }
 
@@ -114,7 +119,19 @@ async function uploadInformationsImages(req, res, next) {
       )
     })
 
-    await Promise.all(tasks)
+    // on attend la fin de tous les envois pour pouvoir nettoyer en cas d'échec partiel
+    const results = await Promise.allSettled(tasks)
+    const failure = results.find((result) => result.status === 'rejected')
+
+    if (failure) {
+      await deleteUploadedUrls([
+        uploads.firstPictureUrl,
+        uploads.secondPictureUrl,
+        uploads.thirdPictureUrl,
+        ...uploads.collabUploads.map((item) => item.url),
+      ])
+      throw failure.reason
+    }
 
     req.informationsUploads = uploads
 

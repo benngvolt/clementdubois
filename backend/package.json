@@ -4,34 +4,23 @@
   "description": "backend du site web de Clément Dubois scénographe",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev-start": "env-cmd -f ./env/.env nodemon server.js",
+    "dev-start": "node --env-file-if-exists=./env/.env --watch server.js",
     "start": "node server.js",
-    "gcp-build": "",
-    "build": "react-scripts build"
+    "gcp-build": ""
   },
   "author": "Benjamin Gibert",
   "license": "ISC",
   "dependencies": {
     "@google-cloud/storage": "^7.19.0",
     "bcrypt": "^6.0.0",
-    "cors": "^2.8.6",
-    "dompurify": "^3.3.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
-    "mongodb": "^7.1.0",
     "mongoose": "^9.2.4",
     "multer": "^2.1.1",
-    "node-fetch": "^3.3.2",
-    "nodemailer": "^8.0.1",
-    "nodemon": "^3.1.14",
     "p-limit": "^3.1.0",
-    "package": "^1.0.1",
-    "sharp": "^0.34.5",
-    "valid-url": "^1.0.9",
-    "validator": "^13.15.26"
+    "sharp": "^0.34.5"
   },
-  "devDependencies": {
-    "typescript": "^5.9.3"
+  "engines": {
+    "node": ">=20.19.0"
   }
 }

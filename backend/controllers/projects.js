@@ -240,6 +240,7 @@
 
 const mongoose = require('mongoose');
 const Project = require('../models/project');
+const { deleteUploadedUrls } = require('../middlewares/deleteImages');
 
 /*------------------------
 ----- HELPERS ------------
@@ -413,6 +414,17 @@ function getUrlsToDelete(previousItems = [], nextItems = []) {
   return previousUrls.filter((url) => !nextUrls.has(url));
 }
 
+// en cas d'échec, les médias envoyés par uploadImages ne seront jamais référencés : on les supprime
+async function respondAndCleanUploads(req, res, status, body) {
+  // réponse déjà envoyée = projet déjà enregistré avec ces médias : surtout ne rien supprimer
+  if (res.headersSent) return;
+
+  await deleteUploadedUrls(
+    [...(req.newImagesObjects || []), ...(req.newMoImagesObjects || [])].map(getMediaUrl)
+  );
+  return res.status(status).json(body);
+}
+
 /*------------------------
 ----- GET ALL PROJECTS ---
 -------------------------*/
@@ -423,7 +435,7 @@ exports.getAllProjects = async (req, res) => {
     res.status(200).json(projects);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error });
+    res.status(500).json({ error: 'Erreur serveur.' });
   }
 };
 
@@ -442,7 +454,7 @@ exports.getOneProject = async (req, res) => {
     res.status(200).json(project);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error });
+    res.status(500).json({ error: 'Erreur serveur.' });
   }
 };
 
@@ -470,7 +482,7 @@ exports.createProject = async (req, res) => {
     const finalSlug = slugify(req.body.slug || req.body.title);
 
     if (!projectData.title || !projectData.projectType) {
-      return res.status(400).json({
+      return respondAndCleanUploads(req, res, 400, {
         error: 'Le champ "title" ou "projectType" est manquant dans la demande.',
       });
     }
@@ -478,7 +490,7 @@ exports.createProject = async (req, res) => {
     const existingProjectWithSlug = await Project.findOne({ slug: finalSlug });
 
     if (existingProjectWithSlug) {
-      return res.status(400).json({ error: 'Un projet avec ce slug existe déjà.' });
+      return respondAndCleanUploads(req, res, 400, { error: 'Un projet avec ce slug existe déjà.' });
     }
 
     const sortedImages = mergeAndSortImages([], images);
@@ -509,7 +521,7 @@ exports.createProject = async (req, res) => {
     res.status(201).json({ message: 'Projet enregistré !' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error });
+    await respondAndCleanUploads(req, res, 500, { error: 'Erreur lors de l\'enregistrement du projet.' });
   }
 };
 
@@ -573,7 +585,7 @@ exports.updateOneProject = async (req, res, next) => {
     const project = await findProjectBySlugOrId(req.params.slugOrId);
 
     if (!project) {
-      return res.status(404).json({ error: 'Projet non trouvé' });
+      return respondAndCleanUploads(req, res, 404, { error: 'Projet non trouvé' });
     }
 
     const existingProjectWithSlug = await Project.findOne({ slug: finalSlug });
@@ -582,7 +594,7 @@ exports.updateOneProject = async (req, res, next) => {
       existingProjectWithSlug &&
       existingProjectWithSlug._id.toString() !== project._id.toString()
     ) {
-      return res.status(400).json({ error: 'Un autre projet utilise déjà ce slug.' });
+      return respondAndCleanUploads(req, res, 400, { error: 'Un autre projet utilise déjà ce slug.' });
     }
 
     const existingImagesObjects = extractExistingIndexedObjects(req.body, 'existingImages');
@@ -623,6 +635,40 @@ exports.updateOneProject = async (req, res, next) => {
     next();
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Erreur lors de la mise à jour du projet.' });
+    await respondAndCleanUploads(req, res, 500, { error: 'Erreur lors de la mise à jour du projet.' });
+  }
+};
+
+/*------------------------------------
+----- SÉLECTION RANDOM (LANDING) -----
+-------------------------------------*/
+
+exports.setRandomSelection = async (req, res) => {
+  const { imageUrl, inRandomSelection } = req.body || {};
+
+  if (typeof imageUrl !== 'string' || !imageUrl || typeof inRandomSelection !== 'boolean') {
+    return res.status(400).json({ error: 'Paramètres "imageUrl" et "inRandomSelection" requis.' });
+  }
+
+  try {
+    const project = await findProjectBySlugOrId(req.params.slugOrId);
+
+    if (!project) {
+      return res.status(404).json({ error: 'Projet non trouvé' });
+    }
+
+    const result = await Project.updateOne(
+      { _id: project._id, 'projectImages.imageUrl': imageUrl },
+      { $set: { 'projectImages.$.inRandomSelection': inRandomSelection } }
+    );
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'Média introuvable dans ce projet.' });
+    }
+
+    res.status(200).json({ message: 'Sélection random mise à jour.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erreur lors de la mise à jour de la sélection random.' });
   }
 };

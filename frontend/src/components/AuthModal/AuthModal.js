@@ -11,6 +11,7 @@ function AuthModal({ handleAuthModal, authModalDisplay }) {
 
     const [displayError, setDisplayError] = useState(false);
     const [displayServerError, setDisplayServerError] = useState(false);
+    const [displayTooManyAttempts, setDisplayTooManyAttempts] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -31,15 +32,20 @@ function AuthModal({ handleAuthModal, authModalDisplay }) {
                 body: JSON.stringify(authData)
             });
     
+            setDisplayTooManyAttempts(response.status === 429);
+
             // Vérifier le code de réponse HTTP
-            if (response.status === 401) {
+            if (response.status === 429) {
+                // trop d'échecs : le serveur bloque temporairement les tentatives
+                setDisplayError(false);
+            } else if (response.status === 401) {
                 // Erreur d'authentification
                 setDisplayError(true);
                 setLoggedOut();
                 console.log('Non authentifié');
             } else if (response.status === 500) {
                 // Erreur interne du serveur
-                displayServerError(true);
+                setDisplayServerError(true);
                 console.log('Erreur serveur');
             } else {
                 // Si le code de réponse est autre que 401 ou 500
@@ -71,6 +77,7 @@ function AuthModal({ handleAuthModal, authModalDisplay }) {
         handleAuthModal();
         setDisplayError(false);
         setDisplayServerError(false);
+        setDisplayTooManyAttempts(false);
     }
 
     return (
@@ -87,6 +94,7 @@ function AuthModal({ handleAuthModal, authModalDisplay }) {
                 </div>
                 <ErrorText errorText={'Accès non-autorisé'} state={displayError}/>
                 <ErrorText errorText={'Une erreur est survenue'} state={displayServerError}/>
+                <ErrorText errorText={'Trop de tentatives, réessayez dans 15 minutes'} state={displayTooManyAttempts}/>
                 <button type='submit' aria-label="Soumettre le formulaire d'authentification" className='authModal_form_button'>LOGIN</button>
             </form>
             <button onClick={closeAuthModal} aria-label="Fermer la modale d'authentification" className='authModal_button'>CLOSE</button>

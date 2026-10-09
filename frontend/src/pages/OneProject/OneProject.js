@@ -9,6 +9,7 @@ import DOMPurify from 'dompurify'
 import Collapse from '../../components/Collapse/Collapse'
 import ImageFocus from '../../components/ImageFocus/ImageFocus'
 import { getMediaUrl } from '../../utils/getMediaUrl'
+import Error404 from '../Error404/Error404'
 
 function OneProject() {
     const { slug } = useParams()
@@ -17,16 +18,27 @@ function OneProject() {
     const [project, setProject] = useState({})
     const [imageFocusUrl, setImageFocusUrl] = useState('')
     const [displayImageFocus, setDisplayImageFocus] = useState(false)
+    const [notFound, setNotFound] = useState(false)
 
     useEffect(() => {
         let isMounted = true
 
+        setNotFound(false)
+
         fetch(`${API_URL}/api/projects/${slug}`)
-            .then((res) => res.json())
+            .then((res) => {
+                if (res.status === 404) return null
+                if (!res.ok) throw new Error(`Chargement du projet impossible (${res.status})`)
+                return res.json()
+            })
             .then((data) => {
                 if (!isMounted) return
 
                 window.scrollTo(0, 0)
+                if (!data) {
+                    setNotFound(true)
+                    return
+                }
                 setProject(data)
             })
             .catch((error) => console.log(error.message))
@@ -68,12 +80,15 @@ function OneProject() {
         return project.projectType === 'spectacle vivant' ? 'Distribution' : "L'équipe"
     }, [project.projectType])
 
-    const showScenoTitle = useMemo(() => {
-        return (
+    // titre du second paragraphe (null = pas de titre pour ce type de projet)
+    const scenoTitle = useMemo(() => {
+        if (
             project.projectType === 'spectacle vivant' ||
             project.projectType === 'évènement' ||
             project.projectType === 'exposition'
-        )
+        ) return 'La scénographie'
+        if (project.projectType === 'oeuvre') return "L'œuvre"
+        return null
     }, [project.projectType])
 
     const prodTypeArray = useMemo(() => {
@@ -137,6 +152,10 @@ function OneProject() {
         return null
     }, [getMediaType])
 
+    if (notFound) {
+        return <Error404 />
+    }
+
     return (
         <main
             className='oneProject'
@@ -178,7 +197,7 @@ function OneProject() {
 
                         {cleanedAboutSceno && (
                             <div className='oneProject_firstInfosBlock_showAndSceno_scenoBlock'>
-                                {showScenoTitle && <h5>La scénographie</h5>}
+                                {scenoTitle && <h5>{scenoTitle}</h5>}
 
                                 <p
                                     dangerouslySetInnerHTML={{ __html: cleanedAboutSceno }}

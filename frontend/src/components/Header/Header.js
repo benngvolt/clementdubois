@@ -175,7 +175,11 @@ function Header() {
                     className="header_nav_menu_itemTitle"
                     onClick={handleGoTop}
                     >
-                    <h1>Clément Dubois <br/><span className='header_nav_menu_itemTitle--small'>directeur artistique & scénographe</span></h1>
+                    <h1>
+                        Clément Dubois
+                        {/* <span className='header_nav_menu_itemTitle--small'>directeur artistique</span>
+                        <span className='header_nav_menu_itemTitle--small'>scénographe</span> */}
+                    </h1>
                 </Link>
 
                 <nav className='header_nav_menu'>

@@ -420,6 +420,7 @@ function ProjectForm({
                     .catch((error) => {
                         console.error(error);
                         setDisplayServerError(true);
+                        setLoaderDisplay(false);
                 });
             } else if (projectFormMode==='edit') {
                 fetch(`${API_URL}/api/projects/${projectEdit._id}`, {

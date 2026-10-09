@@ -17,8 +17,8 @@ router.post('/',
             auth,
             // multer.fields([{ name: 'images' }, { name: 'moImages' }]), 
             multer.fields([
-                { name: 'images', maxCount: 10 },
-                { name: 'moImages', maxCount: 10 }
+                { name: 'images', maxCount: 12 },
+                { name: 'moImages', maxCount: 12 }
             ]),
             uploadImages, 
             projectsCtrl.createProject);
@@ -34,12 +34,17 @@ router.delete ('/:slugOrId',
             projectsCtrl.deleteOneProject, 
             deleteImages);
 
+// retrait/ajout rapide d'un média dans la sélection random de la landing-page (backoffice)
+router.patch('/:slugOrId/random-selection',
+            auth,
+            projectsCtrl.setRandomSelection);
+
 router.put ('/:slugOrId',
             auth, 
             // multer.fields([{ name: 'images' }, { name: 'moImages' }]),
             multer.fields([
-                { name: 'images', maxCount: 10 },
-                { name: 'moImages', maxCount: 10 }
+                { name: 'images', maxCount: 12 },
+                { name: 'moImages', maxCount: 12 }
             ]),
             uploadImages, 
             projectsCtrl.updateOneProject, 

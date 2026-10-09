@@ -27,6 +27,87 @@
         }
     }
     
+    &_link {
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+    }
+
+    // légende sans fond : la couleur du texte s'adapte à la luminosité de l'image derrière
+    &_caption {
+        position: absolute;
+        left: 54px;
+        bottom: 54px;
+        // ne doit pas atteindre le bouton chevrons centré en bas
+        max-width: calc(50% - 90px);
+        display: flex;
+        flex-direction: column;
+        row-gap: 2px;
+        box-sizing: border-box;
+        transition: color 0.3s ease;
+        animation: appearOpacity 2s ease forwards;
+
+        @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
+            left: 60px;
+            bottom: 110px;
+            max-width: calc(100% - 80px);
+        }
+
+        @media only screen and (max-width:$mobileMaxWidth){
+            left: 60px;
+            bottom: 110px;
+            max-width: calc(100% - 75px);
+        }
+
+        // image sombre (ou luminosité inconnue) : texte clair
+        &--light {
+            color: $colorLightGrey;
+            text-shadow: 0 0 12px rgba(0, 0, 0, 0.55);
+        }
+
+        // image claire : texte foncé
+        &--dark {
+            color: $colorDarkGrey;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.55);
+        }
+
+        // survol limité au bloc titre/sous-titre, pas à toute l'image
+        @media (hover: hover) {
+            &:hover {
+                color: $colorFirst;
+            }
+        }
+
+        p, h2 {
+            margin: 0;
+            color: inherit;
+        }
+
+        &_title {
+            @include projectTitleText;
+            line-height: 1;
+            margin-bottom: 4px !important;
+        }
+
+        &_subtitle {
+            @include projectSubtitleText;
+            line-height: 1.15;
+        }
+
+        &_projectInfos {
+            @include projectInfosText;
+            line-height: 1.2;
+        }
+
+        &_creationDate {
+            @include projectYearText;
+            color: inherit;
+            line-height: 1.2;
+        }
+    }
+
     &_image {
 
         width: 100%;

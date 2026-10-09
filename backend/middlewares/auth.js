@@ -1,17 +1,19 @@
 const jwt = require('jsonwebtoken');
- 
+
 module.exports = (req, res, next) => {
-   try {
-        
-        const SECRET_TOKEN = process.env.SECRET_TOKEN;
-        const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token, SECRET_TOKEN);
-        const userId = decodedToken.userId;
+    const [scheme, token] = (req.headers.authorization || '').split(' ');
+
+    if (scheme !== 'Bearer' || !token) {
+        return res.status(401).json({ error: 'Authentification requise.' }); // status 401 'Unauthorized'
+    }
+
+    try {
+        const decodedToken = jwt.verify(token, process.env.SECRET_TOKEN, { algorithms: ['HS256'] });
         req.auth = {
-           userId: userId
+            userId: decodedToken.userId
         };
-	next();
-   } catch(error) {
-       res.status(401).json({ error }); // status 401 'Unauthorized'
-   }
+        next();
+    } catch (error) {
+        res.status(401).json({ error: 'Session expirée ou invalide.' }); // status 401 'Unauthorized'
+    }
 };

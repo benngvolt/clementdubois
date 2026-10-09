@@ -12,7 +12,7 @@ const informationsUploadFields = multer.fields([
   { name: 'firstPicture', maxCount: 1 },
   { name: 'secondPicture', maxCount: 1 },
   { name: 'thirdPicture', maxCount: 1 },
-  { name: 'collabImages', maxCount: 50 },
+  { name: 'collabImages', maxCount: 12 }, // plafonné par la limite globale de multer-config
 ])
 
 router.get('/', informationsCtrl.getInformations)

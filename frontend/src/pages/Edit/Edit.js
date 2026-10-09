@@ -2,10 +2,12 @@ import './Edit.scss'
 import ProjectForm from '../../components/ProjectForm/ProjectForm'
 import ConfirmBox from '../../components/ConfirmBox/ConfirmBox'
 import { API_URL } from '../../utils/constants'
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, useMemo } from 'react'
 import { ProjectsContext } from '../../utils/ProjectsContext'
 import ErrorText from '../../components/ErrorText/ErrorText'
 import InformationsForm from '../../components/InformationsForm/InformationsForm'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 function Edit() {
 
@@ -33,9 +35,13 @@ function Edit() {
     const [informationsEdit, setInformationsEdit] = useState(null)
 
     async function loadInformations() {
-    const res = await fetch(`${API_URL}/api/informations`)
-    const data = await res.json()
-    setInformationsEdit(data)
+        try {
+            const res = await fetch(`${API_URL}/api/informations`)
+            if (!res.ok) throw new Error(`Chargement des informations impossible (${res.status})`)
+            setInformationsEdit(await res.json())
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     useEffect(() => { loadInformations() }, [])
@@ -44,7 +50,43 @@ function Edit() {
     setHandleDisplayInformationsForm(true)
     }
 
-    const { projects, handleLoadProjects, randomImagesSelection, setDisplayHeader, displayHeader, isAuthenticated } = useContext(ProjectsContext);
+    const { projects, handleLoadProjects, setDisplayHeader, displayHeader, isAuthenticated } = useContext(ProjectsContext);
+
+    const [randomRemovalError, setRandomRemovalError] = useState(false);
+    const [pendingRandomRemoval, setPendingRandomRemoval] = useState(null);
+
+    // médias de la sélection random, avec leur projet (nécessaire pour les retirer)
+    const randomSelection = useMemo(() => {
+        return projects.flatMap((project) =>
+            (project.projectImages || [])
+                .filter((media) => media.inRandomSelection === true && media.imageUrl)
+                .map((media) => ({ project, media }))
+        );
+    }, [projects]);
+
+    async function removeFromRandomSelection(project, media) {
+        setPendingRandomRemoval(media.imageUrl);
+        setRandomRemovalError(false);
+
+        try {
+            const res = await fetch(`${API_URL}/api/projects/${project._id}/random-selection`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${sessionStorage.getItem('1')}`,
+                },
+                body: JSON.stringify({ imageUrl: media.imageUrl, inRandomSelection: false }),
+            });
+
+            if (!res.ok) throw new Error(`Retrait impossible (${res.status})`);
+            handleLoadProjects();
+        } catch (error) {
+            console.error(error);
+            setRandomRemovalError(true);
+        } finally {
+            setPendingRandomRemoval(null);
+        }
+    }
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -78,10 +120,8 @@ function Edit() {
             },
         })
         .then((response) => {
-            if(response.ok) {
-                console.log(response);
-                setDisplayError(false);
-            }
+            // ex. 401 si la session a expiré : le projet n'a pas été supprimé
+            setDisplayError(!response.ok);
             setHandleDisplayProjectForm(false);
             setConfirmBoxState (false);
             handleLoadProjects();
@@ -211,18 +251,19 @@ function Edit() {
                 
                 <div className='edit_randomImages'>
                     <p className='edit_randomImages_title'>SÉLECTION D'IMAGES RANDOM :</p>
+                    <ErrorText errorText={'Impossible de retirer cette image de la sélection (session expirée ?)'} state={randomRemovalError}/>
                     <div className='edit_randomImages_list'>
-                        {randomImagesSelection.map((mediaUrl, index) => {
+                        {randomSelection.map(({ project, media }) => {
 
-                            const isVideo = /\.(mp4|webm|ogg)$/i.test(mediaUrl);
+                            const isVideo = (media.fileType || '').startsWith('video/');
 
                             return (
-                                <div key={index} className='edit_randomImages_list_item'>
+                                <div key={`${project._id}-${media.imageUrl}`} className='edit_randomImages_list_item'>
 
                                     {isVideo ? (
                                         <video
                                             className='edit_randomImages_list_item_img'
-                                            src={mediaUrl}
+                                            src={media.imageUrl}
                                             muted
                                             autoPlay
                                             loop
@@ -232,11 +273,23 @@ function Edit() {
                                     ) : (
                                         <img
                                             className='edit_randomImages_list_item_img'
-                                            src={mediaUrl}
-                                            alt={`image random (${index})`}
+                                            src={media.imageUrl}
+                                            alt={`sélection random : ${project.title}`}
                                         />
                                     )}
 
+                                    <p className='edit_randomImages_list_item_title'>{project.title}</p>
+
+                                    <button
+                                        type='button'
+                                        className='edit_randomImages_list_item_removeButton'
+                                        aria-label={`Retirer cette image de ${project.title} de la sélection random`}
+                                        title='Retirer de la sélection random'
+                                        disabled={pendingRandomRemoval === media.imageUrl}
+                                        onClick={() => removeFromRandomSelection(project, media)}
+                                    >
+                                        <FontAwesomeIcon icon={faXmark} />
+                                    </button>
                                 </div>
                             );
                         })}

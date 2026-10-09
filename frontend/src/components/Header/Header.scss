@@ -178,17 +178,26 @@
                     
                 }  
 
+                // "directeur artistique" / "scénographe" : une ligne chacun
                 &--small {
+                    display: block;
                     font-size: 1.2rem;
-                    
+                    line-height: 1.15;
+
                     @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                         font-size: 1.3rem;
-                        margin-top:  10px;
                     };
                     @media only screen and (max-width:$mobileMaxWidth){
                         font-size: 1.3rem;
-                        margin-top:  10px;
-                    } 
+                    }
+
+                    &:first-of-type {
+                        margin-top: 4px;
+
+                        @media only screen and (max-width: $padMaxWidth){
+                            margin-top: 10px;
+                        }
+                    }
                 }
                 h1 {
                     color: $colorDarkGrey;
@@ -196,8 +205,9 @@
                     text-align: center;
                     text-decoration: none;
                     font-size: 2rem;
+                    line-height: 1.1;
                     margin: auto;
-                    padding: 22px 0 22px 22px;
+                    padding: 12px 0 12px 22px;
                     
                     @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
                         width: auto;
@@ -263,13 +273,13 @@
                     color: $colorDarkGrey;
                     font-family: 'MainFont_light';
                     text-transform: uppercase;
-                    font-size: 1.4rem;
+                    font-size: 1.2rem;
                     padding: 0 5px;
                     margin: 0;
                     text-decoration: none;
                     height: 100%;
                     @media only screen and (min-width: $padMinWidth) and (max-width: $padMaxWidth){
-                        font-size: 1.4rem;
+                        font-size: 1.2rem;
                     }
                     @media only screen and (max-width:$mobileMaxWidth){
                         font-size: 1.2rem;
@@ -277,6 +287,7 @@
                     @media (hover: hover) {
                         &:hover {
                             cursor: pointer;
+                            text-decoration:underline;
                         }
                     }
                 }

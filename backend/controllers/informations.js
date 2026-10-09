@@ -1,4 +1,5 @@
 const Information = require('../models/information')
+const { deleteUploadedUrls } = require('../middlewares/deleteImages')
 
 // Helpers
 function safeJsonParse(value, fallback) {
@@ -16,7 +17,6 @@ function withBr(str) {
   return str.replace(/(\r\n|\n|\r)/g, '<br>')
 }
 
-console.log('Mongoose collection:', Information.collection.name)
 
 /*------------------------
 ----- GET INFORMATIONS ---
@@ -33,7 +33,8 @@ exports.getInformations = async (req, res) => {
 
     res.status(200).json(info)
   } catch (error) {
-    res.status(500).json({ error })
+    console.error(error)
+    res.status(500).json({ error: 'Erreur serveur.' })
   }
 }
 
@@ -134,6 +135,16 @@ exports.updateInformations = async (req, res, next) => {
     next()
   } catch (error) {
     console.error(error)
+    if (res.headersSent) return
+
+    // les images envoyées pour cette mise à jour ne seront référencées nulle part
+    const uploads = req.informationsUploads || {}
+    await deleteUploadedUrls([
+      uploads.firstPictureUrl,
+      uploads.secondPictureUrl,
+      uploads.thirdPictureUrl,
+      ...(uploads.collabUploads || []).map((item) => item.url),
+    ])
     res.status(500).json({ error: "Erreur lors de la mise à jour des informations." })
   }
 }

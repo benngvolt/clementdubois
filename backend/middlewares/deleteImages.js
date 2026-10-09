@@ -128,4 +128,10 @@ async function deleteImages(req, res, next) {
   }
 }
 
-module.exports = { deleteImages }
+// supprime des fichiers tout juste envoyés sur le bucket quand l'enregistrement échoue ensuite
+// (sinon ils restent orphelins : payés mais référencés nulle part)
+async function deleteUploadedUrls(urls = []) {
+  await Promise.all(urls.filter(Boolean).map(deleteByUrl))
+}
+
+module.exports = { deleteImages, deleteByUrl, deleteUploadedUrls }

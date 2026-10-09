@@ -29,10 +29,9 @@ export const ProjectsProvider = ({ children }) => {
     const [hideHeader, setHideHeader] = useState(true)
     const [hideFooter, setHideFooter] = useState(true)
     const [loaderDisplay, setLoaderDisplay] = useState(false);
-    const [randomImagesSelection, setRandomImageSelection] = useState ([]);
 
     // définition des catégories de projets
-    const projectCategories = ['spectacle vivant','évènement', 'médiation', 'exposition', 'projet participatif']
+    const projectCategories = ['spectacle vivant','évènement', 'médiation', 'exposition', 'projet participatif', 'oeuvre']
     const productionCategories = ['Production','Co-production', 'Accueil en résidence de création', 'Aide à la création','Aide à la résidence d\'écriture', 'Soutien', 'Remerciements']
 
     /*---------------------------------------------
@@ -42,9 +41,13 @@ export const ProjectsProvider = ({ children }) => {
     useEffect(() => {
         displayLoader();
         fetch(`${API_URL}/api/projects`)
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) throw new Error(`Chargement des projets impossible (${res.status})`);
+                return res.json();
+            })
             .then((data) => {
-                setProjects(data);
+                // une réponse d'erreur (objet) ferait planter tous les .map/.filter
+                setProjects(Array.isArray(data) ? data : []);
                 hideLoader();
             })
             .catch((error) => {
@@ -60,7 +63,10 @@ export const ProjectsProvider = ({ children }) => {
     useEffect(() => {
         
         fetch(`${API_URL}/api/informations`)
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) throw new Error(`Chargement des informations impossible (${res.status})`);
+                return res.json();
+            })
             .then((data) => {
                 setInformations(data);
                 
@@ -71,23 +77,6 @@ export const ProjectsProvider = ({ children }) => {
             });
     }, [loadInformations]);
 
-
-    useEffect(() => {
-        if (!Array.isArray(projects)) return;
-      
-        const selectedImages = projects.flatMap((project) =>
-          Array.isArray(project.projectImages)
-            ? project.projectImages
-                .filter((image) => image.inRandomSelection === true && image.imageUrl)
-                .map((image) => image.imageUrl)
-            : []
-        );
-      
-        const uniqueImages = [...new Set(selectedImages)];
-      
-        setRandomImageSelection(uniqueImages);
-      }, [projects]);
-    
     const handleLoadInformations = () => { 
         setLoadInformations(loadInformations === false ? true : false);
     };
@@ -159,7 +148,6 @@ export const ProjectsProvider = ({ children }) => {
                 displayHeader, 
                 closeHeader, 
                 openHeader, 
-                randomImagesSelection, 
                 hideHeader, 
                 hideFooter, 
                 projectCategories, 
